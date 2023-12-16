@@ -93,16 +93,19 @@ export default function RegisterForm() {
           )}
 
 
-          {/* <hr />
+          <hr />
           <button className="bg-gray-600 text-white font-bold cursor-pointer px-6 py-2"
-            onClick={() => signIn("github")}
+            onClick={() => signIn("google")}
           >
-            SignIn with github
-          </button> */}
+            SignIn with google
+          </button>
 
-          <Link className="text-sm mt-3 text-right" href={"/"}>
-            Already have an account? <span className="underline">Login</span>
-          </Link>
+          <span className="text-sm mt-3 text-right ">
+            Already have an account?
+            <Link className="underline" href={"/login"}>
+              Login
+            </Link>
+          </span>
         </form>
       </div>
     </div>

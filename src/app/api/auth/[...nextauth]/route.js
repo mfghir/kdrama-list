@@ -1,16 +1,20 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
 
 export const authOptions = {
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    // GitHubProvider({
-    //   clientId: process.env.GITHUB_ID,
-    //   clientSecret: process.env.GITHUB_SECRET,
-    // }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
 
     CredentialsProvider({
       name: "credentials",
@@ -40,12 +44,10 @@ export const authOptions = {
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
+
   secret: process.env.AUTH_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/dashboard",
   },
 };
 
