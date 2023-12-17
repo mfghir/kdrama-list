@@ -1,10 +1,9 @@
 "use client"
 
-// import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-
 import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -36,7 +35,6 @@ export default function LoginForm() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const router = useRouter();
 
 
@@ -95,7 +93,7 @@ export default function LoginForm() {
   
 
   return (
-    <section className="flex flex-col justify-center items-center">
+    <section className="flex flex-col justify-center items-center my-6">
      
       <Form {...form}  >
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
