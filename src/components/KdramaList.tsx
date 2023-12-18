@@ -3,7 +3,7 @@ import { DataTable } from '@/utilities/table/data-table'
 import React from 'react'
 
 
-async function getData(): Promise<Movie[]> {
+ function getData(): Promise<Movie[]> {
   // Fetch data from your API here.
   return [
     {
@@ -13,7 +13,7 @@ async function getData(): Promise<Movie[]> {
     },
     {
       id: "2",
-      title: "My Name",
+      title: " My Name",
       status: "50-50",
     },
     {
@@ -22,7 +22,7 @@ async function getData(): Promise<Movie[]> {
       status: "Ok",
     }, {
       id: "4",
-      title: "Work Later Drink Now 2",
+      title: "Alchemy of Souls 2",
       status: "Ok",
     }, {
       id: "5",
@@ -58,8 +58,8 @@ async function getData(): Promise<Movie[]> {
 
 
 
-const KdramaList = async () => {
-  const data = await getData()
+const KdramaList =  () => {
+  const data =  getData()
 
   return (
     <section className='w-full h-full my-6 lg:my-8'>
