@@ -26,6 +26,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import { statuses } from "@/lib/data"
+import { DataTableToolbar } from "./data-table-toolbar"
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -36,9 +40,7 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
 
   const table = useReactTable({
     data,
@@ -60,14 +62,23 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className="flex items-center py-4">
-        <Input
+        {/* <Input
           placeholder="Filter titles..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
+ <DataTableToolbar table={table} />
+        {/* {table.getColumn("status") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("status")}
+            title="Status"
+            options={statuses}
+          />
+        )} */}
+
       </div>
 
       <div className="rounded-md border">
@@ -134,7 +145,7 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
-    
+
     </>
   )
 }
