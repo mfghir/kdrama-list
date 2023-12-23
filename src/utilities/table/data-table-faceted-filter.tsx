@@ -14,7 +14,11 @@ import {
 
 import { Separator } from "@/components/ui/separator"
 import {
-  Command, CommandEmpty, CommandGroup, CommandInput, CommandItem,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
   CommandList,
   CommandSeparator
 } from "@/components/ui/command"
@@ -71,7 +75,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                         key={option.value}
                         className="rounded-sm px-1 font-normal"
                       >
-                        {option.label} 
+                        {option.label}
                       </Badge>
                     ))
                 )}

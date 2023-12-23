@@ -2,9 +2,11 @@ import {
   ArrowDownIcon,
   ArrowRightIcon,
   ArrowUpIcon,
-  StackIcon
+  StarIcon,
+  HeartIcon,
+  CheckIcon
 } from "@radix-ui/react-icons"
-
+import {ThumbsUp , ThumbsDown, FileAudio2 } from "lucide-react"
 
 
 export const labels = [
@@ -26,27 +28,27 @@ export const statuses = [
   {
     value: "definitely",
     label: "Definitely",
-    icon: StackIcon,
+    icon: HeartIcon,
   },
   {
     value: "ok",
     label: "Ok",
-    icon: StackIcon,
+    icon: StarIcon,
   },
   {
     value: "50-50",
     label: "50-50",
-    icon: StackIcon,
+    icon: CheckIcon ,
   },
   {
     value: "normal",
     label: "Normal",
-    icon: StackIcon,
+    icon: ThumbsUp,
   },
   {
     value: "awful",
     label: "Awful",
-    icon: StackIcon,
+    icon: ThumbsDown,
   },
 ]
 

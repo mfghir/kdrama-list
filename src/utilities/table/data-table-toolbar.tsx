@@ -1,17 +1,13 @@
 "use client"
 
-import { Cross2Icon } from "@radix-ui/react-icons"
 import { Table } from "@tanstack/react-table"
-
-// import { Button } from "@/registry/new-york/ui/button"
-// import { Input } from "@/registry/new-york/ui/input"
+import { Cross2Icon } from "@radix-ui/react-icons"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-// import { DataTableViewOptions } from "@/app/examples/tasks/components/data-table-view-options"
 
-// import { priorities, statuses } from "../data/data"
-import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import { Button } from "@/components/ui/button"
 import { priorities, statuses } from "@/lib/data"
+
+import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 import { DataTableViewOptions } from "./data-table-view-options"
 
 interface DataTableToolbarProps<TData> {
@@ -42,14 +38,14 @@ export function DataTableToolbar<TData>({
             options={statuses}
           />
         )}
-        
-        {/* {table.getColumn("priority") && (
+
+        {table.getColumn("priority") && (
           <DataTableFacetedFilter
             column={table.getColumn("priority")}
             title="Priority"
             options={priorities}
           />
-        )} */}
+        )}
 
         {isFiltered && (
           <Button

@@ -1,9 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
+import { DataTableToolbar } from "./data-table-toolbar"
 
 import {
   ColumnDef,
@@ -25,10 +24,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { DataTablePagination } from "./data-table-pagination"
 
-import { DataTableFacetedFilter } from "./data-table-faceted-filter"
-import { statuses } from "@/lib/data"
-import { DataTableToolbar } from "./data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -62,23 +59,7 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className="flex items-center py-4">
-        {/* <Input
-          placeholder="Filter titles..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        /> */}
- <DataTableToolbar table={table} />
-        {/* {table.getColumn("status") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
-            options={statuses}
-          />
-        )} */}
-
+        <DataTableToolbar table={table} />
       </div>
 
       <div className="rounded-md border">
@@ -128,7 +109,7 @@ export function DataTable<TData, TValue>({
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
+        {/* <Button
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
@@ -143,9 +124,10 @@ export function DataTable<TData, TValue>({
           disabled={!table.getCanNextPage()}
         >
           Next
-        </Button>
-      </div>
+        </Button> */}
 
+<DataTablePagination table={table} />
+      </div>
     </>
   )
 }
