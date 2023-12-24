@@ -2,7 +2,7 @@
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Row } from "@tanstack/react-table"
-import { labels } from "@/lib/data"
+
 
 import { movieSchema } from "@/lib/schema"
 import { Button } from "@/components/ui/button"
@@ -19,7 +19,10 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
 import { useToast } from "@/components/ui/use-toast"
+import { EditItem } from "./edit-item"
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 
 
 
@@ -39,29 +42,40 @@ export function DataTableRowActions<TData>({
       title: "Copy to clipboard! ✔",
       description: `Drama Name: ${text}`,
     })
+  }
 
+  const editHandler = (item: any) => {
+    console.log("item", item);
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-        >
-          <DotsHorizontalIcon className="h-4 w-4" />
-          <span className="sr-only">Open menu</span>
-        </Button>
-      </DropdownMenuTrigger>
+    <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+          >
+            <DotsHorizontalIcon className="h-4 w-4" />
+            <span className="sr-only">Open menu</span>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => copyHandler(drama.title)} >Make a copy</DropdownMenuItem>
-        {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}
+        <DropdownMenuContent align="end" className="w-[160px]">
+            <DialogTrigger asChild>
+          <DropdownMenuItem onClick={() => editHandler(drama)}>
+             Edit
+            <EditItem />
+          </DropdownMenuItem>
+        </DialogTrigger>
+            
 
-        <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => copyHandler(drama.title)} >Make a copy</DropdownMenuItem>
+          {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}
 
-        {/* <DropdownMenuSub>
+          <DropdownMenuSeparator />
+
+          {/* <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={drama.label}>
@@ -76,11 +90,12 @@ export function DataTableRowActions<TData>({
 
         <DropdownMenuSeparator /> */}
 
-        <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <DropdownMenuItem>
+            Delete
+            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </Dialog>
   )
 }
