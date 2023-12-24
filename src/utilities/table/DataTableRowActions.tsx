@@ -19,6 +19,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useToast } from "@/components/ui/use-toast"
 
 
 
@@ -29,7 +30,17 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const task = movieSchema.parse(row.original)
+  const drama = movieSchema.parse(row.original)
+  const { toast } = useToast()
+
+  const copyHandler = (text: string) => {
+    navigator.clipboard.writeText(text)
+    toast({
+      title: "Copy to clipboard! ✔",
+      description: `Drama Name: ${text}`,
+    })
+
+  }
 
   return (
     <DropdownMenu>
@@ -45,15 +56,15 @@ export function DataTableRowActions<TData>({
 
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => copyHandler(drama.title)} >Make a copy</DropdownMenuItem>
+        {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuSub>
+        {/* <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
+            <DropdownMenuRadioGroup value={drama.label}>
               {labels.map((label) => (
                 <DropdownMenuRadioItem key={label.value} value={label.value}>
                   {label.label}
@@ -63,7 +74,7 @@ export function DataTableRowActions<TData>({
           </DropdownMenuSubContent>
         </DropdownMenuSub>
 
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator /> */}
 
         <DropdownMenuItem>
           Delete
