@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@/components/ui/button"
 import {
@@ -12,7 +13,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function EditItem() {
+export function EditItem(data:any ,inpValue:any,setInpValue:any) {
+  console.log("data",data.data.title);
+
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
@@ -27,8 +30,11 @@ export function EditItem() {
           <Label htmlFor="title" className="text-right">Title</Label>
           <Input
             id="title"
-            defaultValue="drama"
+            defaultValue={data.data.title}
             className="col-span-3"
+            name={inpValue.title}
+            value={inpValue.title}
+            onChange={(e)=> setInpValue(e.target.value)}
           />
         </div>
         <div className="grid grid-cols-4 items-center gap-4">

@@ -23,6 +23,7 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+import { useState } from "react"
 
 
 
@@ -44,12 +45,19 @@ export function DataTableRowActions<TData>({
     })
   }
 
+  const [inpValue, setInpValue] = useState({
+    title: "",
+    status: ""
+  });
+
+
   const editHandler = (item: any) => {
     console.log("item", item);
   }
 
   return (
-    <Dialog>
+    <>
+      {/* <Dialog> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -62,13 +70,15 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end" className="w-[160px]">
+          <Dialog>
             <DialogTrigger asChild>
-          <DropdownMenuItem onClick={() => editHandler(drama)}>
-             Edit
-            <EditItem />
-          </DropdownMenuItem>
-        </DialogTrigger>
-            
+              <DropdownMenuItem onClick={() => editHandler(drama)} onSelect={(e) => e.preventDefault()}>
+                Edit
+                <EditItem data={drama} inpValue={inpValue} setInpValue={setInpValue} />
+              </DropdownMenuItem>
+            </DialogTrigger>
+          </Dialog>
+
 
           <DropdownMenuItem onClick={() => copyHandler(drama.title)} >Make a copy</DropdownMenuItem>
           {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}
@@ -96,6 +106,7 @@ export function DataTableRowActions<TData>({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </Dialog>
+      {/* </Dialog> */}
+    </>
   )
 }
