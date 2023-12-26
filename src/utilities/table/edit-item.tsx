@@ -10,11 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useState } from "react"
 
-export function EditItem(data:any ,inpValue:any,setInpValue:any) {
-  console.log("data",data.data.title);
+export function EditItem({data}) {
+   const [inpValue, setInpValue] = useState({
+    title: "",
+    status: ""
+  });
+
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -32,9 +38,9 @@ export function EditItem(data:any ,inpValue:any,setInpValue:any) {
             id="title"
             defaultValue={data.data.title}
             className="col-span-3"
-            name={inpValue.title}
+            name="title"
             value={inpValue.title}
-            onChange={(e)=> setInpValue(e.target.value)}
+            onChange={e => setInpValue({ ...inpValue, title: e.target.value })}
           />
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
@@ -43,8 +49,11 @@ export function EditItem(data:any ,inpValue:any,setInpValue:any) {
           </Label>
           <Input
             id="status"
-            defaultValue="ok"
+            defaultValue={data.data.status}
             className="col-span-3"
+            name='status'
+            value={inpValue.status}
+            onChange={e => setInpValue({ ...inpValue, status: e.target.value })}
           />
         </div>
       </div>

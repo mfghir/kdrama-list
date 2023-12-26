@@ -23,7 +23,7 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
-import { useState } from "react"
+
 
 
 
@@ -45,15 +45,7 @@ export function DataTableRowActions<TData>({
     })
   }
 
-  const [inpValue, setInpValue] = useState({
-    title: "",
-    status: ""
-  });
-
-
-  const editHandler = (item: any) => {
-    console.log("item", item);
-  }
+ 
 
   return (
     <>
@@ -72,9 +64,9 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <Dialog>
             <DialogTrigger asChild>
-              <DropdownMenuItem onClick={() => editHandler(drama)} onSelect={(e) => e.preventDefault()}>
+              <DropdownMenuItem  onSelect={(e) => e.preventDefault()}>
                 Edit
-                <EditItem data={drama} inpValue={inpValue} setInpValue={setInpValue} />
+                <EditItem data={drama} />
               </DropdownMenuItem>
             </DialogTrigger>
           </Dialog>
