@@ -1,10 +1,9 @@
 "use client"
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
-import { Row } from "@tanstack/react-table"
-
-
+import { Row, Table } from "@tanstack/react-table"
 import { movieSchema } from "@/lib/schema"
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -24,15 +23,16 @@ import { useToast } from "@/components/ui/use-toast"
 import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 
-
-
-
 interface DataTableRowActionsProps<TData> {
+  // table: Table<TData>
+  // column: Column<TData>
   row: Row<TData>
 }
 
 export function DataTableRowActions<TData>({
-  row,
+  // table,
+  // column,
+  row, 
 }: DataTableRowActionsProps<TData>) {
   const drama = movieSchema.parse(row.original)
   const { toast } = useToast()
@@ -45,7 +45,7 @@ export function DataTableRowActions<TData>({
     })
   }
 
- 
+
 
   return (
     <>
@@ -64,7 +64,9 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <Dialog>
             <DialogTrigger asChild>
-              <DropdownMenuItem  onSelect={(e) => e.preventDefault()}>
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()} 
+              // onClick={() => table.options?.meta.handleOpenDetailsPanel(drama.id)} 
+              >
                 Edit
                 <EditItem data={drama} />
               </DropdownMenuItem>

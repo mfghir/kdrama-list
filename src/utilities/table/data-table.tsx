@@ -1,7 +1,6 @@
 "use client"
 
-import * as React from "react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react"
 import { DataTableToolbar } from "./data-table-toolbar"
 
 import {
@@ -36,8 +35,8 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   // const [inpValue, setInpValue] = React.useState({
   //   title: "",
   //   status: ""
@@ -56,15 +55,34 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-    },
 
+    },
+    meta: {
+      // handleOpenDetailsPanel: (id) => {
+      //   handleOpenDetailsPanel(id)
+      //   console.log("id", id);
+      // },
+      updateData: (rowIndex: number, columnId: string, value: string) => {
+        setColumnFilters((old) =>
+          old.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...old[rowIndex],
+                [columnId]: value,
+              };
+            }
+            return row;
+          })
+        );
+      },
+    },
   })
 
 
   return (
     <>
       <div className="flex items-center py-4">
-        <DataTableToolbar table={table}  />
+        <DataTableToolbar table={table} />
       </div>
 
       <div className="rounded-md border">
@@ -114,25 +132,13 @@ export function DataTable<TData, TValue>({
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
-        {/* <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button> */}
-
-<DataTablePagination table={table} />
+        <DataTablePagination table={table} />
       </div>
     </>
   )
 }
+
+// function handleOpenDetailsPanel(id: any) {
+//   throw new Error("Function not implemented.")
+// }
+

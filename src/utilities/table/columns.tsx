@@ -43,6 +43,7 @@ export const columns: ColumnDef<MovieList>[] = [
   //   enableSorting: false,
   //   enableHiding: false,
   // },
+
   {
     accessorKey: "title",
     header: ({ column }) => (
@@ -67,13 +68,8 @@ export const columns: ColumnDef<MovieList>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
-      const status = statuses.find(
-        (status) => status.value === row.getValue("status")
-      )
-
-      if (!status) {
-        return null
-      }
+      const status = statuses.find((status) => status.value === row.getValue("status"))
+      if (!status) return null
 
       return (
         <div className="flex w-[100px] items-center">
@@ -94,13 +90,8 @@ export const columns: ColumnDef<MovieList>[] = [
       <DataTableColumnHeader column={column} title="Priority" />
     ),
     cell: ({ row }) => {
-      const priority = priorities.find(
-        (priority) => priority.value === row.getValue("priority")
-      )
-
-      if (!priority) {
-        return null
-      }
+      const priority = priorities.find((priority) => priority.value === row.getValue("priority"))
+      if (!priority) return null
 
       return (
         <div className="flex items-center">
@@ -117,6 +108,6 @@ export const columns: ColumnDef<MovieList>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    cell: ({ row }) => <DataTableRowActions row={row}  />,
   },
 ]

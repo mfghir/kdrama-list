@@ -2,7 +2,7 @@
     {
         "id": "1",
         "title": "Adamas",
-        "status": "Ok",
+        "status": "ok",
         "label": "documentation",
         "priority": "medium"
     },
@@ -16,49 +16,49 @@
     {
         "id": "3",
         "title": "Alchemy of Souls 1",
-        "status": "Ok",
+        "status": "ok",
         "label": "documentation",
         "priority": "medium"
     },
     {
         "id": "4",
         "title": "Alchemy of Souls 2",
-        "status": "Definitely",
+        "status": "definitely",
         "label": "documentation",
         "priority": "medium"
     },
     {
         "id": "5",
         "title": "Bad Mama",
-        "status": "Ok",
+        "status": "awful",
         "label": "documentation",
         "priority": "medium"
     },
     {
         "id": "6",
         "title": "Narco Saint",
-        "status": "Ok",
+        "status": "normal",
         "label": "documentation",
         "priority": "medium"
     },
     {
         "id": "7",
         "title": "Big Mouth",
-        "status": "Definitely",
+        "status": "definitely",
         "label": "feature",
         "priority": "medium"
     },
     {
         "id": "8",
         "title": "Doctor Cha",
-        "status": "Ok",
+        "status": "awful",
         "label": "feature",
         "priority": "high"
     },
     {
         "id": "9",
         "title": "Eve",
-        "status": "Ok",
+        "status": "ok",
         "label": "documentation",
         "priority": "low"
     },
@@ -72,7 +72,21 @@
     {
         "id": " 11",
         "title": "Extraordinary Attorney Woo",
-        "status": "Definitely",
+        "status": "definitely",
+        "label": "bug",
+        "priority": "high"
+    },
+    {
+        "id": " 12",
+        "title": "Little Woman",
+        "status": "awful",
+        "label": "bug",
+        "priority": "low"
+    },
+    {
+        "id": " 13",
+        "title": "Bloodhounds",
+        "status": "normal",
         "label": "bug",
         "priority": "high"
     }

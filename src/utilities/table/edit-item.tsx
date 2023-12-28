@@ -13,13 +13,23 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export function EditItem({data}) {
+export function EditItem(data:any) {
    const [inpValue, setInpValue] = useState({
     title: "",
     status: ""
   });
+
+  console.log("data.data",data);
+
+  const editHandler =()=>{
+  }
+
+  useEffect(() => {
+    // table.options?.meta.handleOpenDetailsPanel(id)
+    
+  }, []);
 
 
   return (
@@ -36,7 +46,7 @@ export function EditItem({data}) {
           <Label htmlFor="title" className="text-right">Title</Label>
           <Input
             id="title"
-            defaultValue={data.data.title}
+            // defaultValue={data.data.title}
             className="col-span-3"
             name="title"
             value={inpValue.title}
@@ -49,7 +59,7 @@ export function EditItem({data}) {
           </Label>
           <Input
             id="status"
-            defaultValue={data.data.status}
+            // defaultValue={data.data.status}
             className="col-span-3"
             name='status'
             value={inpValue.status}
