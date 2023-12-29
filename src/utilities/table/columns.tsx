@@ -22,6 +22,7 @@ export const columns: ColumnDef<MovieList>[] = [
   //       className="translate-y-[2px]"
   //     />
   //   ),
+
   //   cell: ({ row }) => (
   //     <Checkbox
   //       checked={row.getIsSelected()}
@@ -108,6 +109,11 @@ export const columns: ColumnDef<MovieList>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row}  />,
+    cell: ({ row }) => {
+
+      const movies = row.original
+      console.log("movies",movies);
+      return <DataTableRowActions row={row}  />
+    }
   },
 ]

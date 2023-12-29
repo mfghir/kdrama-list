@@ -15,21 +15,19 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useEffect, useState } from "react"
 
-export function EditItem(data:any) {
-   const [inpValue, setInpValue] = useState({
+export function EditItem(data: any) {
+  const [inpValue, setInpValue] = useState({
     title: "",
     status: ""
   });
 
-  console.log("data.data",data);
+  console.log("data.data", data);
 
-  const editHandler =()=>{
+  const submitHandler = () => {
+    // data.editItem(inpValue,"put");
+    console.log("inpValue", inpValue);
   }
 
-  useEffect(() => {
-    // table.options?.meta.handleOpenDetailsPanel(id)
-    
-  }, []);
 
 
   return (
@@ -39,8 +37,8 @@ export function EditItem(data:any) {
         <DialogDescription>
           Make changes here. Click save when you're done.
         </DialogDescription>
-
       </DialogHeader>
+
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="title" className="text-right">Title</Label>
@@ -68,7 +66,8 @@ export function EditItem(data:any) {
         </div>
       </div>
       <DialogFooter>
-        <Button type="submit">Save changes</Button>
+        {/* <Button type="submit">Save changes</Button> */}
+        <Button onClick={submitHandler} >Save changes</Button>
       </DialogFooter>
     </DialogContent>
 
