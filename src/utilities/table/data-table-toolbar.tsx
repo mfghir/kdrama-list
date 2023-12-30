@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input"
 
 import { Button } from "@/components/ui/button"
 import { priorities, statuses } from "@/lib/data"
-
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+
 import { DataTableViewOptions } from "./data-table-view-options"
 
 interface DataTableToolbarProps<TData> {

@@ -109,11 +109,11 @@ export const columns: ColumnDef<MovieList>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row ,column,table}) => {
 
       const movies = row.original
       console.log("movies",movies);
-      return <DataTableRowActions row={row}  />
+      return <DataTableRowActions row={row} table={table} />
     }
   },
 ]

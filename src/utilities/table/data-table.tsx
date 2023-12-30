@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { DataTableToolbar } from "./data-table-toolbar"
+import { DataTablePagination } from "./data-table-pagination"
 
 import {
   ColumnDef,
@@ -23,7 +24,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { DataTablePagination } from "./data-table-pagination"
 
 
 interface DataTableProps<TData, TValue> {
@@ -55,27 +55,20 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-
     },
     meta: {
-      // handleOpenDetailsPanel: (id) => {
-      //   handleOpenDetailsPanel(id)
-      //   console.log("id", id);
-      // },
       updateData: (rowIndex: number, columnId: string, value: string) => {
         setColumnFilters((old) =>
           old.map((row, index) => {
             if (index === rowIndex) {
-              return {
-                ...old[rowIndex],
-                [columnId]: value,
-              };
+              return { ...old[rowIndex], [columnId]: value }
             }
             return row;
           })
         );
       },
     },
+
   })
 
 

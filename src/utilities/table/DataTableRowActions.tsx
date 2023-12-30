@@ -22,16 +22,17 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+import { useState } from "react"
 
 interface DataTableRowActionsProps<TData> {
-  // table: Table<TData>
-  // column: Column<TData>
+  table: Table<TData>
+  column: Column<TData>
   row: Row<TData>
 }
 
 export function DataTableRowActions<TData>({
-  // table,
-  // column,
+  table,
+  column,
   row, 
 }: DataTableRowActionsProps<TData>) {
   const drama = movieSchema.parse(row.original)
@@ -45,6 +46,13 @@ export function DataTableRowActions<TData>({
     })
   }
 
+
+//   const [inpValue, setInpValue] = useState({
+//     title: "",
+//     status: ""
+//   });
+
+// console.log("inpValue",inpValue);
 
 
   return (
@@ -64,11 +72,12 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <Dialog>
             <DialogTrigger asChild>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()} 
+              <DropdownMenuItem 
+              onSelect={(e) => e.preventDefault()} 
               // onClick={() => table.options?.meta.handleOpenDetailsPanel(drama.id)} 
               >
                 Edit
-                <EditItem data={drama} />
+                <EditItem table={table}  row={row} column={column} />
               </DropdownMenuItem>
             </DialogTrigger>
           </Dialog>
