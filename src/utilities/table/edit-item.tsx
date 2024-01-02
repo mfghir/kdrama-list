@@ -11,34 +11,52 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useToast } from "@/components/ui/use-toast"
 import { useEffect, useState } from "react"
 
-export function EditItem( row, column, table:any) {
-  // const [inpValue, setInpValue] = useState({
-  //   title: "",
-  //   status: ""
-  // });
+export function EditItem({ row, column, table ,getValue}: {
+  row: any;
+  column: any;
+  table: any;
+  getValue: any
+}): JSX.Element {
 
-  // console.log("data.data", data);
-  console.log("table---", table.table);
+  // console.log("table---", table);
+  const { toast } = useToast() 
+
+  const initialValue = getValue()
+  const [value, setValue] = useState(initialValue)
+
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
 
   const submitHandler = () => {
     // data.editItem(inpValue,"put");
-    // console.log("inpValue", inpValue);
+    console.log("value", value);
+    console.log("column", column);
+    
+    table.options.meta?.updateData(row.index, column.id, value)
+
+    toast({
+      title: "Successfully edited ! ✔",
+      description: `New Name: ${column.title}`,
+    })
   }
 
-  // const initialValue = data.data.getValue()
-  const [value, setValue] = useState("")
+  // const onBlur = () => {
+  //   table.options.meta?.updateData(row.index, column.id, value)
+  // }
 
-  useEffect(() => {
-    setValue(value)
-  }, [value])
+  // const onBlur = () => {
+  //   if (table && table.options && table.options.meta && typeof table.options.meta.updateData === "function") {
+  //     table.options.meta.updateData(row.index, column.id, value);
+  //     table.forceUpdate();
 
-  const onBlur = () => {
-    table.table.options.meta?.updateData(row.index, column.id, value)
-  }
-
-
+  //   } else {
+  //     console.warn('---table.options.meta or updateData function is not defined---');
+  //   }
+  // }
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -59,9 +77,9 @@ export function EditItem( row, column, table:any) {
             name="title"
             value={value}
             onChange={e => setValue(e.target.value)}
-            onBlur={onBlur}
-            // value={inpValue.title}
-            // onChange={e => setInpValue({ ...inpValue, title: e.target.value })}
+            // onBlur={onBlur}
+          // value={inpValue.title}
+          // onChange={e => setInpValue({ ...inpValue, title: e.target.value })}
           />
         </div>
         {/* <div className="grid grid-cols-4 items-center gap-4">

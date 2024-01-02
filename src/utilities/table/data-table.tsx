@@ -24,19 +24,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useQuery } from "@tanstack/react-query"
+import { getKdramaList } from "@/app/page"
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  // dataT: TData[]
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
+  // dataT,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+  const {data, error, isFetched}= useQuery({
+    queryKey: ["kdramalist"],
+    queryFn: getKdramaList
+  })
+
+  console.log("DataTable", data);
+
+  // const [data, setData] = useState(() => [...dataT]);
   // const [inpValue, setInpValue] = React.useState({
   //   title: "",
   //   status: ""
@@ -58,7 +69,7 @@ export function DataTable<TData, TValue>({
     },
     meta: {
       updateData: (rowIndex: number, columnId: string, value: string) => {
-        setColumnFilters((old) =>
+        setData((old) =>
           old.map((row, index) => {
             if (index === rowIndex) {
               return { ...old[rowIndex], [columnId]: value }

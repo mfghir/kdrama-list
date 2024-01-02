@@ -1,7 +1,7 @@
 "use client"
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
-import { Row, Table } from "@tanstack/react-table"
+import { Column, Row, Table } from "@tanstack/react-table"
 import { movieSchema } from "@/lib/schema"
 
 import { Button } from "@/components/ui/button"
@@ -22,18 +22,21 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+
 import { useState } from "react"
 
 interface DataTableRowActionsProps<TData> {
   table: Table<TData>
   column: Column<TData>
   row: Row<TData>
+  getValue: any
 }
 
 export function DataTableRowActions<TData>({
   table,
   column,
   row, 
+  getValue
 }: DataTableRowActionsProps<TData>) {
   const drama = movieSchema.parse(row.original)
   const { toast } = useToast()
@@ -46,19 +49,12 @@ export function DataTableRowActions<TData>({
     })
   }
 
-
-//   const [inpValue, setInpValue] = useState({
-//     title: "",
-//     status: ""
-//   });
-
-// console.log("inpValue",inpValue);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
       {/* <Dialog> */}
-      <DropdownMenu>
+      <DropdownMenu open={isMenuOpen} onOpenChange={(isOpen) => setIsMenuOpen(isOpen)}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
@@ -77,7 +73,7 @@ export function DataTableRowActions<TData>({
               // onClick={() => table.options?.meta.handleOpenDetailsPanel(drama.id)} 
               >
                 Edit
-                <EditItem table={table}  row={row} column={column} />
+                <EditItem table={table}  row={row} column={column} getValue={getValue} />
               </DropdownMenuItem>
             </DialogTrigger>
           </Dialog>
