@@ -13,20 +13,16 @@ export async function getKdramaList(): Promise<MovieList[]> {
 }
 
 
+
 export default async function Home() {
 
-  // const data = await getKdramaList()
-
+  const data = await getKdramaList()
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery({
-    key: ['kdramalist'],
-    queryFn: () => getKdramaList,
-  })
 
   return (
     <main>
       <HydrationBoundary state={dehydrate(queryClient)} >
-        <KdramaList  columns={columns} />
+        <KdramaList data={data} columns={columns} />
         <Toaster />
       </HydrationBoundary>
     </main>

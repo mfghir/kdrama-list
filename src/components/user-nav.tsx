@@ -20,7 +20,7 @@ import {
 
 import { signOut, useSession } from 'next-auth/react';
 import { LogOutIcon } from "lucide-react"
-import Link from "next/link";
+
 
 export function UserNav() {
 
@@ -32,7 +32,7 @@ export function UserNav() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
-            <AvatarImage src={session?.user?.image} alt="user" />
+            <AvatarImage src={session?.user?.image || undefined} alt="user" />
             <AvatarFallback>User</AvatarFallback>
           </Avatar>
         </Button>

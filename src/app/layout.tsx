@@ -26,8 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.className}   `}>
-        <SessionProviderComp>
-          <Provider>
+        <Provider>
+          <SessionProviderComp>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -51,8 +51,8 @@ export default function RootLayout({
                 {children}
               </div>
             </ThemeProvider>
-          </Provider>
-        </SessionProviderComp>
+          </SessionProviderComp>
+        </Provider>
       </body>
     </html>
   )

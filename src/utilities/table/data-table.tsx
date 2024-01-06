@@ -26,33 +26,23 @@ import {
 } from "@/components/ui/table"
 import { useQuery } from "@tanstack/react-query"
 import { getKdramaList } from "@/app/page"
+import KdramaAdd from "@/components/KdramaAdd"
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  // dataT: TData[]
+  dataT: TData[]
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  // dataT,
+  dataT,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-
-  const {data, error, isFetched}= useQuery({
-    queryKey: ["kdramalist"],
-    queryFn: getKdramaList
-  })
-
-  console.log("DataTable", data);
-
-  // const [data, setData] = useState(() => [...dataT]);
-  // const [inpValue, setInpValue] = React.useState({
-  //   title: "",
-  //   status: ""
-  // });
-
+  
+  // console.log("DataTable", data);
+  const [data, setData] = useState(() => [...dataT]);
 
   const table = useReactTable({
     data,
@@ -88,6 +78,9 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center py-4">
         <DataTableToolbar table={table} />
       </div>
+
+      <KdramaAdd/>
+
 
       <div className="rounded-md border">
         <Table>

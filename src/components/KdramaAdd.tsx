@@ -1,8 +1,5 @@
-
-
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,30 +9,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { useTaskStore } from "@/lib/store";
+// import { useTaskStore } from "@/lib/store";
+// import { useAddUser } from "@/lib/mutations.js";
 
 export default function KdramaAdd() {
-  const addTask = useTaskStore((state) => state.addTask);
-  
+  // const addTask = useTaskStore((state) => state.addTask);
+
+
+  const { mutate, data } = useAddUser()
+  console.log("add data", data);
+
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const { title, description } = Object.fromEntries(formData);
+    const { title } = Object.fromEntries(formData);
 
-    if (typeof title !== "string" || typeof description !== "string") return;
-    addTask(title, description);
+    // if (typeof title !== "string" || typeof description !== "string") return;
+    if (typeof title !== "string") return;
+    // addTask(title, description);
+    mutate(title);
+
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="secondary" size="sm">
-          ＋ Add New Todo
+          ＋ Add New Ttile
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

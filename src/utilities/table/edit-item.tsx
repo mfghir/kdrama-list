@@ -1,4 +1,5 @@
 "use client"
+import { getKdramaList } from "@/app/page"
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@/components/ui/button"
 import {
@@ -12,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
+import { useQuery } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
 
 export function EditItem({ row, column, table ,getValue}: {
@@ -20,6 +22,14 @@ export function EditItem({ row, column, table ,getValue}: {
   table: any;
   getValue: any
 }): JSX.Element {
+
+  const {data, error, isFetched}= useQuery({
+    queryKey: ["kdramalist"],
+    queryFn: getKdramaList
+  })
+
+  console.log("edit item data", data);
+
 
   // console.log("table---", table);
   const { toast } = useToast() 
@@ -33,8 +43,8 @@ export function EditItem({ row, column, table ,getValue}: {
 
   const submitHandler = () => {
     // data.editItem(inpValue,"put");
-    console.log("value", value);
-    console.log("column", column);
+    // console.log("value", value);
+    // console.log("column", column);
     
     table.options.meta?.updateData(row.index, column.id, value)
 
