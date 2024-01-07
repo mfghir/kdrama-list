@@ -75,11 +75,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 overflow-x-hidden">
         <DataTableToolbar table={table} />
       </div>
 
-      <KdramaAdd/>
+      {/* <KdramaAdd/> */}
 
 
       <div className="rounded-md border">

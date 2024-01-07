@@ -1,8 +1,7 @@
 "use client"
 
-import { getKdramaList } from '@/app/page'
+// import { useKdramasData } from '@/lib/queries'
 import { DataTable } from '@/utilities/table/data-table'
-import { useQuery } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 
 
@@ -18,12 +17,8 @@ function KdramaList<TData, TValue>({
   columns,
   data
 }: DataTableProps<TData, TValue>) {
-
-  // const {data, error, isFetched}= useQuery({
-  //   queryKey: ["kdramalist"],
-  //   queryFn: getKdramaList
-  // })
-
+  // const { data, isLoading, isError, error, isFetching, refetch } = useKdramasData();
+  // console.log("page",data);
 
   return (
     <section className='w-full h-full my-6 lg:my-8'>

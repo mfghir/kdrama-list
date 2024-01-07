@@ -1,5 +1,7 @@
+
 import KdramaList from "@/components/KdramaList";
 import { Toaster } from "@/components/ui/toaster";
+import { useKdramasData } from "@/lib/queries";
 import { MovieList } from "@/lib/schema";
 
 import { columns } from "@/utilities/table/columns";
@@ -18,11 +20,13 @@ export default async function Home() {
 
   const data = await getKdramaList()
   const queryClient = new QueryClient()
+ 
 
   return (
     <main>
       <HydrationBoundary state={dehydrate(queryClient)} >
         <KdramaList data={data} columns={columns} />
+        {/* <KdramaList columns={columns} /> */}
         <Toaster />
       </HydrationBoundary>
     </main>
