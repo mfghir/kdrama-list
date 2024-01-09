@@ -12,16 +12,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAddUser } from "@/lib/mutations";
 
-// import { useTaskStore } from "@/lib/store";
-// import { useAddUser } from "@/lib/mutations.js";
+// import { useAddUser } from "@/lib/mutations";
+// import { useTaskStore } from "@/lib/store";\
 
 export default function KdramaAdd() {
   // const addTask = useTaskStore((state) => state.addTask);
 
-  const { mutate, data } = useAddUser()
-  console.log("add data", data);
+  // const { mutate, data } = useAddUser()
+  // console.log("add data", data);
 
 
 
@@ -38,7 +37,7 @@ export default function KdramaAdd() {
     // addTask(title, description);
 
     console.log("add data22", data);
-    mutate({ data });
+    // mutate(data);
 
   };
 

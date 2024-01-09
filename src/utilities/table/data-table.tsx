@@ -24,28 +24,29 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useQuery } from "@tanstack/react-query"
-import { getKdramaList } from "@/app/page"
-import KdramaAdd from "@/components/KdramaAdd"
+// import { useQuery } from "@tanstack/react-query"
+import { useKdramasData } from "@/lib/queries"
+// import { getKdramaList } from "@/app/page"
 
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  dataT: TData[]
+interface DataTableProps< TValue> {
+  columns: ColumnDef< TValue>[]
+  // dataT: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable< TValue>({
   columns,
-  dataT,
-}: DataTableProps<TData, TValue>) {
+  // dataT,
+}: DataTableProps< TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const { data } = useKdramasData();
   
-  // console.log("DataTable", data);
-  const [data, setData] = useState(() => [...dataT]);
+  console.log("DataTable", data);
+  const [dataT, setDataT] = useState(data);
 
   const table = useReactTable({
-    data,
+    data:dataT,
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -57,18 +58,18 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
     },
-    meta: {
-      updateData: (rowIndex: number, columnId: string, value: string) => {
-        setData((old) =>
-          old.map((row, index) => {
-            if (index === rowIndex) {
-              return { ...old[rowIndex], [columnId]: value }
-            }
-            return row;
-          })
-        );
-      },
-    },
+    // meta: {
+    //   updateData: (rowIndex: number, columnId: string, value: string) => {
+    //     setData((old) =>
+    //       old.map((row, index) => {
+    //         if (index === rowIndex) {
+    //           return { ...old[rowIndex], [columnId]: value }
+    //         }
+    //         return row;
+    //       })
+    //     );
+    //   },
+    // },
 
   })
 
@@ -79,7 +80,6 @@ export function DataTable<TData, TValue>({
         <DataTableToolbar table={table} />
       </div>
 
-      {/* <KdramaAdd/> */}
 
 
       <div className="rounded-md border">

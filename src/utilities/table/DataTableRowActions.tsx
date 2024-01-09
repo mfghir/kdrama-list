@@ -24,6 +24,8 @@ import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 
 import { useState } from "react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import axios from "axios"
 
 interface DataTableRowActionsProps<TData> {
   table: Table<TData>
@@ -35,7 +37,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   table,
   column,
-  row, 
+  row,
   getValue
 }: DataTableRowActionsProps<TData>) {
   const drama = movieSchema.parse(row.original)
@@ -50,6 +52,22 @@ export function DataTableRowActions<TData>({
   }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // const queryClient = useQueryClient()
+
+  // //deleting the user
+  // const { mutate: deleteUser } = useMutation((id: any) => {
+  //   return axios.delete(`${process.env.NEXT_PUBLIC_API_KEY}/kdramalist/${id}`)
+  // }, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(['list']),
+  //     toast({
+  //       title: "Successfully Deleted! ✔",
+  //       // description: `Drama Name: ${text}`,
+  //     })
+  //   }
+  // })
+
 
   return (
     <>
@@ -68,12 +86,12 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <Dialog>
             <DialogTrigger asChild>
-              <DropdownMenuItem 
-              onSelect={(e) => e.preventDefault()} 
+              <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
               // onClick={() => table.options?.meta.handleOpenDetailsPanel(drama.id)} 
               >
                 Edit
-                <EditItem table={table}  row={row} column={column} getValue={getValue} />
+                <EditItem table={table} row={row} column={column} getValue={getValue} />
               </DropdownMenuItem>
             </DialogTrigger>
           </Dialog>
@@ -99,7 +117,9 @@ export function DataTableRowActions<TData>({
 
         <DropdownMenuSeparator /> */}
 
-          <DropdownMenuItem>
+          <DropdownMenuItem 
+          // onClick={() => deleteUser(drama.id)}
+          >
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
