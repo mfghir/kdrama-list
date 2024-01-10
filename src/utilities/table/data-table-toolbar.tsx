@@ -20,14 +20,12 @@ export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-  const { status, data: session } = useSession();
+  const { data: session } = useSession();
 
 
   return (
-    <div className="flex items-center justify-between w-full overflow-x-scroll lg:overflow-x-hidden">
-      {/* <section className="w-full flex items-center justify-between  overflow-x-scroll"> */}
-
-      <div className="flex flex-1 items-center space-x-2 ">
+    <section className="flex items-center justify-between w-full">
+      <div className="flex flex-1 items-center space-x-2">
         <Input
           placeholder="Filter title..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -53,7 +51,6 @@ export function DataTableToolbar<TData>({
           />
         )}
 
-
         {isFiltered && (
           <Button
             variant="ghost"
@@ -65,10 +62,11 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      {session?.user && <KdramaAdd />}
-      <DataTableViewOptions table={table} />
-      {/* </section> */}
 
-    </div>
+      <div className="flex justify-end flex-1 items-center space-x-2">
+        {session?.user?.email ? <KdramaAdd /> : ""}
+        <DataTableViewOptions table={table} />
+      </div>
+    </section>
   )
 }

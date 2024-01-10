@@ -20,6 +20,7 @@ import {
 
 import { signOut, useSession } from 'next-auth/react';
 import { LogOutIcon } from "lucide-react"
+import Link from "next/link";
 
 
 export function UserNav() {
@@ -51,10 +52,12 @@ export function UserNav() {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
+        <Link href="/dashboard">
           <DropdownMenuItem>
             Profile
             <DropdownMenuShortcut>⇧</DropdownMenuShortcut>
           </DropdownMenuItem>
+          </Link>
 
           {/* <DropdownMenuItem>
               Billing

@@ -31,22 +31,24 @@ import { useKdramasData } from "@/lib/queries"
 
 interface DataTableProps< TValue> {
   columns: ColumnDef< TValue>[]
-  // dataT: TData[]
+  dataT: TData[]
 }
 
 export function DataTable< TValue>({
   columns,
-  // dataT,
+  dataT,
 }: DataTableProps< TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const { data } = useKdramasData();
   
-  console.log("DataTable", data);
-  const [dataT, setDataT] = useState(data);
+  const { data:test } = useKdramasData();
+  console.log("test", test?.data);
+
+  
+  const [dataa, setDataa] = useState(dataT);
 
   const table = useReactTable({
-    data:dataT,
+    data:dataa,
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -76,7 +78,7 @@ export function DataTable< TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4 overflow-x-hidden">
+      <div className="flex items-center py-4 ">
         <DataTableToolbar table={table} />
       </div>
 

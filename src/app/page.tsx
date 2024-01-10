@@ -1,10 +1,10 @@
 
 import KdramaList from "@/components/KdramaList";
 import { Toaster } from "@/components/ui/toaster";
-// import { useKdramasData } from "@/lib/queries";
 import { MovieList } from "@/lib/schema";
 
-import { columns } from "@/utilities/table/columns";
+// import { columns } from "@/utilities/table/columns";
+// import { useKdramasData } from "@/lib/queries";
 // import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
 
 
@@ -25,7 +25,8 @@ export default async function Home() {
     <main>
       {/* <HydrationBoundary state={dehydrate(queryClient)} > */}
         {/* <KdramaList data={data} columns={columns} /> */}
-        <KdramaList columns={columns} />
+        {/* <KdramaList columns={columns} /> */}
+        <KdramaList  />
         <Toaster />
       {/* </HydrationBoundary> */}
     </main>
