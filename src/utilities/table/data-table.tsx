@@ -24,31 +24,43 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-// import { useQuery } from "@tanstack/react-query"
-import { useKdramasData } from "@/lib/queries"
-// import { getKdramaList } from "@/app/page"
+// import { useKdramasData } from "@/lib/queries"
+
+import { useQuery } from "@tanstack/react-query"
+import axios from 'axios'
+import { useMemo } from 'react'
 
 
-interface DataTableProps< TValue> {
-  columns: ColumnDef< TValue>[]
-  dataT: TData[]
+interface DataTableProps<TValue> {
+  columns: ColumnDef<TValue>[]
+  // dataT: TData[]
 }
 
 export function DataTable< TValue>({
   columns,
-  dataT,
+  // dataT,
 }: DataTableProps< TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   
-  const { data:test } = useKdramasData();
-  console.log("test", test?.data);
+  // const { data:test } = useKdramasData();
+  // console.log("test", test?.data);
 
   
-  const [dataa, setDataa] = useState(dataT);
+  // const [dataa, setDataa] = useState(dataT);
+
+  const { data: serverData } = useQuery({
+    queryKey: ["kdrama"],
+    queryFn: async () => {
+      const result = await axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama`);
+      return result.data;
+    },
+  });
+
+  const data = useMemo(() => serverData ?? [], [serverData]);
 
   const table = useReactTable({
-    data:dataa,
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,

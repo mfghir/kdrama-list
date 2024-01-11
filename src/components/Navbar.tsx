@@ -39,7 +39,7 @@ const Navbar = () => {
   const { status, data: session } = useSession();
   return (
     <section className="flex justify-between items-center  ">
-      <h1 className="text-2xl lg:text-4xl font-semibold hidden md:block">Kdrama List</h1>
+      <h1 className="text-2xl lg:text-4xl font-semibold">Kdrama List</h1>
 
       <div className="flex justify-between items-center gap-x-4  md:flex-nowrap">
         <ModeToggle />

@@ -1,5 +1,5 @@
 "use client"
-import { getKdramaList } from "@/app/page"
+// import { getKdramaList } from "@/app/page"
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@/components/ui/button"
 import {
@@ -23,12 +23,12 @@ export function EditItem({ row, column, table ,getValue}: {
   getValue: any
 }): JSX.Element {
 
-  const {data, error, isFetched}= useQuery({
-    queryKey: ["kdramalist"],
-    queryFn: getKdramaList
-  })
+  // const {data, error, isFetched}= useQuery({
+  //   queryKey: ["kdramalist"],
+  //   queryFn: getKdramaList
+  // })
 
-  console.log("edit item data", data);
+  // console.log("edit item data", data);
 
 
   // console.log("table---", table);

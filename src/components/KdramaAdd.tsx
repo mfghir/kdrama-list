@@ -12,16 +12,25 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useMemo } from "react";
 
-// import { useAddUser } from "@/lib/mutations";
-// import { useTaskStore } from "@/lib/store";\
+import { useAddUser } from "@/lib/mutations";
 
 export default function KdramaAdd() {
-  // const addTask = useTaskStore((state) => state.addTask);
+  const { mutate, data:test } = useAddUser()
+  console.log("add data", test);
 
-  // const { mutate, data } = useAddUser()
-  // console.log("add data", data);
+  // const { data: serverData } = useQuery({
+  //   queryKey: ["kdrama"],
+  //   queryFn: async () => {
+  //     const result = await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama`, data);
+  //     return result.data;
+  //   },
+  // });
 
+  // const data = useMemo(() => serverData ?? [], [serverData]);
 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,7 +46,7 @@ export default function KdramaAdd() {
     // addTask(title, description);
 
     console.log("add data22", data);
-    // mutate(data);
+    mutate(data);
 
   };
 
@@ -71,9 +80,25 @@ export default function KdramaAdd() {
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Input
-              id="sort"
-              name="sort"
-              placeholder="Sort..."
+              id="status"
+              name="status"
+              placeholder="Status..."
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Input
+              id="label"
+              name="label"
+              placeholder="Label..."
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Input
+              id="priority"
+              name="priority"
+              placeholder="Priority..."
               className="col-span-4"
             />
           </div>
