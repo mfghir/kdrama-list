@@ -20,12 +20,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { useToast } from "@/components/ui/use-toast"
-import { EditItem } from "./edit-item"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
-
 import { useState } from "react"
+
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
+import KdramaEdit from "./edit-item"
 
 interface DataTableRowActionsProps<TData> {
   table: Table<TData>
@@ -89,13 +89,28 @@ export function DataTableRowActions<TData>({
               <DropdownMenuItem
                 onSelect={(e) => e.preventDefault()}
               // onClick={() => table.options?.meta.handleOpenDetailsPanel(drama.id)} 
+              onClick={() => console.log("---",drama.id)} 
               >
                 Edit
-                <EditItem table={table} row={row} column={column} getValue={getValue} />
+                <KdramaEdit table={table} row={row} column={column} getValue={getValue} />
               </DropdownMenuItem>
             </DialogTrigger>
           </Dialog>
 
+{/* <EditItemDialog
+          item={item}
+          onItemSaved={onItemUpdated}
+          onClose={() => setIsMenuOpen(false)}
+        >
+          <DropdownMenuItem
+            onSelect={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <Edit className="h-4 w-4 mr-2" />
+            Edit
+          </DropdownMenuItem>
+        </EditItemDialog> */}
 
           <DropdownMenuItem onClick={() => copyHandler(drama.title)} >Make a copy</DropdownMenuItem>
           {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}

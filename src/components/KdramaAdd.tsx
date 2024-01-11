@@ -12,25 +12,12 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useMemo } from "react";
-
-import { useAddUser } from "@/lib/mutations";
+import { useAddDrama } from "@/lib/mutations";
+import { useToast } from "./ui/use-toast";
 
 export default function KdramaAdd() {
-  const { mutate, data:test } = useAddUser()
-  console.log("add data", test);
-
-  // const { data: serverData } = useQuery({
-  //   queryKey: ["kdrama"],
-  //   queryFn: async () => {
-  //     const result = await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama`, data);
-  //     return result.data;
-  //   },
-  // });
-
-  // const data = useMemo(() => serverData ?? [], [serverData]);
+  const { mutate } = useAddDrama()
+  const { toast } = useToast()
 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +25,6 @@ export default function KdramaAdd() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    // const { title } = Object.fromEntries(formData);
     const data = Object.fromEntries(formData);
 
     // if (typeof title !== "string" || typeof description !== "string") return;
@@ -47,7 +33,10 @@ export default function KdramaAdd() {
 
     console.log("add data22", data);
     mutate(data);
-
+    toast({
+      title: "Successfully Added ! ✔",
+      // description: `New Name: ${column.title}`,
+    })
   };
 
   return (
@@ -60,7 +49,7 @@ export default function KdramaAdd() {
 
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add New Title</DialogTitle>
+          <DialogTitle>Add New Kdrama</DialogTitle>
           {/* <DialogDescription>
             What do you want to get done today?
           </DialogDescription> */}
@@ -103,7 +92,7 @@ export default function KdramaAdd() {
             />
           </div>
         </form>
-        
+
         <DialogFooter>
           <DialogTrigger asChild>
             <Button type="submit" size="sm" form="todo-form">
