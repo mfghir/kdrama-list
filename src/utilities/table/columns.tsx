@@ -7,6 +7,8 @@ import { labels, priorities, statuses } from "@/lib/data"
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
 import { DataTableRowActions } from "./DataTableRowActions"
 import { MovieList } from "@/lib/schema"
+import KdramaEdit from "./edit-item"
+import { Button } from "@/components/ui/button"
 
 export const columns: ColumnDef<MovieList>[] = [
   // {
@@ -34,7 +36,7 @@ export const columns: ColumnDef<MovieList>[] = [
   //   enableSorting: false,
   //   enableHiding: false,
   // },
-  
+
   // {
   //   accessorKey: "id",
   //   header: ({ column }) => (
@@ -107,9 +109,22 @@ export const columns: ColumnDef<MovieList>[] = [
       return value.includes(row.getValue(id))
     },
   },
+  // {
+  //   id: "actions",
+  //   cell: ({ row ,column,table, getValue}) => {
+
+  //     // const movies = row.original
+  //     // console.log("movies",movies);
+
+  //     // console.log("row",row);
+  //     // console.log("column",column);
+  //     // console.log("table",table);
+  //     return <DataTableRowActions row={row} column={column} table={table} getValue={getValue} />
+  //   }
+  // },
   {
-    id: "actions",
-    cell: ({ row ,column,table, getValue}) => {
+    id: "edit",
+    cell: ({ row, column, table, getValue }) => {
 
       // const movies = row.original
       // console.log("movies",movies);
@@ -117,7 +132,21 @@ export const columns: ColumnDef<MovieList>[] = [
       // console.log("row",row);
       // console.log("column",column);
       // console.log("table",table);
-      return <DataTableRowActions row={row} column={column} table={table} getValue={getValue} />
+      return <KdramaEdit row={row} column={column} table={table} getValue={getValue} />
     }
   },
+
+  {
+    id: "delete",
+    cell: ({ row, column, table, getValue }) => {
+
+      return <Button variant="destructive" size="sm" className="mr-3" 
+      // onClick={() => deleteUser(drama.id)}
+      >
+        Delete
+      </Button>
+    }
+  },
+
+
 ]

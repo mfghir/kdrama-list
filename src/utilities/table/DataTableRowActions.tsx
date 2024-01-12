@@ -51,7 +51,6 @@ export function DataTableRowActions<TData>({
     })
   }
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // const queryClient = useQueryClient()
 
@@ -72,7 +71,7 @@ export function DataTableRowActions<TData>({
   return (
     <>
       {/* <Dialog> */}
-      <DropdownMenu open={isMenuOpen} onOpenChange={(isOpen) => setIsMenuOpen(isOpen)}>
+      <DropdownMenu >
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
@@ -97,20 +96,7 @@ export function DataTableRowActions<TData>({
             </DialogTrigger>
           </Dialog>
 
-{/* <EditItemDialog
-          item={item}
-          onItemSaved={onItemUpdated}
-          onClose={() => setIsMenuOpen(false)}
-        >
-          <DropdownMenuItem
-            onSelect={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <Edit className="h-4 w-4 mr-2" />
-            Edit
-          </DropdownMenuItem>
-        </EditItemDialog> */}
+
 
           <DropdownMenuItem onClick={() => copyHandler(drama.title)} >Make a copy</DropdownMenuItem>
           {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}

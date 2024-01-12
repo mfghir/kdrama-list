@@ -47,7 +47,7 @@
 //     // data.editItem(inpValue,"put");
 //     // console.log("value", value);
 //     // console.log("column", column);
-    
+
 //     table.options.meta?.updateData(row.index, column.id, value)
 //     mutate(value);
 
@@ -143,17 +143,53 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEditDrama } from "@/lib/mutations";
 import { useToast } from "@/components/ui/use-toast";
+import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 // import { toast } from "@/components/ui/use-toast";
 
-export default function KdramaEdit({ row, column, table ,getValue}: {
-    row: any;
-    column: any;
-    table: any;
-    getValue: any
-  }): JSX.Element {
+
+
+
+const editDrama = async (item: any) => {
+  try {
+    const response = await axios.put(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama/${item.id}`, item);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating item:', error);
+    throw error;
+  }
+}
+
+
+export default function KdramaEdit({ row, column, table, getValue }: {
+  row: any;
+  column: any;
+  table: any;
+  getValue: any
+}): JSX.Element {
+
   const { mutate } = useEditDrama()
   const { toast } = useToast()
-console.log("object----",row);
+  // console.log("object----",row);
+
+  // const queryClient = useQueryClient()
+
+  // const mutationUpdateUser = useMutation(editDrama, {
+  //   onSuccess: async () => {
+  //     await queryClient.invalidateQueries(["kdrama"]);
+  //     toast({
+  //         title: "Successfully edited ! ✔",
+  //         // description: `New Name: ${row.original.title}`,
+  //       })
+  //   },
+  // });
+
+
+
+
+
+
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -163,84 +199,85 @@ console.log("object----",row);
     const data = Object.fromEntries(formData);
 
     // if (typeof title !== "string" || typeof description !== "string") return;
-    // if (typeof title !== "string") return;
     // addTask(title, description);
 
-    console.log("add data22", data);
-    mutate(row.id, data);
+    // mutationUpdateUser.mutate({...data, id: row.id});
+
+    console.log("edit---->", row, "-------------------", data);
+    mutate({ id: +row.id + 1, ...data });
     toast({
       title: "Successfully edited ! ✔",
       // description: `New Name: ${column.title}`,
     })
   }
 
-  
+
 
   return (
     <>
-    {/* <Dialog> */}
-      {/* <DialogTrigger asChild>
-        <Button variant="secondary" size="sm" className="mr-3" >
-          ＋ Add New Title
-        </Button>
-      </DialogTrigger> */}
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="secondary" size="sm" className="mr-3" >
+            Edit
+          </Button>
+        </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit Kdrama</DialogTitle>
-          {/* <DialogDescription>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit Kdrama</DialogTitle>
+            {/* <DialogDescription>
             What do you want to get done today?
           </DialogDescription> */}
-        </DialogHeader>
-        <form
-          id="todo-form"
-          className="grid gap-4 py-4"
-          onSubmit={handleSubmit}
-        >
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Input
-              id="title"
-              name="title"
-              placeholder="Title..."
-              className="col-span-4"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Input
-              id="status"
-              name="status"
-              placeholder="Status..."
-              className="col-span-4"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Input
-              id="label"
-              name="label"
-              placeholder="Label..."
-              className="col-span-4"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Input
-              id="priority"
-              name="priority"
-              placeholder="Priority..."
-              className="col-span-4"
-            />
-          </div>
-        </form>
+          </DialogHeader>
+          <form
+            id="todo-form"
+            className="grid gap-4 py-4"
+            onSubmit={handleSubmit}
+          >
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Input
+                id="title"
+                name="title"
+                placeholder="Title..."
+                className="col-span-4"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Input
+                id="status"
+                name="status"
+                placeholder="Status..."
+                className="col-span-4"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Input
+                id="label"
+                name="label"
+                placeholder="Label..."
+                className="col-span-4"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Input
+                id="priority"
+                name="priority"
+                placeholder="Priority..."
+                className="col-span-4"
+              />
+            </div>
+          </form>
 
-        <DialogFooter>
-          <DialogTrigger asChild>
-            <Button type="submit" size="sm" form="todo-form">
-             Submit
-            </Button>
-          </DialogTrigger>
-        </DialogFooter>
-      </DialogContent>
+          <DialogFooter>
+            <DialogTrigger asChild>
+              <Button type="submit" size="sm" form="todo-form">
+                Submit
+              </Button>
+            </DialogTrigger>
+          </DialogFooter>
+        </DialogContent>
 
-    {/* </Dialog> */}
+      </Dialog>
     </>
 
   );

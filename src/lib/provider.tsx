@@ -17,24 +17,3 @@ export default function Provider({ children }: { children: ReactNode }) {
   )
 }
 
-
-// "use client"
-// import React, { useState } from "react"
-// import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-
-// export default function Provider({ children }: any) {
-//   const [client] = useState(new QueryClient())
-
-//   return (
-//     <>
-//       <QueryClientProvider client={client}>
-//         {/* <ReactQueryStreamedHydration> */}
-//             {children}
-//         {/* </ReactQueryStreamedHydration> */}
-//         <ReactQueryDevtools initialIsOpen={false} />
-//       </QueryClientProvider>
-//     </>
-//   )
-// }
-
