@@ -2,92 +2,92 @@
     {
         "id": "1",
         "title": "Adamas",
-        "status": "ok",
-        "label": "documentation",
+        "status": "1time",
+        "label": "usual",
         "priority": "medium"
     },
     {
         "id": "2",
         "title": "My Name",
-        "status": "50-50",
-        "label": "documentation",
+        "status": "dis",
+        "label": "usual",
         "priority": "medium"
     },
     {
         "id": "3",
         "title": "Alchemy of Souls 1",
-        "status": "ok",
-        "label": "documentation",
+        "status": "1time",
+        "label": "usual",
         "priority": "medium"
     },
     {
         "id": "4",
         "title": "Alchemy of Souls 2",
-        "status": "definitely",
-        "label": "documentation",
+        "status": "fav",
+        "label": "usual",
         "priority": "medium"
     },
     {
         "id": "5",
         "title": "Bad Mama",
         "status": "awful",
-        "label": "documentation",
+        "label": "usual",
         "priority": "medium"
     },
     {
         "id": "6",
         "title": "Narco Saint",
         "status": "normal",
-        "label": "documentation",
+        "label": "usual",
         "priority": "medium"
     },
     {
         "id": "7",
         "title": "Big Mouth",
-        "status": "definitely",
-        "label": "feature",
+        "status": "dis",
+        "label": "long",
         "priority": "medium"
     },
     {
         "id": "8",
         "title": "Doctor Cha",
         "status": "awful",
-        "label": "feature",
+        "label": "long",
         "priority": "high"
     },
     {
         "id": "9",
         "title": "Eve",
-        "status": "ok",
-        "label": "documentation",
+        "status": "1time",
+        "label": "usual",
         "priority": "low"
     },
     {
         "id": " 10",
         "title": "Glory",
-        "status": "50-50",
-        "label": "documentation",
+        "status": "normal",
+        "label": "usual",
         "priority": "low"
     },
     {
         "id": " 11",
         "title": "Extraordinary Attorney Woo",
-        "status": "definitely",
-        "label": "bug",
+        "status": "fav",
+        "label": "mini",
         "priority": "high"
     },
     {
         "id": " 12",
         "title": "Little Woman",
         "status": "awful",
-        "label": "bug",
+        "label": "mini",
         "priority": "low"
     },
     {
         "id": " 13",
         "title": "Bloodhounds",
         "status": "normal",
-        "label": "bug",
+        "label": "mini",
         "priority": "high"
     }
 ]

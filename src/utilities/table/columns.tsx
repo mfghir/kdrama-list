@@ -5,10 +5,14 @@ import { Badge } from "@/components/ui/badge"
 import { labels, priorities, statuses } from "@/lib/data"
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
-import { DataTableRowActions } from "./DataTableRowActions"
 import { MovieList } from "@/lib/schema"
 import KdramaEdit from "./edit-item"
-import { Button } from "@/components/ui/button"
+
+import KdramaDelete from "@/components/KdramaDelete"
+// import { DataTableRowActions } from "./DataTableRowActions"
+
+
+
 
 export const columns: ColumnDef<MovieList>[] = [
   // {
@@ -60,7 +64,7 @@ export const columns: ColumnDef<MovieList>[] = [
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("title")}
           </span>
-          {/* {label && <Badge variant="outline">{label.label}</Badge>} */}
+          {label && <Badge variant="outline">{label.label}</Badge>}
         </div>
       )
     },
@@ -124,29 +128,15 @@ export const columns: ColumnDef<MovieList>[] = [
   // },
   {
     id: "edit",
-    cell: ({ row, column, table, getValue }) => {
-
-      // const movies = row.original
-      // console.log("movies",movies);
-
-      // console.log("row",row);
-      // console.log("column",column);
-      // console.log("table",table);
-      return <KdramaEdit row={row} column={column} table={table} getValue={getValue} />
+    cell: ({ row }) => {
+      return <KdramaEdit row={row} />
     }
   },
 
   {
     id: "delete",
-    cell: ({ row, column, table, getValue }) => {
-
-      return <Button variant="destructive" size="sm" className="mr-3" 
-      // onClick={() => deleteUser(drama.id)}
-      >
-        Delete
-      </Button>
+    cell: ({ row }) => {
+      return <KdramaDelete row={row} />
     }
   },
-
-
 ]

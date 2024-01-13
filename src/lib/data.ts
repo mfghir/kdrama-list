@@ -1,44 +1,39 @@
 import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  StarIcon,
-  HeartIcon,
-  CheckIcon
-} from "@radix-ui/react-icons"
-import {ThumbsUp , ThumbsDown, FileAudio2 } from "lucide-react"
-
+  ThumbsUp,
+  ThumbsDown,
+  Star,
+  Heart,
+  HeartOff,
+  ArrowDown,
+  ArrowRight,
+  ArrowUp,
+} from "lucide-react";
 
 export const labels = [
   {
-    value: "bug",
-    label: "Bug",
+    value: "mini",
+    label: "Mini",
   },
   {
-    value: "feature",
-    label: "Feature",
+    value: "usual",
+    label: "Usual",
   },
   {
-    value: "documentation",
-    label: "Documentation",
+    value: "long",
+    label: "Long",
   },
-]
+];
 
 export const statuses = [
   {
-    value: "definitely",
-    label: "Definitely",
-    icon: HeartIcon,
+    value: "fav",
+    label: "Fav",
+    icon: Heart,
   },
   {
-    value: "ok",
-    label: "Ok",
-    icon: StarIcon,
-  },
-  {
-    value: "50-50",
-    label: "50-50",
-    icon: CheckIcon ,
+    value: "1time",
+    label: "1 Time",
+    icon: Star,
   },
   {
     value: "normal",
@@ -46,26 +41,31 @@ export const statuses = [
     icon: ThumbsUp,
   },
   {
-    value: "awful",
-    label: "Awful",
+    value: "dis",
+    label: "Dis",
     icon: ThumbsDown,
   },
-]
+  {
+    value: "awful",
+    label: "Awful",
+    icon: HeartOff,
+  },
+];
 
 export const priorities = [
   {
     label: "Low",
     value: "low",
-    icon: ArrowDownIcon,
+    icon: ArrowDown,
   },
   {
     label: "Medium",
     value: "medium",
-    icon: ArrowRightIcon,
+    icon: ArrowRight,
   },
   {
     label: "High",
     value: "high",
-    icon: ArrowUpIcon,
+    icon: ArrowUp,
   },
-]
+];

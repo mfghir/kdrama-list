@@ -24,7 +24,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-// import { useKdramasData } from "@/lib/queries"
 
 import { useQuery } from "@tanstack/react-query"
 import axios from 'axios'
@@ -36,18 +35,9 @@ interface DataTableProps<TValue> {
   // dataT: TData[]
 }
 
-export function DataTable< TValue>({
-  columns,
-  // dataT,
-}: DataTableProps< TValue>) {
+export function DataTable<TValue>({ columns }: DataTableProps<TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  
-  // const { data:test } = useKdramasData();
-  // console.log("test", test?.data);
-
-  
-  // const [dataa, setDataa] = useState(dataT);
 
   const { data: serverData } = useQuery({
     queryKey: ["kdrama"],
@@ -72,19 +62,6 @@ export function DataTable< TValue>({
       sorting,
       columnFilters,
     },
-    // meta: {
-    //   updateData: (rowIndex: number, columnId: string, value: string) => {
-    //     setData((old) =>
-    //       old.map((row, index) => {
-    //         if (index === rowIndex) {
-    //           return { ...old[rowIndex], [columnId]: value }
-    //         }
-    //         return row;
-    //       })
-    //     );
-    //   },
-    // },
-
   })
 
 
@@ -93,8 +70,6 @@ export function DataTable< TValue>({
       <div className="flex items-center py-4 ">
         <DataTableToolbar table={table} />
       </div>
-
-
 
       <div className="rounded-md border">
         <Table>
@@ -148,8 +123,3 @@ export function DataTable< TValue>({
     </>
   )
 }
-
-// function handleOpenDetailsPanel(id: any) {
-//   throw new Error("Function not implemented.")
-// }
-
