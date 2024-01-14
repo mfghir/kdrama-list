@@ -3,22 +3,47 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEditDrama } from "@/lib/mutations";
 
 import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import { labels, genres, statuses } from "@/lib/data";
+
+
+type SelectOptions = {
+  statuses: string;
+  labels: string;
+  genres: string;
+};
+
 
 export default function KdramaEdit({ row }: { row: any }): JSX.Element {
   const { mutate } = useEditDrama()
   const { toast } = useToast()
+  const [value, setValue] = useState<SelectOptions>({
+    statuses: "",
+    labels: "",
+    genres: ""
+  });
+
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,7 +77,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
           </DialogDescription> */}
         </DialogHeader>
         <form
-          id="todo-form"
+          id="drama-form"
           className="grid gap-4 py-4"
           onSubmit={handleSubmit}
         >
@@ -65,28 +90,79 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input
+            {/* <Input
               id="status"
               name="status"
               placeholder="Status..."
               className="col-span-4"
-            />
+            /> */}
+
+            <Select
+              name="status"
+              value={value.statuses}
+              onValueChange={setValue}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a status" />
+              </SelectTrigger>
+              <SelectContent
+              >
+                {statuses.map((item) =>
+                  <SelectItem key={item.label} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input
+            {/* <Input
               id="label"
               name="label"
               placeholder="Label..."
               className="col-span-4"
-            />
+            /> */}
+            <Select
+              name="label"
+              value={value.labels}
+              onValueChange={setValue}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a label" />
+              </SelectTrigger>
+              <SelectContent>
+                {labels.map((item) =>
+                  <SelectItem key={item.label} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input
+            {/* <Input
               id="priority"
               name="priority"
               placeholder="Priority..."
               className="col-span-4"
-            />
+            /> */}
+
+            <Select
+              name="priority"
+              value={value.genres}
+              onValueChange={setValue}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a priority" />
+              </SelectTrigger>
+              <SelectContent>
+                {genres.map((item) =>
+                  <SelectItem key={item.label} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
         </form>
 
