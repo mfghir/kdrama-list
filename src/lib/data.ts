@@ -52,20 +52,20 @@ export const statuses = [
   },
 ];
 
-export const priorities = [
+export const genres = [
   {
-    label: "Low",
-    value: "low",
+    label: "Fantasy",
+    value: "fantasy",
     icon: ArrowDown,
   },
   {
-    label: "Medium",
-    value: "medium",
+    label: "Comedy",
+    value: "comedy",
     icon: ArrowRight,
   },
   {
-    label: "High",
-    value: "high",
+    label: "Criminal",
+    value: "criminal",
     icon: ArrowUp,
   },
 ];

@@ -10,15 +10,39 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAddDrama } from "@/lib/mutations";
 import { useToast } from "./ui/use-toast";
+import { labels, genres, statuses } from "@/lib/data";
+import { useState } from "react";
+
+type SelectOptions = {
+  statuses: string;
+  labels: string;
+  genres: string;
+};
+
 
 export default function KdramaAdd() {
   const { mutate } = useAddDrama()
   const { toast } = useToast()
-
+  const [value, setValue] = useState<SelectOptions>({
+    statuses: "",
+    labels: "",
+    genres: ""
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,18 +55,15 @@ export default function KdramaAdd() {
     // if (typeof title !== "string") return;
     // addTask(title, description);
 
-    console.log("add data22", data);
+    console.log("data222 ----->", data);
     mutate(data);
-    toast({
-      title: "Successfully Added ! ✔",
-      // description: `New Name: ${column.title}`,
-    })
+    toast({ title: "Successfully Added ✔" })
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="sm" className="mr-3" >
+        <Button variant="secondary" size="sm">
           ＋ Add New Title
         </Button>
       </DialogTrigger>
@@ -50,12 +71,12 @@ export default function KdramaAdd() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add New Kdrama</DialogTitle>
-          {/* <DialogDescription>
-            What do you want to get done today?
-          </DialogDescription> */}
+          <DialogDescription>
+            What do you want to add? 😃
+          </DialogDescription>
         </DialogHeader>
         <form
-          id="todo-form"
+          id="drama-form"
           className="grid gap-4 py-4"
           onSubmit={handleSubmit}
         >
@@ -68,34 +89,85 @@ export default function KdramaAdd() {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input
+            {/* <Input
               id="status"
               name="status"
               placeholder="Status..."
               className="col-span-4"
-            />
+            /> */}
+
+            <Select
+              name="status"
+              value={value.statuses}
+              onValueChange={setValue}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a status" />
+              </SelectTrigger>
+              <SelectContent
+              >
+                {statuses.map((item) =>
+                  <SelectItem key={item.label} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input
+            {/* <Input
               id="label"
               name="label"
               placeholder="Label..."
               className="col-span-4"
-            />
+            /> */}
+            <Select
+              name="label"
+              value={value.labels}
+              onValueChange={setValue}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a label" />
+              </SelectTrigger>
+              <SelectContent>
+                {labels.map((item) =>
+                  <SelectItem key={item.label} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input
+            {/* <Input
               id="priority"
               name="priority"
               placeholder="Priority..."
               className="col-span-4"
-            />
+            /> */}
+
+            <Select
+              name="priority"
+              value={value.genres}
+              onValueChange={setValue}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a priority" />
+              </SelectTrigger>
+              <SelectContent>
+                {genres.map((item) =>
+                  <SelectItem key={item.label} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
         </form>
 
         <DialogFooter>
           <DialogTrigger asChild>
-            <Button type="submit" size="sm" form="todo-form">
+            <Button type="submit" size="sm" form="drama-form">
               Add Drama
             </Button>
           </DialogTrigger>

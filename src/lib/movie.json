@@ -1,93 +1,107 @@
 [
     {
-        "id": "1",
-        "title": "Adamas",
-        "status": "1time",
-        "label": "usual",
-        "priority": "medium"
+      "id": "3",
+      "title": "Alchemy of Souls 1",
+      "status": "1time",
+      "label": "usual",
+      "genre": "comedy"
     },
     {
-        "id": "2",
-        "title": "My Name",
-        "status": "dis",
-        "label": "usual",
-        "priority": "medium"
+      "id": "4",
+      "title": "Alchemy of Souls 2",
+      "status": "fav",
+      "label": "usual",
+      "genre": "comedy"
     },
     {
-        "id": "3",
-        "title": "Alchemy of Souls 1",
-        "status": "1time",
-        "label": "usual",
-        "priority": "medium"
+      "id": "5",
+      "title": "Bad Mama",
+      "status": "awful",
+      "label": "usual",
+      "genre": "comedy"
     },
     {
-        "id": "4",
-        "title": "Alchemy of Souls 2",
-        "status": "fav",
-        "label": "usual",
-        "priority": "medium"
+      "id": "6",
+      "title": "Narco Saint",
+      "status": "normal",
+      "label": "usual",
+      "genre": "comedy"
     },
     {
-        "id": "5",
-        "title": "Bad Mama",
-        "status": "awful",
-        "label": "usual",
-        "priority": "medium"
+      "id": "7",
+      "title": "Big Mouth",
+      "status": "dis",
+      "label": "long",
+      "genre": "comedy"
     },
     {
-        "id": "6",
-        "title": "Narco Saint",
-        "status": "normal",
-        "label": "usual",
-        "priority": "medium"
+      "id": "8",
+      "title": "Doctor Cha",
+      "status": "awful",
+      "label": "long",
+      "genre": "fantasy"
     },
     {
-        "id": "7",
-        "title": "Big Mouth",
-        "status": "dis",
-        "label": "long",
-        "priority": "medium"
+      "id": " 10",
+      "title": "Glory",
+      "status": "normal",
+      "label": "usual",
+      "genre": "criminal"
     },
     {
-        "id": "8",
-        "title": "Doctor Cha",
-        "status": "awful",
-        "label": "long",
-        "priority": "high"
+      "id": " 11",
+      "title": "Extraordinary Attorney Woo",
+      "status": "fav",
+      "label": "mini",
+      "genre": "fantasy"
     },
     {
-        "id": "9",
-        "title": "Eve",
-        "status": "1time",
-        "label": "usual",
-        "priority": "low"
+      "id": " 12",
+      "title": "Little Woman",
+      "status": "awful",
+      "label": "mini",
+      "genre": "criminal"
     },
     {
-        "id": " 10",
-        "title": "Glory",
-        "status": "normal",
-        "label": "usual",
-        "priority": "low"
+      "id": " 13",
+      "title": "Bloodhounds",
+      "status": "normal",
+      "label": "mini",
+      "genre": "fantasy"
     },
     {
-        "id": " 11",
-        "title": "Extraordinary Attorney Woo",
-        "status": "fav",
-        "label": "mini",
-        "priority": "high"
+      "title": "Dp",
+      "status": "1time",
+      "label": "mini",
+      "genre": "comedy",
+      "id": "14"
     },
     {
-        "id": " 12",
-        "title": "Little Woman",
-        "status": "awful",
-        "label": "mini",
-        "priority": "low"
+      "title": "Duty After School ",
+      "status": "fav",
+      "label": "mini",
+      "genre": "fantasy",
+      "id": "15"
     },
     {
-        "id": " 13",
-        "title": "Bloodhounds",
-        "status": "normal",
-        "label": "mini",
-        "priority": "high"
+      "title": "Dear M",
+      "status": "normal",
+      "label": "comedy",
+      "genre": "fantasy",
+      "id": "16"
+    },
+    {
+      "title": "te",
+      "status": "dis",
+      "label": "long",
+      "genre": "comedy",
+      "id": "17"
+    },
+    {
+      "title": "ngn",
+      "status": "1time",
+      "label": "usual",
+      "genre": "criminal",
+      "id": "18"
     }
-]
+  ]

@@ -5,7 +5,7 @@ import { Cross2Icon } from "@radix-ui/react-icons"
 import { Input } from "@/components/ui/input"
 
 import { Button } from "@/components/ui/button"
-import { priorities, statuses } from "@/lib/data"
+import { genres, statuses } from "@/lib/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 
 import { DataTableViewOptions } from "./data-table-view-options"
@@ -43,11 +43,11 @@ export function DataTableToolbar<TData>({
           />
         )}
 
-        {table.getColumn("priority") && (
+        {table.getColumn("genre") && (
           <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
-            options={priorities}
+            column={table.getColumn("genre")}
+            title="genre"
+            options={genres}
           />
         )}
 

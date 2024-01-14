@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "@/components/ui/badge"
-import { labels, priorities, statuses } from "@/lib/data"
+import { labels, genres, statuses } from "@/lib/data"
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
 import { MovieList } from "@/lib/schema"
@@ -92,20 +92,20 @@ export const columns: ColumnDef<MovieList>[] = [
     },
   },
   {
-    accessorKey: "priority",
+    accessorKey: "genre",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Priority" />
+      <DataTableColumnHeader column={column} title="Genre" />
     ),
     cell: ({ row }) => {
-      const priority = priorities.find((priority) => priority.value === row.getValue("priority"))
-      if (!priority) return null
+      const genre = genres.find((genre) => genre.value === row.getValue("genre"))
+      if (!genre) return null
 
       return (
         <div className="flex items-center">
-          {priority.icon && (
-            <priority.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{priority.label}</span>
+          {/* {genre.icon && (
+            <genre.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+          )} */}
+          <span>{genre.label}</span>
         </div>
       )
     },
