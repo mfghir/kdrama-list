@@ -19,9 +19,16 @@ const useEditDrama = () => {
   };
 
   return useMutation(editDrama, {
+    // onSuccess: (_, item) => {
+    //   queryClient.setQueryData(["kdramas"], (oldData:any) => [
+    //     ...(oldData || []).filter((i:any) => i.id !== item.id ? i : item),
+    //     ]);
+    //     },
+    
     onSuccess: async () => {
       await queryClient.invalidateQueries(["kdrama"]);
     },
+    
   });
 };
 
@@ -37,6 +44,10 @@ const useDeleteDrama = () => {
         return oldItems.filter((item:any) => item.id !== deletedItemId);
       });
     },
+
+    // onSuccess: async () => {
+    //   await queryClient.invalidateQueries(["kdrama"]);
+    // },
   });
 };
 

@@ -15,7 +15,12 @@ const KdramaDelete = ({ row }: { row: any }): JSX.Element => {
   const { mutate } = useDeleteDrama()
 
   const deleteHandler = () => {
-    mutate({ id: +row.id + 1 })
+    // console.log("object", row.id );
+    // console.log("row---", row );
+    // console.log("row---original", row.original.id );
+
+
+    mutate({ id: row.original.id })
   }
 
   return (

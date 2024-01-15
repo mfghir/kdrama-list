@@ -136,6 +136,9 @@ export const columns: ColumnDef<MovieList>[] = [
   {
     id: "delete",
     cell: ({ row }) => {
+      const status = statuses.find((status) => status.value === row.getValue("status"))
+      if (!status) return null
+      
       return <KdramaDelete row={row} />
     }
   },

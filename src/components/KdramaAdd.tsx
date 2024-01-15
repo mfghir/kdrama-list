@@ -145,12 +145,12 @@ export default function KdramaAdd() {
             /> */}
 
             <Select
-              name="priority"
+              name="genre"
               value={value.genres}
               onValueChange={setValue}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a priority" />
+                <SelectValue placeholder="Select a genre" />
               </SelectTrigger>
               <SelectContent>
                 {genres.map((item) =>
