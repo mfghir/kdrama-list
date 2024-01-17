@@ -1,5 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { MovieList } from "./schema";
 
 const useAddDrama = () => {
   const addDrama = (data: unknown) => {
@@ -31,6 +32,12 @@ const useEditDrama = () => {
     
   });
 };
+
+
+
+
+
+
 
 const useDeleteDrama = () => {
   const queryClient = useQueryClient();

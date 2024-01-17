@@ -7,7 +7,7 @@ export const movieSchema = z.object({
   title: z.string(),
   status: z.string(),
   label: z.string(),
-  priority: z.string(),
+  genre: z.string(),
 })
 
 export type MovieList = z.infer<typeof movieSchema>

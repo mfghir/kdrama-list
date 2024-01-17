@@ -53,7 +53,7 @@ export default function KdramaAdd() {
     // if (typeof title !== "string") return;
     // addTask(title, description);
 
-    console.log("data222 ----->", data);
+    // console.log("data222 ----->", data);
     mutate(data);
     toast({ title: "Successfully Added ✔" })
   };
@@ -97,7 +97,9 @@ export default function KdramaAdd() {
             <Select
               name="status"
               value={value.statuses}
-              onValueChange={setValue}
+              onValueChange={
+                (val) => setValue({ ...value, statuses: val })
+              }    
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a status" />
@@ -122,7 +124,9 @@ export default function KdramaAdd() {
             <Select
               name="label"
               value={value.labels}
-              onValueChange={setValue}
+              onValueChange={
+                (val) => setValue({ ...value, labels: val })
+              }
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a label" />
@@ -147,7 +151,9 @@ export default function KdramaAdd() {
             <Select
               name="genre"
               value={value.genres}
-              onValueChange={setValue}
+              onValueChange={
+                (val) => setValue({ ...value, genres: val })
+              }        
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a genre" />
