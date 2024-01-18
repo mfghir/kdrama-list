@@ -66,7 +66,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
     console.log("edit--->", data);
     console.log("row.original.id--->", row.original.id);
    
-
+  
     mutate({ id: row.original.id, ...data });
     // mutate({
       // id: row.original.id, data:{

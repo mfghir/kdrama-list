@@ -49,7 +49,11 @@ const useDeleteDrama = () => {
     onSuccess: (deletedItemId) => {
       queryClient.setQueryData(["kdrama"], (oldItems:any) => {
         return oldItems.filter((item:any) => item.id !== deletedItemId);
-      });
+      },
+      {
+        staleTime: 60 * 1000, //
+        }
+      );
     },
 
     // onSuccess: async () => {
