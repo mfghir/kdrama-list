@@ -12,7 +12,9 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -39,50 +41,40 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
   // const { mutate } = useUpdateYourData()
   const { toast } = useToast()
   const [value, setValue] = useState<SelectOptions>({
-    statuses: "",
-    labels: "",
-    genres: ""
-  });
-
-  // const changeHandler = (e: { target: { name: string; value: any; } }) => {
-  //   let name = e.target.name as keyof SelectOptions;
-  //   setValue(prev => ({ ...prev, [name]: e.target.value }))
-
-  // }
-
-
-
+    // statuses: "",
+    // labels: "",
+    // genres: ""
+    statuses: row.original.status,
+    labels: row.original.label,
+    genres: row.original.genre,
+  })
+  const [inputValue, setInputValue] = useState<string>(row.original.input);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
+    // const data = Object.fromEntries(formData);
 
     // if (typeof title !== "string" || typeof description !== "string") return;
     // addTask(title, description);
 
-    console.log("edit--->", data);
+    // console.log("edit--->", data);
+    // console.log("row.original.id--->", row.original.id);
+    // mutate({ id: row.original.id, ...data });
+
+    const editedData = Object.fromEntries(formData);
+    const updatedData = {
+      ...row.original,
+      ...editedData,
+      input: inputValue, // Use the preserved input value
+    };
+
+    console.log("updatedData--->", updatedData);
     console.log("row.original.id--->", row.original.id);
-   
-  
-    mutate({ id: row.original.id, ...data });
-    // mutate({
-      // id: row.original.id, data:{
-      //   title: data.title ? data.title : row.original.title ,
-      //   status: data.status ? data.status : row.original.status ,
-      //   label: data.label ? data.label : row.original.label ,
-      //   genre: data.genre ? data.genre : row.original.genre ,
-      // },
 
-
-
-      
-      // status: data.status ,
-      // label: data.label ,
-      // genre: data.genre
-  // });
+    mutate({ id: row.original.id, ...updatedData });
     toast({ title: "Successfully edited ! ✔" })
   }
 
@@ -91,9 +83,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="sm" className="mr-3" onClick={()=> console.log("row-->", row.original)}>
-          Edit
-        </Button>
+        <Button variant="default"  size="sm">Edit</Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[425px]">
@@ -114,6 +104,8 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
               name="title"
               placeholder="Title..."
               className="col-span-4"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -127,18 +119,21 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a status" />
               </SelectTrigger>
-              <SelectContent
-              >
-                {statuses.map((item) =>
-                  <SelectItem key={item.label} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                )}
+
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Select a status</SelectLabel>
+                  {statuses.map((item) =>
+                    <SelectItem key={item.label} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  )}
+                </SelectGroup>
               </SelectContent>
             </Select>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
 
+          <div className="grid grid-cols-4 items-center gap-4">
             <Select
               name="label"
               value={value.labels}
@@ -149,15 +144,20 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a label" />
               </SelectTrigger>
-              <SelectContent>
-                {labels.map((item) =>
-                  <SelectItem key={item.label} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                )}
-              </SelectContent>
+
+              <SelectGroup>
+                <SelectLabel>Select a status</SelectLabel>
+                <SelectContent>
+                  {labels.map((item) =>
+                    <SelectItem key={item.label} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  )}
+                </SelectContent>
+              </SelectGroup>
             </Select>
           </div>
+
           <div className="grid grid-cols-4 items-center gap-4">
             <Select
               name="genre"
@@ -169,18 +169,20 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a genre" />
               </SelectTrigger>
-              <SelectContent>
-                {genres.map((item) =>
-                  <SelectItem key={item.label} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                )}
-              </SelectContent>
+
+              <SelectGroup>
+                <SelectLabel>Select a status</SelectLabel>
+                <SelectContent>
+                  {genres.map((item) =>
+                    <SelectItem key={item.label} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  )}
+                </SelectContent>
+              </SelectGroup>
             </Select>
           </div>
         </form>
-
-
 
         <DialogFooter>
           <DialogTrigger asChild>
@@ -191,6 +193,6 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
         </DialogFooter>
       </DialogContent>
 
-    </Dialog>
+    </Dialog >
   );
 }

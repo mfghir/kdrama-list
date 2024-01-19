@@ -3,6 +3,7 @@ import { useDeleteDrama } from '@/lib/mutations'
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -39,9 +40,11 @@ const KdramaDelete = ({ row }: { row: any }): JSX.Element => {
         </DialogHeader>
 
         <DialogFooter>
-          <Button type="submit" onClick={deleteHandler}>
-            Confirm
-          </Button>
+          <DialogClose asChild>
+            <Button variant='destructive' type="submit" onClick={deleteHandler}>
+              Confirm
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog >
