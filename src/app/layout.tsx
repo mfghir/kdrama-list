@@ -34,9 +34,11 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              <div className=" h-full min-h-screen p-6 lg:px-20 lg:py-8 ">
+              <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8">
                 <Navbar />
+                <main className="grid place-items-center h-screen">
                 {children}
+                </main>
               </div>
             </ThemeProvider>
           </SessionProviderComp>

@@ -127,13 +127,13 @@ export const columns: ColumnDef<MovieList>[] = [
   //     return <DataTableRowActions row={row} column={column} table={table} getValue={getValue} />
   //   }
   // },
+  
   {
     id: "edit",
     cell: ({ row }) => {
       return <KdramaEdit row={row} />
     }
   },
-
   {
     id: "delete",
     cell: ({ row }) => {
@@ -146,9 +146,6 @@ export const columns: ColumnDef<MovieList>[] = [
   {
     id: "copy",
     cell: ({ row }) => {
-      // const status = statuses.find((status) => status.value === row.getValue("status"))
-      // if (!status) return null
-
       return <KdramaCopy row={row} />
     }
   },

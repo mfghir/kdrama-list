@@ -43,7 +43,7 @@ export default function RegisterForm() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const { data: session, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
@@ -183,18 +183,19 @@ export default function RegisterForm() {
   //     console.log("Error during registration: ", error);
   //   }
   // };
-  
-  
+
+
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
   }
 
   return (
     <>
-      {/* <div className="grid place-items-center h-screen">
+      <>
+        {/* <div className="grid place-items-center h-screen">
               <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
                 <h1 className="text-xl font-bold my-4">Register</h1>
-        
+
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                   <input
                     onChange={(e) => setName(e.target.value)}
@@ -214,21 +215,21 @@ export default function RegisterForm() {
                   <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
                     Register
                   </button>
-        
+
                   {error && (
                     <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                       {error}
                     </div>
                   )}
-        
-        
+
+
                   <hr />
                   <button className="bg-gray-600 text-white font-bold cursor-pointer px-6 py-2"
                     onClick={() => signIn("google")}
                   >
                     SignIn with google
                   </button>
-        
+
                   <span className="text-sm mt-3 text-right ">
                     Already have an account?
                     <Link className="underline" href={"/login"}>
@@ -238,6 +239,8 @@ export default function RegisterForm() {
                 </form>
               </div>
             </div> */}
+      </>
+
       <section className="flex flex-col justify-center items-center my-6">
 
         <Form {...form}  >
@@ -312,3 +315,9 @@ export default function RegisterForm() {
     </>
   );
 }
+
+
+
+
+
+

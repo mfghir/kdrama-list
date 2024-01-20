@@ -16,8 +16,7 @@ export default function UserInfo() {
   if (status === "authenticated") {
     return (
 
-      <div className="grid place-items-center h-screen">
-        <div className="shadow-lg p-8 bg-zinc-300/10 flex flex-col gap-2 my-6">
+        <div className="shadow-lg p-8 bg-zinc-300/10 flex flex-col gap-2 my-6 w-full md:w-2/4">
 
           {session?.user?.image ? <Image src={session?.user?.image} alt="user" width={60} height={60} /> : ""}
 
@@ -40,7 +39,7 @@ export default function UserInfo() {
             </Link>
           </Button>
         </div>
-      </div>
+ 
     );
   }
 }
