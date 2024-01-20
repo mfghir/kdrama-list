@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { Button } from './ui/button'
 import { useDeleteDrama } from '@/lib/mutations'
 
@@ -14,20 +15,16 @@ import {
 
 const KdramaDelete = ({ row }: { row: any }): JSX.Element => {
   const { mutate } = useDeleteDrama()
+  const { data: session } = useSession();
 
   const deleteHandler = () => {
-    // console.log("object", row.id );
-    // console.log("row---", row );
-    // console.log("row---original", row.original.id );
-
-
     mutate({ id: row.original.id })
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="destructive" size="sm">Delete</Button>
+        {session?.user?.email && <Button variant="destructive" size="sm">Delete</Button>}
       </DialogTrigger>
 
       <DialogContent>

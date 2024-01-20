@@ -27,6 +27,7 @@ import { useEditDrama } from "@/lib/mutations";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import { labels, genres, statuses } from "@/lib/data";
+import { useSession } from "next-auth/react";
 
 
 type SelectOptions = {
@@ -37,9 +38,11 @@ type SelectOptions = {
 
 
 export default function KdramaEdit({ row }: { row: any }): JSX.Element {
+  const { data: session } = useSession();
+
   const { mutate } = useEditDrama()
-  // const { mutate } = useUpdateYourData()
   const { toast } = useToast()
+
   const [value, setValue] = useState<SelectOptions>({
     // statuses: "",
     // labels: "",
@@ -83,7 +86,9 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default"  size="sm">Edit</Button>
+        {session?.user?.email &&
+          <Button variant="default" size="sm">Edit</Button>
+        }
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[425px]">

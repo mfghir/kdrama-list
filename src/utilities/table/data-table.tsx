@@ -25,11 +25,11 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { useQuery } from "@tanstack/react-query"
-import axios from 'axios'
 import { useMemo } from 'react'
 import { useKdramasData } from "@/lib/queries"
 import { columns } from '@/utilities/table/columns'
+
+import { useToast } from "@/components/ui/use-toast"
 
 // interface DataTableProps<TValue> {
 //   columns: ColumnDef<TValue>[]
@@ -39,7 +39,15 @@ import { columns } from '@/utilities/table/columns'
 export function DataTable<TValue>() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const { toast } = useToast()
 
+  const copyHandler = (text: string) => {
+    navigator.clipboard.writeText(text)
+    toast({
+      title: "Copy to clipboard! ✔",
+      description: `Drama Name: ${text}`,
+    })
+  }
   // const { data: serverData } = useQuery({
   //   queryKey: ["kdrama"],
   //   queryFn: async () => {
@@ -102,7 +110,9 @@ export function DataTable<TValue>() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                >
+                  onClick={() => copyHandler(row.original.title)}
+                  // onClick={() => console.log("test--->",row)}
+                  >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

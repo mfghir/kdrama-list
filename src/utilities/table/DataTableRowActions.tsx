@@ -23,9 +23,9 @@ import { useToast } from "@/components/ui/use-toast"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { useState } from "react"
 
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import axios from "axios"
-import KdramaEdit from "./edit-item"
+// import { useMutation, useQueryClient } from "@tanstack/react-query"
+// import axios from "axios"
+import KdramaEdit from "@/components/KdramaEdit"
 
 interface DataTableRowActionsProps<TData> {
   table: Table<TData>

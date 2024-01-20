@@ -6,9 +6,10 @@ import { labels, genres, statuses } from "@/lib/data"
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
 import { MovieList } from "@/lib/schema"
-import KdramaEdit from "./edit-item"
+import KdramaEdit from "@/components/KdramaEdit"
 
 import KdramaDelete from "@/components/KdramaDelete"
+import KdramaCopy from "@/components/KdramaCopy"
 // import { DataTableRowActions } from "./DataTableRowActions"
 
 
@@ -138,8 +139,17 @@ export const columns: ColumnDef<MovieList>[] = [
     cell: ({ row }) => {
       const status = statuses.find((status) => status.value === row.getValue("status"))
       if (!status) return null
-      
+
       return <KdramaDelete row={row} />
+    }
+  },
+  {
+    id: "copy",
+    cell: ({ row }) => {
+      // const status = statuses.find((status) => status.value === row.getValue("status"))
+      // if (!status) return null
+
+      return <KdramaCopy row={row} />
     }
   },
 ]
