@@ -22,6 +22,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import Image from "next/image";
+import GoogleButton from "./common/GoogleButton";
 
 const formSchema = z.object({
   fullName: z.string()
@@ -240,76 +242,83 @@ export default function RegisterForm() {
               </div>
             </div> */}
       </>
+      <section className="w-full grid md:grid-cols-2 md:gap-x-6 max-h-screen mb-8">
+        <Image
+          className="hidden md:block w-full h-fit rounded-3xl"
+          width={480}
+          height={720}
+          src="https://i.postimg.cc/XqYrh5Ff/Default-Create-a-captivating-artwork-showcasing-the-breathtaki-0-1b094c66-a93d-4fa8-9cb0-8d5e3d8e56e.jpg"
+          alt="Sign up illustration" />
 
-      <section className="flex flex-col justify-center items-center my-6">
+        <div className="flex flex-col justify-center items-center my-6 ">
 
-        <Form {...form}  >
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Full Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="fullName" {...field} />
-                  </FormControl>
+          <Form {...form}  >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="fullName" {...field} className="py-4" />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="email" {...field} />
-                  </FormControl>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="email" {...field} className="py-4" />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="password" {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" >Submit</Button>
-          </form>
-        </Form>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
 
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder="password" {...field} className="py-4" />
+                    </FormControl>
 
-        <button
-          onClick={() => signIn("google")}
-          className="bg-blue-500 text-white px-4 py-3 rounded-lg mt-6"
-        >
-          Sign in with google
-        </button>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <span className="text-sm mt-3 text-right ">
-          Already have an account?
-          <Link className="underline" href={"/login"}>
-            Login
-          </Link>
-        </span>
+              <Button type="submit" className="w-full font-semibold">Submit</Button>
+            </form>
+          </Form>
+
+          <div className="flex justify-between items-center gap-x-2 my-6 w-full">
+            <span className="w-full h-[1px] bg-gray-400"></span>
+            <span>or</span>
+            <span className="w-full h-[1px] bg-gray-400"></span>
+          </div>
+
+          <GoogleButton />
+
+          <p className="text-sm mt-4">
+            Already have an account?
+            <Link className=" text-blue-500 ml-1" href="/login" >
+              Login
+            </Link>
+          </p>
+        </div>
       </section>
 
     </>

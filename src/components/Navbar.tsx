@@ -34,15 +34,17 @@ import { ModeToggle } from '@/utilities/ModeToggle';
 
 import React from 'react'
 import { UserNav } from './user-nav';
+import ThemeSelector from './theme/ThemeSelector';
 
 const Navbar = () => {
   const { status, data: session } = useSession();
   return (
-    <section className="flex justify-between items-center  ">
+    <section className="flex justify-between items-center mb-8 ">
       <h1 className="text-2xl lg:text-4xl font-semibold">Kdrama List</h1>
 
       <div className="flex justify-between items-center gap-x-4  md:flex-nowrap">
-        <ModeToggle />
+        {/* <ModeToggle /> */}
+        <ThemeSelector />
         <span className="font-bold text-sm md:text-base">{session?.user?.name}</span>
         {
           session?.user ?

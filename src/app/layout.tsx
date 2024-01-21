@@ -26,23 +26,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.className}   `}>
-        <Provider>
-          <SessionProviderComp>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
             >
+        <Provider>
+          <SessionProviderComp>
               <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8">
                 <Navbar />
                 <main className="grid place-items-center h-screen">
                 {children}
                 </main>
               </div>
-            </ThemeProvider>
           </SessionProviderComp>
         </Provider>
+            </ThemeProvider>
       </body>
     </html>
   )
