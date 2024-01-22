@@ -22,7 +22,7 @@ import {     Select,
       themes.find((t) => t.theme === currentTheme)?.values || "",
     );
     return (
-      <div className="absolute right-0 top-0 flex items-center gap-4 rounded-[0.5rem] text-sm font-medium">
+      <div className=" right-0 top-0 flex items-center gap-4 rounded-[0.5rem] text-sm font-medium">
         <Select
           defaultValue={currentTheme || "default"}
           onValueChange={(value) => {

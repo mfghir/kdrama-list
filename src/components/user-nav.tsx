@@ -23,18 +23,16 @@ import { LogOutIcon } from "lucide-react"
 import Link from "next/link";
 
 
-export function UserNav() {
-
-  const { status, data: session } = useSession();
-
+const UserNav = () => {
+  const { data: session } = useSession();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
-            <AvatarImage src={session?.user?.image || undefined} alt="user" />
-            <AvatarFallback>User</AvatarFallback>
+            <AvatarImage src={session?.user?.image || undefined} alt="user pic" />
+            <AvatarFallback>{session?.user?.name ? session?.user.name.slice(0, 2) : "user pic"}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -52,11 +50,11 @@ export function UserNav() {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-        <Link href="/dashboard">
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <Link href="/dashboard">
+            <DropdownMenuItem>
+              Profile
+              <DropdownMenuShortcut>⇧</DropdownMenuShortcut>
+            </DropdownMenuItem>
           </Link>
 
           {/* <DropdownMenuItem>
@@ -81,3 +79,5 @@ export function UserNav() {
     </DropdownMenu>
   )
 }
+
+export default UserNav

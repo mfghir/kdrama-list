@@ -1,66 +1,43 @@
 "use client"
 
-import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+
 import { Button } from './ui/button';
-
 import { ModeToggle } from '@/utilities/ModeToggle';
+import UserNav from './user-nav';
 
-// const Navbar = () => {
-//   const { status, data: session } = useSession();
-
-//   return (
-//     <section className="flex justify-between items-center  ">
-//       <h1 className="text-2xl lg:text-4xl font-semibold hidden md:block">Kdrama List</h1>
-
-
-//       <div className="flex justify-between items-center gap-x-4  md:flex-nowrap">
-//         <ModeToggle />
-//         <span className="font-bold text-sm md:text-base">{session?.user?.name}</span>
-//         {session?.user?.name ?
-//           <Button variant="destructive" onClick={() => signOut({ callbackUrl: "/" })}>Log out</Button>
-//           :
-//           <Button asChild><Link href="/register">Register</Link></Button>
-//         }
-//       </div>
-
-//     </section >
-//   )
-// }
-
-// export default Navbar
-
-
-
-import React from 'react'
-import { UserNav } from './user-nav';
 import ThemeSelector from './theme/ThemeSelector';
 
 const Navbar = () => {
-  const { status, data: session } = useSession();
-  return (
-    <section className="flex justify-between items-center mb-8 ">
-      <h1 className="text-2xl lg:text-4xl font-semibold">Kdrama List</h1>
+  const { data: session } = useSession();
 
-      <div className="flex justify-between items-center gap-x-4  md:flex-nowrap">
-        {/* <ModeToggle /> */}
-        <ThemeSelector />
-        <span className="font-bold text-sm md:text-base">{session?.user?.name}</span>
-        {
-          session?.user ?
+  return (
+    <nav className="flex justify-between items-center w-full mb-8 ">
+      <Image
+        className="w-16 h-16 rounded-full object-fill"
+        width={80}
+        height={80}
+        src="https://i.postimg.cc/rwwCstjZ/kdrama-logo.jpg"
+        alt="logo"
+      />
+
+      <section className="flex justify-end gap-y-2 gap-x-4 flex-wrap md:flex-nowrap">
+        <div className='flex justify-between items-center gap-x-4'>
+          <ModeToggle />
+          {session?.user ?
             <UserNav />
             :
-            <Button asChild><Link href="/register">Register</Link></Button>
-        }
-        {/* 
-        {session?.user?.name ?
-          <Button variant="destructive" onClick={() => signOut({ callbackUrl: "/" })}>Log out</Button>
-          :
-          <Button asChild><Link href="/register">Register</Link></Button>
-        } */}
-      </div>
+            <Button asChild>
+              <Link href="/register">Register</Link>
+            </Button>
+          }
+        </div>
 
-    </section >
+        <ThemeSelector />
+      </section>
+    </nav >
   )
 }
 

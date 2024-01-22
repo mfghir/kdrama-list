@@ -7,8 +7,7 @@ import SessionProviderComp from './SessionProviderComp'
 import Provider from '@/lib/provider'
 
 import Navbar from '@/components/Navbar'
-import { UserNav } from '@/components/user-nav'
-
+import { cookies } from "next/headers";
 
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -23,8 +22,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const cookieStore = cookies();
+  const currentTheme = cookieStore.get("currentTheme")?.value || "default";
+
   return (
-    <html lang="en">
+    <html lang="en" className={currentTheme}>
       <body className={`${montserrat.className}   `}>
             <ThemeProvider
               attribute="class"
@@ -36,7 +38,7 @@ export default function RootLayout({
           <SessionProviderComp>
               <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8">
                 <Navbar />
-                <main className="grid place-items-center h-screen">
+                <main className="grid place-items-center min-h-screen my-8">
                 {children}
                 </main>
               </div>

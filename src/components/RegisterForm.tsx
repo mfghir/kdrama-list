@@ -242,15 +242,16 @@ export default function RegisterForm() {
               </div>
             </div> */}
       </>
-      <section className="w-full grid md:grid-cols-2 md:gap-x-6 max-h-screen mb-8">
+      <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen">
         <Image
           className="hidden md:block w-full h-fit rounded-3xl"
           width={480}
-          height={720}
-          src="https://i.postimg.cc/XqYrh5Ff/Default-Create-a-captivating-artwork-showcasing-the-breathtaki-0-1b094c66-a93d-4fa8-9cb0-8d5e3d8e56e.jpg"
+          height={650}
+          src="https://i.postimg.cc/XqYrh5Ff/signup-pic.jpg"
           alt="Sign up illustration" />
 
-        <div className="flex flex-col justify-center items-center my-6 ">
+        <div className="flex flex-col my-6">
+          <h1 className="text-2xl font-bold inline-block w-fit border-b-2  my-4">Register</h1>
 
           <Form {...form}  >
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
@@ -310,7 +311,7 @@ export default function RegisterForm() {
             <span className="w-full h-[1px] bg-gray-400"></span>
           </div>
 
-          <GoogleButton />
+          <GoogleButton text="Sign up" />
 
           <p className="text-sm mt-4">
             Already have an account?

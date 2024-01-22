@@ -20,6 +20,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import Image from "next/image";
+import Link from "next/link";
+import GoogleButton from "./common/GoogleButton";
+
 const formSchema = z.object({
   email: z.string()
     .min(5, { message: "This field has to be filled." })
@@ -32,11 +36,8 @@ const formSchema = z.object({
 
 
 export default function LoginForm() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,8 +69,6 @@ export default function LoginForm() {
   }
 
 
-
-
   // const handleSubmit = async (e: any) => {
   //   e.preventDefault();
 
@@ -90,56 +89,72 @@ export default function LoginForm() {
   //     console.log(error);
   //   }
   // };
-  
+
 
   return (
-    <section className="flex flex-col justify-center items-center my-6">
-     
-      <Form {...form}  >
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="email" {...field}  />
-                </FormControl>
+    <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen">
+      <Image
+        className="hidden md:block w-full h-fit rounded-3xl"
+        width={480}
+        height={650}
+        src="https://i.postimg.cc/MKXcmyzx/login-pic.jpg"
+        alt="Login illustration" />
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input placeholder="password" {...field} />
-                </FormControl>
+      <div className="flex flex-col my-6">
+        <h1 className="text-2xl font-bold inline-block w-fit border-b-2 my-4">Login</h1>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <Form {...form}  >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="email" {...field} className="py-4" />
+                  </FormControl>
 
-          <Button type="submit" >Submit</Button>
-        </form>
-      </Form>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-      
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="password" {...field} className="py-4" />
+                  </FormControl>
 
-      <button
-        onClick={() => signIn("google")}
-        className="bg-blue-500 text-white px-4 py-3 rounded-lg mt-6"
-      >
-        Sign in with google
-      </button>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
+            <Button type="submit" className="w-full font-semibold">Submit</Button>
+          </form>
+        </Form>
+
+        <div className="flex justify-between items-center gap-x-2 my-6 w-full">
+          <span className="w-full h-[1px] bg-gray-400"></span>
+          <span>or</span>
+          <span className="w-full h-[1px] bg-gray-400"></span>
+        </div>
+
+        <GoogleButton text="Login" />
+
+        <p className="text-sm mt-4">
+          Does not have an account?
+          <Link className=" text-blue-500 ml-1" href="/register" >
+            Register
+          </Link>
+        </p>
+      </div>
     </section>
   );
 }
