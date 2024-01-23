@@ -38,7 +38,7 @@ export default function RootLayout({
           <SessionProviderComp>
               <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8">
                 <Navbar />
-                <main className="grid place-items-center min-h-screen my-8">
+                <main className="grid place-items-center min-h-screen my-8 overflow-hidden">
                 {children}
                 </main>
               </div>

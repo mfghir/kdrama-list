@@ -61,7 +61,7 @@ export default function KdramaAdd() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="sm">
+        <Button variant="secondary" size="sm" className="ml-4 md:ml-0" >
           ＋ Add New Title
         </Button>
       </DialogTrigger>
