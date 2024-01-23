@@ -5,27 +5,31 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
+import { NextAuthOptions } from "next-auth";
 
-export const authOptions = {
+
+
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
 
     CredentialsProvider({
       name: "credentials",
       credentials: {},
 
-      async authorize(credentials) {
-        const { email, password } = credentials;
+      async authorize(credentials: { email: string; password: string; }) {
+        const { email, password  } = credentials;
 
         try {
           await connectDB();
           const user = await User.findOne({ email });
+          console.log("user---->",user);
 
           if (!user) {
             return null;
@@ -38,6 +42,11 @@ export const authOptions = {
           }
 
           return user;
+          // return {
+          //   id: user.id,
+          //   email: user.email,
+          //   role: user.role, // Assuming your user model has a 'role' field
+          // };
         } catch (error) {
           console.log("Error: ", error);
         }
@@ -49,6 +58,7 @@ export const authOptions = {
   pages: {
     signIn: "/dashboard",
   },
+  
 };
 
 const handler = NextAuth(authOptions);

@@ -12,6 +12,8 @@ export default function UserInfo() {
   const { status, data: session } = useSession();
 
   console.log("status", status);
+  console.log("session---->", session);
+  // console.log("role---->", session.user.role);
 
   if (status === "authenticated") {
     return (

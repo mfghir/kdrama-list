@@ -88,7 +88,7 @@ export default function RegisterForm() {
     }
   }
 
-  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  // async function onSubmit( e:any ,values: z.infer<typeof formSchema>) {
 
   //   e.preventDefault();
 
@@ -119,9 +119,9 @@ export default function RegisterForm() {
   //         "Content-Type": "application/json",
   //       },
   //       body: JSON.stringify({
-  //         name,
-  //         email,
-  //         password,
+  //         fullName : values.fullName ,
+  //         email: values.email ,
+  //         password : values.email ,
   //       }),
   //     });
 
