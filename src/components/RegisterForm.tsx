@@ -26,7 +26,7 @@ import Image from "next/image";
 import GoogleButton from "./common/GoogleButton";
 
 const formSchema = z.object({
-  fullName: z.string()
+  name: z.string()
     .min(4, { message: "This field has to be filled." }),
   email: z.string()
     .min(5, { message: "This field has to be filled." })
@@ -58,7 +58,7 @@ export default function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
       password: "",
     },
@@ -69,7 +69,7 @@ export default function RegisterForm() {
 
     try {
       const res = await signIn("credentials", {
-        fullName: values.fullName,
+        name: values.name,
         email: values.email,
         password: values.password,
 
@@ -257,7 +257,7 @@ export default function RegisterForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
               <FormField
                 control={form.control}
-                name="fullName"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Full Name</FormLabel>

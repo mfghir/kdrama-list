@@ -41,12 +41,15 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
-          return user;
-          // return {
-          //   id: user.id,
-          //   email: user.email,
-          //   role: user.role, // Assuming your user model has a 'role' field
-          // };
+          
+
+          // return user;
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role, // Assuming your user model has a 'role' field
+          };
         } catch (error) {
           console.log("Error: ", error);
         }
