@@ -7,7 +7,30 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUp,
+  gauge
 } from "lucide-react";
+
+export interface NavItem {
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+  icon?: string;
+  label?: string;
+  description?: string;
+}
+
+
+
+export const navItems: NavItem[] = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon:  gauge ,
+    label: "Dashboard",
+  },
+]
+
 
 export const labels = [
   {
@@ -69,3 +92,5 @@ export const genres = [
     icon: ArrowUp,
   },
 ];
+
+

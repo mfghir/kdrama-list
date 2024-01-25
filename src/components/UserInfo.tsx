@@ -1,39 +1,42 @@
 "use client";
 
 import Image from "next/image";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
-import { LogOutIcon } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-export default function UserInfo() {
-  const { status, data: session } = useSession();
+import { LogOutIcon } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-  // console.log("status", status);
-  console.log("session---->", session);
-  // console.log("role---->", session.user.role);
 
-  if (status === "authenticated") {
+interface UserInfoProps {
+  role: string;
+  email: string;
+  name: string;
+  image: string;
+}
+
+
+export default function UserInfo({
+  role,
+  email,
+  name,
+  image,
+}: UserInfoProps): JSX.Element | null {
+
+  if (role === "admin") {
     return (
-
       <div className="shadow-lg px-4 py-6 bg-zinc-300/10 flex flex-col gap-2 my-6 w-full md:w-2/4 rounded-2xl">
-
-        {session?.user?.image ? <Image src={session?.user?.image} alt="user" width={60} height={60} /> : ""}
+        {image ? <Image src={image} alt="user" width={60} height={60} />: ""}
 
         <div>
-          Name: <span className="font-bold">{session?.user?.name}</span>
+          Role: <span className="font-bold">{role}</span>
         </div>
         <div>
-          Email: <span className="font-bold">{session?.user?.email}</span>
+          Name: <span className="font-bold">{name}</span>
         </div>
-        {/* <button
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className="bg-red-500 text-white font-bold px-6 py-2 mt-3"
-          >
-            Log Out
-          </button> */}
+        <div>
+          Email: <span className="font-bold">{email}</span>
+        </div>
 
         <Button asChild >
           <Link href="/" >
@@ -45,4 +48,12 @@ export default function UserInfo() {
 
     );
   }
+  else {
+    <>
+      user
+    </>
+  }
+
+  return null
+
 }

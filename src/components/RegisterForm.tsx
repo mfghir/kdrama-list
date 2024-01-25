@@ -63,30 +63,47 @@ export default function RegisterForm() {
       password: "",
     },
   })
-
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-
-    try {
-      const res = await signIn("credentials", {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-
-        redirect: false,
-      });
-
-      if (res?.error) {
-        setError("Invalid Credentials");
-        // if (res?.url) router.replace("/dashboard");
-        return;
-      }
-
-      router.replace("dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+  
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Could not register user.")
+        return res.json()
+      })
+      .then((data) => {
+        console.log(data);
+        router.push("/login");
+      }).catch((err) => setError(err.message));
   }
+
+
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+
+  //   try {
+  //     const res = await signIn("credentials", {
+  //       name: values.name,
+  //       email: values.email,
+  //       password: values.password,
+
+  //       // redirect: false,
+  //     });
+  //     console.log('res', res);
+
+  //     if (res?.error) {
+  //       setError("Invalid Credentials");
+  //       // if (res?.url) router.replace("/dashboard");
+  //       return;
+  //     }
+
+  //     router.replace("dashboard");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   // async function onSubmit( e:any ,values: z.infer<typeof formSchema>) {
 

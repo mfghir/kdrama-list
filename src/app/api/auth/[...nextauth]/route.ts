@@ -41,8 +41,7 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
-          
-
+        
           // return user;
           return {
             id: user.id,
@@ -50,12 +49,14 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
             role: user.role, // Assuming your user model has a 'role' field
           };
+
         } catch (error) {
           console.log("Error: ", error);
         }
       },
     }),
   ],
+  
 
   secret: process.env.AUTH_SECRET,
   pages: {
