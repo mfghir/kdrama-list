@@ -7,7 +7,8 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUp,
-  gauge
+  Gauge,
+  UsersRound
 } from "lucide-react";
 
 export interface NavItem {
@@ -15,9 +16,8 @@ export interface NavItem {
   href?: string;
   disabled?: boolean;
   external?: boolean;
-  icon?: string;
+  icon?: unknown;
   label?: string;
-  description?: string;
 }
 
 
@@ -26,8 +26,14 @@ export const navItems: NavItem[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon:  gauge ,
+    icon:  Gauge ,
     label: "Dashboard",
+  },
+  {
+    title: "Users",
+    href: "/dashboard/users",
+    icon:  UsersRound ,
+    label: "Users",
   },
 ]
 

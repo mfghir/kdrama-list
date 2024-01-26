@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import UserInfo from "@/components/UserInfo";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
+import DashboardLayout from "./layout";
 
 
 const Dashboard = async () => {
@@ -14,8 +15,11 @@ const Dashboard = async () => {
   await connectDB()
   const user = await User.findOne({ email: session?.user.email });
 
-
-  return <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} />
+  return (
+    <DashboardLayout>
+      <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} />
+    </DashboardLayout>
+  )
 }
 
 export default Dashboard

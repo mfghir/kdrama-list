@@ -33,7 +33,7 @@ import {     Select,
         >
           <SelectTrigger
             id="theme-selector"
-            className="line-clamp-1 w-[160px] truncate"
+            className="line-clamp-1 w-[120px] truncate"
           >
             <SelectValue />
           </SelectTrigger>

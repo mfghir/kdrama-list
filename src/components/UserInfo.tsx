@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 
 import { LogOutIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import DashboardNav from "./dashboard/DashboardNav";
 
 
 interface UserInfoProps {
@@ -25,6 +26,7 @@ export default function UserInfo({
 
   if (role === "admin") {
     return (
+      <>
       <div className="shadow-lg px-4 py-6 bg-zinc-300/10 flex flex-col gap-2 my-6 w-full md:w-2/4 rounded-2xl">
         {image ? <Image src={image} alt="user" width={60} height={60} />: ""}
 
@@ -45,7 +47,8 @@ export default function UserInfo({
           </Link>
         </Button>
       </div>
-
+  
+</>
     );
   }
   else {

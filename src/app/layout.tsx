@@ -28,23 +28,25 @@ export default function RootLayout({
   return (
     <html lang="en" className={currentTheme}>
       <body className={`${montserrat.className}   `}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-        <Provider>
-          <SessionProviderComp>
-              <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Provider>
+            <SessionProviderComp>
+<main className="min-h-screen overflow-hidden">
+            {/* <main className="grid place-items-center min-h-screen my-8 overflow-hidden"> */}
+
+              {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
                 <Navbar />
-                <main className="grid place-items-center min-h-screen my-8 overflow-hidden">
                 {children}
-                </main>
-              </div>
-          </SessionProviderComp>
-        </Provider>
-            </ThemeProvider>
+              {/* </div> */}
+              </main>
+            </SessionProviderComp>
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   )
