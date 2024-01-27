@@ -36,13 +36,13 @@ export default function RootLayout({
         >
           <Provider>
             <SessionProviderComp>
-<main className="min-h-screen overflow-hidden">
-            {/* <main className="grid place-items-center min-h-screen my-8 overflow-hidden"> */}
+              <main className="min-h-screen overflow-hidden">
+                {/* <main className="grid place-items-center min-h-screen my-8 overflow-hidden"> */}
 
-              {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
+                {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
                 <Navbar />
                 {children}
-              {/* </div> */}
+                {/* </div> */}
               </main>
             </SessionProviderComp>
           </Provider>
