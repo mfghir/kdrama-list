@@ -6,6 +6,7 @@ import UserInfo from "@/components/UserInfo";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 import DashboardLayout from "./layout";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 
 const Dashboard = async () => {
@@ -13,12 +14,11 @@ const Dashboard = async () => {
   if (!session) redirect("/register");
 
   await connectDB()
-  const user = await User.findOne({ email: session?.user.email });
+  const user = await User.findOne({ email: session?.user?.email });
 
   return (
-    <DashboardLayout>
       <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} />
-    </DashboardLayout>
+
   )
 }
 
