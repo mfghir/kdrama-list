@@ -29,15 +29,15 @@ export default function UserInfo({
     return (
       <>
 
-        <ScrollArea className="h-full mt-8">
+        <ScrollArea className="h-full ">
           <div className="w-full flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">
               Hi, Welcome back 👋
             </h2>
 
             <div className="hidden md:flex items-center gap-x-4">
-            {new Date().toLocaleString() + ""}
-              <Button>{new Date().toLocaleString("en-US", {year:"numeric", month: "long", day : '2-digit'})}</Button>
+              {new Date().toLocaleString() + ""}
+              <Button>{new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}</Button>
             </div>
           </div>
 

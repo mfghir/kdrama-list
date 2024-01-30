@@ -12,7 +12,7 @@ export default function DashboardLayout({
 
         {/* <ScrollArea className="h-full">
       <div className="bg flex-1 space-y-4 p-4 md:p-8 pt-6"> */}
-        <main className="w-full pt-16 p-6">{children}</main>
+        <main className="w-full pt-28 p-6">{children}</main>
         {/* </div>
       </ScrollArea> */}
       </div>

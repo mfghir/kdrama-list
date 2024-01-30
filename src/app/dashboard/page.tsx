@@ -1,15 +1,13 @@
-import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 import UserInfo from "@/components/UserInfo";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
-import DashboardLayout from "./layout";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 
-const Dashboard = async () => {
+const Dashboard = async () => { 
   const session = await getServerSession(authOptions);
   if (!session) redirect("/register");
 
@@ -17,8 +15,7 @@ const Dashboard = async () => {
   const user = await User.findOne({ email: session?.user?.email });
 
   return (
-      <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} />
-
+    <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} />
   )
 }
 

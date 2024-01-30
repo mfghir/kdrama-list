@@ -22,7 +22,7 @@ import * as z from "zod"
 
 import Image from "next/image";
 import Link from "next/link";
-import GoogleButton from "./common/GoogleButton";
+import GoogleButton from "../utilities/GoogleButton";
 
 const formSchema = z.object({
   email: z.string()
@@ -92,7 +92,7 @@ export default function LoginForm() {
 
 
   return (
-    <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen">
+    <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen  p-6 mt-24 lg:px-20 lg:py-8">
       <Image
         className="hidden md:block w-full h-fit rounded-3xl"
         width={480}

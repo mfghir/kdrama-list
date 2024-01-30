@@ -17,9 +17,9 @@ const Navbar = () => {
   const path = usePathname();
 
   return (
-    <div className="w-full p-3 lg:px-20 flex justify-between items-center fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
+    <div className="w-full p-3 lg:px-20 flex justify-between items-center fixed  supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
       <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
-        test ==========
+       
         <Image
           className="w-16 h-16 rounded-full object-fill"
           width={80}

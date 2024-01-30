@@ -23,7 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Image from "next/image";
-import GoogleButton from "./common/GoogleButton";
+import GoogleButton from "../utilities/GoogleButton";
 
 const formSchema = z.object({
   name: z.string()
@@ -38,13 +38,8 @@ const formSchema = z.object({
 
 
 export default function RegisterForm() {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
   const router = useRouter();
-
   const { status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -52,7 +47,6 @@ export default function RegisterForm() {
       router.replace("/dashboard");
     }
   }, [sessionStatus, router]);
-
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -63,7 +57,7 @@ export default function RegisterForm() {
       password: "",
     },
   })
-  
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await fetch("/api/register", {
       method: "POST",
@@ -259,7 +253,7 @@ export default function RegisterForm() {
               </div>
             </div> */}
       </>
-      <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen">
+      <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen p-6 mt-24 lg:px-20 lg:py-8">
         <Image
           className="hidden md:block w-full h-fit rounded-3xl"
           width={480}
