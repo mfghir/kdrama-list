@@ -13,9 +13,12 @@ const Dashboard = async () => {
 
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });
+  const users = await User.find().sort({ createdAt: -1 })
+  const usersList = users.map(user => user.toObject());
+
 
   return (
-    <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} />
+    <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} usersList={usersList} />
   )
 }
 

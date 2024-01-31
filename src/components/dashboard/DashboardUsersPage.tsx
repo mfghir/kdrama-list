@@ -24,9 +24,7 @@ interface DashboardUsersPageProps {
 
 
 const DashboardUsersPage = ({ usersList }: DashboardUsersPageProps): JSX.Element => {
-  const filteredUsers = usersList.filter((user) => user.role === "user");
-  // const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
- const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const filteredUsers = usersList?.filter((user) => user.role === "user");
 
   return (
     <section className="w-full h-full overflow-y-scroll grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -44,14 +42,14 @@ const DashboardUsersPage = ({ usersList }: DashboardUsersPageProps): JSX.Element
         <CardHeader>
           <CardTitle>users list</CardTitle>
           <CardDescription>
-            Total Users {filteredUsers.length}
+            Total Users {filteredUsers?.length}
           </CardDescription>
         </CardHeader>
 
         <CardContent>
           <section className=""  >
-            {filteredUsers.map((user) => (
-              <div key={user.email} className="flex justify-between items-center gap-x-2 my-8 bg-orange-600">
+            {filteredUsers?.map((user) => (
+              <div key={user.email} className="flex justify-between items-center gap-x-2 my-8">
                 <Avatar className="h-9 w-9">
                   <AvatarImage src={user?.image || user.name.slice(0, 2)} alt="Avatar" />
                   <AvatarFallback>
@@ -64,7 +62,9 @@ const DashboardUsersPage = ({ usersList }: DashboardUsersPageProps): JSX.Element
                   <p className="text-sm text-muted-foreground break-all">{user.email}</p>
                 </div>
 
-                <p className="ml-auto text-xs md:text-sm font-medium">{user.createdAt.toLocaleDateString("en-US", { year: "numeric", month: "short", day: '2-digit' })}</p>
+                <p className="ml-auto text-xs md:text-sm font-medium">
+                  {user.createdAt.toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })}
+                </p>
               </div>
             ))}
           </section>
