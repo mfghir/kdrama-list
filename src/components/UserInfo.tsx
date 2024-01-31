@@ -11,7 +11,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { useKdramasData } from "@/lib/queries";
 import Overview from "./dashboard/Overview";
-import DashboardUsersPage from "./dashboard/DashboardUsersPage";
+import DashboardUsersPage from "./dashboard/TabUsers.tsx";
 
 
 interface UserInfoProps {
@@ -35,7 +35,7 @@ interface DashboardUsersPageProps {
 }
 
 
-export default function UserInfo({ role, email, name, image, usersList }: UserInfoProps & DashboardUsersPageProps): JSX.Element | null{
+export default function UserInfo({ role, email, name, image, usersList }: UserInfoProps & DashboardUsersPageProps): JSX.Element | null {
   const { data: serverData } = useKdramasData()
   console.log("usersList---", usersList);
 
@@ -47,7 +47,6 @@ export default function UserInfo({ role, email, name, image, usersList }: UserIn
   if (role === "admin") {
     return (
       <>
-
         <ScrollArea className="h-full ">
           <section className="w-full flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">

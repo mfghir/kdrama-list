@@ -2,9 +2,9 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import UserInfo from "@/components/UserInfo";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
+import TabDashboard from "@/components/dashboard/TabDashboard";
 
 
 const Dashboard = async () => { 
@@ -16,9 +16,10 @@ const Dashboard = async () => {
   const users = await User.find().sort({ createdAt: -1 })
   const usersList = users.map(user => user.toObject());
 
-
+  
+  // <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} usersList={usersList} />
   return (
-    <UserInfo role={user.role} email={user.email} name={user.name} image={user.image} usersList={usersList} />
+    <TabDashboard role={user.role} email={user.email} name={user.name} image={user.image} usersList={usersList} />
   )
 }
 
