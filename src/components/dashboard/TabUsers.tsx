@@ -1,8 +1,8 @@
-import React from 'react'
+import { UserClient } from '@/utilities/users-table/client'
 
-const TabUsers = () => {
+const TabUsers = ({ data }: any) => {
   return (
-    <div>TabUsers</div>
+    <UserClient data={data} />
   )
 }
 

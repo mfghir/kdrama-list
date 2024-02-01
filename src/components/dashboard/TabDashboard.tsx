@@ -1,17 +1,15 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 import { Calendar, CircleUserRound, Clock, Popcorn, Slice, Smile, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useKdramasData } from "@/lib/queries";
-import { ScrollArea } from "../ui/scroll-area";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import Overview from "./Overview";
-import { AvatarFallback } from "@radix-ui/react-avatar";
-import { Avatar, AvatarImage } from "../ui/avatar";
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { ScrollArea } from "../ui/scroll-area";
+
+import { Button } from "../ui/button";
 
 
 
@@ -21,7 +19,6 @@ interface UserInfoProps {
   name: string;
   image?: string;
 }
-
 
 interface User {
   email: string;
@@ -38,9 +35,6 @@ interface SecThreeProps {
 
 const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & SecThreeProps): JSX.Element | null => {
   const { data: serverData } = useKdramasData()
-  console.log("usersList---", usersList);
-
-
 
 
   if (role === "admin") {
@@ -184,11 +178,6 @@ const SecTwo = ({ serverData }: any) => {
     </section>
   )
 }
-
-
-
-
-
 
 
 
