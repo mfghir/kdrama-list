@@ -6,7 +6,7 @@ import { CellAction } from "./cell-action";
 
 
 export type User = {
-  id: number;
+  _id: number;
   name: string;
   email: string;
   role: string;
