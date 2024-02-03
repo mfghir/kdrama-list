@@ -4,6 +4,7 @@ import User from "@/models/user";
 import TabUserEdit from "@/components/dashboard/TabUserEdit";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BreadCrumb from "@/utilities/breadcrumb";
+import { useRouter } from "next/navigation";
 
 export default async function Page() {
   const breadcrumbItems = [
@@ -14,6 +15,10 @@ export default async function Page() {
   await connectDB()
   const users = await User.find({ role: "user" }).sort({ createdAt: -1 }) // Sort by date in descending order
   const usersList = users.map(user => user.toObject());
+
+  // await connectDB()
+  // const user = await User.findOne({ email }).select("_id");
+  // console.log("user",user);
 
   return (
     <ScrollArea className="h-full">

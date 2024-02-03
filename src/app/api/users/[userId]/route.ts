@@ -24,21 +24,23 @@
 
 
 
-
-
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
-import { NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export async function PATCH(req: { json: () => PromiseLike<{ email: any; }> | { email: any; }; }) {
+export default async function PUT(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDB();
-    const { email } = await req.json();
-    const user = await User.findOne({ email }).select("_id");
-    console.log("user: ", user);
-    return NextResponse.json({ user });
+    const { email, ...updatedData } = req.body;
+    const user = await User.findOneAndUpdate({ email }, updatedData, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json({ user });
   } catch (error) {
-    console.log(error);
+    console.log("error ===>", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 }
-

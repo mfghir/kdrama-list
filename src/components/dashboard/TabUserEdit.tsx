@@ -25,6 +25,7 @@ import { Separator } from '../ui/separator'
 
 import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
+import axios from "axios";
 
 
 
@@ -47,7 +48,9 @@ const formSchema = z.object({
     .array(ImgSchema)
     .max(IMG_MAX_LIMIT, { message: "You can only add up to 1 image" })
     .min(1, { message: "At least one image must be added." }),
-  email: z.string().email("Invalid Email Address"),
+    email: z.string()
+    .min(5, { message: "This field has to be filled." })
+    .email("This is not a valid email."),
   role: z.
     string().default("user")
 });
@@ -57,15 +60,15 @@ type ProductFormValues = z.infer<typeof formSchema>;
 
 
 const TabUserEdit = ({ usersList }: { usersList: any }) => {
-  const params = useParams()
-  const currentUser = usersList.filter((user: { _id: string | string[]; }) => user._id == params.userId)[0] || {};
-  // console.log(params);
+  const {userId} = useParams()
+  const currentUser = usersList.filter((user: { _id: string | string[]; }) => user._id == userId)[0] || {};
+  // console.log(userId);
   // console.log(usersList);
   // console.log('current User', currentUser)
 
 
 
-  const initialData = null
+  const initialData = currentUser ? currentUser : null
 
   const router = useRouter();
   const { toast } = useToast();
@@ -78,23 +81,24 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
   const toastMessage = initialData ? "user updated." : "user created.";
   const action = initialData ? "Save changes" : "Create";
 
-  // const defaultValues = initialData
-  //   ? initialData
-  //   : {
-  //     name: "",
-  //     email: "",
-  //     imgUrl: [],
-  //     role: "",
-  //   };
-
-  const form = useForm<ProductFormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
+  const defaultValues = initialData
+    ? initialData
+    : {
       name: "",
       email: "",
       imgUrl: [],
       role: "",
-    }
+    };
+
+  const form = useForm<ProductFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues
+    // : {
+    //   name: currentUser.name ,
+    //   email: currentUser.email,
+    //   imgUrl: [],
+    //   role: currentUser.role,
+    // }
   });
 
   // const onSubmit = async (data: ProductFormValues) => {
@@ -126,39 +130,34 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
   //     setLoading(false);
   //   }
   // };
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await fetch("/api/register", {
-      method: "PATCH",
-
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Could not register user.")
-        return res.json()
-      })
-      .then((data) => {
-        console.log(data);
-        router.push("/login");
-      }).catch((err) => console.log(err.message));
-  }
-
   
-
-  const onDelete = async () => {
+  
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log('test');
     try {
-      setLoading(true);
-      //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
-      router.refresh();
-      // router.push(`/${params.storeId}/products`);
-    } catch (error: any) {
-    } finally {
-      setLoading(false);
-      setOpen(false);
+      const response = await axios.put(`/api/users/${userId}`, values);
+      console.log("===>",response);
+      router.push("/dashboard/users");
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const triggerImgUrlValidation = () => form.trigger("imgUrl");
+
+  // const onDelete = async () => {
+  //   try {
+  //     setLoading(true);
+  //     //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
+  //     router.refresh();
+  //     // router.push(`/${params.storeId}/products`);
+  //   } catch (error: any) {
+  //   } finally {
+  //     setLoading(false);
+  //     setOpen(false);
+  //   }
+  // };
+
+  // const triggerImgUrlValidation = () => form.trigger("imgUrl");
 
 
 
@@ -167,15 +166,13 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between ">
         <Heading title={title} description={description} />
       </div>
-      <Separator />
+      {/* <Separator /> */}
+
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">
           {/* <FormField
             control={form.control}
             name="imgUrl"
@@ -202,8 +199,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={loading} {...field} />
+                    <Input placeholder={currentUser.name} disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -217,7 +213,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} {...field} />
+                    <Input placeholder={currentUser.email} disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -231,7 +227,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
                 <FormItem>
                   <FormLabel>Role</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} {...field} />
+                    <Input placeholder={currentUser.role} disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
