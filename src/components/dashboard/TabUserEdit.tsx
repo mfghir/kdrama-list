@@ -44,10 +44,10 @@ export const IMG_MAX_LIMIT = 1;
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
-  imgUrl: z
-    .array(ImgSchema)
-    .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
-    .min(1, { message: "At least one image must be added." }),
+  // imgUrl: z
+  //   .array(ImgSchema)
+  //   .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
+  //   .min(1, { message: "At least one image must be added." }),
   email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
@@ -84,7 +84,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    imgUrl: [],
+    // imgUrl: {},
     role: "",
   };
 
@@ -100,49 +100,52 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
   });
 
 
-  // const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
+  const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
+    try {
+      setLoading(true);
+      if (initialData) {
+        console.log("initialData---", initialData);
+        console.log("data---", data);
+        // await api.put(`/users/${initialData?.id}`, data).then(()=>{
+          
+        await axios.patch(`/api/users/${initialData._id}`, data);
+
+      } else {
+        // const res = await axios.post(`/api/products/create-product`, data);
+        // console.log("product", res);
+      }
+
+      router.refresh();
+      router.push(`/dashboard/users`);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  // const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  //   console.log('test', values);
+  //   // updateContact(values)
   //   try {
-  //     setLoading(true);
-  //     if (initialData) {
-  //       console.log("initialData---", initialData);
-  //       console.log("data---", data);
-  //       // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
-
-  //     } else {
-  //       // const res = await axios.post(`/api/products/create-product`, data);
-  //       // console.log("product", res);
-  //     }
-
-  //     router.refresh();
-  //     router.push(`/dashboard/users`);
-  //     toast({
-  //       variant: "destructive",
-  //       title: "Uh oh! Something went wrong.",
-  //       description: "There was a problem with your request.",
-  //     });
-
-  //   } catch (error: any) {
-  //     toast({
-  //       variant: "destructive",
-  //       title: "Uh oh! Something went wrong.",
-  //       description: "There was a problem with your request.",
-  //     });
-  //   } finally {
-  //     setLoading(false);
+  //     const response = await axios.put(`/api/users/${userId}`, values);
+  //     console.log("===>", response);
+  //     router.push("/dashboard/users");
+  //   } catch (error) {
+  //     console.log(error);
   //   }
   // };
-
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log('test', values);
-    // try {
-    //   // const response = await axios.put(`/api/users/${userId}`, values);
-    //   // console.log("===>", response);
-    //   // router.push("/dashboard/users");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
 
 
   // const onDelete = async () => {
