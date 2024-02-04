@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { Trash } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,21 +46,19 @@ const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
   imgUrl: z
     .array(ImgSchema)
-    .max(IMG_MAX_LIMIT, { message: "You can only add up to 1 image" })
+    .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
     .min(1, { message: "At least one image must be added." }),
-    email: z.string()
+  email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
-  role: z.
-    string().default("user")
+  role: z.string().default("user")
 });
 
-type ProductFormValues = z.infer<typeof formSchema>;
 
 
 
 const TabUserEdit = ({ usersList }: { usersList: any }) => {
-  const {userId} = useParams()
+  const { userId } = useParams()
   const currentUser = usersList.filter((user: { _id: string | string[]; }) => user._id == userId)[0] || {};
   // console.log(userId);
   // console.log(usersList);
@@ -69,28 +67,28 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
 
 
   const initialData = currentUser ? currentUser : null
-
   const router = useRouter();
+  const pathName = usePathname()
+  // console.log("pathName", pathName.includes('new') ? "yes" : "no");
+
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
 
-  const title = initialData ? "Edit user" : "Create user";
-  const description = initialData ? "Edit a user." : "Add a new user";
-  const toastMessage = initialData ? "user updated." : "user created.";
-  const action = initialData ? "Save changes" : "Create";
+  const title = pathName.includes('new') ? "Create user":  "Edit user" 
+  const description = pathName.includes('new') ?  "Add a new user" :"Edit a user."
+  const toastMessage = initialData ?  "user created.": "user updated."
+  const action = pathName.includes('new') ? "Create" :"Save changes" 
 
-  const defaultValues = initialData
-    ? initialData
-    : {
-      name: "",
-      email: "",
-      imgUrl: [],
-      role: "",
-    };
+  const defaultValues = initialData ? initialData : {
+    name: "",
+    email: "",
+    imgUrl: [],
+    role: "",
+  };
 
-  const form = useForm<ProductFormValues>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
     // : {
@@ -101,10 +99,13 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
     // }
   });
 
-  // const onSubmit = async (data: ProductFormValues) => {
+
+  // const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
   //   try {
   //     setLoading(true);
   //     if (initialData) {
+  //       console.log("initialData---", initialData);
+  //       console.log("data---", data);
   //       // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
 
   //     } else {
@@ -130,17 +131,17 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
   //     setLoading(false);
   //   }
   // };
-  
-  
+
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log('test');
-    try {
-      const response = await axios.put(`/api/users/${userId}`, values);
-      console.log("===>",response);
-      router.push("/dashboard/users");
-    } catch (error) {
-      console.log(error);
-    }
+    console.log('test', values);
+    // try {
+    //   // const response = await axios.put(`/api/users/${userId}`, values);
+    //   // console.log("===>", response);
+    //   // router.push("/dashboard/users");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
 
@@ -169,7 +170,17 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
       <div className="flex items-center justify-between ">
         <Heading title={title} description={description} />
       </div>
-      {/* <Separator /> */}
+      {/* {initialData && (
+        <Button
+          disabled={loading}
+          variant="destructive"
+          size="sm"
+          onClick={() => setOpen(true)}
+        >
+          <Trash className="h-4 w-4" />
+        </Button>
+      )}
+      <Separator /> */}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">
@@ -235,7 +246,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
             />
           </div>
 
-          <Button disabled={loading} className="ml-auto" type="submit">
+          <Button disabled={loading} className="ml-auto" type="submit" >
             {action}
           </Button>
         </form>
