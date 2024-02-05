@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ScrollArea } from "../ui/scroll-area";
 
 import { Button } from "../ui/button";
+import { Notification, userNotifs } from "@/lib/data";
 
 
 
@@ -86,10 +87,33 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
       </>
     );
   }
-  else {
-    <>
-      user
-    </>
+  if (role === "user") {
+    return (
+      <>
+        <ScrollArea className="h-full ">
+          <section className="w-full flex items-center justify-between space-y-2">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Hi, Welcome back 👋
+            </h2>
+
+            <div className="hidden md:flex items-center gap-x-4">
+              <Button className="flex justify-between items-center gap-x-2" variant="secondary">
+                <Calendar size={18} />
+                {new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}
+              </Button>
+              <Button className="flex justify-between items-center gap-x-2" variant="ghost">
+                <Clock size={18} />
+                {new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" })}
+              </Button>
+            </div>
+          </section>
+
+          <SecTwo serverData={serverData} />
+
+          <SecUserNotifs />
+        </ScrollArea>
+      </>
+    )
   }
 
   return null
@@ -222,6 +246,52 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
 
                 <p className="ml-auto text-xs md:text-sm font-medium">
                   {user.createdAt.toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })}
+                </p>
+              </div>
+            ))}
+          </section>
+        </CardContent>
+      </Card>
+      {/* </div > */}
+    </section>
+  )
+}
+
+
+const SecUserNotifs = (): JSX.Element => {
+
+  return (
+    <section className="w-full h-full overflow-y-scroll lg:overflow-auto grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <Card className="col-span-4">
+        <CardHeader>
+          <CardTitle>Overview</CardTitle>
+        </CardHeader>
+        <CardContent className="pl-2">
+          <Overview />
+        </CardContent>
+      </Card>
+
+
+      <Card className="col-span-3">
+        <CardHeader>
+          <CardTitle>Notifications list</CardTitle>
+          <CardDescription>
+            Total Notifications {userNotifs?.length}
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent>
+          <section className="" >
+            {userNotifs?.map((item) => (
+              <div key={item.title} className="flex justify-between items-center gap-x-2 my-8">
+
+                <div className=" space-y-1">
+                  <p className="text-sm font-medium leading-none">{item.emoji} {item.title}</p>
+                  <p className="text-sm text-muted-foreground line-clamp-2 ">{item.desc}</p>
+                </div>
+
+                <p className="ml-auto text-xs md:text-sm font-medium">
+                  {item.createdAt}
                 </p>
               </div>
             ))}

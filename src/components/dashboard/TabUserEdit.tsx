@@ -76,10 +76,10 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
 
-  const title = pathName.includes('new') ? "Create user":  "Edit user" 
-  const description = pathName.includes('new') ?  "Add a new user" :"Edit a user."
-  const toastMessage = initialData ?  "user created.": "user updated."
-  const action = pathName.includes('new') ? "Create" :"Save changes" 
+  const title = pathName.includes('new') ? "Create user" : "Edit user"
+  const description = pathName.includes('new') ? "Add a new user" : "Edit a user."
+  const toastMessage = initialData ? "user created." : "user updated."
+  const action = pathName.includes('new') ? "Create" : "Save changes"
 
   const defaultValues = initialData ? initialData : {
     name: "",
@@ -104,15 +104,14 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
     try {
       setLoading(true);
       if (initialData) {
-        console.log("initialData---", initialData);
+        console.log("initialData---", initialData._id);
         console.log("data---", data);
-        // await api.put(`/users/${initialData?.id}`, data).then(()=>{
-          
+         
         await axios.patch(`/api/users/${initialData._id}`, data);
-
       } else {
-        // const res = await axios.post(`/api/products/create-product`, data);
-        // console.log("product", res);
+        // await axios.post(`/api/users`, data);
+        const res = await axios.post(`/api/register`, data);
+        console.log("product", res);
       }
 
       router.refresh();
@@ -124,6 +123,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
       });
 
     } catch (error: any) {
+      console.log("error-->", error);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",

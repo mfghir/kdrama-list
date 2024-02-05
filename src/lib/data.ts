@@ -8,7 +8,7 @@ import {
   ArrowRight,
   ArrowUp,
   Gauge,
-  UsersRound
+  UsersRound,
 } from "lucide-react";
 
 export interface NavItem {
@@ -20,23 +20,20 @@ export interface NavItem {
   label?: string;
 }
 
-
-
 export const navItems: NavItem[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon:  Gauge ,
+    icon: Gauge,
     label: "Dashboard",
   },
   {
     title: "Users",
     href: "/dashboard/users",
-    icon:  UsersRound ,
+    icon: UsersRound,
     label: "Users",
   },
-]
-
+];
 
 export const labels = [
   {
@@ -99,8 +96,6 @@ export const genres = [
   },
 ];
 
-
-
 export const chartData = [
   {
     name: "Jan",
@@ -150,7 +145,44 @@ export const chartData = [
     name: "Dec",
     total: Math.floor(Math.random() * 5000) + 1000,
   },
-]
+];
 
 
+export type Notification = {
+  id: string;
+  emoji:string;
+  title: string;
+  desc: string;
+  createdAt: string;
+};
 
+export const userNotifs: Notification[] = [
+  {
+    id: "1",
+    emoji: "🚀",
+    title: "Dashboard",
+    desc: "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
+    createdAt: "12/01/2024",
+  },
+  {
+    id: "2",
+    emoji: "🌐",
+    title: "web",
+    desc: "WebNow, a request to /api/post/a/b/c will respond with the text: Post: a, b, c. Optional catch all API routes. Catch all routes can be made optional by including the parameter in double …",
+    createdAt: "15/01/2024",
+  },
+  {
+    id: "3",
+    emoji: "🔄",
+    title: "Bing",
+    desc: "Certainly! Below is an example of a PUT request implementation using the Fetch API in Next.js:",
+    createdAt: "24/01/2024",
+  },
+  {
+    id: "4",
+    emoji: "🌟",
+    title: "Nextjs",
+    desc: "Next.js is an open-source web development framework created by the private company Vercel providing React-based web applications with server-side rendering and static website generation. React documen…",
+    createdAt: "02/02/2024",
+  },
+];

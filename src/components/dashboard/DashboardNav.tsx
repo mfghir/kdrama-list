@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-import { NavItem, navItems } from '@/lib/data';
+import { navItems } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
 
