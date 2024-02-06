@@ -34,8 +34,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Provider>
             <SessionProviderComp>
+          <Provider>
               <main className="min-h-screen overflow-hidden">
                 {/* <main className="grid place-items-center min-h-screen my-8 overflow-hidden"> */}
 
@@ -44,8 +44,8 @@ export default function RootLayout({
                 {children}
                 {/* </div> */}
               </main>
-            </SessionProviderComp>
           </Provider>
+            </SessionProviderComp>
         </ThemeProvider>
       </body>
     </html>

@@ -108,11 +108,16 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
         console.log("data---", data);
          
         await axios.patch(`/api/users/${initialData._id}`, data);
+        // toast({
+        //   title: "Success!",
+        //   description: "User has been edited.",
+        // });
       } else {
         // await axios.post(`/api/users`, data);
         const res = await axios.post(`/api/register`, data);
         console.log("product", res);
       }
+      
 
       router.refresh();
       router.push(`/dashboard/users`);
@@ -124,6 +129,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
 
     } catch (error: any) {
       console.log("error-->", error);
+      console.error(error.response); 
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
