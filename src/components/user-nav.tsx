@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { signOut, useSession } from 'next-auth/react';
-import { LogOutIcon } from "lucide-react"
+import { Gauge, LogOutIcon } from "lucide-react"
 import Link from "next/link";
 
 
@@ -52,8 +52,8 @@ const UserNav = () => {
         <DropdownMenuGroup>
           <Link href="/dashboard">
             <DropdownMenuItem>
-              Profile
-              <DropdownMenuShortcut>⇧</DropdownMenuShortcut>
+            Dashboard
+              <DropdownMenuShortcut><Gauge /></DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>
 

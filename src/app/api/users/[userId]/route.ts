@@ -66,78 +66,71 @@
 
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
-import { NextApiRequest, NextApiResponse } from "next";
+import { IncomingMessage } from "http";
+import { NextApiRequest } from "next";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function PATCH(req, context) {
   try {
     await connectDB();
     const id = context.params.userId;
-    console.log("id", id);
+    console.log("id====>", id);
 
-    const session = await getServerSession({req ,context});
-  
-    console.log("object,session-------", session);
+    const session = await getServerSession(req);
+    console.log("session===>", session);
 
-    // const user = await User.findOneAndUpdate({ email });
-    // console.log("object,user", user._id);
-
-    const user = await User.findOne({ email: session.user.email });
-    console.log("object,user--------", user._id);
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" },{status:404});
+    if (!session) {
+      return NextResponse.json(
+        {
+          error:
+            "You are unauthorized to perform this action!, Please login first.",
+        },
+        { status: 401 }
+      );
     }
 
-    await user.save();
-    return NextResponse.json({ message: "sth went wrong" }, { status: 200 });
+    const user = await User.findOne({ email: session.user.email });
+    console.log("object,user", user);
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "No user found with that email. Please sign up or log in." },
+        { status: 404 }
+      );
+    }
+
+    if (user.role !== "admin") {
+      return NextResponse.json(
+        { error: "You don't have permission to perform this action" },
+        { status: 403 }
+      );
+    }
+
+    const userEdited = await User.findOne({ _id: id });
+    console.log("userEdited", userEdited);
+    console.log("req", req);
+
+    // userEdited.name =req.body.name || user.name,
+    // userEdited.email =req.body.email || user.email,
+    // userEdited.role =req.body.role || user.role,
+
+    user.set({
+      name: req.body.name || user.name,
+      email: req.body.email || user.email,
+      role: req.body.role || user.role,
+    });
+
+    userEdited.save();
+
+    return NextResponse.json(
+      { error: "User updated successfully!" },
+      { status: 200 }
+    );
   } catch (error) {
-    console.log("error ===>", error);
-    return NextResponse.json({ error: "Internal Server Error" });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
-
-// import connectDB from "@/lib/connectDB";
-// import User from "@/models/user";
-// import { NextApiRequest, NextApiResponse } from "next";
-// import { getServerSession } from "next-auth";
-// import { getSession } from "next-auth/react";
-// import { NextResponse } from "next/server";
-
-// export async function PATCH(req, context) {
-
-//   try {
-//     await connectDB();
-//     const id = context.params.userId;
-//     console.log("id",id);
-
-//     const session = getServerSession({req});
-//     console.log('session', session);
-
-//     if (!session) {
-//       return NextResponse.json({ error: "لطفا وارد حساب کاربری خود شوید" },{ status: 401 });
-//     }
-
-//     const user = await User.findOne({ email: session.user.email })
-//     console.log("object,user", user);
-
-//     if (!user) {
-//       return NextResponse.json({ error: "حساب کاربری یافت نشد" },{ status: 404 });
-//     }
-//     if (user.role !== "admin") {
-//       return NextResponse.json({ error: "دسترسی محدود" }, { status: 403 });
-//     }
-
-//     user.save();
-
-//     return NextResponse.json({ error: "آگهی منتشر شد" }, { status: 200 });
-
-//   } catch (error) {
-//     return NextResponse.json(
-//       { error: "مشکلی در سرور رخ داده است" },
-//       { status: 500 }
-//     );
-// }
-// }

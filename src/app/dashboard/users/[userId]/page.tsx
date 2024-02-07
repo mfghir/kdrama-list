@@ -6,25 +6,26 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import BreadCrumb from "@/utilities/breadcrumb";
 import { useRouter } from "next/navigation";
 
-export default async function Page() {
+interface PageProps {
+  params: {
+    userId: string;
+  };
+}
+
+export default async function Page({ params: { userId } }: PageProps) {
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
     { title: "Create", link: "/dashboard/users/create" },
   ];
 
-  await connectDB()
-  const users = await User.find({ role: "user" }).sort({ createdAt: -1 }) // Sort by date in descending order
-  const usersList = users.map(user => user.toObject());
-
-  // await connectDB()
-  // const user = await User.findOne({ email }).select("_id");
-  // console.log("user",user);
+  await connectDB();
+  const user = await User.findOne({ _id: userId });
 
   return (
     <ScrollArea className="h-full">
       <div className="flex-1 space-y-4 p-5">
         <BreadCrumb items={breadcrumbItems} />
-        <TabUserEdit usersList={usersList} />
+        <TabUserEdit userId={user} />
       </div>
     </ScrollArea>
   );

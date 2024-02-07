@@ -57,19 +57,10 @@ const formSchema = z.object({
 
 
 
-const TabUserEdit = ({ usersList }: { usersList: any }) => {
-  const { userId } = useParams()
-  const currentUser = usersList.filter((user: { _id: string | string[]; }) => user._id == userId)[0] || {};
-  // console.log(userId);
-  // console.log(usersList);
-  // console.log('current User', currentUser)
-
-
-
-  const initialData = currentUser ? currentUser : null
+const TabUserEdit = ({ userId }) => {
+  const initialData = userId ? userId : null
   const router = useRouter();
   const pathName = usePathname()
-  // console.log("pathName", pathName.includes('new') ? "yes" : "no");
 
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
@@ -106,7 +97,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
       if (initialData) {
         console.log("initialData---", initialData._id);
         console.log("data---", data);
-         
+
         await axios.patch(`/api/users/${initialData._id}`, data);
         // toast({
         //   title: "Success!",
@@ -117,7 +108,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
         const res = await axios.post(`/api/register`, data);
         console.log("product", res);
       }
-      
+
 
       router.refresh();
       router.push(`/dashboard/users`);
@@ -129,7 +120,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
 
     } catch (error: any) {
       console.log("error-->", error);
-      console.error(error.response); 
+      console.error(error.response);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -219,7 +210,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder={currentUser.name} disabled={loading} {...field} />
+                    <Input placeholder={userId.name} disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -233,7 +224,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder={currentUser.email} disabled={loading} {...field} />
+                    <Input placeholder={userId.email} disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -247,7 +238,7 @@ const TabUserEdit = ({ usersList }: { usersList: any }) => {
                 <FormItem>
                   <FormLabel>Role</FormLabel>
                   <FormControl>
-                    <Input placeholder={currentUser.role} disabled={loading} {...field} />
+                    <Input placeholder={userId.role} disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
