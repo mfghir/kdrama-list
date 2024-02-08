@@ -1,21 +1,33 @@
 import Sidebar from "@/components/dashboard/Sidebar"
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({
-  children, // will be a page or nested layout
-}: {
-  children: React.ReactNode
-}) {
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import connectDB from "@/lib/connectDB";
+import User from "@/models/user";
+
+
+const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/register");
+
+  await connectDB()
+  const user = await User.findOne({ email: session?.user?.email });
+  console.log("=====",user);
+  console.log("------",user.role);
+  console.log("------",user.email);
+  // const users = await User.find().sort({ createdAt: -1 })
+  // const usersList = user.map(user => user.toObject());
+
+  if (!user) return <h3>No such user found in the database!</h3>;
+
   return (
-    <>
-      <div className="flex h-screen overflow-hidden">
-        <Sidebar />
-
-        {/* <ScrollArea className="h-full">
-      <div className="bg flex-1 space-y-4 p-4 md:p-8 pt-6"> */}
-        <main className="w-full pt-28 p-6">{children}</main>
-        {/* </div>
-      </ScrollArea> */}
-      </div>
-    </>
+    <section className="flex h-screen overflow-hidden">
+      <Sidebar userRole={user.role} userEmail={user.email} userInfo={user} />
+      <div className="w-full pt-28 p-6">{children}</div>
+    </section>
   )
 }
+
+
+export default DashboardLayout

@@ -9,6 +9,7 @@ import {
   ArrowUp,
   Gauge,
   UsersRound,
+  MessageSquare,
 } from "lucide-react";
 
 export interface NavItem {
@@ -18,6 +19,7 @@ export interface NavItem {
   external?: boolean;
   icon?: unknown;
   label?: string;
+  role: string[];
 }
 
 export const navItems: NavItem[] = [
@@ -26,12 +28,21 @@ export const navItems: NavItem[] = [
     href: "/dashboard",
     icon: Gauge,
     label: "Dashboard",
+    role: ["user", "admin"],
   },
   {
     title: "Users",
     href: "/dashboard/users",
     icon: UsersRound,
     label: "Users",
+    role: ['admin'],
+  },
+  {
+    title: "Messages",
+    href: "/dashboard/messages",
+    icon: MessageSquare,
+    label: "Messages",
+    role: ['user'],
   },
 ];
 
@@ -147,10 +158,9 @@ export const chartData = [
   },
 ];
 
-
 export type Notification = {
   id: string;
-  emoji:string;
+  emoji: string;
   title: string;
   desc: string;
   createdAt: string;
