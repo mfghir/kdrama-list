@@ -35,14 +35,14 @@ export const navItems: NavItem[] = [
     href: "/dashboard/users",
     icon: UsersRound,
     label: "Users",
-    role: ['admin'],
+    role: ["admin"],
   },
   {
     title: "Messages",
     href: "/dashboard/messages",
     icon: MessageSquare,
     label: "Messages",
-    role: ['user'],
+    role: ["user"],
   },
 ];
 
@@ -196,3 +196,14 @@ export const userNotifs: Notification[] = [
     createdAt: "02/02/2024",
   },
 ];
+
+export interface UserInfo {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  createdAt: Date;
+  updatedAt: Date;
+  role: string;
+  __v: number;
+}

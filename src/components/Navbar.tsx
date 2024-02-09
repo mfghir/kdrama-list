@@ -12,14 +12,16 @@ import ThemeSelector from './theme/ThemeSelector';
 import MobileSidebar from './dashboard/MobileSidebar';
 import { usePathname } from 'next/navigation';
 
-const Navbar = () => {
+import { UserInfo } from '@/lib/data';
+
+const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
   const { data: session } = useSession();
   const path = usePathname();
 
   return (
     <div className="w-full p-3 lg:px-20 flex justify-between items-center fixed  supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
       <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
-       
+
         <Image
           className="w-16 h-16 rounded-full object-fill"
           width={80}
@@ -35,11 +37,12 @@ const Navbar = () => {
           <ThemeSelector />
         </div>
 
-        {path === "/dashboard" || path === "/dashboard/users" ?
-          <div className="lg:hidden">
-            <MobileSidebar />
-          </div> : null
-        }
+        {/* {path === "/dashboard" || path === "/dashboard/users" || path === "/dashboard/messages"  ? */}
+        <div className="lg:hidden">
+          <MobileSidebar userInfo={userInfo} />
+        </div>
+        {/* null */}
+        {/* } */}
 
         {session?.user ? <UserNav /> :
           <Button asChild>
@@ -47,7 +50,6 @@ const Navbar = () => {
           </Button>
         }
       </section>
-      {/* </nav > */}
     </div>
   )
 }

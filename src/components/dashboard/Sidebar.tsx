@@ -1,30 +1,21 @@
 "use client"
 
 import { navItems } from '@/lib/data';
-import DashboardNav from './DashboardNav'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import { cn } from '@/lib/utils';
 import { useSession } from 'next-auth/react';
+import DashboardNav from './DashboardNav';
 
 
 
-// interface DashboardNavProps {
-//   // items: NavItem[];
-//   userRole: string,
-//   userEmail: string
-//   setOpen?: Dispatch<SetStateAction<boolean>>;
-// }
+const Sidebar = ({ setOpen, userInfo }: any) => {
+  // const session = useSession()
+  // console.log("session", session.data);
 
-const Sidebar = ({ setOpen, userRole, userEmail,userInfo }: any) => {
-  const session = useSession()
-console.log("session",session.data.user);
-
-  const path = usePathname();
-  console.log("role role role" , userRole);
-  console.log("email email email" , userEmail);
-console.log("userInfo",userInfo);
-
+  // const path = usePathname();
+  // console.log("userInfo", userInfo);
 
 
   return (
@@ -36,11 +27,11 @@ console.log("userInfo",userInfo);
               Overview
             </h2>
 
-            <nav className="grid items-start gap-2">
+            <DashboardNav setOpen={setOpen} userInfo={userInfo} />
+
+            {/* <nav className="grid items-start gap-2">
               {navItems.map((item, index) => {
-                console.log(item.role.includes("admin"));
-                // Check if the user's role matches the allowed roles for the navigation item
-                if (item.role === userRole ) {
+                if (item.role && item.role.includes(userInfo?.role || "user")) {
                   return (
                     item.href && (
                       <Link
@@ -65,8 +56,7 @@ console.log("userInfo",userInfo);
                   );
                 }
               })}
-            </nav>
-
+            </nav> */}
           </div>
         </div>
       </div>

@@ -13,17 +13,12 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });
-  console.log("=====",user);
-  console.log("------",user.role);
-  console.log("------",user.email);
-  // const users = await User.find().sort({ createdAt: -1 })
-  // const usersList = user.map(user => user.toObject());
 
   if (!user) return <h3>No such user found in the database!</h3>;
 
   return (
     <section className="flex h-screen overflow-hidden">
-      <Sidebar userRole={user.role} userEmail={user.email} userInfo={user} />
+      <Sidebar userInfo={user} />
       <div className="w-full pt-28 p-6">{children}</div>
     </section>
   )
