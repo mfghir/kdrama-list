@@ -16,6 +16,7 @@ interface ProductsClientProps {
 
 export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
   const router = useRouter();
+  // console.log(data);
 
   return (
     <>

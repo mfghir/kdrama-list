@@ -98,11 +98,11 @@ const TabUserEdit = ({ userId }) => {
         console.log("initialData---", initialData._id);
         console.log("data---", data);
 
-        await axios.put(`/api/users/${initialData._id}`, data);
-        toast({
-          title: "Success!",
-          description: "User has been edited.",
-        });
+        await axios.patch(`/api/users/${initialData._id}`, data);
+        // toast({
+        //   title: "Success!",
+        //   description: "User has been edited.",
+        // });
       } else {
         // await axios.post(`/api/users`, data);
         const res = await axios.post(`/api/register`, data);
@@ -112,11 +112,11 @@ const TabUserEdit = ({ userId }) => {
 
       router.refresh();
       router.push(`/dashboard/users`);
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-      });
+      // toast({
+      //   variant: "destructive",
+      //   title: "Uh oh! Something went wrong.",
+      //   description: "There was a problem with your request.",
+      // });
 
     } catch (error: any) {
       console.log("error-->", error);

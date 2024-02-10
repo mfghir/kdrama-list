@@ -5,6 +5,7 @@ import TabUserEdit from "@/components/dashboard/TabUserEdit";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BreadCrumb from "@/utilities/breadcrumb";
 import { useRouter } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 interface PageProps {
   params: {
@@ -12,7 +13,14 @@ interface PageProps {
   };
 }
 
-export default async function Page({ params: { userId } }: PageProps) {
+export default async function Page({ params: { userId } }: PageProps ,context:any) {
+  // const session = getServerSession();
+
+  // console.log("session==============",session);
+  // console.log("context==============",context);
+  // console.log("userId==============",userId);
+  // console.log("params==============",params);
+
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
     { title: "Create", link: "/dashboard/users/create" },
