@@ -15,6 +15,7 @@ import { useState } from "react";
 import { User } from "./columns";
 import { AlertModal } from "../alert-modal";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import axios from "axios";
 
 interface CellActionProps {
   data: User;
@@ -25,9 +26,21 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  // console.log("data up===>",data);
 
-  const onConfirm = async () => {};
+  const onConfirm = async () => {
+
+    try {
+      setLoading(true);
+      await fetch(`/api/users/${data._id}`, { method: "DELETE" });
+      // await axios.delete(`/api/users/${data._id}`);
+      setOpen(false)
+      router.refresh();
+    } catch (error) {
+      console.error("delete error==>", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -51,7 +64,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuItem
             onClick={() => router.push(`/dashboard/users/${data._id}`)}
           >
-            <Edit className="mr-2 h-4 w-4" /> Update
+            <Edit className="mr-2 h-4 w-4" /> Edit
           </DropdownMenuItem>
 
           <DropdownMenuItem onClick={() => setOpen(true)}>

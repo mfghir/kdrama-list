@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+
 import React from "react";
 
 type BreadCrumbType = {
@@ -21,13 +22,13 @@ export default function BreadCrumb({ items }: BreadCrumbPropsType) {
       >
         Dashboard
       </Link>
+      
       {items?.map((item: BreadCrumbType, index: number) => (
         <React.Fragment key={item.title}>
           <ChevronRightIcon className="h-4 w-4" />
           <Link
             href={item.link}
-            className={cn(
-              "font-medium",
+            className={cn("font-medium",
               index === items.length - 1
                 ? "text-foreground pointer-events-none"
                 : "text-muted-foreground",

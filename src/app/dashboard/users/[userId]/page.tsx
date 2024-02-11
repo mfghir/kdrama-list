@@ -18,12 +18,13 @@ export default async function Page({ params: { userId } }: PageProps ,context:an
 
   // console.log("session==============",session);
   // console.log("context==============",context);
-  // console.log("userId==============",userId);
+  console.log("userId==============",userId);
   // console.log("params==============",params);
 
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
     { title: "Create", link: "/dashboard/users/create" },
+    { title: "Edit", link: "/dashboard/users/edit" },
   ];
 
   await connectDB();

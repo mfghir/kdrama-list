@@ -2,7 +2,6 @@ import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 
-// GET ALL COURSES
 export async function GET(request: any) {
   try {
     await connectDB();
@@ -17,7 +16,6 @@ export async function GET(request: any) {
   }
 }
 
-//Create a Course
 export async function POST(request: any) {
   try {
     const userData = await request.json();
@@ -37,10 +35,13 @@ export async function POST(request: any) {
   }
 }
 
-// DELETE A COURSE
-export async function DELETE(request: any) {
+export async function DELETE(request: any,data:any,params: any) {
   try {
     const id = request.nextUrl.searchParams.get("id");
+    console.log("-id------------------",id);
+    // console.log("-request-------------------",request);
+    console.log("-data-------------------",data);
+    console.log("-params-------------------",params);
 
     await connectDB();
     await User.findByIdAndDelete(id);

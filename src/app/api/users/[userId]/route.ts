@@ -16,7 +16,29 @@ export async function GET(request: any, { params: { id } }: any) {
   }
 }
 
-//Update/EDITING a Course
+
+
+export async function POST(request: any) {
+  try {
+    const userData = await request.json();
+
+    await connectDB();
+    await User.create(userData);
+
+    return NextResponse.json(
+      { message: "Course created successfully", data: userData },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Failed to Create a Course", error },
+      { status: 500 }
+    );
+  }
+}
+
+
+
 export async function PUT(request: any, context: any) {
   try {
     const userData = await request?.json();
@@ -31,6 +53,28 @@ export async function PUT(request: any, context: any) {
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to Create a Course", error },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: any, context: any) {
+  try {
+    await connectDB();
+    // const id = request.nextUrl.searchParams.get("id")
+    const id = context.params.userId;
+    console.log("id ==============", id);
+    console.log("context ==============", context);
+
+    await User.findByIdAndDelete(id);
+
+    return NextResponse.json(
+      { message: "Course deleted Successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Failed to Delete a Course", error },
       { status: 500 }
     );
   }
