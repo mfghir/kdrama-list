@@ -20,15 +20,16 @@ export default async function Page({ params: { userId } }: PageProps ,context:an
   // console.log("context==============",context);
   console.log("userId==============",userId);
   // console.log("params==============",params);
-
+  
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
     { title: "Create", link: "/dashboard/users/create" },
     { title: "Edit", link: "/dashboard/users/edit" },
   ];
-
+  
   await connectDB();
-  const user = await User.findOne({ _id: userId });
+  const test =  userId ? userId : "test" ;
+  const user =  User.findOne({ _id: test });
 
   return (
     <ScrollArea className="h-full">

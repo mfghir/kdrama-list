@@ -105,7 +105,7 @@ const TabUserEdit = ({ userId }) => {
         // });
       } else {
         // await axios.post(`/api/users`, data);
-        const res = await axios.post(`/api/register`, data);
+        const res = await axios.post(`/api/users`, data);
         console.log("product", res);
       }
 
