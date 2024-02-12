@@ -1,11 +1,10 @@
-import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
-
+import connectDB from "@/lib/connectDB";
 import TabUserEdit from "@/components/dashboard/TabUserEdit";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BreadCrumb from "@/utilities/breadcrumb";
-import { useRouter } from "next/navigation";
-import { getServerSession } from "next-auth";
+
 
 interface PageProps {
   params: {
@@ -13,23 +12,16 @@ interface PageProps {
   };
 }
 
-export default async function Page({ params: { userId } }: PageProps ,context:any) {
-  // const session = getServerSession();
+export default async function Page({ params: { userId } }: PageProps) {
 
-  // console.log("session==============",session);
-  // console.log("context==============",context);
-  console.log("userId==============",userId);
-  // console.log("params==============",params);
-  
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
-    { title: "Create", link: "/dashboard/users/create" },
     { title: "Edit", link: "/dashboard/users/edit" },
   ];
-  
+
   await connectDB();
-  const test =  userId ? userId : "test" ;
-  const user =  User.findOne({ _id: test });
+  const user = await User.findOne({ _id: userId });
+  // const strId = String(userId);
 
   return (
     <ScrollArea className="h-full">

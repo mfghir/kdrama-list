@@ -21,6 +21,7 @@ export async function GET(request: any, { params: { id } }: any) {
 export async function POST(request: any) {
   try {
     const userData = await request.json();
+    console.log("User Data :>> ", userData);
 
     await connectDB();
     await User.create(userData);
@@ -39,7 +40,8 @@ export async function POST(request: any) {
 
 
 
-export async function PUT(request: any, context: any) {
+
+export async function PATCH(request: any, context: any) {
   try {
     const userData = await request?.json();
 
@@ -57,6 +59,10 @@ export async function PUT(request: any, context: any) {
     );
   }
 }
+
+
+
+
 
 export async function DELETE(request: any, context: any) {
   try {

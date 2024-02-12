@@ -18,8 +18,10 @@ export async function GET(request: any) {
 
 export async function POST(request: any) {
   try {
+    
     const userData = await request.json();
-
+    console.log("userData",userData);
+    
     await connectDB();
     await User.create(userData);
 
