@@ -27,6 +27,7 @@ import { Separator } from '../ui/separator'
 import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
+import ImgUpload from "@/utilities/ImgUpload";
 
 
 
@@ -149,10 +150,12 @@ const TabUserAdd = () => {
                 <FormControl>
                   <FileUpload
                     onChange={field.onChange}
-                    value={field.value || "https://i.postimg.cc/2yg62hWm/notfound.jpg"}
-                    // value={field.value}
+                    // value={field.value || "https://i.postimg.cc/2yg62hWm/notfound.jpg"}
+                    value={field.value}
                     onRemove={field.onChange}
                   />
+                  {/* <ImgUpload value={field.value} onChange={field.onChange}   /> */}
+                  {/* <ImgUpload    /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
