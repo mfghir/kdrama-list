@@ -42,7 +42,7 @@ const ImgSchema = z.object({
   url: z.string(),
 });
 
-export const IMG_MAX_LIMIT = 1;
+export const IMG_MAX_LIMIT = 3;
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
@@ -50,6 +50,8 @@ const formSchema = z.object({
     .array(ImgSchema)
     .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
     .min(1, { message: "At least one image must be added." }),
+
+  // .refine((value) => value.length === 1, { message: "You can only add 1 image" }),
   email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
@@ -80,32 +82,32 @@ const TabUserAdd = () => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    // imgUrl: {},
+    imgUrl: [],
+    password: "",
     role: "",
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
-    // : {
-    //   name: currentUser.name ,
-    //   email: currentUser.email,
-    //   imgUrl: [],
-    //   role: currentUser.role,
-    // }
   });
 
+  console.log('form ------', form);
+  console.log('default values ------', defaultValues);
 
   const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
-    console.log(data);
+    console.log("data-------", data);
     try {
       setLoading(true);
-      if (!initialData) {
-        await axios.post(`/api/users`, data);
+      if (initialData) {
+        console.log("initialData-=-=-=-=-", initialData);
+        await axios.post(`/api/users/`, data);
 
       } else {
         console.log("error ****");
       }
+      // await axios.post(`/api/users`, data);
+      console.log("data-------", data);
 
       router.push(`/dashboard/users`);
       router.refresh();
@@ -119,7 +121,8 @@ const TabUserAdd = () => {
   };
 
 
-
+  const triggerImgUrlValidation = () => form.trigger("imgUrl");
+  console.log("triggerImgUrlValidation", triggerImgUrlValidation);
 
 
   return (
@@ -127,7 +130,8 @@ const TabUserAdd = () => {
       <div className="flex items-center justify-between ">
         <Heading title={title} description={description} />
       </div>
-      {/* {initialData && (
+      {/* 
+      {initialData && (
         <Button
           disabled={loading}
           variant="destructive"
