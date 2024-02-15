@@ -207,7 +207,7 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
             )}
           /> */}
 
-          <div className="md:grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
             <FormField
               control={form.control}
               name="name"

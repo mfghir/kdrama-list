@@ -5,8 +5,12 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
-import { UploadDropzone } from "./uploadthing";
+// import { UploadDropzone } from "./uploadthing";
+
 import { UploadFileResponse } from "uploadthing/client";
+import { OurFileRouter } from "@/app/api/uploadthing/core";
+import { UploadDropzone } from "@uploadthing/react";
+import { IMG_MAX_LIMIT } from "@/components/dashboard/TabUserAdd";
 
 
 interface ImageUploadProps {
@@ -31,8 +35,8 @@ export default function FileUpload({
   };
 
   const onUpdateFile = (newFiles: any) => {
-  // console.log("value",value);
-  // console.log("newFiles",newFiles);
+    // console.log("value",value);
+    // console.log("newFiles",newFiles);
 
     onChange([...value, ...newFiles]);
   };
@@ -40,8 +44,8 @@ export default function FileUpload({
     <>
       <div>
         <div className="mb-4 flex items-center gap-4">
-        {!!value?.length ?
-          value?.map((item:any) => (
+        {!!value.length &&
+          value?.map((item) => (
             <div
               key={item.key}
               className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
@@ -61,18 +65,16 @@ export default function FileUpload({
                   fill
                   className="object-cover"
                   alt="Image"
-                  // src={item.fileUrl || ""}
-                  src={item.url || ""}
+                  src={item.fileUrl || ""}
                 />
               </div>
             </div>
-          ))
-          :"nothing"
-        }
+          ))}
         </div>
 
         <div>
-          <UploadDropzone
+        {value.length < IMG_MAX_LIMIT && (
+          <UploadDropzone<OurFileRouter>
             className="dark:bg-zinc-800 py-2 ut-label:text-sm ut-allowed-content:ut-uploading:text-red-300"
             endpoint="imageUploader"
             config={{ mode: "auto" }}
@@ -88,9 +90,14 @@ export default function FileUpload({
                   );
               },
             }}
-            onClientUploadComplete={(res: any) => {
-              const data = res;
-              if (data) { onUpdateFile(data); }
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              const data: UploadFileResponse[] | undefined = res;
+              if (data) {
+                onUpdateFile(data);
+              }
+          console.log("Files: ", res);
+
             }}
             onUploadError={(error: Error) => {
               toast({
@@ -103,7 +110,9 @@ export default function FileUpload({
               // Do something once upload begins
             }}
           />
-        </div>
+        )}
+      </div>
+
       </div>
     </>
   );

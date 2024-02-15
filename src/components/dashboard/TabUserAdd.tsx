@@ -42,7 +42,7 @@ const ImgSchema = z.object({
   url: z.string(),
 });
 
-export const IMG_MAX_LIMIT = 3;
+export const IMG_MAX_LIMIT = 1;
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
@@ -166,7 +166,8 @@ const TabUserAdd = () => {
             )}
           />
 
-          <div className="md:grid md:grid-cols-3 gap-8">
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
             <FormField
               control={form.control}
               name="name"

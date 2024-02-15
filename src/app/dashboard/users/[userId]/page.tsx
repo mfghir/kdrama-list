@@ -25,7 +25,7 @@ export default async function Page({ params: { userId } }: PageProps) {
 
   return (
     <ScrollArea className="h-full">
-      <div className="flex-1 space-y-4 p-5">
+      <div className="flex-1 space-y-4">
         <BreadCrumb items={breadcrumbItems} />
         <TabUserEdit userId={user} />
       </div>

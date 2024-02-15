@@ -87,6 +87,7 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
       </>
     );
   }
+
   if (role === "user") {
     return (
       <>
@@ -101,6 +102,7 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
                 <Calendar size={18} />
                 {new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}
               </Button>
+              
               <Button className="flex justify-between items-center gap-x-2" variant="ghost">
                 <Clock size={18} />
                 {new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" })}
@@ -285,7 +287,7 @@ const SecUserNotifs = (): JSX.Element => {
             {userNotifs?.map((item) => (
               <div key={item.title} className="flex justify-between items-center gap-x-2 my-8">
 
-                <div className=" space-y-1">
+                <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">{item.emoji} {item.title}</p>
                   <p className="text-sm text-muted-foreground line-clamp-2 ">{item.desc}</p>
                 </div>
