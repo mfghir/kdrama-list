@@ -38,7 +38,7 @@ export default function FileUpload({
     // console.log("value",value);
     // console.log("newFiles",newFiles);
 
-    onChange([...value, ...newFiles]);
+    onChange(newFiles);
   };
   return (
     <>
