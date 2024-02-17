@@ -6,6 +6,8 @@ import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 import TabDashboard from "@/components/dashboard/TabDashboard";
 
+import { CldImage } from "next-cloudinary";
+import { CldUploadButton } from "next-cloudinary";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -17,6 +19,7 @@ const Dashboard = async () => {
   const usersList = users.map(user => user.toObject());
 
 
+
   return (
     <TabDashboard role={user.role} email={user.email} name={user.name} image={user.image} usersList={usersList} />
   )
@@ -24,3 +27,24 @@ const Dashboard = async () => {
 
 export default Dashboard
 
+
+
+// import {Cloudinary} from "@cloudinary/url-gen";
+// export async function create(formData: FormData) {
+
+//   const cloudinary = new Cloudinary({cloud: {cloudName: 'dadxzqtz5'}});
+
+//   const file = formData.get('image') as File;
+//   const arrayBuffer = await file.arrayBuffer();
+//   const buffer = new Uint8Array(arrayBuffer);
+//   await new Promise((resolve, reject) => {
+//     cloudinary.uploader.upload_stream({}, function (error, result) {
+//       if (error) {
+//         reject(error);
+//         return;
+//       }
+//       resolve(result);
+//     })
+//     .end(buffer);
+//   });
+// }

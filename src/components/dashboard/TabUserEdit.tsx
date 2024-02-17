@@ -26,6 +26,7 @@ import { Separator } from '../ui/separator'
 import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
+import Image from "next/image";
 
 
 
@@ -206,6 +207,14 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
               </FormItem>
             )}
           /> */}
+
+<Image 
+src={userId?.imgUrl}
+alt="Sample image"
+width={200}
+height={200}
+ />
+          
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
             <FormField

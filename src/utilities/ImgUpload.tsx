@@ -1,8 +1,9 @@
 "use client"
 
+import Image, { ImageLoaderProps } from 'next/image';
+
 // import { useState } from 'react';
 // import { UploadButton, UploadDropzone } from './uploadthing'
-// import Image from 'next/image';
 // import { UploadFileResponse } from 'uploadthing/client';
 // import { useToast } from '@/components/ui/use-toast';
 
@@ -106,31 +107,66 @@
 
 
 
-import Image from "next/image";
+// // import multer from 'multer';
 
+//  const imageKitLoader = ({ src, width, quality }:any) => {
+//   if(src[0] === "/") src = src.slice(1);
 
+//   const params = [`w-${width}`];
+//   if (quality) {
+//     params.push(`q-${quality}`);
+//   }
 
- const imageKitLoader = ({ src, width, quality }) => {
-  if(src[0] === "/") src = src.slice(1);
-  const params = [`w-${width}`];
-  if (quality) {
-    params.push(`q-${quality}`);
-  }
-  const paramsString = params.join(",");
-  var urlEndpoint = "https://ik.imagekit.io/tymxpun8x";
-  if(urlEndpoint[urlEndpoint.length-1] === "/") urlEndpoint = urlEndpoint.substring(0, urlEndpoint.length - 1);
-  return `${urlEndpoint}/${src}?tr=${paramsString}`
-}
+//   const paramsString = params.join(",");
+//   let urlEndpoint = "https://ik.imagekit.io/tymxpun8x";
+  
+//   if(urlEndpoint[urlEndpoint.length-1] === "/") urlEndpoint = urlEndpoint.substring(0, urlEndpoint.length - 1);
+//   // return `${urlEndpoint}/${src}?tr=${paramsString}`
+//   return `${urlEndpoint}/${src}`
+// }
 
 export const MyImage = ({ onChange, onRemove, value }: any) => {
+  console.log("value",value);
+  function imageKitLoader(p: ImageLoaderProps): void {
+    // throw new Error('Function not implemented.');
+    console.log('p',p);
+  }
+
   return (
-    <Image
+    <div className="flex flex-col items-center gap-2">
+      {/* <input type='file' accept="images/*" id={`upload-button-${value?.id || ""}`} multiple onClick={e=> e.target.value=null} */}
+      {value && (
+        <div className="flex flex-row items-center gap-2">
+          <Image
+            alt={"Your uploaded file"}
+            height={200}
+            layout="fixed"
+            objectFit="cover"
+            // src={`http://localhost:3000/files/${value?.id}` || ""} // TODO: fix this URL
+
+            // src={`C:\fakepath\${value}`}
+            src={value}
+            width={200}
+            loader={imageKitLoader}
+          />
+          <button onClick={onRemove}>Remove</button>
+        </div>
+      )}
+
+      <input type="file" accept=".png,.jpg,.jpeg" onChange={onChange} />
+
+ 
+  
+   
+    {/* <Image 
       loader={imageKitLoader}
       // src={value.src}
       src="default-image.jpg"
       alt="Sample image"
       width={200}
       height={200}
-    />
+    />  */}
+    </div>
   );
 };
+

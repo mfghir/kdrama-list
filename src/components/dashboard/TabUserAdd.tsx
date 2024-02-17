@@ -27,7 +27,11 @@ import { Separator } from '../ui/separator'
 import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
-import ImgUpload, { MyImage } from "@/utilities/ImgUpload";
+import { MyImage } from "@/utilities/ImgUpload";
+
+// import { create } from "@/app/dashboard/page";
+// import { create } from "@/utilities/ImgUpload";
+// import ImgUpload, { MyImage } from "@/utilities/ImgUpload";
 
 
 
@@ -162,7 +166,8 @@ const TabUserAdd = () => {
                     onRemove={field.onChange}
                   /> */}
                   {/* <ImgUpload value={field.value} onChange={field.onChange}   /> */}
-                  <MyImage value={field.value} onChange={field.onChang} /> 
+                  <MyImage value={field.value} onChange={field.onChange} /> 
+                  {/* <ImgUpload  /> */}
           </FormControl>
                 <FormMessage />
               </FormItem>
@@ -252,3 +257,17 @@ const TabUserAdd = () => {
 }
 
 export default TabUserAdd
+
+
+
+
+
+// const ImgUpload = () => {
+//   return (
+//     <form action={create} method="post" encType="multipart/form-data">
+//       <input type='file' name='image' />
+//       <button type='submit'>Submit</button>
+//     </form>
+//   )
+// }
+
