@@ -1,6 +1,8 @@
 "use client"
 
-import Image, { ImageLoaderProps } from 'next/image';
+import Image, { ImageLoaderProps } from "next/image";
+
+// import Image, { ImageLoaderProps } from 'next/image';
 
 // import { useState } from 'react';
 // import { UploadButton, UploadDropzone } from './uploadthing'
@@ -104,32 +106,28 @@ import Image, { ImageLoaderProps } from 'next/image';
 
 
 
+ const imageKitLoader = ({ src, width, quality }:any) => {
+  if(src[0] === "/") src = src.slice(1);
 
+  const params = [`w-${width}`];
+  if (quality) {
+    params.push(`q-${quality}`);
+  }
 
-
-// // import multer from 'multer';
-
-//  const imageKitLoader = ({ src, width, quality }:any) => {
-//   if(src[0] === "/") src = src.slice(1);
-
-//   const params = [`w-${width}`];
-//   if (quality) {
-//     params.push(`q-${quality}`);
-//   }
-
-//   const paramsString = params.join(",");
-//   let urlEndpoint = "https://ik.imagekit.io/tymxpun8x";
+  const paramsString = params.join(",");
+  let urlEndpoint = "https://ik.imagekit.io/tymxpun8x";
   
-//   if(urlEndpoint[urlEndpoint.length-1] === "/") urlEndpoint = urlEndpoint.substring(0, urlEndpoint.length - 1);
-//   // return `${urlEndpoint}/${src}?tr=${paramsString}`
-//   return `${urlEndpoint}/${src}`
-// }
+  if(urlEndpoint[urlEndpoint.length-1] === "/") urlEndpoint = urlEndpoint.substring(0, urlEndpoint.length - 1);
+  // return `${urlEndpoint}/${src}?tr=${paramsString}`
+  return `${urlEndpoint}/${src}`
+}
 
 export const MyImage = ({ onChange, onRemove, value }: any) => {
   console.log("value",value);
   function imageKitLoader(p: ImageLoaderProps): void {
     // throw new Error('Function not implemented.');
-    console.log('p',p);
+  console.log("value",value);
+  console.log('p',p);
   }
 
   return (
@@ -170,3 +168,34 @@ export const MyImage = ({ onChange, onRemove, value }: any) => {
   );
 };
 
+
+
+
+
+
+
+// "use client";
+
+// import { UploadButton } from "./uploadthing";
+
+ 
+// // import { UploadButton } from "~/utils/uploadthing";
+ 
+// export default function Home() {
+//   return (
+//     <main className="flex h-[200px] flex-col items-center justify-between p-24">
+//       <UploadButton
+//         endpoint="imageUploader"
+//         onClientUploadComplete={(res) => {
+//           // Do something with the response
+//           console.log("Files: ", res);
+//           alert("Upload Completed");
+//         }}
+//         onUploadError={(error: Error) => {
+//           // Do something with the error.
+//           alert(`ERROR! ${error.message}`);
+//         }}
+//       />
+//     </main>
+//   );
+// }

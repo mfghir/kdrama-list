@@ -27,7 +27,8 @@ import { Separator } from '../ui/separator'
 import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
-import { MyImage } from "@/utilities/ImgUpload";
+import ImgUpload, { MyImage } from "@/utilities/ImgUpload";
+import DropzoneComp from "./Dropzone"
 
 // import { create } from "@/app/dashboard/page";
 // import { create } from "@/utilities/ImgUpload";
@@ -50,8 +51,9 @@ export const IMG_MAX_LIMIT = 1;
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
-  imgUrl: z.string()
-    // .array(ImgSchema)
+  imgUrl: z
+  // .string()
+    .array(ImgSchema)
     // .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
     .min(1, { message: "At least one image must be added." }),
 
@@ -86,8 +88,8 @@ const TabUserAdd = () => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    // imgUrl: [],
-    imgUrl: "",
+    imgUrl: [],
+    // imgUrl: "",
     password: "",
     role: "",
   };
@@ -128,9 +130,6 @@ const TabUserAdd = () => {
   };
 
 
-  // const triggerImgUrlValidation = () => form.trigger("imgUrl");
-  // console.log("triggerImgUrlValidation", triggerImgUrlValidation);
-
 
   return (
     <div>
@@ -159,15 +158,16 @@ const TabUserAdd = () => {
               <FormItem>
                 <FormLabel>Images</FormLabel>
                 <FormControl>
-                  {/* <FileUpload
+                  <FileUpload
                     onChange={field.onChange}
                     // value={field.value || "https://i.postimg.cc/2yg62hWm/notfound.jpg"}
                     value={field.value}
                     onRemove={field.onChange}
-                  /> */}
+                  />
                   {/* <ImgUpload value={field.value} onChange={field.onChange}   /> */}
-                  <MyImage value={field.value} onChange={field.onChange} /> 
+                  {/* <MyImage value={field.value} onChange={field.onChange} />  */}
                   {/* <ImgUpload  /> */}
+                  {/* <DropzoneComp  /> */}
           </FormControl>
                 <FormMessage />
               </FormItem>
