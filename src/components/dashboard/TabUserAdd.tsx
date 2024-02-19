@@ -99,12 +99,13 @@ const TabUserAdd = () => {
     defaultValues
   });
 
-  // console.log('form ------oo', form);
+  console.log('form ------oo', form);
   // console.log('default values ------oo', defaultValues);
 
   const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
     console.log("data-------", data);
-    console.log('default values ------', defaultValues);
+    // console.log('default values ------', defaultValues);
+    console.log("object");
 
     try {
       setLoading(true);

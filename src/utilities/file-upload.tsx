@@ -26,7 +26,7 @@ export default function FileUpload({
 }: ImageUploadProps) {
   const { toast } = useToast();
 
-  console.log("value",value);
+  // console.log("value",value);
 
   const onDeleteFile = (key: string) => {
     const files = value;
@@ -36,15 +36,16 @@ export default function FileUpload({
 
   const onUpdateFile = (newFiles: any) => {
     // console.log("value",value);
-    const fileUrl = newFiles.map((file) =>  file.url )
-    console.log(`File URL=============: ${fileUrl}`)
-    console.log("newFiles",newFiles);
+    const fileUrl = newFiles.map((file: { url: any; }) =>  file.url )
+    console.log("File URLe=============>>>>" ,fileUrl)
+    console.log("newFiles =======>>>>>",newFiles);
+    console.log("value =========>>>>",value);
 
     onChange([...value, ...newFiles]);
     // onChange(fileUrl);
   };
 
-  console.log("value 22",value);
+  // console.log("value onUpdateFile=============:",value);
 
   return (
     <>
@@ -72,6 +73,7 @@ export default function FileUpload({
                     className="object-cover"
                     alt="Image"
                     src={item.url || ""}
+                    // src={item.url || item.fileUrl}
                   />
                 </div>
               </div>
@@ -96,23 +98,24 @@ export default function FileUpload({
               }}
 
               onClientUploadComplete={(res) => {
+                // const data: UploadFileResponse[] | undefined = res;
                 const data: UploadFileResponse[]  = res;
-                // const data: UploadFileResponse[]  = res;
 
                 const fileUrl = res.map((file) =>  file.url )
-                console.log(`File URL: ${fileUrl}`)
-
-                console.log("Files: ", res);
+                
+                // console.log(`File URL: ${fileUrl}`)
+                // console.log("Files: ", res);
                 // console.log("data: ", );
 
                 if (data) onUpdateFile(data);
               }}
               onUploadError={(error: Error) => {
-                toast({
-                  title: "Error",
-                  variant: "destructive",
-                  description: error.message,
-                });
+                console.log("error upload ===>",error.message);
+                // toast({
+                //   title: "Error",
+                //   variant: "destructive",
+                //   description: error.message,
+                // });
               }}
               onUploadBegin={() => { }}
             />
