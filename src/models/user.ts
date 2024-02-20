@@ -19,10 +19,16 @@ const UserSchema = new mongoose.Schema(
       default: "user",
     },
     imgUrl: {
-      // type: [String],
       type: String,
       required: false,
     },
+    // imgUrl: [{
+    //   name: String,
+    //   size: Number,
+    //   key: String,
+    //   serverData: mongoose.Schema.Types.Mixed,
+    //   url: String
+    // }],
   },
   { timestamps: true }
 );

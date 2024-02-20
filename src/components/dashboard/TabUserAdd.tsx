@@ -27,8 +27,6 @@ import { Separator } from '../ui/separator'
 import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
-import ImgUpload, { MyImage } from "@/utilities/ImgUpload";
-import DropzoneComp from "./Dropzone"
 
 // import { create } from "@/app/dashboard/page";
 // import { create } from "@/utilities/ImgUpload";
@@ -52,12 +50,12 @@ export const IMG_MAX_LIMIT = 1;
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
   imgUrl: z
-  // .string()
-    .array(ImgSchema)
+  // .string().array(ImgSchema)
     // .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
-    .min(1, { message: "At least one image must be added." }),
+    // .min(1, { message: "At least one image must be added." }),
+    .any()
+    .refine((files) => {return files?.[0]}),
 
-  // .refine((value) => value.length === 1, { message: "You can only add 1 image" }),
   email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
@@ -88,8 +86,8 @@ const TabUserAdd = () => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    imgUrl: [],
-    // imgUrl: "",
+    // imgUrl: [],
+    imgUrl: "",
     password: "",
     role: "",
   };
@@ -99,13 +97,10 @@ const TabUserAdd = () => {
     defaultValues
   });
 
-  console.log('form ------oo', form);
-  // console.log('default values ------oo', defaultValues);
 
   const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
     console.log("data-------", data);
     // console.log('default values ------', defaultValues);
-    console.log("object");
 
     try {
       setLoading(true);
