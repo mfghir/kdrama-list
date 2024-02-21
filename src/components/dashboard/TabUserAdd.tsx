@@ -106,11 +106,12 @@ const TabUserAdd = () => {
       setLoading(true);
       if (!initialData) {
         console.log("initialData-=-=-=-=-", initialData);
-        await axios.post(`/api/users/`, data);
+        await axios.post(`/api/users`, data);
 
       } else {
         console.log("error ****");
       }
+      
       // await axios.post(`/api/users`, data);
       console.log("data ****", data);
 
