@@ -49,12 +49,12 @@ export const IMG_MAX_LIMIT = 1;
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
-  imgUrl: z
-  // .string().array(ImgSchema)
+  imgUrl: z.string()
+    // .array(ImgSchema)
     // .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
     // .min(1, { message: "At least one image must be added." }),
-    .any()
-    .refine((files) => {return files?.[0]}),
+    // .any()
+    .refine((files) => { return files?.[0] }),
 
   email: z.string()
     .min(5, { message: "This field has to be filled." })
@@ -83,11 +83,16 @@ const TabUserAdd = () => {
   const toastMessage = initialData ? "user created." : "user updated."
   const action = pathName.includes('new') ? "Create" : "Save changes"
 
+
+
+  const storedImgUrl = localStorage.getItem('imgUrl');
+  console.log(typeof (storedImgUrl));
+
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
     // imgUrl: [],
-    imgUrl: "",
+    imgUrl: "" || storedImgUrl ,
     password: "",
     role: "",
   };
@@ -104,14 +109,16 @@ const TabUserAdd = () => {
 
     try {
       setLoading(true);
+
       if (!initialData) {
         console.log("initialData-=-=-=-=-", initialData);
-        await axios.post(`/api/users`, data);
 
+        await axios.post(`/api/users`, data);
+        localStorage.removeItem('imgUrl');
       } else {
         console.log("error ****");
       }
-      
+
       // await axios.post(`/api/users`, data);
       console.log("data ****", data);
 
@@ -125,7 +132,6 @@ const TabUserAdd = () => {
       setLoading(false);
     }
   };
-
 
 
   return (
@@ -158,14 +164,14 @@ const TabUserAdd = () => {
                   <FileUpload
                     onChange={field.onChange}
                     // value={field.value || "https://i.postimg.cc/2yg62hWm/notfound.jpg"}
-                    value={field.value}
+                    value={field.value  }
                     onRemove={field.onChange}
                   />
                   {/* <ImgUpload value={field.value} onChange={field.onChange}   /> */}
                   {/* <MyImage value={field.value} onChange={field.onChange} />  */}
                   {/* <ImgUpload  /> */}
                   {/* <DropzoneComp  /> */}
-          </FormControl>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

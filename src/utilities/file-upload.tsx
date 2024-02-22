@@ -10,7 +10,7 @@ import { UploadFileResponse } from "uploadthing/client";
 
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { useEffect, useState } from "react";
-import { getFile, onDeleteFile } from "@/lib/uploadthing";
+import { onDeleteFile } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 
 
@@ -38,8 +38,8 @@ export default function FileUpload({
       await onDeleteFile(imgDelete);
       onRemove(url);
 
-      // // Remove the image URL from local storage
-      // localStorage.removeItem('imgUrl');
+      // Remove the image URL from local storage
+      localStorage.removeItem('imgUrl');
       setImgUrl('');
       setImgDelete('')
 
@@ -59,42 +59,27 @@ export default function FileUpload({
 
   const onUpdateFile = (newFiles: any) => {
     const fileUrl = newFiles?.map((file: { url: any; }) => file.url)
+    value = fileUrl[0]
+    // console.log('value=======>>', value);
 
     setImgUrl(fileUrl[0]);
     setImgDelete(newFiles[0].key)
-    onChange(fileUrl[0]);
+    // onChange(fileUrl[0]);
 
-    // console.log("fileUrl[0]===>",fileUrl[0]);
-    // getFile(fileUrl[0])
-    // console.log("getFile>>>",getFile(fileUrl[0]));
+    onChange(value);
+    // onChange({value:fileUrl[0]});
+    // onChange([...value, fileUrl[0]]);
 
-    // // Save the image URL in local storage
-    // localStorage.setItem('imgUrl', fileUrl[0]);
-
-    
-    
-    // if (fileUrl.length > 0) {
-    //   setImgUrl(fileUrl[0]);
-    //   setImgDelete(newFiles[0].key);
-    //   onChange(fileUrl[0]);
-
-    //   // Save the image URL in local storage
-    //   localStorage.setItem("imgUrl", fileUrl[0]);
-    // }
+    // Save the image URL in local storage
+    localStorage.setItem('imgUrl', fileUrl[0]);
   };
 
   useEffect(() => {
-    // // Get the image URL from local storage
-    // const storedImgUrl = localStorage.getItem('imgUrl');
+    // Get the image URL from local storage
+    const storedImgUrl = localStorage.getItem('imgUrl');
 
-    // // Set it as the initial state of the imgUrl variable
-    // if (storedImgUrl) setImgUrl(storedImgUrl);
-
-
-
-  const test= getFile(imgUrl)
-
-  console.log("getFile>>>",JSON.stringify(test) );
+    // Set it as the initial state of the imgUrl variable
+    if (storedImgUrl) setImgUrl(storedImgUrl);
   }, [imgUrl]);
 
   return (
@@ -108,7 +93,6 @@ export default function FileUpload({
                   type="button"
                   onClick={deleteHandler}
                   // onClick={() => onDeleteFile(imgDelete, imgUrl)}
-
                   variant="destructive"
                   size="sm"
                 >
@@ -146,8 +130,7 @@ export default function FileUpload({
             }}
 
             onClientUploadComplete={(res) => {
-              // const data: UploadFileResponse[] | undefined = res;
-              const data: UploadFileResponse[] = res;
+              const data: UploadFileResponse[] | undefined = res;
               if (data) onUpdateFile(data);
             }}
             onUploadError={(error: Error) => {
@@ -158,8 +141,7 @@ export default function FileUpload({
               //   description: error.message,
               // });
             }}
-            onUploadBegin={() => {
-            }}
+            onUploadBegin={() => { }}
           />
         </div>
       </div>
