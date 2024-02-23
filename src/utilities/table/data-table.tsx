@@ -58,7 +58,7 @@ export function DataTable<TValue>() {
 
   // const data = useMemo(() => serverData ?? [], [serverData]);
 
-  const { data:serverData } =  useKdramasData()
+  const { data: serverData } = useKdramasData()
   const data = useMemo(() => serverData ?? [], [serverData]);
 
   const table = useReactTable({
@@ -111,8 +111,7 @@ export function DataTable<TValue>() {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => copyHandler(row.original.title)}
-                  // onClick={() => console.log("test--->",row)}
-                  >
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

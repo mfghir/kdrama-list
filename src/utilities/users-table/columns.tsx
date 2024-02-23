@@ -1,6 +1,7 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
+import { Checkbox } from "@/components/ui/checkbox";
 // import { Checkbox } from "@/components/ui/checkbox";
 
 
@@ -16,25 +17,33 @@ export type User = {
 
 
 export const columns: ColumnDef<User>[] = [
-  //   {
-  //     id: "select",
-  //     header: ({ table }) => (
-  //       <Checkbox
-  //         checked={table.getIsAllPageRowsSelected()}
-  //         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //         aria-label="Select all"
-  //       />
-  //     ),
-  //     cell: ({ row }) => (
-  //       <Checkbox
-  //         checked={row.getIsSelected()}
-  //         onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //         aria-label="Select row"
-  //       />
-  //     ),
-  //     enableSorting: false,
-  //     enableHiding: false,
-  //   },
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => {
+      // console.log(row.original._id);
+
+      // const t = [...row, row]
+      // console.log("row",row);
+
+      // const test = row.map((item: any) => item.original._id === row.original._id ? true : false);
+      // console.log('test', test);
+
+      return (<Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />)
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "name",
     header: "NAME",
@@ -45,7 +54,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "role",
-    header: "ROLE", 
+    header: "ROLE",
   },
   {
     accessorKey: "createdAt",

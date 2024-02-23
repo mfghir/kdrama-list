@@ -4,12 +4,11 @@
 import * as z from "zod";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
-import { Trash } from "lucide-react";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { usePathname, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -20,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { Button } from "@/components/ui/button";
 import { Heading } from '@/utilities/heading'
 import { Separator } from '../ui/separator'
 
@@ -28,34 +28,12 @@ import { useToast } from "../ui/use-toast";
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
 
-// import { create } from "@/app/dashboard/page";
-// import { create } from "@/utilities/ImgUpload";
-// import ImgUpload, { MyImage } from "@/utilities/ImgUpload";
 
 
-
-const ImgSchema = z.object({
-  fileName: z.string(),
-  name: z.string(),
-  fileSize: z.number(),
-  size: z.number(),
-  fileKey: z.string(),
-  key: z.string(),
-  fileUrl: z.string(),
-  url: z.string(),
-});
-
-export const IMG_MAX_LIMIT = 1;
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
-  imgUrl: z.string()
-    // .array(ImgSchema)
-    // .max(IMG_MAX_LIMIT, { message: "You can only add 1 image" })
-    // .min(1, { message: "At least one image must be added." }),
-    // .any()
-    .refine((files) => { return files?.[0] }),
-
+  imgUrl: z.string().refine((files) => { return files?.[0] }),
   email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
@@ -92,7 +70,7 @@ const TabUserAdd = () => {
     name: "",
     email: "",
     // imgUrl: [],
-    imgUrl: "" || storedImgUrl ,
+    imgUrl: "" || storedImgUrl,
     password: "",
     role: "",
   };
@@ -135,7 +113,7 @@ const TabUserAdd = () => {
 
 
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between ">
         <Heading title={title} description={description} />
       </div>
@@ -161,16 +139,7 @@ const TabUserAdd = () => {
               <FormItem>
                 <FormLabel>Images</FormLabel>
                 <FormControl>
-                  <FileUpload
-                    onChange={field.onChange}
-                    // value={field.value || "https://i.postimg.cc/2yg62hWm/notfound.jpg"}
-                    value={field.value  }
-                    onRemove={field.onChange}
-                  />
-                  {/* <ImgUpload value={field.value} onChange={field.onChange}   /> */}
-                  {/* <MyImage value={field.value} onChange={field.onChange} />  */}
-                  {/* <ImgUpload  /> */}
-                  {/* <DropzoneComp  /> */}
+                  <FileUpload onChange={field.onChange} value={field.value} onRemove={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -179,20 +148,6 @@ const TabUserAdd = () => {
 
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
-            {/* <FormField
-              control={form.control}
-              name="imgUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Pic</FormLabel>
-                  <FormControl>
-                    <Input placeholder="pic" type="file" disabled={loading} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
-
             <FormField
               control={form.control}
               name="name"
@@ -255,7 +210,7 @@ const TabUserAdd = () => {
           </Button>
         </form>
       </Form>
-    </div>
+    </>
   )
 }
 
@@ -263,14 +218,4 @@ export default TabUserAdd
 
 
 
-
-
-// const ImgUpload = () => {
-//   return (
-//     <form action={create} method="post" encType="multipart/form-data">
-//       <input type='file' name='image' />
-//       <button type='submit'>Submit</button>
-//     </form>
-//   )
-// }
 

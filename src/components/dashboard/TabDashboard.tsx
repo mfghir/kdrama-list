@@ -41,7 +41,7 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
   if (role === "admin") {
     return (
       <>
-        <ScrollArea className="h-full ">
+        <ScrollArea className="h-full p-6">
           <section className="w-full flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">
               Hi, Welcome back 👋
@@ -211,8 +211,10 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
   const filteredUsers = usersList?.filter((user) => user.role === "user");
 
   return (
-    <section className="w-full h-full overflow-y-scroll grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7">
-      <Card className="col-span-4">
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7 h-[430px]">
+
+    {/* <section className=" overflow-y-scroll grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7"> */}
+      <Card className="col-span-4 h-[430px]">
         <CardHeader>
           <CardTitle>Overview</CardTitle>
         </CardHeader>
@@ -222,7 +224,7 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
       </Card>
 
 
-      <Card className="col-span-3">
+      <Card className="col-span-4 md:col-span-3 h-[430px] overflow-y-scroll">
         <CardHeader>
           <CardTitle>users list</CardTitle>
           <CardDescription>
@@ -231,7 +233,7 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
         </CardHeader>
 
         <CardContent>
-          <section className=""  >
+          {/* <section className=""  > */}
             {filteredUsers?.map((user) => (
               <div key={user.email} className="flex justify-between items-center gap-x-2 my-8">
                 <Avatar className="h-9 w-9">
@@ -251,11 +253,13 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
                 </p>
               </div>
             ))}
-          </section>
+          {/* </section> */}
         </CardContent>
       </Card>
       {/* </div > */}
-    </section>
+    {/* </section> */}
+    </div>
+
   )
 }
 

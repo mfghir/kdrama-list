@@ -37,16 +37,38 @@ export async function POST(request: any) {
   }
 }
 
-export async function DELETE(request: any,data:any,params: any) {
+export async function DELETE(request: any,data:any,params: any,context:any) {
   try {
     const id = request.nextUrl.searchParams.get("id");
     console.log("-id------------------",id);
-    // console.log("-request-------------------",request);
+
+    const idsToDelete = request.nextUrl.searchParams.getAll("ids")
+      // ? request.nextUrl.searchParams.getAll("ids")
+      // : [id];
+
+    // if (!idsToDelete || !idsToDelete.length) {
+    //   throw new Error("No valid IDs provided for deletion.");
+    // }
+    
+    // const idsToDelete = data.ids; // Array of IDs of the users to delete
+
+    console.log("-idsToDelete------------------",idsToDelete);
+    console.log("-context-------------------",context);
     console.log("-data-------------------",data);
     console.log("-params-------------------",params);
 
     await connectDB();
-    await User.findByIdAndDelete(id);
+     // Delete a single user if the ID is provided
+     if (id) {
+      await User.findByIdAndDelete(id);
+    }
+
+    // Delete multiple users if the IDs are provided
+    if (idsToDelete && idsToDelete.length > 0) {
+      await User.deleteMany({ _id: { $in: idsToDelete } });
+    }
+
+
 
     return NextResponse.json(
       { message: "Course deleted Successfully" },

@@ -172,7 +172,7 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
 
 
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between ">
         <Heading title={title} description={description} />
       </div>
@@ -208,13 +208,13 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
             )}
           /> */}
 
-<Image 
-src={userId?.imgUrl}
-alt="Sample image"
-width={200}
-height={200}
- />
-          
+          <Image
+            src={userId?.imgUrl}
+            alt="Sample image"
+            width={200}
+            height={200} 
+          />
+
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
             <FormField
@@ -279,7 +279,7 @@ height={200}
           </Button>
         </form>
       </Form>
-    </div>
+    </>
   )
 }
 

@@ -51,6 +51,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         onConfirm={onConfirm}
         loading={loading}
       />
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -62,9 +63,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/users/${data._id}`)}
-          >
+          <DropdownMenuItem onClick={() => router.push(`/dashboard/users/${data._id}`)}>
             <Edit className="mr-2 h-4 w-4" /> Edit
           </DropdownMenuItem>
 

@@ -19,7 +19,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="flex h-screen overflow-hidden">
       <Sidebar userInfo={user} />
-      <div className="w-full pt-28 p-6">{children}</div>
+      <div className="w-full pt-24 py-6 h-full">{children}</div>
     </section>
   )
 }
