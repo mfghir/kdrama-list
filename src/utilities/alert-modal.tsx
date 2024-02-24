@@ -23,9 +23,8 @@ export const AlertModal: React.FC<AlertModalProps> = ({
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) {
-    return null;
-  }
+  if (!isMounted) return null;
+
 
   return (
     <Modal
@@ -38,7 +37,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
         <Button disabled={loading} variant="outline" onClick={onClose}>
           Cancel
         </Button>
-        
+
         <Button disabled={loading} variant="destructive" onClick={onConfirm}>
           Continue
         </Button>

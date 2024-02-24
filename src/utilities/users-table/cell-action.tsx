@@ -32,8 +32,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
     try {
       setLoading(true);
-      await fetch(`/api/users/${data._id}`, { method: "DELETE" });
-      // await axios.delete(`/api/users/${data._id}`);
+      // await fetch(`/api/users/${data._id}`, { method: "DELETE" });
+      await axios.delete(`/api/users/${data._id}`);
       setOpen(false)
       router.refresh();
     } catch (error) {

@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Table } from "@tanstack/react-table"
-import { Trash } from "lucide-react"
+import { AwardIcon, Trash } from "lucide-react"
 
 import {
   Select,
@@ -40,27 +40,29 @@ export function DataTablePagination<TData>({
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const test = table.getFilteredSelectedRowModel().rows
-  const ids = test.map((item) => item.original._id)
+  const rowsList = table.getFilteredSelectedRowModel().rows
+  const ids = rowsList.map((item) => item.original._id)
   console.log(ids);
 
 
   const onConfirm = async () => {
-
     try {
       setLoading(true);
       // await fetch(`/api/users/${tee}`, { method: "DELETE" });
       // await axios.delete(`/api/users/${data._id}`);
-      const requestBody = {
-        ids
-      };
+
 
       // await fetch(`/api/users`, {
       //   method: "DELETE",
       //   headers: {"Content-Type": "application/json" },
       //   body: JSON.stringify(requestBody)
       // });
-      axios.delete('/api/users', {data: requestBody})
+
+      const requestBody = { ids: ids };
+      console.log("requestBody",requestBody);
+      console.log("ids",ids);
+
+      await axios.delete('/api/users', {data: requestBody})
       setOpen(false)
       router.refresh();
 

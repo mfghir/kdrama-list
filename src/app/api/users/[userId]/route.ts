@@ -10,13 +10,11 @@ export async function GET(request: any, { params: { id } }: any) {
     return NextResponse.json({ message: "Ok", data: course }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed to fetch Courses", error },
+      { message: "Failed to fetch Users", error },
       { status: 500 }
     );
   }
 }
-
-
 
 export async function POST(request: any) {
   try {
@@ -27,7 +25,7 @@ export async function POST(request: any) {
     await User.create(userData);
 
     return NextResponse.json(
-      { message: "Course created successfully", data: userData },
+      { message: "user created successfully", data: userData },
       { status: 201 }
     );
   } catch (error) {
@@ -37,9 +35,6 @@ export async function POST(request: any) {
     );
   }
 }
-
-
-
 
 export async function PATCH(request: any, context: any) {
   try {
@@ -49,7 +44,7 @@ export async function PATCH(request: any, context: any) {
     await User.findByIdAndUpdate(context.params.userId, userData);
 
     return NextResponse.json(
-      { message: "Course Updated successfully", data: userData },
+      { message: "user Updated successfully", data: userData },
       { status: 201 }
     );
   } catch (error) {
@@ -60,27 +55,60 @@ export async function PATCH(request: any, context: any) {
   }
 }
 
+// export async function DELETE(request: any, context: any) {
+//   try {
+//     await connectDB();
+//     // const id = request.nextUrl.searchParams.get("id")
+//     const id = context.params.userId;
+//     console.log("id ==============", id);
+//     console.log("context ==============", context);
 
+//     await User.findByIdAndDelete(id);
 
+//     return NextResponse.json(
+//       { message: "user deleted Successfully" },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     return NextResponse.json(
+//       { message: "Failed to Delete a Course", error },
+//       { status: 500 }
+//     );
+//   }
+// }
 
-
-export async function DELETE(request: any, context: any) {
+export async function DELETE(req: any, res: any, context: any) {
   try {
     await connectDB();
-    // const id = request.nextUrl.searchParams.get("id")
     const id = context.params.userId;
-    console.log("id ==============", id);
-    console.log("context ==============", context);
+    console.log("id--********************", id);
+    console.log("context--********************", context);
 
-    await User.findByIdAndDelete(id);
+    // Extract user IDs from the request body
+    // const { userIds } = req.body;
+    // console.log("userIds======", userIds);
+    // console.log("context======", context);
+
+    const { ids } = req.body;
+    console.log("ids--***********", ids);
+
+    if (Array.isArray(ids)) {
+      // Delete multiple users
+      await User.deleteMany({ _id: { $in: ids } });
+    } else {
+      // Delete a single user
+      await User.findByIdAndDelete(id);
+    }
 
     return NextResponse.json(
-      { message: "Course deleted Successfully" },
-      { status: 200 }
+      { message: "users deleted successfully" },
+      { status: 201 }
     );
   } catch (error) {
+    console.error("Error deleting users:", error);
+    // return res.status(500).json({ message: "Internal server error" });
     return NextResponse.json(
-      { message: "Failed to Delete a Course", error },
+      { message: "Failed to delete users", error },
       { status: 500 }
     );
   }
