@@ -17,9 +17,10 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   if (!user) return <h3>No such user found in the database!</h3>;
 
   return (
-    <section className="flex h-screen overflow-hidden">
+    <section className="flex min-h-screen overflow-hidden p-6">
       <Sidebar userInfo={user} />
-      <div className="w-full pt-24 py-6 h-full">{children}</div>
+      <div className="w-full h-full mt-24 ">{children}</div>
+      {/* <div className="w-full h-full mt-24 mb-6 px-6 pt-8 pb-40 md:p-6 md:mb-0 md:mt-14 ">{children}</div> */}
     </section>
   )
 }
