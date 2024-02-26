@@ -2,6 +2,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
 // import { Checkbox } from "@/components/ui/checkbox";
 
 
@@ -27,22 +28,27 @@ export const columns: ColumnDef<User>[] = [
       />
     ),
     cell: ({ row }) => {
-      // console.log(row.original._id);
-
-      // const t = [...row, row]
-      // console.log("row",row);
-
-      // const test = row.map((item: any) => item.original._id === row.original._id ? true : false);
-      // console.log('test', test);
-
-      return (<Checkbox
+      return <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
-      />)
+      />
     },
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "imgUrl",
+    header: "IMG",
+    cell: ({ row }) => {
+      return <Image src={row.original.imgUrl} alt="Sample image" width={40} height={40} className="rounded-full" />
+
+      //       <Avatar>
+      //   <AvatarImage src="https://github.com/shadcn.png" />
+      //   <AvatarFallback>CN</AvatarFallback>
+      // </Avatar>
+
+    }
   },
   {
     accessorKey: "name",

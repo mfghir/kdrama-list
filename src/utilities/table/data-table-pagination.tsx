@@ -33,38 +33,23 @@ export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
 
-
-  console.log("table", table.getFilteredSelectedRowModel().rows);
-
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const rowsList = table.getFilteredSelectedRowModel().rows
   const ids = rowsList.map((item) => item.original._id)
-  console.log(ids);
 
 
   const onConfirm = async () => {
     try {
       setLoading(true);
-      // await fetch(`/api/users/${tee}`, { method: "DELETE" });
-      // await axios.delete(`/api/users/${data._id}`);
-
-
-      // await fetch(`/api/users`, {
-      //   method: "DELETE",
-      //   headers: {"Content-Type": "application/json" },
-      //   body: JSON.stringify(requestBody)
-      // });
 
       const requestBody = { ids: ids };
-      console.log("requestBody",requestBody);
-      console.log("ids",ids);
-
-      await axios.delete('/api/users', {data: requestBody})
-      setOpen(false)
+      await axios.delete('/api/users', { params: requestBody })
       router.refresh();
+
+      setOpen(false)
 
     } catch (error) {
       console.error("delete error------>", error);

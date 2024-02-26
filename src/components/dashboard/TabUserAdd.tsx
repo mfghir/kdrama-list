@@ -69,7 +69,7 @@ const TabUserAdd = () => {
     name: "",
     email: "",
     // imgUrl: [],
-    imgUrl: "" || storedImgUrl,
+    imgUrl: "https://utfs.io/f/f33acdb2-70ff-4fde-9a05-763beb20ec4f-8wans1.jpg" || storedImgUrl,
     password: "",
     role: "",
   };

@@ -109,30 +109,36 @@ export async function POST(request: any) {
 
 export async function DELETE(
   req: any,
-  res: any,
   context: any
 ) {
   try {
     await connectDB();
-    const id = context.params.userId;
+    // const id = context.params.userId;
+    const ids = req.nextUrl.searchParams.getAll('ids[]');
+
+    console.log(' getAll >>>>>>>>>>>>>>>>>>>>>>', ids)
+  
+
+
 
     // console.log("req-------------",req);
 
     // Extract user IDs from the request body
     // const { userIds } = req.body;
-    // console.log("userIds======", userIds);
-    console.log("context======", context);
+    // console.log("userIds >>>>>>>>>>>>", userIds);
 
-    const { ids } = req.body;
-        console.log("ids======", ids);
 
-    if (Array.isArray(ids)) {
+    // const { ids } = req.body;
+    // console.log("ids >>>>>>>>>>>>", ids);
+
+    // if (Array.isArray(ids)) {
       // Delete multiple users
-      await User.deleteMany({ _id: { $in: ids } });
-    } else {
-      // Delete a single user
-      await User.findByIdAndDelete(id);
-    }
+      await User.deleteMany({ _id: { $in: ids } });   
+    // } 
+    // else {
+    //   // Delete a single user
+    //   await User.findByIdAndDelete(id);
+    // }
 
     return NextResponse.json(
       { message: "users deleted successfully" },

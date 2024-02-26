@@ -55,61 +55,69 @@ export async function PATCH(request: any, context: any) {
   }
 }
 
-// export async function DELETE(request: any, context: any) {
-//   try {
-//     await connectDB();
-//     // const id = request.nextUrl.searchParams.get("id")
-//     const id = context.params.userId;
-//     console.log("id ==============", id);
-//     console.log("context ==============", context);
-
-//     await User.findByIdAndDelete(id);
-
-//     return NextResponse.json(
-//       { message: "user deleted Successfully" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     return NextResponse.json(
-//       { message: "Failed to Delete a Course", error },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-export async function DELETE(req: any, res: any, context: any) {
+export async function DELETE(request: any, context: any) {
   try {
     await connectDB();
+    // const id = request.nextUrl.searchParams.get("id")
     const id = context.params.userId;
-    console.log("id--********************", id);
-    console.log("context--********************", context);
+    // console.log("id ==============", id);
+    // console.log("context ==============", context);
 
-    // Extract user IDs from the request body
-    // const { userIds } = req.body;
-    // console.log("userIds======", userIds);
-    // console.log("context======", context);
-
-    const { ids } = req.body;
-    console.log("ids--***********", ids);
-
-    if (Array.isArray(ids)) {
-      // Delete multiple users
-      await User.deleteMany({ _id: { $in: ids } });
-    } else {
-      // Delete a single user
-      await User.findByIdAndDelete(id);
-    }
+    await User.findByIdAndDelete(id);
 
     return NextResponse.json(
-      { message: "users deleted successfully" },
-      { status: 201 }
+      { message: "user deleted Successfully" },
+      { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting users:", error);
-    // return res.status(500).json({ message: "Internal server error" });
     return NextResponse.json(
-      { message: "Failed to delete users", error },
+      { message: "Failed to Delete a Course", error },
       { status: 500 }
     );
   }
 }
+
+// export async function DELETE(req: any, context: any) {
+//   try {
+//     await connectDB();
+//     const id = context.params.userId;
+
+//     console.log("id--********************", id[0]);
+//     console.log("context--********************", context);
+
+//     // Extract user IDs from the request body
+//     // const { userIds } = req.body;
+//     // console.log("userIds======", userIds);
+//     // console.log("context======", context);
+
+//     const { ids } = req.body;
+//     console.log("ids--***********", ids);
+
+//     if(id) {
+//       // Delete a single user
+//       await User.findByIdAndDelete(id[0]);
+//     }
+
+
+//     // if (Array.isArray(ids)) {
+//     //   // Delete multiple users
+//     //   await User.deleteMany({ _id: { $in: [ids] } });
+//     // } 
+//     // else {
+//       // Delete a single user
+//     //   await User.findByIdAndDelete(id);
+//     // }
+
+//     return NextResponse.json(
+//       { message: "users deleted successfully" },
+//       { status: 201 }
+//     );
+//   } catch (error) {
+//     console.error("Error deleting users:", error);
+//     // return res.status(500).json({ message: "Internal server error" });
+//     return NextResponse.json(
+//       { message: "Failed to delete users", error },
+//       { status: 500 }
+//     );
+//   }
+// }

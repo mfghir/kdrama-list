@@ -29,13 +29,14 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
 
   const onConfirm = async () => {
-
     try {
       setLoading(true);
       // await fetch(`/api/users/${data._id}`, { method: "DELETE" });
       await axios.delete(`/api/users/${data._id}`);
+
       setOpen(false)
       router.refresh();
+
     } catch (error) {
       console.error("delete error==>", error);
     } finally {
