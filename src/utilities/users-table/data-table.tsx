@@ -26,6 +26,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DataTablePagination } from "../table/data-table-pagination";
 import { useState } from "react";
+import { AlertModal } from "../alert-modal";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,7 +41,6 @@ export function DataTable<TData, TValue>({
   data,
   searchKey,
 }: DataTableProps<TData, TValue>) {
-
 
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -59,8 +61,40 @@ export function DataTable<TData, TValue>({
   })
 
 
-  /* this can be used to get the selectedrows 
-  console.log("value", table.getFilteredSelectedRowModel()); */
+
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const rowsList = table.getFilteredSelectedRowModel().rows
+  const ids = rowsList.map((item) => item.original._id)
+
+
+  const onConfirm = async () => {
+    try {
+      setLoading(true);
+
+      const requestBody = { ids: ids };
+      await axios.delete('/api/users', { params: requestBody })
+
+      // table.setRowSelection([]);  // v.1 - this unselected the rows
+      table.resetRowSelection(true) // v.2 - this unselected the rows
+
+      router.refresh();
+      setOpen(false)
+
+    } catch (error) {
+      console.error("delete error------>", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+
+  // // /* this can be used to get the selectedrows 
+  // console.log("value", table.getFilteredSelectedRowModel());
 
   return (
     <>
@@ -70,7 +104,7 @@ export function DataTable<TData, TValue>({
         onChange={(event) =>
           table.getColumn(searchKey)?.setFilterValue(event.target.value)
         }
-        className="w-full md:max-w-sm"
+        className="w-full md:max-w-sm my-4"
       />
 
       {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
@@ -125,7 +159,8 @@ export function DataTable<TData, TValue>({
         </Table>
         <ScrollBar orientation="horizontal" />
       </ScrollArea> */}
-      <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
+
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -166,7 +201,9 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </ScrollArea>
+      </div>
+
+
 
       {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
@@ -194,10 +231,17 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
       </div> */}
-
-      <div className="flex items-center justify-end space-x-2 py-0">
-        <DataTablePagination table={table} />
+      <div className="flex items-center justify-end space-x-2 py-8">
+        <DataTablePagination setOpen={setOpen} table={table} />
       </div>
+
+
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onConfirm}
+        loading={loading}
+      />
     </>
   );
 }

@@ -19,9 +19,9 @@ const Sidebar = ({ setOpen, userInfo }: any) => {
 
 
   return (
-    <nav className='relative hidden h-screen border-r pt-16 lg:block w-72'>
+    <nav className='relative hidden h-auto border-r pt-16 lg:block w-72'>
       <div className="space-y-4 py-4">
-        <div className="px-3 py-6">
+        <div className="px-4 py-6">
           <div className="space-y-2">
             <h2 className="mb-2 px-4 text-xl font-semibold tracking-tight">
               Overview

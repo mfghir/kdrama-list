@@ -26,53 +26,55 @@ import axios from "axios"
 
 
 interface DataTablePaginationProps<TData> {
-  table: Table<TData>
+  table: Table<TData>,
+  setOpen: boolean
 }
 
 export function DataTablePagination<TData>({
   table,
+  setOpen
 }: DataTablePaginationProps<TData>) {
 
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
+  // const [loading, setLoading] = useState(false);
+  // const [open, setOpen] = useState(false);
+  // const router = useRouter();
 
-  const rowsList = table.getFilteredSelectedRowModel().rows
-  const ids = rowsList.map((item) => item.original._id)
+  // const rowsList = table.getFilteredSelectedRowModel().rows
+  // const ids = rowsList.map((item) => item.original._id)
 
 
-  const onConfirm = async () => {
-    try {
-      setLoading(true);
+  // const onConfirm = async () => {
+  //   try {
+  //     setLoading(true);
 
-      const requestBody = { ids: ids };
-      await axios.delete('/api/users', { params: requestBody })
-      router.refresh();
+  //     const requestBody = { ids: ids };
+  //     await axios.delete('/api/users', { params: requestBody })
+  //     router.refresh();
 
-      setOpen(false)
+  //     setOpen(false)
 
-    } catch (error) {
-      console.error("delete error------>", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   } catch (error) {
+  //     console.error("delete error------>", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
 
 
 
   return (
     <section className="w-full overflow-hidden">
-      <AlertModal
+      {/* <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={onConfirm}
         loading={loading}
-      />
+      /> */}
       <div className="flex items-center justify-between px-2 overflow-x-scroll md:overflow-x-hidden">
 
-        <div className="flex justify-between items-center gap-x-4">
-          <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex justify-between items-center gap-x-4 mr-4">
+          <div className="flex-1 text-sm text-muted-foreground whitespace-nowrap">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
@@ -85,7 +87,7 @@ export function DataTablePagination<TData>({
 
         <div className="flex items-center space-x-6 lg:space-x-8">
           <div className="flex items-center space-x-2">
-            <p className="text-sm font-medium">Rows per page</p>
+            <p className="text-sm font-medium whitespace-nowrap">Rows per page</p>
             <Select
               value={`${table.getState().pagination.pageSize}`}
               onValueChange={(value: any) => {

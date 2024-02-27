@@ -1,10 +1,21 @@
 import TabMessages from '@/components/dashboard/TabMessages'
-import React from 'react'
+import { ScrollArea } from "@/components/ui/scroll-area";
+import BreadCrumb from "@/utilities/breadcrumb";
+
 
 const Page = () => {
-    return (
+  const breadcrumbItems = [
+    { title: "Users", link: "/dashboard/messages" },
+  ];
+
+  return (
+    <ScrollArea className="h-full">
+      <div className="flex-1 space-y-4">
+        <BreadCrumb items={breadcrumbItems} />
         <TabMessages />
-    )
+      </div>
+    </ScrollArea>
+  )
 }
 
 export default Page

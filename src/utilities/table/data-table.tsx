@@ -79,7 +79,7 @@ export function DataTable<TValue>() {
 
   return (
     <>
-      <div className="flex items-center py-4 overflow-x-scroll">
+      <div className="flex items-center py-4 overflow-x-scroll md:overflow-x-hidden">
         <DataTableToolbar table={table} />
       </div>
 

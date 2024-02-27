@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Checkbox } from "@/components/ui/checkbox";
 
 
@@ -41,12 +42,12 @@ export const columns: ColumnDef<User>[] = [
     accessorKey: "imgUrl",
     header: "IMG",
     cell: ({ row }) => {
-      return <Image src={row.original.imgUrl} alt="Sample image" width={40} height={40} className="rounded-full" />
+      // return <Image src={row.original.imgUrl} alt="Sample image" width={40} height={40} className="rounded-full" />
 
-      //       <Avatar>
-      //   <AvatarImage src="https://github.com/shadcn.png" />
-      //   <AvatarFallback>CN</AvatarFallback>
-      // </Avatar>
+      return <Avatar>
+        <AvatarImage src={row.original.imgUrl} />
+        <AvatarFallback>{row.original.name}</AvatarFallback>
+      </Avatar>
 
     }
   },

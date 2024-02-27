@@ -22,13 +22,15 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
     <div className="w-full p-3 lg:px-20 flex justify-between items-center fixed  supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
       <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
 
-        <Image
-          className="w-16 h-16 rounded-full object-fill"
-          width={80}
-          height={80}
-          src="https://i.postimg.cc/rwwCstjZ/kdrama-logo.jpg"
-          alt="logo"
-        />
+        <Link href="/">
+          <Image
+            className="w-16 h-16 rounded-full object-fill"
+            width={80}
+            height={80}
+            src="https://i.postimg.cc/rwwCstjZ/kdrama-logo.jpg"
+            alt="logo"
+          />
+        </Link>
       </section>
 
       <section className="flex justify-end items-center gap-y-2 gap-x-4">

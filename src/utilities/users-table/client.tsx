@@ -20,10 +20,10 @@ export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between my-4">
         <Heading
           title={`Users (${data.length})`}
-          description="Manage users (Client side table functionalities.)"
+          description="list of users in database"
         />
         <Button
           className="text-xs md:text-sm"

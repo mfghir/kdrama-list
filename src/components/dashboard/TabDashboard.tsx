@@ -41,7 +41,7 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
   if (role === "admin") {
     return (
       <>
-        <ScrollArea className="h-full p-6">
+        <ScrollArea className="h-full ">
           <section className="w-full flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">
               Hi, Welcome back 👋

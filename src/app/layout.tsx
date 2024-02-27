@@ -2,10 +2,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 
-
-
-import "@uploadthing/react/styles.css";
-
 import { ThemeProvider } from '@/components/theme-provider'
 import SessionProviderComp from './SessionProviderComp'
 import Provider from '@/lib/provider'
@@ -13,6 +9,7 @@ import Provider from '@/lib/provider'
 import Navbar from '@/components/Navbar'
 import { cookies } from "next/headers";
 import { getServerSession } from 'next-auth'
+
 import { authOptions } from './api/auth/[...nextauth]/route'
 import connectDB from '@/lib/connectDB'
 import User from '@/models/user'
