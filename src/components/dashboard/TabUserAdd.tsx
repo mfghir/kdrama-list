@@ -81,23 +81,21 @@ const TabUserAdd = () => {
 
 
   const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
-    console.log("data-------", data);
-    // console.log('default values ------', defaultValues);
 
     try {
       setLoading(true);
 
       if (!initialData) {
-        console.log("initialData-=-=-=-=-", initialData);
-
+        // console.log("initialData-=-=-=-=-", initialData);
         await axios.post(`/api/users`, data);
         localStorage.removeItem('imgUrl');
+
       } else {
         console.log("error ****");
       }
 
       // await axios.post(`/api/users`, data);
-      console.log("data ****", data);
+      // console.log("data ****", data);
 
       router.push(`/dashboard/users`);
       router.refresh();

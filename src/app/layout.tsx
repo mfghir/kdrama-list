@@ -36,7 +36,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={currentTheme}>
-      <body className={`${montserrat.className}   `}>
+      <body className={`${montserrat.className} bg-orange-400 `}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -45,7 +45,7 @@ export default async function RootLayout({
         >
           <SessionProviderComp>
             <Provider>
-              <main className="min-h-screen overflow-hidden">
+              <main className="min-h-screen overflow-hidden   bg-blue-300">
                 {/* <main className="grid place-items-center min-h-screen my-8 overflow-hidden"> */}
 
                 {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}

@@ -6,7 +6,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 
-import "@uploadthing/react/styles.css";
+// import "@uploadthing/react/styles.css";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession(authOptions);
@@ -18,11 +18,14 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   if (!user) return <h3>No such user found in the database!</h3>;
 
   return (
-    <section className="flex min-h-screen overflow-hidden ">
+    <>
+     <section className="md:flex w-full min-h-screen overflow-hidden ">
       <Sidebar userInfo={user} />
+      {/* {children} */}
       <div className="w-full h-full mt-24 p-6">{children}</div>
       {/* <div className="w-full h-full mt-24 mb-6 px-6 pt-8 pb-40 md:p-6 md:mb-0 md:mt-14 ">{children}</div> */}
-    </section>
+     </section>
+    </>
   )
 }
 

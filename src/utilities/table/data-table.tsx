@@ -131,7 +131,7 @@ export function DataTable<TValue>() {
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
-        <DataTablePagination table={table} />
+        <DataTablePagination table={table} setOpen={false} />
       </div>
     </>
   )

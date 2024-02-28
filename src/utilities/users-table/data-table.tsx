@@ -98,70 +98,73 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <Input
-        placeholder={`Search ${searchKey}...`}
-        value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn(searchKey)?.setFilterValue(event.target.value)
-        }
-        className="w-full md:max-w-sm my-4"
-      />
+      <ScrollArea className="h-full ">
+        {/* <section className="w-full flex items-center justify-between space-y-2"> */}
+        {/* <section className="h-full flex flex-col "> */}
+        <Input
+          placeholder={`Search ${searchKey}...`}
+          value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn(searchKey)?.setFilterValue(event.target.value)
+          }
+          className="w-full md:max-w-sm my-4"
+        />
 
-      {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
-        <Table className="relative">
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
+        <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
+          <Table className="relative">
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                      </TableHead>
+                    );
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea> */}
+              ))}
+            </TableHeader>
 
-      <div className="rounded-md border">
-        <Table>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
+
+        {/* <div className="rounded-md border w-full">
+        <Table >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -201,11 +204,11 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
+      </div> */}
 
 
 
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
+        {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -230,18 +233,23 @@ export function DataTable<TData, TValue>({
             Next
           </Button>
         </div>
-      </div> */}
-      <div className="flex items-center justify-end space-x-2 py-8">
-        <DataTablePagination setOpen={setOpen} table={table} />
-      </div>
+        </div> */}
+        <div className="flex items-center justify-end space-x-2 py-8">
+          <DataTablePagination setOpen={setOpen} table={table} />
+        </div>
 
 
-      <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onConfirm}
-        loading={loading}
-      />
+        <AlertModal
+          isOpen={open}
+          onClose={() => setOpen(false)}
+          onConfirm={onConfirm}
+          loading={loading}
+        />
+
+        {/* </section> */}
+      </ScrollArea>
+
+
     </>
   );
 }
