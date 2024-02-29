@@ -11,12 +11,12 @@ const page = () => {
   ];
 
   return (
-    <ScrollArea className="h-full">
-      <div className="flex-1 space-y-4 ">
+    // <ScrollArea className="h-full">
+      <div className="flex-1 space-y-4 h-auto">
         <BreadCrumb items={breadcrumbItems} />
         <TabUserAdd />
       </div>
-    </ScrollArea>
+    // </ScrollArea>
   )
 }
 

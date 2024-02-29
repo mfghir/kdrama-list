@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // import "@uploadthing/react/styles.css";
 
@@ -19,12 +20,23 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-     <section className="md:flex w-full min-h-screen overflow-hidden ">
+     {/* <section className="md:flex w-full min-h-screen overflow-hidden ">
       <Sidebar userInfo={user} />
       {/* {children} */}
-      <div className="w-full h-full mt-24 p-6">{children}</div>
+      {/* <div className="w-full h-full mt-24 p-6">{children}</div> */}
       {/* <div className="w-full h-full mt-24 mb-6 px-6 pt-8 pb-40 md:p-6 md:mb-0 md:mt-14 ">{children}</div> */}
-     </section>
+     {/* </section> */} 
+
+     <>
+    {/* <ScrollArea className="h-full "> */}
+     
+      <div className="w-fit md:flex justify-between bg-red-400   ">
+        <Sidebar userInfo={user} />
+        {/* <main className="w-full h-full p-6 md:p-8 py-24">{children}</main> */}
+        <main className=" w-[calc(100vw-48px)] lg:w-full h-full  px-6 pt-24 mb-8">{children}</main>
+      </div>
+      {/* </ScrollArea> */}
+    </>
     </>
   )
 }

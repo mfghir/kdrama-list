@@ -19,9 +19,8 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
   const path = usePathname();
 
   return (
-    <div className="w-full p-3 lg:px-20 flex justify-between items-center fixed  supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
+    <div className="w-full px-6 py-3 lg:px-20 flex justify-between items-center fixed  supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
       <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
-
         <Link href="/">
           <Image
             className="w-16 h-16 rounded-full object-fill"

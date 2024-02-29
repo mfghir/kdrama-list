@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAddDrama } from "@/lib/mutations";
+
 import { useToast } from "./ui/use-toast";
 import { labels, genres, statuses } from "@/lib/data";
 import { useState } from "react";
@@ -53,7 +54,6 @@ export default function KdramaAdd() {
     // if (typeof title !== "string") return;
     // addTask(title, description);
 
-    // console.log("data222 ----->", data);
     mutate(data);
     toast({ title: "Successfully Added ✔" })
   };
@@ -99,7 +99,7 @@ export default function KdramaAdd() {
               value={value.statuses}
               onValueChange={
                 (val) => setValue({ ...value, statuses: val })
-              }    
+              }
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a status" />
@@ -153,7 +153,7 @@ export default function KdramaAdd() {
               value={value.genres}
               onValueChange={
                 (val) => setValue({ ...value, genres: val })
-              }        
+              }
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a genre" />

@@ -98,8 +98,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <ScrollArea className="h-full ">
-        {/* <section className="w-full flex items-center justify-between space-y-2"> */}
+      {/* <ScrollArea className="h-full "> */}
+        {/* <section className="w-full flex  flex-col items-center justify-between space-y-2"> */}
         {/* <section className="h-full flex flex-col "> */}
         <Input
           placeholder={`Search ${searchKey}...`}
@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)
           }
-          className="w-full md:max-w-sm my-4"
+          className="w-full md:max-w-sm my-3"
         />
 
         <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
@@ -163,8 +163,8 @@ export function DataTable<TData, TValue>({
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
 
-        {/* <div className="rounded-md border w-full">
-        <Table >
+        {/* <div className="rounded-md border h-[calc(80vh-220px)] overflow-hidden">
+        <Table className="w-full relative" >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -234,7 +234,7 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
         </div> */}
-        <div className="flex items-center justify-end space-x-2 py-8">
+        <div className="flex items-center justify-end space-x-2 py-2">
           <DataTablePagination setOpen={setOpen} table={table} />
         </div>
 
@@ -247,7 +247,7 @@ export function DataTable<TData, TValue>({
         />
 
         {/* </section> */}
-      </ScrollArea>
+      {/* </ScrollArea> */}
 
 
     </>
