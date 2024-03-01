@@ -99,18 +99,18 @@ export function DataTable<TData, TValue>({
   return (
     <>
       {/* <ScrollArea className="h-full "> */}
-        {/* <section className="w-full flex  flex-col items-center justify-between space-y-2"> */}
-        {/* <section className="h-full flex flex-col "> */}
-        <Input
-          placeholder={`Search ${searchKey}...`}
-          value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn(searchKey)?.setFilterValue(event.target.value)
-          }
-          className="w-full md:max-w-sm my-3"
-        />
+      {/* <section className="w-full flex  flex-col items-center justify-between space-y-2"> */}
+      {/* <section className="h-full flex flex-col "> */}
+      <Input
+        placeholder={`Search ${searchKey}...`}
+        value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+        onChange={(event) =>
+          table.getColumn(searchKey)?.setFilterValue(event.target.value)
+        }
+        className="w-full md:max-w-sm my-3"
+      />
 
-        <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
+      {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
           <Table className="relative">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -161,9 +161,9 @@ export function DataTable<TData, TValue>({
             </TableBody>
           </Table>
           <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        </ScrollArea> */}
 
-        {/* <div className="rounded-md border h-[calc(80vh-220px)] overflow-hidden">
+      <div className="rounded-md border h-[calc(80vh-220px)] overflow-y-hidden overflow-x-scroll">
         <Table className="w-full relative" >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -204,11 +204,11 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div> */}
+      </div>
 
 
 
-        {/* <div className="flex items-center justify-end space-x-2 py-4">
+      {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -234,19 +234,19 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
         </div> */}
-        <div className="flex items-center justify-end space-x-2 py-2">
-          <DataTablePagination setOpen={setOpen} table={table} />
-        </div>
+      <div className="flex items-center justify-end space-x-2 py-2">
+        <DataTablePagination setOpen={setOpen} table={table} />
+      </div>
 
 
-        <AlertModal
-          isOpen={open}
-          onClose={() => setOpen(false)}
-          onConfirm={onConfirm}
-          loading={loading}
-        />
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onConfirm}
+        loading={loading}
+      />
 
-        {/* </section> */}
+      {/* </section> */}
       {/* </ScrollArea> */}
 
 

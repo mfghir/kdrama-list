@@ -1,12 +1,17 @@
 import { UserClient } from '@/utilities/users-table/client'
-import { ScrollArea } from '../ui/scroll-area'
+import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 
 const TabUsers = ({ data }: any) => {
   return (
-    // <div className="h-full ">
+    <ScrollArea>
+   {/* <div className="h-full "> */}
     
     <UserClient data={data} />
-    // </div>
+
+    
+   {/* </div> */}
+    <ScrollBar orientation="horizontal" />
+    </ScrollArea>
   )
 }
 

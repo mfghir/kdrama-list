@@ -41,30 +41,30 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
   if (role === "admin") {
     return (
       <>
-        {/* <ScrollArea className="h-full "> */}
+        {/* <ScrollArea className="h-full w-full"> */}
         {/* <div className="flex-1 space-y-4  p-4 md:p-8 pt-6"> */}
-          <section className="w-full flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Hi, Welcome back 👋
-            </h2>
+        <section className="w-full flex items-center justify-between space-y-2">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Hi, Welcome back 👋
+          </h2>
 
-            <div className="hidden md:flex items-center gap-x-4">
-              <Button className="flex justify-between items-center gap-x-2" variant="secondary">
-                <Calendar size={18} />
-                {new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}
-              </Button>
-              <Button className="flex justify-between items-center gap-x-2" variant="ghost">
-                <Clock size={18} />
-                {new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" })}
-              </Button>
-            </div>
-          </section>
+          <div className="hidden md:flex items-center gap-x-4">
+            <Button className="flex justify-between items-center gap-x-2" variant="secondary">
+              <Calendar size={18} />
+              {new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}
+            </Button>
+            <Button className="flex justify-between items-center gap-x-2" variant="ghost">
+              <Clock size={18} />
+              {new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" })}
+            </Button>
+          </div>
+        </section>
 
-          <SecTwo serverData={serverData} />
+        <SecTwo serverData={serverData} />
 
-          <SecThree usersList={usersList} />
+        <SecThree usersList={usersList} />
 
-          {/* <section className="flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
+        {/* <section className="flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
             {image ? <Image src={image} alt="user" width={60} height={60} /> : ""}
 
             <div>
@@ -104,7 +104,7 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
                 <Calendar size={18} />
                 {new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}
               </Button>
-              
+
               <Button className="flex justify-between items-center gap-x-2" variant="ghost">
                 <Clock size={18} />
                 {new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" })}
@@ -138,7 +138,6 @@ const SecTwo = ({ serverData }: any) => {
   const criminal = serverData?.filter((item: { genre: string; }) => item.genre === "criminal")
 
   return (
-
     <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 my-6">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -213,9 +212,9 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
   const filteredUsers = usersList?.filter((user) => user.role === "user");
 
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7 h-[430px]">
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7 min-h-[430px]">
 
-    {/* <section className=" overflow-y-scroll grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7"> */}
+      {/* <section className=" overflow-y-scroll grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7"> */}
       <Card className="col-span-4 h-[430px]">
         <CardHeader>
           <CardTitle>Overview</CardTitle>
@@ -235,39 +234,36 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
         </CardHeader>
 
         <CardContent>
-          {/* <section className=""  > */}
-            {filteredUsers?.map((user) => (
-              <div key={user.email} className="flex justify-between items-center gap-x-2 my-8">
-                <Avatar className="h-9 w-9">
-                  <AvatarImage src={user?.image || user.name.slice(0, 2)} alt="Avatar" />
-                  <AvatarFallback>
-                    <CircleUserRound className="w-full h-full" />
-                  </AvatarFallback>
-                </Avatar>
+          {filteredUsers?.map((user) => (
+            <div key={user.email} className="w-full flex  items-center  gap-x-3 mb-8">
+              <Avatar className="h-9 w-9">
+                <AvatarImage src={user?.imgUrl} alt="Avatar" />
+                <AvatarFallback>
+                  <CircleUserRound className="w-full h-full" />
+                </AvatarFallback>
+              </Avatar>
 
-                <div className=" space-y-1">
+              <div className="flex flex-col w-full space-y-2">
+
+                <div className="w-full flex justify-between items-center">
                   <p className="text-sm font-medium leading-none">{user.name}</p>
-                  <p className="text-sm text-muted-foreground break-all">{user.email}</p>
+                  <p className="text-xs text-muted-foreground break-all">
+                    {user.createdAt.toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })}
+                  </p>
                 </div>
 
-                <p className="ml-auto text-xs md:text-sm font-medium">
-                  {user.createdAt.toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })}
-                </p>
+                <p className="w-full text-sm font-medium">{user.email}</p>
               </div>
-            ))}
-          {/* </section> */}
+            </div>
+          ))}
         </CardContent>
       </Card>
-      {/* </div > */}
-    {/* </section> */}
     </div>
-
   )
 }
 
 
 const SecUserNotifs = (): JSX.Element => {
-
   return (
     <section className="w-full h-full overflow-y-scroll lg:overflow-auto grid grid-cols-1 gap-y-4  lg:gap-4 md:grid-cols-2 lg:grid-cols-7">
       <Card className="col-span-4">
@@ -289,24 +285,20 @@ const SecUserNotifs = (): JSX.Element => {
         </CardHeader>
 
         <CardContent>
-          <section className="" >
-            {userNotifs?.map((item) => (
-              <div key={item.title} className="flex justify-between items-center gap-x-2 my-8">
-
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">{item.emoji} {item.title}</p>
-                  <p className="text-sm text-muted-foreground line-clamp-2 ">{item.desc}</p>
-                </div>
-
-                <p className="ml-auto text-xs md:text-sm font-medium">
-                  {item.createdAt}
-                </p>
+          {userNotifs?.map((item) => (
+            <div key={item.title} className="flex justify-between items-center gap-x-2 my-8">
+              <div className="space-y-1">
+                <p className="text-sm font-medium leading-none">{item.emoji} {item.title}</p>
+                <p className="text-sm text-muted-foreground line-clamp-2 ">{item.desc}</p>
               </div>
-            ))}
-          </section>
+
+              <p className="ml-auto text-xs md:text-sm font-medium">
+                {item.createdAt}
+              </p>
+            </div>
+          ))}
         </CardContent>
       </Card>
-      {/* </div > */}
     </section>
   )
 }

@@ -23,10 +23,15 @@ const Dashboard = async () => {
 
   return (
     <>
-    {/* // <div className="flex-1 space-y-4 p-4 md:p-8 pt-6"> */}
+      {/* // <div className="flex-1 space-y-4 p-4 md:p-8 pt-6"> */}
 
-    <TabDashboard role={user.role} email={user.email} name={user.name} image={user.image} usersList={usersList} />
-    {/* // </div> */}
+      <TabDashboard
+        role={user.role}
+        email={user.email}
+        name={user.name}
+        image={user.image}
+        usersList={usersList} />
+      {/* // </div> */}
     </>
 
   )

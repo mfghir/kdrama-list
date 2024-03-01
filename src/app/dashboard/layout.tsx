@@ -29,11 +29,13 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 
      <>
     {/* <ScrollArea className="h-full "> */}
-     
-      <div className="w-fit md:flex justify-between bg-red-400   ">
+
+    {/* user.name.slice(0, 2) */}
+    {/* w-[calc(100vw-48px)] */}
+      <div className="w-full h-full md:flex justify-between bg-red-400   ">
         <Sidebar userInfo={user} />
         {/* <main className="w-full h-full p-6 md:p-8 py-24">{children}</main> */}
-        <main className=" w-[calc(100vw-48px)] lg:w-full h-full  px-6 pt-24 mb-8">{children}</main>
+        <main className="  w-full h-full  px-6 pt-24 mb-8">{children}</main>
       </div>
       {/* </ScrollArea> */}
     </>

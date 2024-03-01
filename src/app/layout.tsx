@@ -36,7 +36,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={currentTheme}>
-      <body className={`${montserrat.className}`}>
+      <body className={`${montserrat.className} `}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -45,14 +45,15 @@ export default async function RootLayout({
         >
           <SessionProviderComp>
             <Provider>
-              <main className="min-h-screen   ">
-                {/* <main className="grid place-items-center min-h-screen my-8 overflow-hidden"> */}
+              {/* <main className="min-h-screen   "> */}
+                {/* <main className="grid place-items-start w-fill min-h-screen my-8 overflow-hidden"> */}
 
-                {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
                 <Navbar userInfo={user} />
+                {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
                 {children}
                 {/* </div> */}
-              </main>
+              {/* </main> */}
+              
             </Provider>
           </SessionProviderComp>
         </ThemeProvider>

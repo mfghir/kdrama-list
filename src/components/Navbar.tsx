@@ -19,38 +19,40 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
   const path = usePathname();
 
   return (
-    <div className="w-full px-6 py-3 lg:px-20 flex justify-between items-center fixed  supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
-      <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
-        <Link href="/">
-          <Image
-            className="w-16 h-16 rounded-full object-fill"
-            width={80}
-            height={80}
-            src="https://i.postimg.cc/rwwCstjZ/kdrama-logo.jpg"
-            alt="logo"
-          />
-        </Link>
-      </section>
+    <div className="fixed inset-0 top-0 left-0 z-20 bg-fuchsia-400 h-fit">
+      <div className=" px-6 py-3 lg:px-20 flex justify-between items-center supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur">
+        <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
+          <Link href="/">
+            <Image
+              className="w-16 h-16 rounded-full object-fill"
+              width={70}
+              height={70}
+              src="https://i.postimg.cc/rwwCstjZ/kdrama-logo.jpg"
+              alt="logo"
+            />
+          </Link>
+        </section>
 
-      <section className="flex justify-end items-center gap-y-2 gap-x-4">
-        <div className='hidden lg:flex justify-between items-center gap-x-4'>
-          <ModeToggle />
-          <ThemeSelector />
-        </div>
+        <section className="flex justify-end items-center gap-y-2 gap-x-4">
+          <div className='hidden lg:flex justify-between items-center gap-x-4'>
+            <ModeToggle />
+            <ThemeSelector />
+          </div>
 
-        {/* {path === "/dashboard" || path === "/dashboard/users" || path === "/dashboard/messages"  ? */}
-        <div className="lg:hidden">
-          <MobileSidebar userInfo={userInfo} />
-        </div>
-        {/* null */}
-        {/* } */}
+          {/* {path === "/dashboard" || path === "/dashboard/users" || path === "/dashboard/messages"  ? */}
+          <div className="lg:hidden">
+            <MobileSidebar userInfo={userInfo} />
+          </div>
+          {/* null */}
+          {/* } */}
 
-        {session?.user ? <UserNav /> :
-          <Button asChild>
-            <Link href="/register">Register</Link>
-          </Button>
-        }
-      </section>
+          {session?.user ? <UserNav /> :
+            <Button asChild>
+              <Link href="/register">Register</Link>
+            </Button>
+          }
+        </section>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import TabUsers from '@/components/dashboard/TabUsers';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
@@ -33,14 +33,15 @@ const DashboardUsers = async () => {
   // w-[calc(100vw-48px)]
   return (
     <>
-    {/* <ScrollArea className="h-full  "> */}
+    {/* <ScrollArea className=" h-full"> */}
     {/* <div className="flex flex-col space-y-4 h-auto"> */}
 
     {/* <div className="flex-1 space-y-4  p-6 md:p-8 pt-8"> */}
-    <div className=" min-h-screen h-full w-full">
+    {/* <div className=" min-h-screen h-full w-full"> */}
       <BreadCrumb items={breadcrumbItems} />
       <TabUsers data={usersList} />
-    </div>
+      {/* <ScrollBar orientation="horizontal" /> */}
+    {/* </div> */}
     {/* </ScrollArea> */}
     </>
   )
