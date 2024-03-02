@@ -20,10 +20,7 @@ const Dashboard = async () => {
   return (
     <TabDashboard
       role={user.role}
-      email={user.email}
-      name={user.name}
-      image={user.image}
-      usersList={usersList} />
+      usersList={usersList}  />
   )
 }
 

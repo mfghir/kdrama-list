@@ -1,14 +1,16 @@
 "use client"
 
-import { Dispatch, SetStateAction } from 'react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { UserInfo, navItems } from '@/lib/data';
 
-import { navItems } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
 
-const DashboardNav = ({ setOpen, userInfo }: any) => {
+const DashboardNav = ({ setOpen, userInfo }: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userInfo: UserInfo
+}) => {
   const path = usePathname();
   // console.log("userInfo userInfo", userInfo);
 

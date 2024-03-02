@@ -11,31 +11,14 @@ import { ScrollArea } from "../ui/scroll-area";
 
 import { Button } from "../ui/button";
 import { Notification, userNotifs } from "@/lib/data";
+import { User } from "@/utilities/users-table/columns";
 
 
 
-interface UserInfoProps {
+const TabDashboard = ({ role, usersList }:{
   role: string;
-  email: string;
-  name: string;
-  image?: string;
-}
-
-interface User {
-  imgUrl: string | undefined;
-  email: string;
-  name: string;
-  role: string;
-  image?: string;
-  createdAt: Date;
-}
-
-interface SecThreeProps {
-  usersList: User[];
-}
-
-
-const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & SecThreeProps): JSX.Element | null => {
+  usersList?: User[];
+})=> {
   const { data: serverData } = useKdramasData()
 
 

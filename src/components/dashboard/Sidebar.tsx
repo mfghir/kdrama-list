@@ -1,6 +1,6 @@
 "use client"
 
-import { navItems } from '@/lib/data';
+import { UserInfo, navItems } from '@/lib/data';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -10,7 +10,10 @@ import DashboardNav from './DashboardNav';
 
 
 
-const Sidebar = ({ setOpen, userInfo }: any) => {
+const Sidebar = ({ setOpen, userInfo }: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userInfo: UserInfo
+}) => {
   // const session = useSession()
   // console.log("session", session.data);
 

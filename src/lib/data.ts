@@ -8,9 +8,16 @@ import {
   ArrowRight,
   ArrowUp,
   Gauge,
+  SquareUserRound ,
   UsersRound,
   MessageSquare,
 } from "lucide-react";
+
+
+
+
+
+
 
 export interface NavItem {
   title: string;
@@ -28,6 +35,13 @@ export const navItems: NavItem[] = [
     href: "/dashboard",
     icon: Gauge,
     label: "Dashboard",
+    role: ["user", "admin"],
+  },
+  {
+    title: "Profile",
+    href: "/dashboard/profile",
+    icon: SquareUserRound,
+    label: "Profile",
     role: ["user", "admin"],
   },
   {

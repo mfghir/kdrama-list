@@ -28,7 +28,7 @@ const MobileSidebar = ({ userInfo }: { userInfo: UserInfo }) => {
             Overview
           </h2>
 
-          <div className="space-y-2 min-h-[550px] ">
+          <div className="space-y-2 min-h-[550px]">
             <DashboardNav userInfo={userInfo} setOpen={setOpen} />
           </div>
 
