@@ -31,7 +31,6 @@
     "axios": "^1.6.4",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
-    "cloudinary": "^2.0.1",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "js-cookie": "^3.0.5",

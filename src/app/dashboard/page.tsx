@@ -6,9 +6,6 @@ import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 import TabDashboard from "@/components/dashboard/TabDashboard";
 
-import { CldImage } from "next-cloudinary";
-import { CldUploadButton } from "next-cloudinary";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -16,24 +13,17 @@ const Dashboard = async () => {
 
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });
+
   const users = await User.find().sort({ createdAt: -1 })
   const usersList = users.map(user => user.toObject());
 
-
-
   return (
-    <>
-      {/* // <div className="flex-1 space-y-4 p-4 md:p-8 pt-6"> */}
-
-      <TabDashboard
-        role={user.role}
-        email={user.email}
-        name={user.name}
-        image={user.image}
-        usersList={usersList} />
-      {/* // </div> */}
-    </>
-
+    <TabDashboard
+      role={user.role}
+      email={user.email}
+      name={user.name}
+      image={user.image}
+      usersList={usersList} />
   )
 }
 

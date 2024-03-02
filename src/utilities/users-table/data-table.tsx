@@ -100,7 +100,7 @@ export function DataTable<TData, TValue>({
     <>
       {/* <ScrollArea className="h-full "> */}
       {/* <section className="w-full flex  flex-col items-center justify-between space-y-2"> */}
-      {/* <section className="h-full flex flex-col "> */}
+      {/* <section className="w-fit h-full flex flex-col p-6 bg-green-200 "> */}
       <Input
         placeholder={`Search ${searchKey}...`}
         value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
@@ -163,8 +163,8 @@ export function DataTable<TData, TValue>({
           <ScrollBar orientation="horizontal" />
         </ScrollArea> */}
 
-      <div className="rounded-md border h-[calc(80vh-220px)] overflow-y-hidden overflow-x-scroll">
-        <Table className="w-full relative" >
+      <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-hidden">
+        <Table className="relative" >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -204,6 +204,7 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+
       </div>
 
 

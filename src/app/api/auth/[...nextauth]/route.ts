@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
+
 import { NextAuthOptions } from "next-auth";
 
 
@@ -47,7 +48,8 @@ export const authOptions: NextAuthOptions = {
             id: user.id,
             name: user.name,
             email: user.email,
-            role: user.role, // Assuming your user model has a 'role' field
+            role: user.role,
+            imgUrl: user.imgUrl,
           };
 
         } catch (error) {

@@ -58,11 +58,7 @@ export async function PATCH(request: any, context: any) {
 export async function DELETE(request: any, context: any) {
   try {
     await connectDB();
-    // const id = request.nextUrl.searchParams.get("id")
     const id = context.params.userId;
-    // console.log("id ==============", id);
-    // console.log("context ==============", context);
-
     await User.findByIdAndDelete(id);
 
     return NextResponse.json(
@@ -98,11 +94,10 @@ export async function DELETE(request: any, context: any) {
 //       await User.findByIdAndDelete(id[0]);
 //     }
 
-
 //     // if (Array.isArray(ids)) {
 //     //   // Delete multiple users
 //     //   await User.deleteMany({ _id: { $in: [ids] } });
-//     // } 
+//     // }
 //     // else {
 //       // Delete a single user
 //     //   await User.findByIdAndDelete(id);

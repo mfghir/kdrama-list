@@ -21,18 +21,20 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 import { Gauge, LogOutIcon } from "lucide-react"
 import Link from "next/link";
+import { UserInfo } from "@/lib/data";
 
 
-const UserNav = () => {
-  const { data: session } = useSession();
+const UserNav = ({userInfo}: { userInfo: UserInfo }) => {
+  // const { data: session } = useSession();
+  // console.log("session===>>>" , session);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
-            <AvatarImage src={session?.user?.image || undefined} alt="user pic" />
-            <AvatarFallback>{session?.user?.name ? session?.user.name.slice(0, 2) : "user pic"}</AvatarFallback>
+            <AvatarImage src={userInfo.imgUrl} alt="user pic" />
+            <AvatarFallback>{userInfo?.name ? userInfo.name.slice(0, 2) : "user pic"}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -40,9 +42,9 @@ const UserNav = () => {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{session?.user?.name}</p>
+            <p className="text-sm font-medium leading-none">{userInfo.name}</p>
             <p className="text-xs leading-none text-muted-foreground">
-              {session?.user?.email}
+              {userInfo.email}
             </p>
           </div>
         </DropdownMenuLabel>

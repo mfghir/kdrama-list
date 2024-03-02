@@ -19,7 +19,7 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
   const path = usePathname();
 
   return (
-    <div className="fixed inset-0 top-0 left-0 z-20 bg-fuchsia-400 h-fit">
+    <div className="fixed inset-0 top-0 left-0 z-20 h-fit">
       <div className=" px-6 py-3 lg:px-20 flex justify-between items-center supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur">
         <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
           <Link href="/">
@@ -46,7 +46,7 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
           {/* null */}
           {/* } */}
 
-          {session?.user ? <UserNav /> :
+          {session?.user ? <UserNav userInfo={userInfo} /> :
             <Button asChild>
               <Link href="/register">Register</Link>
             </Button>

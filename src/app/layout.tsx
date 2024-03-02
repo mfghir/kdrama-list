@@ -33,6 +33,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });
+  console.log("user====",user);
 
   return (
     <html lang="en" className={currentTheme}>

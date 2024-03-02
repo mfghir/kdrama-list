@@ -3,15 +3,17 @@ import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 
 const TabUsers = ({ data }: any) => {
   return (
-    <ScrollArea>
-   {/* <div className="h-full "> */}
-    
-    <UserClient data={data} />
+    <>
+      {/* <ScrollArea> */}
+      <div className="h-full w-full " >
 
-    
-   {/* </div> */}
-    <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+      <UserClient data={data} />
+
+
+      </div>
+      {/* <ScrollBar orientation="horizontal" /> */}
+      {/* </ScrollArea> */}
+    </>
   )
 }
 

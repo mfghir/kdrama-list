@@ -205,5 +205,6 @@ export interface UserInfo {
   createdAt: Date;
   updatedAt: Date;
   role: string;
+  imgUrl?: string;
   __v: number;
 }

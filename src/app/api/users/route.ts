@@ -107,38 +107,11 @@ export async function POST(request: any) {
 //   }
 // }
 
-export async function DELETE(
-  req: any,
-  context: any
-) {
+export async function DELETE(req: any, context: any) {
   try {
     await connectDB();
-    // const id = context.params.userId;
-    const ids = req.nextUrl.searchParams.getAll('ids[]');
-
-    console.log(' getAll >>>>>>>>>>>>>>>>>>>>>>', ids)
-  
-
-
-
-    // console.log("req-------------",req);
-
-    // Extract user IDs from the request body
-    // const { userIds } = req.body;
-    // console.log("userIds >>>>>>>>>>>>", userIds);
-
-
-    // const { ids } = req.body;
-    // console.log("ids >>>>>>>>>>>>", ids);
-
-    // if (Array.isArray(ids)) {
-      // Delete multiple users
-      await User.deleteMany({ _id: { $in: ids } });   
-    // } 
-    // else {
-    //   // Delete a single user
-    //   await User.findByIdAndDelete(id);
-    // }
+    const ids = req.nextUrl.searchParams.getAll("ids[]");
+    await User.deleteMany({ _id: { $in: ids } });
 
     return NextResponse.json(
       { message: "users deleted successfully" },
@@ -146,7 +119,6 @@ export async function DELETE(
     );
   } catch (error) {
     console.error("Error deleting users:", error);
-    // return res.status(500).json({ message: "Internal server error" });
     return NextResponse.json(
       { message: "Failed to delete users", error },
       { status: 500 }

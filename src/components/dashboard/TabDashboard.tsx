@@ -22,6 +22,7 @@ interface UserInfoProps {
 }
 
 interface User {
+  imgUrl: string | undefined;
   email: string;
   name: string;
   role: string;
@@ -41,8 +42,6 @@ const TabDashboard = ({ role, email, name, image, usersList }: UserInfoProps & S
   if (role === "admin") {
     return (
       <>
-        {/* <ScrollArea className="h-full w-full"> */}
-        {/* <div className="flex-1 space-y-4  p-4 md:p-8 pt-6"> */}
         <section className="w-full flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
             Hi, Welcome back 👋
@@ -238,9 +237,7 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
             <div key={user.email} className="w-full flex  items-center  gap-x-3 mb-8">
               <Avatar className="h-9 w-9">
                 <AvatarImage src={user?.imgUrl} alt="Avatar" />
-                <AvatarFallback>
-                  <CircleUserRound className="w-full h-full" />
-                </AvatarFallback>
+                <AvatarFallback>{user.name.slice(0, 2)}</AvatarFallback>
               </Avatar>
 
               <div className="flex flex-col w-full space-y-2">
