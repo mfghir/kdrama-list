@@ -18,7 +18,12 @@ export default async function Page({ params: { userId } }: PageProps) {
   ];
 
   await connectDB();
+
+
   const user = await User.findOne({ _id: userId });
+  
+
+
 
   return (
     <div className="flex-1 space-y-4">

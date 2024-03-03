@@ -1,34 +1,29 @@
 "use client"
 
-import * as z from "zod";
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-import { Trash } from "lucide-react";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
-import { Heading } from '@/utilities/heading'
-import { Separator } from '../ui/separator'
-
-
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
+
+import { Heading } from '@/utilities/heading'
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
-import Image from "next/image";
-
-
 
 
 const formSchema = z.object({
@@ -37,47 +32,36 @@ const formSchema = z.object({
   email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
-  password: z.string()
-    .min(8, { message: "pass must be at least 8 length." }),
+  // password: z.string()
+  //   .min(8, { message: "pass must be at least 8 length." }),
   role: z.string().default("user")
 });
 
 
 
 
-const TabUserEdit = ({ userId }: { userId: any }) => {
+const TabUserEdit = ({ userId }: any ) => {
   console.log(userId);
+  console.log("-====userId=>>>>>>>", typeof userId);
+
   const initialData = userId ? userId : null
   const router = useRouter();
-  const pathName = usePathname()
 
   const { toast } = useToast();
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [imgLoading, setImgLoading] = useState(false);
 
-  const title = pathName.includes('new') ? "Create user" : "Edit user"
-  const description = pathName.includes('new') ? "Add a new user" : "Edit a user."
-  const toastMessage = initialData ? "user created." : "user updated."
-  const action = pathName.includes('new') ? "Create" : "Save changes"
 
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
     imgUrl: "" || userId.imgUrl ,
-    password: "",
+    // password: "",
     role: "",
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
-    // : {
-    //   name: currentUser.name ,
-    //   email: currentUser.email,
-    //   imgUrl: [],
-    //   role: currentUser.role,
-    // }
   });
 
 
@@ -158,7 +142,7 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
   return (
     <>
       <div className="flex items-center justify-between ">
-        <Heading title={title} description={description} />
+        <Heading title="Edit user" description="Edit a user." />
       </div>
       {/* {initialData && (
         <Button
@@ -225,7 +209,7 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
               )}
             />
 
-            <FormField
+            {/* <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
@@ -237,7 +221,7 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
             <FormField
               control={form.control}
@@ -255,7 +239,7 @@ const TabUserEdit = ({ userId }: { userId: any }) => {
           </div>
 
           <Button disabled={loading} className="ml-auto" type="submit" >
-            {action}
+            {loading ? "Saving changes..." : "Save changes"}
           </Button>
         </form>
       </Form>

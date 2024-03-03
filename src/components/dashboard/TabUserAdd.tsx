@@ -1,14 +1,11 @@
-
 "use client"
 
-import * as z from "zod";
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import * as z from "zod";
 
 import { useForm } from "react-hook-form";
-import { usePathname, useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -18,15 +15,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Heading } from '@/utilities/heading'
-import { Separator } from '../ui/separator'
-
-
 import { useToast } from "../ui/use-toast";
+
+import { Heading } from '@/utilities/heading'
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
-
 
 
 
@@ -45,31 +40,17 @@ const formSchema = z.object({
 
 
 const TabUserAdd = () => {
-  //   console.log(userId);
   const initialData = null
   const router = useRouter();
-  const pathName = usePathname()
-
   const { toast } = useToast();
-  const [open, setOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
-  const [imgLoading, setImgLoading] = useState(false);
-
-  const title = pathName.includes('new') ? "Create user" : "Edit user"
-  const description = pathName.includes('new') ? "Add a new user" : "Edit a user."
-  const toastMessage = initialData ? "user created." : "user updated."
-  const action = pathName.includes('new') ? "Create" : "Save changes"
-
-
-
   const storedImgUrl = localStorage.getItem('imgUrl');
-  console.log(typeof (storedImgUrl));
 
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    // imgUrl: [],
-    imgUrl: storedImgUrl ? storedImgUrl : "https://utfs.io/f/f33acdb2-70ff-4fde-9a05-763beb20ec4f-8wans1.jpg" ,
+    imgUrl: storedImgUrl ? storedImgUrl : "https://utfs.io/f/f33acdb2-70ff-4fde-9a05-763beb20ec4f-8wans1.jpg",
     password: "",
     role: "",
   };
@@ -81,28 +62,27 @@ const TabUserAdd = () => {
 
 
   const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
-
     try {
       setLoading(true);
 
       if (!initialData) {
-        // console.log("initialData-=-=-=-=-", initialData);
-        await axios.post(`/api/users`, data);
+        // await axios.post(`/api/users`, data);
+        await axios.post(`/api/register`, data);
         localStorage.removeItem('imgUrl');
-
       } else {
         console.log("error ****");
       }
 
-      // await axios.post(`/api/users`, data);
-      // console.log("data ****", data);
-
       router.push(`/dashboard/users`);
       router.refresh();
 
+      // toast({
+      //   variant: "default",
+      //   title: "Success!",
+      //   description: "User was successfully added.",
+      // });
     } catch (error: any) {
       console.log("error-->", error);
-
     } finally {
       setLoading(false);
     }
@@ -112,20 +92,8 @@ const TabUserAdd = () => {
   return (
     <>
       <div className="flex items-center justify-between ">
-        <Heading title={title} description={description} />
+        <Heading title="Create user" description="Add a new user" />
       </div>
-      {/* 
-      {initialData && (
-        <Button
-          disabled={loading}
-          variant="destructive"
-          size="sm"
-          onClick={() => setOpen(true)}
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
-      )}
-      <Separator /> */}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">
@@ -203,7 +171,7 @@ const TabUserAdd = () => {
           </div>
 
           <Button disabled={loading} className="ml-auto" type="submit" >
-            {action}
+            {loading ? "Creating..." : "Create"}
           </Button>
         </form>
       </Form>

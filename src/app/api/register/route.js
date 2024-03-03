@@ -4,13 +4,14 @@ import bcrypt from "bcryptjs";
 
 import connectDB from "@/lib/connectDB";
 
-export async function POST(req) {
+export async function POST(req) { 
   try {
-    const { name, email, password } = await req.json();
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const { name, email, password } = await req.json();
+    const userData = await req.json();
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
 
     await connectDB();
-    await User.create({ name, email, password: hashedPassword });
+    await User.create({ ...userData, password: hashedPassword });
 
     return NextResponse.json({ message: "User registered." }, { status: 201 });
   } catch (error) {

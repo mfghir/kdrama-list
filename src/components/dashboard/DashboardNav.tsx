@@ -12,8 +12,7 @@ const DashboardNav = ({ setOpen, userInfo }: {
   userInfo: UserInfo
 }) => {
   const path = usePathname();
-  // console.log("userInfo userInfo", userInfo);
-
+  
   if (!navItems?.length) return null;
 
   return (

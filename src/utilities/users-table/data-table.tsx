@@ -163,7 +163,7 @@ export function DataTable<TData, TValue>({
           <ScrollBar orientation="horizontal" />
         </ScrollArea> */}
 
-      <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-hidden">
+      <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-x-hidden">
         <Table className="relative" >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
