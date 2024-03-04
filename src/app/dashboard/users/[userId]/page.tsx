@@ -11,18 +11,13 @@ interface PageProps {
 }
 
 export default async function Page({ params: { userId } }: PageProps) {
+  await connectDB();
+  const user = await User.findOne({ _id: userId });
 
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
     { title: "Edit", link: "/dashboard/users/edit" },
   ];
-
-  await connectDB();
-
-
-  const user = await User.findOne({ _id: userId });
-  
-
 
 
   return (

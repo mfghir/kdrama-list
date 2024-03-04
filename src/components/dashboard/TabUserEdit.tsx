@@ -54,7 +54,7 @@ const TabUserEdit = ({ userId }: any ) => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    imgUrl: "" || userId.imgUrl ,
+    imgUrl: "" || userId?.imgUrl ,
     // password: "",
     role: "",
   };

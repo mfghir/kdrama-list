@@ -12,6 +12,10 @@ export async function POST(req) {
     return NextResponse.json({ user });
   } catch (error) {
     console.log(error);
+    return NextResponse.json(
+      { message: "Failed to checking user", error },
+      { status: 500 }
+    );
   }
 }
 

@@ -1,17 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useToast } from "@/components/ui/use-toast";
 
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
+
 import { UploadDropzone } from "@uploadthing/react";
 import { UploadFileResponse } from "uploadthing/client";
 
 import { OurFileRouter } from "@/app/api/uploadthing/core";
-import { useEffect, useState } from "react";
 import { onDeleteFile } from "@/lib/uploadthing";
-import { useRouter } from "next/navigation";
 
 
 
@@ -60,11 +61,9 @@ export default function FileUpload({
   const onUpdateFile = (newFiles: any) => {
     const fileUrl = newFiles?.map((file: { url: any; }) => file.url)
     value = fileUrl[0]
-    // console.log('value=======>>', value);
 
     setImgUrl(fileUrl[0]);
     setImgDelete(newFiles[0].key)
-    // onChange(fileUrl[0]);
 
     onChange(value);
     // onChange({value:fileUrl[0]});
@@ -92,7 +91,6 @@ export default function FileUpload({
                 <Button
                   type="button"
                   onClick={deleteHandler}
-                  // onClick={() => onDeleteFile(imgDelete, imgUrl)}
                   variant="destructive"
                   size="sm"
                 >

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import axios from 'axios'
 import { Button } from '../ui/button'
-import { Trash } from 'lucide-react'
+import { Pencil, Trash, X } from 'lucide-react'
 
 import { UserInfo } from '@/lib/data'
 import { AlertModal } from '@/utilities/alert-modal'
@@ -14,12 +14,16 @@ import { signOut } from 'next-auth/react'
 import { toast } from '../ui/use-toast'
 import { Input } from '../ui/input'
 import NewPass from '@/utilities/new-pass'
+import EditProfile from './edit-profile'
+import Link from 'next/link'
 
 
 const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
- 
+
+  const [editOpen, setEditOpen] = useState(false);
+
   const router = useRouter();
 
 
@@ -55,27 +59,42 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       />
 
       <section className="h-full flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
-        <Image src={userInfo.imgUrl || "user pic"} alt="user" width={120} height={120} className='rounded-full' />
+        {editOpen ?
+          <>
+            <EditProfile setEditOpen={setEditOpen} />
+          </>
+          :
+          <>
+            <div className="flex justify-between items-center">
+              <Image src={userInfo?.imgUrl} alt="user" width={120} height={120} className='rounded-full' />
 
-        <div className='space-y-3 my-3'>
-          <p>
-            Role: <span className="font-bold">{userInfo.role}</span>
-          </p>
-          <p>
-            Name: <span className="font-bold">{userInfo.name}</span>
-          </p>
-          <p>
-            Email: <span className="font-bold">{userInfo.email}</span>
-          </p>
-          <p>
-              <NewPass userInfo={userInfo} />
-          </p>
-        </div>
+              <Link href="/dashboard/profile/edit-profile">
+              <Pencil className='hover:text-gray-600 transition' onClick={() => setEditOpen(!editOpen)} />
+              </Link>
+            </div>
 
-        <Button variant='destructive' onClick={() => setOpen(true)}>
-          <Trash className="mr-2 h-4 w-4" />
-          Delete Account
-        </Button>
+            <div className='space-y-3 my-3'>
+              <p>
+                Role: <span className="font-bold">{userInfo.role}</span>
+              </p>
+              <p>
+                Name: <span className="font-bold">{userInfo.name}</span>
+              </p>
+              <p>
+                Email: <span className="font-bold">{userInfo.email}</span>
+              </p>
+              {/* <p>
+                <NewPass userInfo={userInfo} />
+              </p> */}
+            </div>
+
+            <Button variant='destructive' onClick={() => setOpen(true)}>
+              <Trash className="mr-2 h-4 w-4" />
+              Delete Account
+            </Button>
+          </>
+        }
+
       </section>
     </>
 

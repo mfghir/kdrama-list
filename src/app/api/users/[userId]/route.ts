@@ -1,20 +1,22 @@
+import { NextResponse } from "next/server";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
-import { NextResponse } from "next/server";
 
-export async function GET(request: any, { params: { id } }: any) {
-  try {
-    await connectDB();
-    const course = await User.findOne({ _id: id });
+import  bcrypt  from 'bcryptjs';
 
-    return NextResponse.json({ message: "Ok", data: course }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Failed to fetch Users", error },
-      { status: 500 }
-    );
-  }
-}
+// export async function GET(request: any, { params: { id } }: any) {
+//   try {
+//     await connectDB();
+//     const course = await User.findOne({ _id: id });
+
+//     return NextResponse.json({ message: "Ok", data: course }, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json(
+//       { message: "Failed to fetch Users", error },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 export async function POST(request: any) {
   try {
@@ -25,12 +27,12 @@ export async function POST(request: any) {
     await User.create(userData);
 
     return NextResponse.json(
-      { message: "user created successfully", data: userData },
+      { message: "user added successfully", data: userData },
       { status: 201 }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed to Create a Course", error },
+      { message: "Failed to add a user", error },
       { status: 500 }
     );
   }
@@ -39,10 +41,35 @@ export async function POST(request: any) {
 export async function PATCH(request: any, context: any) {
   try {
     const userData = await request?.json();
-    console.log("test*********" , userData);
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    // delete userData.password;
+    // userData.password = hashedPassword
+    console.log("hashedPassword----",hashedPassword);
+    console.log("context----",context);
+   
+
+
+    // if (!context.params.userId) throw new Error('No user ID provided');
+    // const updatedUser = await User.updateOne(
+    //   { _id: context.params.userId },
+    //   { $set: userData }
+    // ).exec()
+    console.log("userData----",userData);
+
 
     await connectDB();
-    await User.findByIdAndUpdate(context.params.userId, userData);
+    await User.findByIdAndUpdate(context.params.userId, {...userData, password: hashedPassword});
+    // await User.create({ ...userData, password: hashedPassword });
+    
+    // if (!context.params.userId) throw new Error('No ID Provided');
+    // const updatedUser = await User.updateOne(
+    //   { _id: context.params.userId },
+    //   { $set: userData }
+    // ).exec()
+
+    // if(!updatedUser) throw new Error(`User not found with id ${context.params.userId}`);
+
+
 
     return NextResponse.json(
       { message: "user Updated successfully", data: userData },
@@ -50,7 +77,7 @@ export async function PATCH(request: any, context: any) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed to Create a Course", error },
+      { message: "Failed to Updated a User", error },
       { status: 500 }
     );
   }
