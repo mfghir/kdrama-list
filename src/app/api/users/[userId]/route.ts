@@ -42,34 +42,10 @@ export async function PATCH(request: any, context: any) {
   try {
     const userData = await request?.json();
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    // delete userData.password;
-    // userData.password = hashedPassword
-    console.log("hashedPassword----",hashedPassword);
-    console.log("context----",context);
-   
-
-
-    // if (!context.params.userId) throw new Error('No user ID provided');
-    // const updatedUser = await User.updateOne(
-    //   { _id: context.params.userId },
-    //   { $set: userData }
-    // ).exec()
-    console.log("userData----",userData);
-
-
+ 
+    userData.password = hashedPassword
     await connectDB();
-    await User.findByIdAndUpdate(context.params.userId, {...userData, password: hashedPassword});
-    // await User.create({ ...userData, password: hashedPassword });
-    
-    // if (!context.params.userId) throw new Error('No ID Provided');
-    // const updatedUser = await User.updateOne(
-    //   { _id: context.params.userId },
-    //   { $set: userData }
-    // ).exec()
-
-    // if(!updatedUser) throw new Error(`User not found with id ${context.params.userId}`);
-
-
+    await User.findByIdAndUpdate(context.params.userId, userData);
 
     return NextResponse.json(
       { message: "user Updated successfully", data: userData },

@@ -8,8 +8,6 @@ import connectDB from "@/lib/connectDB";
 
 import { NextAuthOptions } from "next-auth";
 
-
-
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -24,13 +22,13 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {},
 
-      async authorize(credentials: { email: string; password: string; }) {
-        const { email, password  } = credentials;
+      async authorize(credentials: { email: string; password: string }) {
+        const { email, password } = credentials;
 
         try {
           await connectDB();
           const user = await User.findOne({ email });
-          console.log("user---->",user);
+          console.log("user---->", user);
 
           if (!user) {
             return null;
@@ -42,7 +40,6 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
-        
           // return user;
           return {
             id: user.id,
@@ -51,20 +48,17 @@ export const authOptions: NextAuthOptions = {
             role: user.role,
             imgUrl: user.imgUrl,
           };
-
         } catch (error) {
           console.log("Error: ", error);
         }
       },
     }),
   ],
-  
 
   secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/dashboard",
   },
-  
 };
 
 const handler = NextAuth(authOptions);

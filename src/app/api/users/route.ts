@@ -40,10 +40,10 @@ import User from "@/models/user";
 
 // ------------------------------------------------------delete list of users 👇---------------
 
-export async function DELETE(req: any) {
+export async function DELETE(request: any) {
   try {
     await connectDB();
-    const ids = req.nextUrl.searchParams.getAll("ids[]");
+    const ids = request.nextUrl.searchParams.getAll("ids[]");
     await User.deleteMany({ _id: { $in: ids } });
 
     return NextResponse.json(

@@ -22,18 +22,14 @@ export const metadata: Metadata = {
   description: 'list of kdrama series',
 }
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = cookies();
   const currentTheme = cookieStore.get("currentTheme")?.value || "default";
 
   const session = await getServerSession(authOptions);
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });
-  console.log("user====",user);
+  console.log("layout user====", user);
 
   return (
     <html lang="en" className={currentTheme}>
@@ -47,14 +43,14 @@ export default async function RootLayout({
           <SessionProviderComp>
             <Provider>
               {/* <main className="min-h-screen   "> */}
-                {/* <main className="grid place-items-start w-fill min-h-screen my-8 overflow-hidden"> */}
+              {/* <main className="grid place-items-start w-fill min-h-screen my-8 overflow-hidden"> */}
 
-                <Navbar userInfo={user} />
-                {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
-                {children}
-                {/* </div> */}
+              <Navbar userInfo={user} />
+              {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
+              {children}
+              {/* </div> */}
               {/* </main> */}
-              
+
             </Provider>
           </SessionProviderComp>
         </ThemeProvider>
