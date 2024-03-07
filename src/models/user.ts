@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
     },
     imgUrl: {
       type: String,
-      required: false,
+      default: "https://utfs.io/f/f33acdb2-70ff-4fde-9a05-763beb20ec4f-8wans1.jpg",
     },
   },
   { timestamps: true }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -11,9 +11,8 @@ import { Pencil, Trash, X } from 'lucide-react'
 import { UserInfo } from '@/lib/data'
 import { AlertModal } from '@/utilities/alert-modal'
 import { signOut } from 'next-auth/react'
+
 import { toast } from '../ui/use-toast'
-import { Input } from '../ui/input'
-import NewPass from '@/utilities/new-pass'
 import EditProfile from './edit-profile'
 import Link from 'next/link'
 
@@ -23,8 +22,16 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
   const [open, setOpen] = useState(false);
 
   const [editOpen, setEditOpen] = useState(false);
-
+  const [userInfoData, setUserInfoData] = useState(userInfo);
   const router = useRouter();
+
+  useEffect(() => {
+    setUserInfoData(userInfo);
+  }, [userInfo]);
+
+  const handleProfileUpdate = (updatedUserInfo) => {
+    setUserInfoData(updatedUserInfo);
+  };
 
 
   const onConfirm = async () => {
@@ -61,7 +68,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       <section className="h-full flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
         {editOpen ?
           <>
-            <EditProfile setEditOpen={setEditOpen} />
+            <EditProfile userInfoData={userInfoData}  handleProfileUpdate={handleProfileUpdate} />
           </>
           :
           <>
@@ -69,7 +76,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
               <Image src={userInfo?.imgUrl} alt="user" width={120} height={120} className='rounded-full' />
 
               <Link href="/dashboard/profile/edit-profile">
-              <Pencil className='hover:text-gray-600 transition' onClick={() => setEditOpen(!editOpen)} />
+                <Pencil className='hover:text-gray-600 transition' onClick={() => setEditOpen(!editOpen)} />
               </Link>
             </div>
 

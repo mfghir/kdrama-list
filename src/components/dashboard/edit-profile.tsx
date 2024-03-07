@@ -56,8 +56,7 @@ const formSchema = z.object({
 
 
 
-
-const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
+const EditProfile = ({ userInfo, handleProfileUpdate }: { userInfo: UserInfo, handleProfileUpdate: (updatedUserInfo: UserInfo) => void }) => {
   console.log("-====userInfo=>>>>>>>", userInfo);
   // console.log("-====userInfo id=>>>>>>>", userInfo._id);
 
@@ -72,7 +71,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       name: "",
       email: "",
       imgUrl: "" || userInfo?.imgUrl,
-      password: "",
+      password: ""  ,
       // role: "",
     }
   });
@@ -96,7 +95,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       // 	console.log("product", res);
       // }
 
-
+      handleProfileUpdate(data);
       router.refresh();
       router.push(`/dashboard/profile`);
 
