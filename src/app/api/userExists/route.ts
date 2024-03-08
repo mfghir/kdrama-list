@@ -2,18 +2,43 @@ import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 
-export async function POST(req:any) {
+export async function POST(req: any) {
   try {
     await connectDB();
-    // const { email } = await req.json();
-    // const user = await User.findOne({ email }).select("_id");
+    const { email } = await req.json();
+    const user = await User.findOne({ email }).select("_id");
 
-    
-    const test = await req.json();
-    console.log("test: ", test);
-    const user = await User.findOne({ _id: test._id }).select("_id");
-    console.log("user: ", user);
-    
+    // if (!user) {
+    //   // User with the provided email does not exist
+    //   return NextResponse.json(
+    //     { message: "Invalid credentials" },
+    //     { status: 401 }
+    //   );
+    // }
+
+    // // Check if the user is logged in based on their lastLoggedIn timestamp
+    // const isLoggedIn = user.lastLoggedIn !== null;
+    // console.log("isLoggedIn", isLoggedIn);
+
+    // if (isLoggedIn) {
+    //   // User is already logged in
+    //   return NextResponse.json(
+    //     { message: "User is already logged in" },
+    //     { status: 200 }
+    //   );
+    // }
+
+    // // Perform the necessary login operations here
+    // // For example, you can update the user's lastLoggedIn field to the current timestamp
+    // user.lastLoggedIn = new Date();
+    // await user.save();
+
+    // // Return a success message or any other desired response
+    // return NextResponse.json(
+    //   { message: "User logged in successfully" },
+    //   { status: 200 }
+    // );
+
     return NextResponse.json({ user });
   } catch (error) {
     console.log(error);
@@ -23,6 +48,3 @@ export async function POST(req:any) {
     );
   }
 }
-
-
-

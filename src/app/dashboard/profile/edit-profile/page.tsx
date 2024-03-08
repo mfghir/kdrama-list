@@ -8,7 +8,6 @@ import { getServerSession } from 'next-auth';
 
 
 const Page = async() => {
-
   const session = await getServerSession(authOptions);
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });

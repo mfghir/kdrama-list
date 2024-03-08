@@ -1,7 +1,6 @@
 "use client";
 
-
-import { Calendar, CircleUserRound, Clock, Popcorn, Slice, Smile, Sparkles } from "lucide-react"
+import { Calendar, Clock, Popcorn, Slice, Smile, Sparkles } from "lucide-react"
 import { useKdramasData } from "@/lib/queries";
 import Overview from "./Overview";
 
@@ -10,15 +9,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ScrollArea } from "../ui/scroll-area";
 
 import { Button } from "../ui/button";
-import { Notification, userNotifs } from "@/lib/data";
+import { UserInfo, userNotifs } from "@/lib/data";
 import { User } from "@/utilities/users-table/columns";
+import { ReactElement, JSXElementConstructor, ReactNode, PromiseLikeOfReactNode, Key, ReactPortal } from "react";
 
 
 
-const TabDashboard = ({ role, usersList }:{
+const TabDashboard = ({ role, usersList }: {
   role: string;
   usersList?: User[];
-})=> {
+}) => {
   const { data: serverData } = useKdramasData()
 
 
@@ -190,8 +190,10 @@ const SecTwo = ({ serverData }: any) => {
 
 
 
-const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
-  const filteredUsers = usersList?.filter((user) => user.role === "user");
+const SecThree = ({ usersList }: {
+  usersList: any
+}): JSX.Element => {
+  const filteredUsers = usersList?.filter((user:UserInfo) => user.role === "user");
 
   return (
     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7 min-h-[430px]">
@@ -216,7 +218,7 @@ const SecThree = ({ usersList }: SecThreeProps): JSX.Element => {
         </CardHeader>
 
         <CardContent>
-          {filteredUsers?.map((user) => (
+          {filteredUsers?.map((user: UserInfo ) => (
             <div key={user.email} className="w-full flex  items-center  gap-x-3 mb-8">
               <Avatar className="h-9 w-9">
                 <AvatarImage src={user?.imgUrl} alt="Avatar" />

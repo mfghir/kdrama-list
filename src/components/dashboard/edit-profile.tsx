@@ -37,8 +37,9 @@ const formSchema = z.object({
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
   password: z.string()
-    .min(8, { message: "pass must be at least 8 length." }),
-  // role: z.string().default("user")
+    .min(8, { message: "pass must be at least 8 length." })
+    .optional(),
+  role: z.string().default("user")
 });
 
 
@@ -56,10 +57,7 @@ const formSchema = z.object({
 
 
 
-const EditProfile = ({ userInfo, handleProfileUpdate }: { userInfo: UserInfo, handleProfileUpdate: (updatedUserInfo: UserInfo) => void }) => {
-  console.log("-====userInfo=>>>>>>>", userInfo);
-  // console.log("-====userInfo id=>>>>>>>", userInfo._id);
-
+const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -68,10 +66,11 @@ const EditProfile = ({ userInfo, handleProfileUpdate }: { userInfo: UserInfo, ha
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
+      name: "" || userInfo?.name,
+      email: "" || userInfo?.email,
       imgUrl: "" || userInfo?.imgUrl,
-      password: ""  ,
+      // password: ""
+      // password: ""|| userInfo?.password
       // role: "",
     }
   });
@@ -79,35 +78,42 @@ const EditProfile = ({ userInfo, handleProfileUpdate }: { userInfo: UserInfo, ha
 
   const onSubmit = async (data: z.infer<typeof formSchema>): Promise<void> => {
     console.log("data edit", data);
+
     try {
       setLoading(true);
-      // if (initialData) {
-      await axios.patch(`/api/users/${userInfo._id}`, data);
+
+      // Create a new object to hold the data to be sent to the server
+      const newData: any = {
+        name: data.name,
+        email: data.email,
+        imgUrl: data.imgUrl,
+        password: data?.password,
+
+      };
+
+      // Only include the password field if a new password is provided
+      if (data.password) {
+        newData.password = data.password;
+      } else {
+        // If no new password is provided, include the existing hashed password
+        newData.password = userInfo.password;
+      }
+
+      await axios.patch(`/api/users/${userInfo._id}`, newData);
       localStorage.removeItem('imgUrl');
-      // toast({
-      //   title: "Success!",
-      //   description: "User has been edited.",
-      // });
 
-      // } else {
-      // 	// await axios.post(`/api/users`, data);
-      // 	const res = await axios.post(`/api/users`, data);
-      // 	console.log("product", res);
-      // }
-
-      handleProfileUpdate(data);
       router.refresh();
       router.push(`/dashboard/profile`);
+      router.refresh();
 
-      // toast({
-      //   variant: "destructive",
-      //   title: "Uh oh! Something went wrong.",
-      //   description: "There was a problem with your request.",
-      // });
+      toast({
+        title: "Success!",
+        description: "User has been edited.",
+      });
 
     } catch (error: any) {
       console.log("error-->", error);
-      console.error(error.response);
+      
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",

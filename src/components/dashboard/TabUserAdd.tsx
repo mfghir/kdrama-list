@@ -50,7 +50,7 @@ const TabUserAdd = () => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    imgUrl: storedImgUrl ? storedImgUrl : "https://utfs.io/f/f33acdb2-70ff-4fde-9a05-763beb20ec4f-8wans1.jpg",
+    imgUrl: storedImgUrl ? storedImgUrl : "https://i.postimg.cc/rpN1DtvM/uer-pic.jpg",
     password: "",
     role: "",
   };

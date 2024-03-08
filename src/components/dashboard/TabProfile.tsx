@@ -25,14 +25,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
   const [userInfoData, setUserInfoData] = useState(userInfo);
   const router = useRouter();
 
-  useEffect(() => {
-    setUserInfoData(userInfo);
-  }, [userInfo]);
-
-  const handleProfileUpdate = (updatedUserInfo) => {
-    setUserInfoData(updatedUserInfo);
-  };
-
+ 
 
   const onConfirm = async () => {
     try {
@@ -68,7 +61,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       <section className="h-full flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
         {editOpen ?
           <>
-            <EditProfile userInfoData={userInfoData}  handleProfileUpdate={handleProfileUpdate} />
+            <EditProfile userInfo={userInfo}  />
           </>
           :
           <>
@@ -90,9 +83,6 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
               <p>
                 Email: <span className="font-bold">{userInfo.email}</span>
               </p>
-              {/* <p>
-                <NewPass userInfo={userInfo} />
-              </p> */}
             </div>
 
             <Button variant='destructive' onClick={() => setOpen(true)}>

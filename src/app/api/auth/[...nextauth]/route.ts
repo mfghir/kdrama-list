@@ -30,6 +30,10 @@ export const authOptions: NextAuthOptions = {
           const user = await User.findOne({ email });
           console.log("user---->", user);
 
+          // const objectId = await User.findOne({ email }).select("_id");
+          // const idString = objectId._id.valueOf();
+          // console.log("objectId---->",idString); 
+
           if (!user) return null;
 
           const passwordsMatch = await bcrypt.compare(password, user.password);

@@ -41,8 +41,8 @@ const formSchema = z.object({
 
 
 const TabUserEdit = ({ userId }: any ) => {
-  console.log(userId);
-  console.log("-====userId=>>>>>>>", typeof userId);
+  // console.log(userId);
+  // console.log("-====userId=>>>>>>>", typeof userId);
 
   const initialData = userId ? userId : null
   const router = useRouter();

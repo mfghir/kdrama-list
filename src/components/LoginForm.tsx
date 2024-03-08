@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import GoogleButton from "../utilities/GoogleButton";
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -20,9 +20,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import GoogleButton from "../utilities/GoogleButton";
+import axios from "axios";
 
 const formSchema = z.object({
   email: z.string()
@@ -47,8 +48,8 @@ export default function LoginForm() {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
     try {
       const res = await signIn("credentials", {
         email: values.email,
@@ -57,12 +58,19 @@ export default function LoginForm() {
         redirect: false,
       });
 
+      // const res = await axios.post("/api/userExists", {
+      //   email: values.email,
+      //   password: values.password,
+      // }
+      // );
+
+
       if (res?.error) {
         setError("Invalid Credentials");
         return;
       }
 
-      router.replace("dashboard");
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
     }
