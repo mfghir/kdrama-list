@@ -99,6 +99,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
         newData.password = userInfo.password;
       }
 
+      console.log("newData===>",newData);
       await axios.patch(`/api/users/${userInfo._id}`, newData);
       localStorage.removeItem('imgUrl');
 

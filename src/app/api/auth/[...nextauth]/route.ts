@@ -12,6 +12,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -20,19 +21,26 @@ export const authOptions: NextAuthOptions = {
 
     CredentialsProvider({
       name: "credentials",
-      credentials: {},
+      // credentials: {},
 
-      async authorize(credentials: { email: string; password: string }) {
-        const { email, password } = credentials;
+      async authorize(credentials: {
+        csrfToken: string;
+        email: string;
+        password: string;
+      }) {
+        const { csrfToken, email, password } = credentials;
+        console.log("credentials *****", credentials);
+        console.log("credentials csrfToken ********", credentials.csrfToken);
 
         try {
           await connectDB();
           const user = await User.findOne({ email });
-          console.log("user---->", user);
+          console.log("user auth---->", user);
 
-          // const objectId = await User.findOne({ email }).select("_id");
-          // const idString = objectId._id.valueOf();
-          // console.log("objectId---->",idString); 
+          const objectId = await User.findOne({ email }).select("_id");
+          const idString = objectId._id.valueOf();
+          console.log("objectId ****---->", idString);
+
 
           if (!user) return null;
 
@@ -40,14 +48,14 @@ export const authOptions: NextAuthOptions = {
 
           if (!passwordsMatch) return null;
 
-          // return user;
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            imgUrl: user.imgUrl,
-          };
+          return user;
+          // return {
+          //   id: user.id,
+          //   name: user.name,
+          //   email: user.email,
+          //   role: user.role,
+          //   imgUrl: user.imgUrl,
+          // };
         } catch (error) {
           console.log("Error: ", error);
         }

@@ -23,15 +23,16 @@ import * as z from "zod"
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+
 import axios from "axios";
+import { useToast } from "./ui/use-toast";
 
 const formSchema = z.object({
   email: z.string()
-    .min(5, { message: "This field has to be filled." })
-    .email("This is not a valid email."),
-  password: z.string().min(8, {
-    message: "pass must be at least 8 length.",
-  }),
+    .email("This is not a valid email.")
+    .min(5, { message: "This field has to be filled." }),
+  password: z.string()
+    .min(8, { message: "pass must be at least 8 length." }),
 })
 
 
@@ -39,6 +40,7 @@ const formSchema = z.object({
 export default function LoginForm() {
   const [error, setError] = useState("");
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,7 +59,7 @@ export default function LoginForm() {
 
         redirect: false,
       });
-
+      console.log("res login", res);
       // const res = await axios.post("/api/userExists", {
       //   email: values.email,
       //   password: values.password,
@@ -66,13 +68,20 @@ export default function LoginForm() {
 
 
       if (res?.error) {
+        // if (res?.data.error) {
         setError("Invalid Credentials");
         return;
       }
 
       router.push("/dashboard");
     } catch (error) {
-      console.log(error);
+      console.log("error===>", error);
+
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
     }
   }
 

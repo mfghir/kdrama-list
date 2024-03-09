@@ -28,8 +28,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   const session = await getServerSession(authOptions);
   await connectDB()
+
   const user = await User.findOne({ email: session?.user?.email });
+  // const userTest = await User.findOne({ id: session?.user?.id });
   console.log("layout user====", user);
+  // console.log("layout userTest====", userTest);
 
   return (
     <html lang="en" className={currentTheme}>
