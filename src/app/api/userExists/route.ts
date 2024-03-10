@@ -9,6 +9,8 @@ export async function POST(req: any) {
     const { email } = await req.json();
     const user = await User.findOne({ email })
     const userr = await User.findOne({ email }).select("_id");
+    console.log("userr exist ****",userr);
+    
 
     if (!user) {
       // User with the provided email does not exist
