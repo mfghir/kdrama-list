@@ -1,4 +1,4 @@
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/route.";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -20,7 +20,7 @@ const Dashboard = async () => {
   return (
     <TabDashboard
       role={user.role}
-      usersList={usersList}  />
+      usersList={usersList} />
   )
 }
 

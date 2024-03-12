@@ -2,7 +2,7 @@ import Sidebar from "@/components/dashboard/Sidebar"
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/route.";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 
