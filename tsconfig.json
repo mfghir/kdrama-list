@@ -36,7 +36,7 @@
     "src/app/register/page.tsx",
     "src/components/dashboard/TabUsers.tsx",
     "src/app/api/userExists/route.ts",
-    "src/app/api/auth/[...nextauth]/route..js"
+    "src/app/api/auth/[...nextauth]/route.js"
   ],
   "exclude": [
     "node_modules"

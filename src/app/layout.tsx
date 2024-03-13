@@ -10,7 +10,7 @@ import Navbar from '@/components/Navbar'
 import { cookies } from "next/headers";
 import { getServerSession } from 'next-auth'
 
-import { authOptions } from './api/auth/[...nextauth]/route.'
+import { authOptions } from './api/auth/[...nextauth]/route'
 import connectDB from '@/lib/connectDB'
 import User from '@/models/user'
 
