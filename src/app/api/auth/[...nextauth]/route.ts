@@ -8,30 +8,28 @@ import connectDB from "@/lib/connectDB";
 
 import { NextAuthOptions } from "next-auth";
 
-export const authOptions = {
-  // export const authOptions: NextAuthOptions = {
+//  const authOptions = {
+  export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
   
   providers: [
     GoogleProvider({
-      // clientId: process.env.GOOGLE_CLIENT_ID as string,
-      // clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      clientId: process.env.GOOGLE_CLIENT_ID ,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
 
     CredentialsProvider({
       name: "credentials",
       // credentials: {},
 
-      // async authorize(credentials: {
-      //   csrfToken: string;
-      //   email: string;
-      //   password: string;
-      // }) {
-        async authorize(credentials) {
+      async authorize(credentials: {
+        csrfToken: string;
+        email: string;
+        password: string;
+      }) {
+        // async authorize(credentials) {
         const { csrfToken, email, password } = credentials;
         console.log("credentials *****", credentials);
         console.log("credentials csrfToken ********", credentials.csrfToken);

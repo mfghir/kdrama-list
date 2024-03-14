@@ -1,28 +1,29 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 
 import connectDB from "@/lib/connectDB";
 import KDramaModel from "@/models/kdrama";
+import { NextApiRequest, NextApiResponse } from "next";
 
 
-export async function GET(request: any) {
-  try {
-    await connectDB();
-    const kdramaList = await KDramaModel.find();
+// export async function GET() {
+//   try {
+//     await connectDB();
+//     const kdramaList = await KDramaModel.find();
 
-    return NextResponse.json({ message: "Ok", data: kdramaList }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Failed to fetch Courses", error },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json({ message: "Ok", data: kdramaList }, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json(
+//       { message: "Failed to fetch Courses", error },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 
-export async function POST(req:any, res:any) { 
+export async function POST(req:any, res:NextApiResponse) { 
   try {
     const kdramaData = await req.json();
+    console.log("kdramaData ********",kdramaData);
     await connectDB();
     await KDramaModel.create(kdramaData);
 
@@ -32,7 +33,7 @@ export async function POST(req:any, res:any) {
     // const savedKDarama = await kdrama.save();
     // res.status(201).json(savedKDarama);
 
-    return NextResponse.json({ message: "drama has added." }, { status: 201 });
+    // return NextResponse.json({ message: "drama has added." }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { message: "An error occurred while adding the kdrama." },

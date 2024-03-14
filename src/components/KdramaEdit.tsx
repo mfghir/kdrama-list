@@ -59,14 +59,6 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    // const data = Object.fromEntries(formData);
-
-    // if (typeof title !== "string" || typeof description !== "string") return;
-    // addTask(title, description);
-
-    // console.log("edit--->", data);
-    // console.log("row.original.id--->", row.original.id);
-    // mutate({ id: row.original.id, ...data });
 
     const editedData = Object.fromEntries(formData);
     const updatedData = {
@@ -75,8 +67,6 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
       input: inputValue, // Use the preserved input value
     };
 
-    console.log("updatedData--->", updatedData);
-    console.log("row.original.id--->", row.original.id);
 
     mutate({ id: row.original.id, ...updatedData });
     toast({ title: "Successfully edited ! ✔" })

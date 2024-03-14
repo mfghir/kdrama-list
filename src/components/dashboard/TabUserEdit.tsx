@@ -80,8 +80,7 @@ const TabUserEdit = ({ userId }: any ) => {
         const res = await axios.post(`/api/users`, data);
         console.log("product", res);
       }
-
-
+      
       router.refresh();
       router.push(`/dashboard/users`);
       router.refresh();

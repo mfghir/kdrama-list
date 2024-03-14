@@ -69,8 +69,9 @@ const useAddDrama = () => {
 
   const addDrama = async (data: unknown) => {
     await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama`, data);
+    // await axios.post(`/api/kdrama`, data);
+
     console.log("data data data====",data);
-    // await axios.post(`api/kdrama`, data);
   };
 
   return useMutation(addDrama, {

@@ -35,7 +35,7 @@ type SelectOptions = {
 };
 
 
-export default function KdramaAdd() {
+const KdramaAdd = () => {
   const { mutate } = useAddDrama()
   const { toast } = useToast()
   const [value, setValue] = useState<SelectOptions>({
@@ -44,23 +44,34 @@ export default function KdramaAdd() {
     genres: ""
   });
 
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
-    console.log("data drama form",data);
+    console.log("data drama form", data);
+    // mutate(data);
 
-    // if (typeof title !== "string" || typeof description !== "string") return;
-    // if (typeof title !== "string") return;
-    // addTask(title, description);
-    
+    // await fetch("/api/kdrama", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) throw new Error("Could not register user.")
+    //     return res.json()
+    //   })
+    //   .then((data) => {console.log(data) })
+    //   .catch((err) => console.log(err.message));
+
+
+
     await axios.post(`/api/kdrama`, data);
-    mutate(data);
     toast({ title: "Successfully Added ✔" })
   };
+
 
   // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
@@ -113,19 +124,10 @@ export default function KdramaAdd() {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Input
-              id="status"
-              name="status"
-              placeholder="Status..."
-              className="col-span-4"
-            /> */}
-
             <Select
               name="status"
               value={value.statuses}
-              onValueChange={
-                (val) => setValue({ ...value, statuses: val })
-              }
+              onValueChange={(val) => setValue({ ...value, statuses: val })}
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a status" />
@@ -141,12 +143,6 @@ export default function KdramaAdd() {
             </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Input
-              id="label"
-              name="label"
-              placeholder="Label..."
-              className="col-span-4"
-            /> */}
             <Select
               name="label"
               value={value.labels}
@@ -167,13 +163,6 @@ export default function KdramaAdd() {
             </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Input
-              id="priority"
-              name="priority"
-              placeholder="Priority..."
-              className="col-span-4"
-            /> */}
-
             <Select
               name="genre"
               value={value.genres}
@@ -206,3 +195,6 @@ export default function KdramaAdd() {
     </Dialog>
   );
 }
+
+
+export default KdramaAdd 
