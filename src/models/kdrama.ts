@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
-const kdramaSchema = new mongoose.Schema(
+const KDramaSchema = new mongoose.Schema(
   {
-    id: {
-      type: String,
-      required: true,
-    },
     title: {
       type: String,
       required: true,
@@ -27,6 +23,6 @@ const kdramaSchema = new mongoose.Schema(
 );
 
 const KDramaModel =
-  mongoose.models.KDramaModel || mongoose.model("Kdrama", kdramaSchema);
+  mongoose.models.KDramaModel || mongoose.model("KDramaModel", KDramaSchema);
 
 export default KDramaModel;
