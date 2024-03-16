@@ -6,7 +6,7 @@ import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
 
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, RequestInternal } from "next-auth";
 
 //  const authOptions = {
   export const authOptions: NextAuthOptions = {
@@ -22,26 +22,26 @@ import { NextAuthOptions } from "next-auth";
 
     CredentialsProvider({
       name: "credentials",
-      // credentials: {},
+      credentials: {},
 
-      async authorize(credentials: {
-        csrfToken: string;
-        email: string;
-        password: string;
-      }) {
-        // async authorize(credentials) {
-        const { csrfToken, email, password } = credentials;
-        console.log("credentials *****", credentials);
-        console.log("credentials csrfToken ********", credentials.csrfToken);
+      // async authorize(credentials: { email: string;password: string}) {
+    async authorize(credentials: Record<string, string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
+     if (!credentials) {
+        return null;
+      }
+
+        const { email, password } = credentials;
+        // console.log("credentials *****", credentials);
+        // console.log("credentials csrfToken ********", credentials.csrfToken);
 
         try {
           await connectDB();
           const user = await User.findOne({ email });
-          console.log("user auth---->", user);
+          // console.log("user auth---->", user);
 
-          const objectId = await User.findOne({ email }).select("_id");
-          const idString = objectId._id.valueOf();
-          console.log("objectId ****---->", idString);
+          // const objectId = await User.findOne({ email }).select("_id");
+          // const idString = objectId._id.valueOf();
+          // console.log("objectId ****---->", idString);
 
 
           if (!user) return null;
@@ -59,7 +59,8 @@ import { NextAuthOptions } from "next-auth";
           //   imgUrl: user.imgUrl,
           // };
         } catch (error) {
-          console.log("Error: ", error);
+          console.log("Error during authentication: ", error);
+           return null;
         }
       },
     }),
