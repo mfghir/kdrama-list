@@ -6,14 +6,14 @@ import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
 
-import { NextAuthOptions, RequestInternal } from "next-auth";
+import { AuthOptions, NextAuthOptions } from "next-auth";
 
 //  const authOptions = {
-  export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -24,11 +24,11 @@ import { NextAuthOptions, RequestInternal } from "next-auth";
       name: "credentials",
       credentials: {},
 
-      // async authorize(credentials: { email: string;password: string}) {
-    async authorize(credentials: Record<string, string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
-     if (!credentials) {
-        return null;
-      }
+      async authorize(credentials: any) {
+        // async authorize(credentials: Record<string, string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
+        if (!credentials) {
+          return null;
+        }
 
         const { email, password } = credentials;
         // console.log("credentials *****", credentials);
@@ -42,7 +42,6 @@ import { NextAuthOptions, RequestInternal } from "next-auth";
           // const objectId = await User.findOne({ email }).select("_id");
           // const idString = objectId._id.valueOf();
           // console.log("objectId ****---->", idString);
-
 
           if (!user) return null;
 
@@ -60,7 +59,7 @@ import { NextAuthOptions, RequestInternal } from "next-auth";
           // };
         } catch (error) {
           console.log("Error during authentication: ", error);
-           return null;
+          return null;
         }
       },
     }),
@@ -72,6 +71,6 @@ import { NextAuthOptions, RequestInternal } from "next-auth";
   },
 };
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions) as never;
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST ,authOptions };
