@@ -8,24 +8,22 @@ import connectDB from "@/lib/connectDB";
 
 import { AuthOptions, NextAuthOptions } from "next-auth";
 
-//  const authOptions = {
-const authOptions: NextAuthOptions = {
+const authOptions = {
   session: {
     strategy: "jwt",
   },
 
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
 
     CredentialsProvider({
       name: "credentials",
       credentials: {},
 
-      async authorize(credentials: any) {
-        // async authorize(credentials: Record<string, string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
+      async authorize(credentials) {
         if (!credentials) {
           return null;
         }
@@ -71,6 +69,6 @@ const authOptions: NextAuthOptions = {
   },
 };
 
-const handler = NextAuth(authOptions) as never;
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST ,authOptions };
+export { handler as GET, handler as POST, authOptions };
