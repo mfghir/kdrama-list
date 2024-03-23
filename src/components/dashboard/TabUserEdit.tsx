@@ -143,17 +143,6 @@ const TabUserEdit = ({ userId }: any ) => {
       <div className="flex items-center justify-between ">
         <Heading title="Edit user" description="Edit a user." />
       </div>
-      {/* {initialData && (
-        <Button
-          disabled={loading}
-          variant="destructive"
-          size="sm"
-          onClick={() => setOpen(true)}
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
-      )}
-      <Separator /> */}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">

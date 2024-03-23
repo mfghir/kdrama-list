@@ -18,6 +18,10 @@ const KDramaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    author: {
+      type: mongoose.Schema.Types.ObjectId, // reference to the user who created this
+      ref: "User", // it will look for a model with that name in lowercase
+    },
   },
   { timestamps: true }
 );

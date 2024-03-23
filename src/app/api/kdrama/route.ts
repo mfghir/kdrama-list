@@ -24,6 +24,13 @@ export async function POST( req: any,res: any) {
     await connectDB();
     await KDramaModel.create(kdramaData);
 
+    // const userPost = await postModel.find({ author: user.id }); //// پست های مروبط به کاربر رو پیدا می کنه : کد بک اند
+
+    ////  کاربر رو پیدا می کنه username  , pic id کاربر داخل دیتای پست نشون میده بهت به وسیله populate
+    // const posts = await postModel
+    //   .find()
+    //   .populate("author", ["username", "pic", "_id"])
+    //   .sort({ createdAt: -1 });
 
     return NextResponse.json({ message: "drama has added." }, { status: 201 });
   } catch (error) {

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     name: {
       type: String,
       required: true,
@@ -19,8 +20,7 @@ const UserSchema = new mongoose.Schema({
     },
     imgUrl: {
       type: String,
-      default:
-        "https://i.postimg.cc/rpN1DtvM/uer-pic.jpg",
+      default: "https://i.postimg.cc/rpN1DtvM/uer-pic.jpg",
     },
   },
   { timestamps: true }
