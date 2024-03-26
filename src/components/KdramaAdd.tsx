@@ -27,6 +27,7 @@ import { useToast } from "./ui/use-toast";
 import { labels, genres, statuses } from "@/lib/data";
 import { useState } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 type SelectOptions = {
   statuses: string;
@@ -36,6 +37,9 @@ type SelectOptions = {
 
 
 const KdramaAdd = () => {
+  const { data: session } = useSession();
+  // console.log("session add", session?.user?.email);
+
   const { mutate } = useAddDrama()
   const { toast } = useToast()
   const [value, setValue] = useState<SelectOptions>({
@@ -51,7 +55,10 @@ const KdramaAdd = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
-    console.log("data drama form", data);
+    console.log("data drama form", {
+      ...data,
+      author: session?.user?.email
+    });
     // mutate(data);
 
     // await fetch("/api/kdrama", {
@@ -68,8 +75,22 @@ const KdramaAdd = () => {
 
 
 
-    await axios.post(`/api/kdrama`, data);
-    toast({ title: "Successfully Added ✔" })
+ // Check if session, user, and email are available before using
+ const author = session?.user?.email ?? ''; // Default value if email is undefined
+ // Add author to the data object
+ data.author = author;
+
+ try {
+  // Send the post request directly with the data object
+  // await axios.post(`/api/kdrama`, data);
+  mutate(data);
+
+  toast({ title: "Successfully Added ✔" });
+
+} catch (error) {
+  console.error("Error adding data:", error);
+  toast({ title: "Error Adding Data", description: "An error occurred while adding data"});
+}
   };
 
 

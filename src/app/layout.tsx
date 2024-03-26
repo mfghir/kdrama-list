@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   const user = await User.findOne({ email: session?.user?.email });
   // const userTest = await User.findOne({ id: session?.user?.id });
-  console.log("layout user====", user);
+  // console.log("layout user====", user);
   // console.log("layout userTest====", userTest);
 
   return (

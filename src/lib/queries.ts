@@ -17,7 +17,7 @@ const useKdramasData = () => {
     // console.log(data);
 
     const res = await axios.get(`/api/kdrama`);
-    console.log(res);
+    // console.log(res);
     return res.data.data;
   }
 
