@@ -1,5 +1,5 @@
 import  User  from './user';
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const KDramaSchema = new mongoose.Schema(
   {
@@ -20,7 +20,7 @@ const KDramaSchema = new mongoose.Schema(
       required: true,
     },
     userId: {
-      type: mongoose.Schema.Types.ObjectId , // reference to the user who created this
+      type: Schema.Types.ObjectId , // reference to the user who created this
       ref: "User", // it will look for a model with that name in lowercase
       required: true,
     },

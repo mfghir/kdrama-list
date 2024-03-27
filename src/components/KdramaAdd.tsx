@@ -61,36 +61,36 @@ const KdramaAdd = () => {
     });
     // mutate(data);
 
-    // await fetch("/api/kdrama", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => {
-    //     if (!res.ok) throw new Error("Could not register user.")
-    //     return res.json()
-    //   })
-    //   .then((data) => {console.log(data) })
-    //   .catch((err) => console.log(err.message));
+    const res = await fetch("/api/kdrama", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    })
+    const dataDrama = await res.json()
 
+    if (dataDrama.error) {
+      console.log("error", dataDrama);
 
+    } else {
+      console.log("success", dataDrama);
+    }
 
- // Check if session, user, and email are available before using
- const author = session?.user?.email ?? ''; // Default value if email is undefined
- // Add author to the data object
- data.author = author;
+    //  // Check if session, user, and email are available before using
+    //  const author = session?.user?.email ?? ''; // Default value if email is undefined
+    //  // Add author to the data object
+    //  data.author = author;
 
- try {
-  // Send the post request directly with the data object
-  // await axios.post(`/api/kdrama`, data);
-  mutate(data);
+    // try {
+    //   // Send the post request directly with the data object
+    //   // await axios.post(`/api/kdrama`, data);
+    //   mutate(data);
 
-  toast({ title: "Successfully Added ✔" });
+    //   toast({ title: "Successfully Added ✔" });
 
-} catch (error) {
-  console.error("Error adding data:", error);
-  toast({ title: "Error Adding Data", description: "An error occurred while adding data"});
-}
+    // } catch (error) {
+    //   console.error("Error adding data:", error);
+    //   toast({ title: "Error Adding Data", description: "An error occurred while adding data" });
+    // }
   };
 
 
