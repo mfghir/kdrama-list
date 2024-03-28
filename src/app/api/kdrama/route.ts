@@ -1,38 +1,27 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 import connectDB from "@/lib/connectDB";
 import KDramaModel from "@/models/kdrama";
-import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/models/user";
-import { getServerSession } from "next-auth";
+
 import { Types } from "mongoose";
 
 export async function GET() {
   try {
     await connectDB();
-    const kdramaList = await KDramaModel.find().sort({ createdAt: -1 });
-    // console.log("kdramaList ******",kdramaList);
 
-    // const { email } = await req.json();
-    // const user = await User.findOne({ email });
-    // const test = await User.findByIdAndUpdate(context.params);
+    const session = await getServerSession(authOptions);
+    // console.log("GET session******", session);
 
-    // const ids = request.nextUrl.searchParams.getAll("ids[]");
-    // console.log("test",context.nextUrl.searchParams.getAll() );
+    const user = await User.findOne({ email: session?.user?.email });
+    // console.log("user ******", user._id);
 
-    // const posts = await KDramaModel.find()
-    //   .populate("author", "_id")
-    //   .sort({ createdAt: -1 });
-
-    //   console.log("posts ******",posts);
-
-    // const userPost = await postModel.find({ author: user.id }); //// پست های مروبط به کاربر رو پیدا می کنه : کد بک اند
-
-    ////  کاربر رو پیدا می کنه username  , pic id کاربر داخل دیتای پست نشون میده بهت به وسیله populate
-    // const posts = await postModel
-    //   .find()
-    //   .populate("author", ["username", "pic", "_id"])
-    //   .sort({ createdAt: -1 });
+    const kdramaList = await KDramaModel.find({ userId: user._id })
+      .select("-userId")
+      .sort({ createdAt: -1 });
+    // console.log("kdramaList ******", kdramaList);
 
     return NextResponse.json(
       { message: "Ok", data: kdramaList },
@@ -46,14 +35,14 @@ export async function GET() {
   }
 }
 
-export async function POST(req: any, res: any) {
+export async function POST(req: any) {
   try {
     await connectDB();
     const body = await req.json();
     const { title, status, label, genre }: any = body;
 
-    const session = getServerSession(req);
-    console.log("KDrama session******", session);
+    const session = await getServerSession(authOptions);
+    // console.log("POST KDrama session******", session);
 
     if (!session) {
       return NextResponse.json(
@@ -62,7 +51,7 @@ export async function POST(req: any, res: any) {
       );
     }
 
-    const user = await User.findOne({ email: session.user.email });
+    const user = await User.findOne({ email: session?.user?.email });
     console.log("KDrama user******", user);
 
     if (!user) {
@@ -79,18 +68,15 @@ export async function POST(req: any, res: any) {
       );
     }
 
-    const newKDrama = await KDramaModel.create({
+    // const newKDrama =
+    await KDramaModel.create({
       title,
       status,
       label,
       genre,
       userId: new Types.ObjectId(user._id),
     });
-    console.log("newKDrama ******", newKDrama);
-
-
-    // const kdramaData = await req.json();
-    // await KDramaModel.create(kdramaData);
+    // console.log("POST newKDrama ******", newKDrama);
 
     return NextResponse.json({ message: "drama has added." }, { status: 201 });
   } catch (error) {
