@@ -12,6 +12,7 @@ export async function GET() {
   try {
     await connectDB();
 
+    // @ts-ignore
     const session = await getServerSession(authOptions);
     // console.log("GET session******", session);
 
@@ -41,6 +42,7 @@ export async function POST(req: any) {
     const body = await req.json();
     const { title, status, label, genre }: any = body;
 
+    // @ts-ignore
     const session = await getServerSession(authOptions);
     // console.log("POST KDrama session******", session);
 
