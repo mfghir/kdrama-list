@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-// import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 import connectDB from "@/lib/connectDB";
 import KDramaModel from "@/models/kdrama";
@@ -12,7 +12,7 @@ export async function GET() {
   try {
     await connectDB();
 
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     // console.log("GET session******", session);
 
     const user = await User.findOne({ email: session?.user?.email });
@@ -41,8 +41,7 @@ export async function POST(req: any) {
     const body = await req.json();
     const { title, status, label, genre }: any = body;
 
-    
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     // console.log("POST KDrama session******", session);
 
     if (!session) {

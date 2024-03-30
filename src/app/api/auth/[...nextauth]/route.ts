@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
 import { string } from "zod";
 import { NextAuthOptions } from "next-auth";
+import axios from "axios";
 
 // // @ts-ignore
 // const handler = NextAuth({
@@ -33,19 +34,6 @@ import { NextAuthOptions } from "next-auth";
 //           throw new Error("An error occurred in the server");
 //         }
 
-//         try {
-//           const user = await User.findOne({ email });
-//           if (!user) return null;
-
-//           const passwordsMatch = await bcrypt.compare(password, user.password);
-//           if (!passwordsMatch) return null;
-
-//           return user;
-//         } catch (error) {
-//           console.log("Error during authentication: ", error);
-//           return null;
-//         }
-//       },
 //     }),
 //   ],
 
@@ -62,11 +50,15 @@ import { NextAuthOptions } from "next-auth";
 // export { handler as GET, handler as POST };
 
 // import { handlers } from "auth";
-
 // export const { GET, POST } = handlers
 
-export const authOptions: NextAuthOptions = {
-  session: { strategy: "jwt" },
+// const handler = NextAuth({
+export const authOptions :NextAuthOptions  = {
+  session: {
+    strategy: "jwt",
+    maxAge: 60 * 60 * 24 * 7 /* one week */,
+  },
+  // session: { strategy: "jwt" },
 
   providers: [
     GoogleProvider({
@@ -76,9 +68,12 @@ export const authOptions: NextAuthOptions = {
 
     CredentialsProvider({
       name: "Credentials",
-      credentials: {},
-      async authorize(credentials: any) {
-        const { email, password } = credentials;
+      credentials: {
+        email: {},
+        password: {},
+      },
+      async authorize(credentials) {
+        const { email, password } = credentials!;
 
         try {
           await connectDB();
@@ -86,27 +81,70 @@ export const authOptions: NextAuthOptions = {
           throw new Error("An error occurred on the server");
         }
 
-        if (!email || !password)
-          throw new Error("Please provide valid credentials");
+        // if (!email || !password)
+        //   throw new Error("Please provide valid credentials");
 
-        const user = await User.findOne({ email });
-        if (!user) throw new Error("Please create an account first");
+        // const user = await User.findOne({ email });
+        // if (!user) throw new Error("Please create an account first");
 
-        const passwordsMatch = await bcrypt.compare(password, user.password);
-        if (!passwordsMatch) throw new Error("Incorrect email or password");
+        // const passwordsMatch = await bcrypt.compare(password, user.password);
+        // if (!passwordsMatch) return null;
 
-        return { email };
+        try {
+          const user = await User.findOne({ email });
+          if (!user) return null;
+
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+          if (!passwordsMatch) return null;
+
+          return user;
+        } catch (error) {
+          console.log("Error during authentication: ", error);
+          return null;
+        }
+        //       },
+
+        // if (passwordsMatch) return { id: user.id, email: user.email };
+        // if (passwordsMatch) return user
+
+        // return user;
+        // return  {email}
+        // return null;
       },
     }),
-
   ],
+
+  // callbacks: {
+  //   async session({session, token, user}) {
+  //     console.log("session ******", session);
+  //     console.log("token *********", token);
+  //     console.log("USER *****", user);
+  //     console.log("Before axios post request");
+
+  //     try {
+  //       const registerResponse = await axios.post("/api/register",
+  //         {
+  //           name: session?.user?.name,
+  //           email: session?.user?.email,
+  //           image: session?.user?.image,
+  //           // password: session?.user?.password,
+  //         }
+  //       );
+  //       console.log("User registered successfully: ********", registerResponse.data);
+  //     } catch (error) {
+  //       console.error("Error registering user: ********", error);
+  //     }
+
+  //     return Promise.resolve(session);
+  //   },
+  // },
 
   secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/dashboard",
   },
 };
+// );
 
 const handler = NextAuth(authOptions);
-
-export default handler;
+export { handler as GET, handler as POST };

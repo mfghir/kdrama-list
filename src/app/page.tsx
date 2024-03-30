@@ -1,7 +1,7 @@
 
 import KdramaList from "@/components/KdramaList";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+// import { authOptions } from "./api/auth/[...nextauth]/route";
+// import { getServerSession } from "next-auth";
 
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
