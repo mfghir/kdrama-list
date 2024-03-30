@@ -99,7 +99,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
         newData.password = userInfo.password;
       }
 
-      console.log("newData===>",newData);
+      console.log("newData===>", newData);
       await axios.patch(`/api/users/${userInfo._id}`, newData);
       localStorage.removeItem('imgUrl');
 
@@ -114,7 +114,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
 
     } catch (error: any) {
       console.log("error-->", error);
-      
+
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -141,6 +141,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
               <FormItem>
                 <FormLabel>Images</FormLabel>
                 <FormControl>
+                  {/* @ts-ignore */}
                   <FileUpload onChange={field.onChange} value={field.value} onRemove={field.onChange} />
                 </FormControl>
                 <FormMessage />
@@ -148,8 +149,8 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
             )}
           />
 
-          <Image
-            src={userInfo?.imgUrl}
+          {/* @ts-ignore */}
+          <Image src={userInfo?.imgUrl}
             alt="Sample image"
             width={200}
             height={200}

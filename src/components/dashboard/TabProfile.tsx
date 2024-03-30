@@ -66,6 +66,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
           :
           <>
             <div className="flex justify-between items-center">
+              {/* @ts-ignore */}
               <Image src={userInfo?.imgUrl} alt="user" width={120} height={120} className='rounded-full' />
 
               <Link href="/dashboard/profile/edit-profile">

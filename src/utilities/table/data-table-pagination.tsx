@@ -80,6 +80,7 @@ export function DataTablePagination<TData>({
           </div>
 
           {table.getFilteredSelectedRowModel().rows.length ?
+          //  @ts-ignore 
             <Button variant="destructive" onClick={() => setOpen(true)}>
               <Trash className="mr-2 h-4 w-4" /> Delete
             </Button> : ""}

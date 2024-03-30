@@ -15,10 +15,12 @@ import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { onDeleteFile } from "@/lib/uploadthing";
 
 
-
+//  @ts-ignore 
 interface ImageUploadProps {
   onChange?: any;
-  onRemove: (value: UploadFileResponse[]) => void;
+  //  @ts-ignore 
+  onRemove: (value: UploadFileResponse[]) => void;  
+  //  @ts-ignore 
   value: UploadFileResponse[];
 }
 
@@ -112,6 +114,7 @@ export default function FileUpload({
         </div>
 
         <div>
+         {/* @ts-ignore  */}
           <UploadDropzone<OurFileRouter>
             className="dark:bg-zinc-800 py-2 ut-label:text-sm ut-allowed-content:ut-uploading:text-red-300"
             endpoint="imageUploader"

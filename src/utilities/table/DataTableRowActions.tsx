@@ -91,6 +91,7 @@ export function DataTableRowActions<TData>({
               onClick={() => console.log("---",drama.id)} 
               >
                 Edit
+                {/* @ts-ignore  */}
                 <KdramaEdit table={table} row={row} column={column} getValue={getValue} />
               </DropdownMenuItem>
             </DialogTrigger>

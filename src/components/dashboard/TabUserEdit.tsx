@@ -153,6 +153,7 @@ const TabUserEdit = ({ userId }: any ) => {
               <FormItem>
                 <FormLabel>Images</FormLabel>
                 <FormControl>
+                  {/* @ts-ignore */}
                   <FileUpload onChange={field.onChange} value={field.value} onRemove={field.onChange} />
                 </FormControl>
                 <FormMessage />

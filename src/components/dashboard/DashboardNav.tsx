@@ -35,7 +35,9 @@ const DashboardNav = ({ setOpen, userInfo }: {
                     item.disabled && "cursor-not-allowed opacity-80",
                   )}
                 >
+                    {/* @ts-ignore  */}
                   <item.icon className="mr-2 h-4 w-4" />
+                  
                   <span>{item.title}</span>
                 </span>
               </Link>

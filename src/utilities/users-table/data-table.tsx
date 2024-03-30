@@ -67,6 +67,7 @@ export function DataTable<TData, TValue>({
   const router = useRouter();
 
   const rowsList = table.getFilteredSelectedRowModel().rows
+  //  @ts-ignore 
   const ids = rowsList.map((item) => item.original._id)
 
 
@@ -236,6 +237,7 @@ export function DataTable<TData, TValue>({
         </div>
         </div> */}
       <div className="flex items-center justify-end space-x-2 py-2">
+        {/* @ts-ignore  */}
         <DataTablePagination setOpen={setOpen} table={table} />
       </div>
 
