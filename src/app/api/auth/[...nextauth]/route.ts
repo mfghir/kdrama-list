@@ -1,13 +1,12 @@
 import NextAuth from "next-auth/next";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+// import CredentialsProvider from "next-auth/providers/credentials";
+// import GoogleProvider from "next-auth/providers/google";
 
-import User from "@/models/user";
-import bcrypt from "bcryptjs";
-import connectDB from "@/lib/connectDB";
-import { string } from "zod";
-import { NextAuthOptions } from "next-auth";
-import axios from "axios";
+// import User from "@/models/user";
+// import bcrypt from "bcryptjs";
+// import connectDB from "@/lib/connectDB";
+import { authOptions } from "@/auth-options";
+
 
 // // @ts-ignore
 // const handler = NextAuth({
@@ -49,102 +48,119 @@ import axios from "axios";
 
 // export { handler as GET, handler as POST };
 
+
+
 // import { handlers } from "auth";
 // export const { GET, POST } = handlers
 
+
+
+
 // const handler = NextAuth({
-export const authOptions :NextAuthOptions  = {
-  session: {
-    strategy: "jwt",
-    maxAge: 60 * 60 * 24 * 7 /* one week */,
-  },
-  // session: { strategy: "jwt" },
+// //  const authOptions :NextAuthOptions  = {
+//   session: {
+//     strategy: "jwt",
+//     maxAge: 60 * 60 * 24 * 7 /* one week */,
+//   },
+//   // session: { strategy: "jwt" },
 
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
+//   providers: [
+//     GoogleProvider({
+//       clientId: process.env.GOOGLE_CLIENT_ID as string,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+//     }),
 
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: {},
-        password: {},
-      },
-      async authorize(credentials) {
-        const { email, password } = credentials!;
+//     CredentialsProvider({
+//       name: "Credentials",
+//       credentials: {
+//         email: {},
+//         password: {},
+//       },
+//       async authorize(credentials) {
+//         const { email, password } = credentials!;
 
-        try {
-          await connectDB();
-        } catch (err) {
-          throw new Error("An error occurred on the server");
-        }
+//         try {
+//           await connectDB();
+//         } catch (err) {
+//           throw new Error("An error occurred on the server");
+//         }
 
-        // if (!email || !password)
-        //   throw new Error("Please provide valid credentials");
+//         // if (!email || !password)
+//         //   throw new Error("Please provide valid credentials");
 
-        // const user = await User.findOne({ email });
-        // if (!user) throw new Error("Please create an account first");
+//         // const user = await User.findOne({ email });
+//         // if (!user) throw new Error("Please create an account first");
 
-        // const passwordsMatch = await bcrypt.compare(password, user.password);
-        // if (!passwordsMatch) return null;
+//         // const passwordsMatch = await bcrypt.compare(password, user.password);
+//         // if (!passwordsMatch) return null;
 
-        try {
-          const user = await User.findOne({ email });
-          if (!user) return null;
+//         try {
+//           const user = await User.findOne({ email });
+//           if (!user) return null;
 
-          const passwordsMatch = await bcrypt.compare(password, user.password);
-          if (!passwordsMatch) return null;
+//           const passwordsMatch = await bcrypt.compare(password, user.password);
+//           if (!passwordsMatch) return null;
 
-          return user;
-        } catch (error) {
-          console.log("Error during authentication: ", error);
-          return null;
-        }
-        //       },
+//           return user;
+//         } catch (error) {
+//           console.log("Error during authentication: ", error);
+//           return null;
+//         }
+//         //       },
 
-        // if (passwordsMatch) return { id: user.id, email: user.email };
-        // if (passwordsMatch) return user
+//         // if (passwordsMatch) return { id: user.id, email: user.email };
+//         // if (passwordsMatch) return user
 
-        // return user;
-        // return  {email}
-        // return null;
-      },
-    }),
-  ],
+//         // return user;
+//         // return  {email}
+//         // return null;
+//       },
+//     }),
+//   ],
 
-  // callbacks: {
-  //   async session({session, token, user}) {
-  //     console.log("session ******", session);
-  //     console.log("token *********", token);
-  //     console.log("USER *****", user);
-  //     console.log("Before axios post request");
+//   // callbacks: {
+//   //   async session({session, token, user}) {
+//   //     console.log("session ******", session);
+//   //     console.log("token *********", token);
+//   //     console.log("USER *****", user);
+//   //     console.log("Before axios post request");
 
-  //     try {
-  //       const registerResponse = await axios.post("/api/register",
-  //         {
-  //           name: session?.user?.name,
-  //           email: session?.user?.email,
-  //           image: session?.user?.image,
-  //           // password: session?.user?.password,
-  //         }
-  //       );
-  //       console.log("User registered successfully: ********", registerResponse.data);
-  //     } catch (error) {
-  //       console.error("Error registering user: ********", error);
-  //     }
+//   //     try {
+//   //       const registerResponse = await axios.post("/api/register",
+//   //         {
+//   //           name: session?.user?.name,
+//   //           email: session?.user?.email,
+//   //           image: session?.user?.image,
+//   //           // password: session?.user?.password,
+//   //         }
+//   //       );
+//   //       console.log("User registered successfully: ********", registerResponse.data);
+//   //     } catch (error) {
+//   //       console.error("Error registering user: ********", error);
+//   //     }
 
-  //     return Promise.resolve(session);
-  //   },
-  // },
+//   //     return Promise.resolve(session);
+//   //   },
+//   // },
 
-  secret: process.env.AUTH_SECRET,
-  pages: {
-    signIn: "/dashboard",
-  },
-};
+//   secret: process.env.AUTH_SECRET,
+//   pages: {
+//     signIn: "/dashboard",
+//   },
+// }
 // );
 
+// // const handler = NextAuth(authOptions);
+// // export default authOptions
+// export { handler as GET, handler as POST };
+
+
+
+
+
+
+
+
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+
+export {handler as GET, handler as POST }

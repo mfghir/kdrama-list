@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+// import { authOptions } from "../auth/[...nextauth]/route";
 
 import connectDB from "@/lib/connectDB";
 import KDramaModel from "@/models/kdrama";
 import User from "@/models/user";
 
 import { Types } from "mongoose";
+import { authOptions } from "@/auth-options";
 
 export async function GET() {
   try {

@@ -1,10 +1,11 @@
 import EditProfile from '@/components/dashboard/edit-profile'
 import BreadCrumb from '@/utilities/breadcrumb'
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import connectDB from '@/lib/connectDB';
 import User from '@/models/user';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/auth-options';
 
 
 const Page = async() => {

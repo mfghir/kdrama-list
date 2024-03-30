@@ -1,4 +1,4 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import connectDB from '@/lib/connectDB';
 import User from '@/models/user';
 
@@ -7,6 +7,7 @@ import BreadCrumb from '@/utilities/breadcrumb';
 import { redirect } from 'next/navigation';
 
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/auth-options';
 
 const Page = async () => {
   const session = await getServerSession(authOptions);

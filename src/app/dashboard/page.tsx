@@ -1,10 +1,11 @@
-import { authOptions } from "../api/auth/[...nextauth]/route";
+// import  authOptions  from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 import TabDashboard from "@/components/dashboard/TabDashboard";
+import { authOptions } from "@/auth-options";
 
 
 const Dashboard = async () => {

@@ -2,12 +2,13 @@ import Sidebar from "@/components/dashboard/Sidebar"
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import { authOptions } from "../api/auth/[...nextauth]/route";
+// import { authOptions } from "../api/auth/[...nextauth]/route";
 import connectDB from "@/lib/connectDB";
 import User from "@/models/user";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import "@uploadthing/react/styles.css";
+import { authOptions } from "@/auth-options";
 
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
