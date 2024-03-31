@@ -8,6 +8,7 @@ import {
   ArrowRight,
   ArrowUp,
   Gauge,
+  ListFilter,
   SquareUserRound ,
   UsersRound,
   MessageSquare,
@@ -57,6 +58,13 @@ export const navItems: NavItem[] = [
     icon: MessageSquare,
     label: "Messages",
     role: ["user"],
+  },
+  {
+    title: "KDrama List",
+    href: "/dashboard/kdrama-list",
+    icon: ListFilter,
+    label: "KDrama List",
+    role: ["user", "admin"],
   },
 ];
 
