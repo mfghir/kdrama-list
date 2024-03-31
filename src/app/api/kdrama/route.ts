@@ -53,7 +53,7 @@ export async function POST(req: any) {
     }
 
     const user = await User.findOne({ email: session?.user?.email });
-    console.log("KDrama user******", user);
+    // console.log("POST KDrama user******", user);
 
     if (!user) {
       return NextResponse.json(

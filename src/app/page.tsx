@@ -1,6 +1,8 @@
+import { authOptions } from "@/auth-options";
+import { getServerSession } from "next-auth";
 
-import KdramaList from "@/components/KdramaList";
-
+import User from "@/models/user";
+import HomePage from "@/components/HomePage";
 
 
 export default async function Home() {
@@ -18,10 +20,10 @@ export default async function Home() {
   // ]);
 
   // console.log("Home user test", user);
-  // console.log("Home user kdramas", user.kdramas);
 
-  // await connectDB()
-  // const user = await User.findOne({ email: session?.user?.email });
+  const users = await User.find({ role: "user" }).sort({ createdAt: -1 }) // Sort by date in descending order
+  const usersList = users.map(user => user.toObject());
 
-  return <KdramaList  />
+
+  return <HomePage usersList={usersList}  />
 }

@@ -36,7 +36,7 @@ import { useToast } from "@/components/ui/use-toast"
 //   // dataT: TData[]
 // }
 
-export function DataTable<TValue>() {
+export function DataTable<TValue>({kdramaList}:any) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const { toast } = useToast()
@@ -48,6 +48,7 @@ export function DataTable<TValue>() {
       description: `Drama Name: ${text}`,
     })
   }
+  console.log("kdramaList" ,kdramaList);
   // const { data: serverData } = useQuery({
   //   queryKey: ["kdrama"],
   //   queryFn: async () => {
@@ -81,13 +82,13 @@ export function DataTable<TValue>() {
   return (
     <>
       <div className="flex items-center py-4 overflow-x-scroll md:overflow-x-hidden">
-        <DataTableToolbar table={table} />
+        <DataTableToolbar table={table || kdramaList} />
       </div>
 
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {(table || kdramaList).getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
@@ -106,8 +107,8 @@ export function DataTable<TValue>() {
           </TableHeader>
 
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+            {(table || kdramaList).getRowModel().rows?.length ? (
+              (table || kdramaList).getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -132,7 +133,7 @@ export function DataTable<TValue>() {
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
-        <DataTablePagination table={table} setOpen={false} />
+        <DataTablePagination table={table ||kdramaList} setOpen={false} />
       </div>
     </>
   )
