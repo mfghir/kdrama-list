@@ -28,7 +28,8 @@ import { labels, genres, statuses } from "@/lib/data";
 import { useEditDrama } from "@/lib/mutations";
 import { useState } from "react";
 
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 
 type SelectOptions = {
@@ -39,7 +40,9 @@ type SelectOptions = {
 
 
 export default function KdramaEdit({ row }: { row: any }): JSX.Element {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const pathname = usePathname()
+
 
   const { mutate } = useEditDrama()
   const { toast } = useToast()
@@ -67,7 +70,6 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
       input: inputValue, // Use the preserved input value
     };
 
-
     mutate({ id: row.original.id, ...updatedData });
     toast({ title: "Successfully edited ! ✔" })
   }
@@ -77,7 +79,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {session?.user?.email &&
+        {pathname === "/dashboard/kdrama-list" &&
           <Button variant="default" size="sm">Edit</Button>
         }
       </DialogTrigger>

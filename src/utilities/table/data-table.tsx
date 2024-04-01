@@ -82,13 +82,13 @@ export function DataTable<TValue>({kdramaList}:any) {
   return (
     <>
       <div className="flex items-center py-4 overflow-x-scroll md:overflow-x-hidden">
-        <DataTableToolbar table={table || kdramaList} />
+        <DataTableToolbar table={table} />
       </div>
 
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {(table || kdramaList).getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
@@ -107,8 +107,8 @@ export function DataTable<TValue>({kdramaList}:any) {
           </TableHeader>
 
           <TableBody>
-            {(table || kdramaList).getRowModel().rows?.length ? (
-              (table || kdramaList).getRowModel().rows.map((row) => (
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -133,7 +133,7 @@ export function DataTable<TValue>({kdramaList}:any) {
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
-        <DataTablePagination table={table ||kdramaList} setOpen={false} />
+        <DataTablePagination table={table} setOpen={false} />
       </div>
     </>
   )

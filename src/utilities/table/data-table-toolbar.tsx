@@ -10,7 +10,9 @@ import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 
 import { DataTableViewOptions } from "./data-table-view-options"
 import KdramaAdd from "@/components/KdramaAdd"
-import { useSession } from "next-auth/react"
+// import { useSession } from "next-auth/react"
+
+import { usePathname } from "next/navigation"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -20,7 +22,9 @@ export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const pathname = usePathname()
+
 
 
   return (
@@ -64,7 +68,7 @@ export function DataTableToolbar<TData>({
       </div>
 
       <div className="flex justify-end flex-1 items-center space-x-2">
-        {session?.user?.email ? <KdramaAdd /> : ""}
+        {pathname === "/dashboard/kdrama-list" && <KdramaAdd />}
         <DataTableViewOptions table={table} />
       </div>
     </section>

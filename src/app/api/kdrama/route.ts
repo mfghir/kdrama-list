@@ -12,9 +12,11 @@ import { authOptions } from "@/auth-options";
 export async function GET() {
   try {
     await connectDB();
+    
 
     const session = await getServerSession(authOptions);
     // console.log("GET session******", session);
+    // console.log("GET context******", context);
 
     const user = await User.findOne({ email: session?.user?.email });
     // console.log("user ******", user._id);

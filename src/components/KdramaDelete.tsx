@@ -1,7 +1,3 @@
-import { useSession } from 'next-auth/react'
-import { Button } from './ui/button'
-import { useDeleteDrama } from '@/lib/mutations'
-
 import {
   Dialog,
   DialogClose,
@@ -13,9 +9,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { Button } from './ui/button'
+import { useDeleteDrama } from '@/lib/mutations'
+import { usePathname } from 'next/navigation'
+
+// import { useSession } from 'next-auth/react'
+
 const KdramaDelete = ({ row }: { row: any }): JSX.Element => {
   const { mutate } = useDeleteDrama()
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const pathname = usePathname()
 
   const deleteHandler = () => {
     mutate({ id: row.original.id })
@@ -24,7 +27,7 @@ const KdramaDelete = ({ row }: { row: any }): JSX.Element => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {session?.user?.email && <Button variant="destructive" size="sm">Delete</Button>}
+        {pathname === "/dashboard/kdrama-list" && <Button variant="destructive" size="sm">Delete</Button>}
       </DialogTrigger>
 
       <DialogContent>

@@ -6,7 +6,7 @@ import HomePage from "@/components/HomePage";
 
 
 export default async function Home() {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   // const user = await User.aggregate([
   //   { $match: { email: session?.user?.email } },
   //   {
@@ -25,5 +25,5 @@ export default async function Home() {
   const usersList = users.map(user => user.toObject());
 
 
-  return <HomePage usersList={usersList}  />
+  return <HomePage usersList={usersList}   />
 }
