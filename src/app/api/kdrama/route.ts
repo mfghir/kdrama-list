@@ -1,18 +1,16 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-// import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/auth-options";
 
-import connectDB from "@/lib/connectDB";
-import KDramaModel from "@/models/kdrama";
 import User from "@/models/user";
+import KDramaModel from "@/models/kdrama";
+import connectDB from "@/lib/connectDB";
 
 import { Types } from "mongoose";
-import { authOptions } from "@/auth-options";
 
 export async function GET() {
   try {
     await connectDB();
-    
 
     const session = await getServerSession(authOptions);
     // console.log("GET session******", session);

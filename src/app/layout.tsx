@@ -51,6 +51,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
               <Navbar userInfo={user} />
               {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
+              
               {children}
               {/* </div> */}
               {/* </main> */}

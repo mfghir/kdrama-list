@@ -64,15 +64,8 @@ export function DataTablePagination<TData>({
 
 
   return (
-    <section className="w-full overflow-hidden">
-      {/* <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onConfirm}
-        loading={loading}
-      /> */}
-      <div className="flex items-center justify-between px-2 overflow-x-scroll md:overflow-x-hidden">
-
+    <>
+      <div className="w-full flex items-center justify-between px-2 overflow-x-scroll md:overflow-x-hidden">
         <div className="flex justify-between items-center gap-x-4 mr-4">
           <div className="flex-1 text-sm text-muted-foreground whitespace-nowrap">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
@@ -80,7 +73,7 @@ export function DataTablePagination<TData>({
           </div>
 
           {table.getFilteredSelectedRowModel().rows.length ?
-          //  @ts-ignore 
+            //  @ts-ignore 
             <Button variant="destructive" onClick={() => setOpen(true)}>
               <Trash className="mr-2 h-4 w-4" /> Delete
             </Button> : ""}
@@ -112,6 +105,7 @@ export function DataTablePagination<TData>({
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </div>
+
           <div className="flex items-center space-x-2">
             <Button
               variant="outline"
@@ -152,6 +146,8 @@ export function DataTablePagination<TData>({
           </div>
         </div>
       </div>
-    </section>
+      {/* <span className="opacity-0 md:hidden">tetssss</span> */}
+    </>
+
   )
 }

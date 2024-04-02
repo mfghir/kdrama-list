@@ -84,12 +84,12 @@ export function DataTable<TValue>({ kdramaList }: any) {
 
   return (
     <>
-      <div className="flex items-center py-4 overflow-x-scroll md:overflow-x-hidden">
+      <div className="w-auto flex items-center justify-between py-4 overflow-x-scroll md:overflow-x-hidden">
         <DataTableToolbar table={table} />
       </div>
 
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border h-fit overflow-scroll md:overflow-x-hidden">
+        <Table >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -135,7 +135,7 @@ export function DataTable<TValue>({ kdramaList }: any) {
         </Table>
       </div>
 
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="w-auto flex items-center justify-end space-x-2 py-4">
         <DataTablePagination table={table} setOpen={false} />
       </div>
     </>

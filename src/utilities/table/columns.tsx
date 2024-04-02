@@ -149,4 +149,10 @@ export const columns: ColumnDef<MovieList>[] = [
       return <KdramaCopy row={row} />
     }
   },
+  // {
+  //   id: "test",
+  //   cell: ({ row }) => {
+  //     return <span className="opacity-0 md:hidden">tets</span>
+  //   }
+  // },
 ]

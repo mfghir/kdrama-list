@@ -10,8 +10,9 @@ const HomePage = ({ usersList }: any) => {
 
 
   return (
-    <ScrollArea className="h-full ">
-      <div className="w-[100vw] lg:w-full h-full min-h-screen pt-28 pb-6 px-6 lg:px-20">
+    <>
+    {/* <ScrollArea className="h-full "> */}
+      <div className="w-full h-full min-h-screen pt-28 pb-6 px-6 lg:px-20">
 
         <p className='my-6' >Welcome to the Kdrama List app</p>
 
@@ -43,7 +44,9 @@ const HomePage = ({ usersList }: any) => {
           ))}
         </div>
       </div>
-    </ScrollArea>
+    {/* </ScrollArea> */}
+    </>
+
   )
 }
 

@@ -28,15 +28,16 @@ export function DataTableToolbar<TData>({
 
 
   return (
-    <section className="flex items-center justify-between w-full">
-      <div className="flex flex-1 items-center space-x-2">
+    <>
+      {/* <section className="w-auto flex items-center justify-between overflow-x-scroll bg-blue-200"> */}
+      <div className="w-fit flex items-center space-x-2 mr-6 md:mr-auto">
         <Input
+          className="h-8 w-[150px] lg:w-[250px]"
           placeholder="Filter title..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
         />
 
         {table.getColumn("status") && (
@@ -67,10 +68,13 @@ export function DataTableToolbar<TData>({
         )}
       </div>
 
-      <div className="flex justify-end flex-1 items-center space-x-2">
+      <div className="w-fit flex justify-end items-center gap-x-2">
         {pathname === "/dashboard/kdrama-list" && <KdramaAdd />}
         <DataTableViewOptions table={table} />
+        {/* <span className="opacity-0 md:hidden">tetssss</span> */}
       </div>
-    </section>
+      {/* </section> */}
+    </>
+
   )
 }

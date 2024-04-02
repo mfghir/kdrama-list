@@ -21,14 +21,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { DataTablePagination } from "../table/data-table-pagination";
-import { useState } from "react";
 import { AlertModal } from "../alert-modal";
-import axios from "axios";
+import { Input } from "@/components/ui/input";
+
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import axios from "axios";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -61,7 +60,6 @@ export function DataTable<TData, TValue>({
   })
 
 
-
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -91,27 +89,22 @@ export function DataTable<TData, TValue>({
     }
   };
 
-
-
-
   // // /* this can be used to get the selectedrows 
   // console.log("value", table.getFilteredSelectedRowModel());
 
   return (
     <>
-      {/* <ScrollArea className="h-full "> */}
-      {/* <section className="w-full flex  flex-col items-center justify-between space-y-2"> */}
-      {/* <section className="w-fit h-full flex flex-col p-6 bg-green-200 "> */}
-      <Input
-        placeholder={`Search ${searchKey}...`}
-        value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn(searchKey)?.setFilterValue(event.target.value)
-        }
-        className="w-full md:max-w-sm my-3"
-      />
+      <>
+        <Input
+          placeholder={`Search ${searchKey}...`}
+          value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn(searchKey)?.setFilterValue(event.target.value)
+          }
+          className="w-full md:max-w-sm my-3"
+        />
 
-      {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
+        {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
           <Table className="relative">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -164,53 +157,51 @@ export function DataTable<TData, TValue>({
           <ScrollBar orientation="horizontal" />
         </ScrollArea> */}
 
-      <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-x-hidden">
-        <Table className="relative" >
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
+        <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-x-hidden">
+          <Table className="relative" >
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                      </TableHead>
+                    )
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
 
-      </div>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
 
 
-
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
+        {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -236,11 +227,11 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
         </div> */}
-      <div className="flex items-center justify-end space-x-2 py-2">
-        {/* @ts-ignore  */}
-        <DataTablePagination setOpen={setOpen} table={table} />
-      </div>
-
+        <div className="w-auto flex items-center justify-end space-x-2 py-4">
+          {/* @ts-ignore  */}
+          <DataTablePagination setOpen={setOpen} table={table} />
+        </div>
+      </>
 
       <AlertModal
         isOpen={open}
@@ -248,11 +239,6 @@ export function DataTable<TData, TValue>({
         onConfirm={onConfirm}
         loading={loading}
       />
-
-      {/* </section> */}
-      {/* </ScrollArea> */}
-
-
     </>
   );
 }
