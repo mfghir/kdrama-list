@@ -36,7 +36,7 @@ import { useToast } from "@/components/ui/use-toast"
 //   // dataT: TData[]
 // }
 
-export function DataTable<TValue>({kdramaList}:any) {
+export function DataTable<TValue>({ kdramaList }: any) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const { toast } = useToast()
@@ -48,7 +48,7 @@ export function DataTable<TValue>({kdramaList}:any) {
       description: `Drama Name: ${text}`,
     })
   }
-  console.log("kdramaList" ,kdramaList);
+  console.log("kdramaList", kdramaList);
   // const { data: serverData } = useQuery({
   //   queryKey: ["kdrama"],
   //   queryFn: async () => {
@@ -60,7 +60,10 @@ export function DataTable<TValue>({kdramaList}:any) {
   // const data = useMemo(() => serverData ?? [], [serverData]);
 
   const { data: serverData } = useKdramasData()
-  const data = useMemo(() => serverData ?? [], [serverData]);
+  // const data = useMemo(() => serverData ?? [], [serverData]);
+  const data = useMemo(() => {
+    return kdramaList ? kdramaList : serverData ? serverData : [];
+  }, [serverData, kdramaList]);
 
   const table = useReactTable({
     data,

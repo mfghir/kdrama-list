@@ -18,30 +18,35 @@ export default async function Page({ params: { userDetailsId } }: PageProps) {
   const user = await User.findOne({ _id: userDetailsId })
   // console.log("userDetailsId  user **********", user);
 
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
   // console.log("GET session******", session);
 
 
-  // const kdramaList = await KDramaModel.find({ userId: user._id })
-  // 	.select("-userId")
-  // 	.sort({ createdAt: -1 });
-  // console.log("userDetailsId kdramaList **********", kdramaList);
+  const kdramaList = await KDramaModel.find({ userId: userDetailsId })
+  	.select("-userId")
+  	.sort({ createdAt: -1 });
+  console.log("userDetailsId kdramaList **********", kdramaList);
 
-  const userr = await User.aggregate([
-    { $match: { email: session?.user?.email } },
-    {
-      $lookup: {
-        from: "kdramamodels",
-        foreignField: "userId",
-        localField: "_id",
-        as: "kdrama",
-      },
-    },
-  ]);
-  console.log("userDetailsId userr **********", userr);
+  // const userr = await User.aggregate([
+  //   { $match: { email: session?.user?.email } },
+  //   {
+  //     $lookup: {
+  //       from: "kdramamodels",
+  //       foreignField: "userId",
+  //       localField: "_id",
+  //       as: "kdrama",
+  //     },
+  //   },
+  // ]);
+  // console.log("userDetailsId userr **********", userr);
 
-  const test = userr.map(i=> JSON.parse(JSON.stringify(i)) )
-  console.log("userDetailsId test test **********", test[0]);
+  // console.log("userDetailsId userr ------------",JSON.parse(JSON.stringify(userr))._id);
+  
+  // const test = userr.map(i=> i)
+  // console.log("userDetailsId test test **********", test);
+  
+  // const test2 = test.find(i=> i.id ===userDetailsId )
+  // console.log("userDetailsId test2 **********", test2);
 
 
   // const test = await User.findOne({ email: session?.user?.email })
@@ -63,7 +68,7 @@ export default async function Page({ params: { userDetailsId } }: PageProps) {
     <div className="flex-1 space-y-4">
       <BreadCrumb items={breadcrumbItems} />
       <UserDetails userDetails={user}
-      // kdramaList={kdramaList} 
+      kdramaList={kdramaList} 
       />
     </div>
   );

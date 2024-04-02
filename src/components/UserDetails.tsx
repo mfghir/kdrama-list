@@ -4,7 +4,7 @@ import Image from "next/image"
 import { ScrollArea } from "./ui/scroll-area"
 import { DataTable } from "@/utilities/table/data-table"
 
-const UserDetails = ({ userDetails }: any) => {
+const UserDetails = ({ userDetails,kdramaList }: any) => {
 
   // const test = userDetails.map((i:any) =>  JSON.parse(JSON.stringify(i) ))
   // console.log("test test test+++++",test[0].name)
@@ -31,7 +31,7 @@ const UserDetails = ({ userDetails }: any) => {
       {/* <div className=" "> */}
       <ScrollArea className="h-full ">
         <div className="w-[100vw] lg:w-full">
-          <DataTable kdramaList={userDetails.kdrama} />
+          <DataTable kdramaList={kdramaList} />
         </div>
       </ScrollArea>
       {/* </div> */}
