@@ -30,6 +30,7 @@ import { useKdramasData } from "@/lib/queries"
 import { columns } from '@/utilities/table/columns'
 
 import { useToast } from "@/components/ui/use-toast"
+import { Heading } from "../heading"
 
 // interface DataTableProps<TValue> {
 //   columns: ColumnDef<TValue>[]
@@ -84,6 +85,13 @@ export function DataTable<TValue>({ kdramaList }: any) {
 
   return (
     <>
+      <div className="my-3">
+        <Heading
+          title={`Kdramas (${data.length})`}
+          description="list of kdarams in database"
+        />
+      </div>
+
       <div className="w-auto flex items-center justify-between py-4 overflow-x-scroll md:overflow-x-hidden">
         <DataTableToolbar table={table} />
       </div>
