@@ -147,11 +147,13 @@ export default function LoginForm() {
                   <FormControl>
                     <Input placeholder="password" {...field} className="py-4" />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
+            <Link className=" text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" href="/forget-password" >
+              forget password?
+            </Link>
 
             <Button type="submit" className="w-full font-semibold">Submit</Button>
           </form>
