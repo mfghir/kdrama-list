@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { ArrowRightIcon } from 'lucide-react'
+import Footer from './Footer'
 
 const HomePage = ({ usersList }: any) => {
   // console.log("test" , test);
@@ -34,9 +35,9 @@ const HomePage = ({ usersList }: any) => {
           <div className="absolute flex justify-center items-center flex-col gap-y-4">
             <p className="text-7xl font-bold mx-auto z-10">KDrama</p>
             <p className="text-lg lg:text-3xl mx-auto z-10">Welcome to the world of kdrama fans</p>
-            {/* <Button variant='default' size='lg' >Lets Go</Button> */}
+
             <Button variant="expandIcon" Icon={ArrowRightIcon} iconPlacement="right">
-              {/* className='bg-[#020817] text-white text-lg font-semibold' > */}
+
               Lets Go</Button>
           </div>
         </section>
@@ -62,13 +63,15 @@ const HomePage = ({ usersList }: any) => {
                   <p>{item.email}</p>
                 </div>
 
-                <Link href={`/${item._id}`}
-                  className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500">
-                  See More</Link>
+                <Link href={`/${item._id}`} className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500">
+                  See More
+                </Link>
               </div>
             </div>
           ))}
         </div>
+
+        <Footer />
       </section>
     </>
 
