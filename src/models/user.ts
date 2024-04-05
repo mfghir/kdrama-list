@@ -1,4 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
+
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  isActive: boolean;
+  emailToken: string | null;
+  isAdmin: boolean;
+  emailResetPassword: string | null;
+  passwordResetTokenExpires: Date | null; // Field for token expiration
+}
 
 const UserSchema = new mongoose.Schema(
   {
@@ -26,5 +37,6 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.models.User || mongoose.model("User", UserSchema);
+const User: Model<IUser> =
+  mongoose.models.User || mongoose.model("User", UserSchema);
 export default User;

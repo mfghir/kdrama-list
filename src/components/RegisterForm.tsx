@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 
 
@@ -38,7 +38,6 @@ const formSchema = z.object({
 
 
 export default function RegisterForm() {
-  const [error, setError] = useState("");
   const router = useRouter();
   const { status: sessionStatus } = useSession();
 
@@ -71,7 +70,7 @@ export default function RegisterForm() {
       .then((data) => {
         console.log(data);
         router.push("/login");
-      }).catch((err) => setError(err.message));
+      }).catch((err) => console.log(err));
   }
 
 
