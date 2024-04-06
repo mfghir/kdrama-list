@@ -23,7 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Image from "next/image";
-import GoogleButton from "../utilities/GoogleButton";
+import GoogleButton from "../../utilities/GoogleButton";
 
 const formSchema = z.object({
   name: z.string()

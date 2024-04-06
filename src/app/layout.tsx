@@ -14,6 +14,7 @@ import { getServerSession } from 'next-auth'
 import connectDB from '@/lib/connectDB'
 import User from '@/models/user'
 import { authOptions } from '@/auth-options'
+import SmoothScrolling from '@/utilities/SmoothScrolling'
 
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -46,15 +47,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           <SessionProviderComp>
             <Provider>
-              {/* <main className="min-h-screen   "> */}
-              {/* <main className="grid place-items-start w-fill min-h-screen my-8 overflow-hidden"> */}
 
+              {/* @ts-ignore */}
               <Navbar userInfo={user} />
-              {/* <div className="w-full h-full min-h-screen p-6 lg:px-20 lg:py-8"> */}
-              
+<SmoothScrolling>
+
               {children}
-              {/* </div> */}
-              {/* </main> */}
+</SmoothScrolling>
+
 
             </Provider>
           </SessionProviderComp>

@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import axios from "axios";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../ui/use-toast";
 
 
 
@@ -69,9 +69,9 @@ const ForgetPassword = () => {
   //   }
   // }
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  // const onSubmit = async (data: ForgotPasswordInputs) => {
-    console.log("form",form.control)
-    console.log("values",values)
+    // const onSubmit = async (data: ForgotPasswordInputs) => {
+    console.log("form", form.control)
+    console.log("values", values)
     try {
       const response = await fetch('/api/auth/reset-password', {
         method: 'POST',

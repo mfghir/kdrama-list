@@ -1,11 +1,11 @@
-import ForgetPassword from '@/components/ForgetPassword'
+import ForgetPassword from '@/components/forms/ForgetPassword'
 import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-    title: 'Forgot Password',
-  }
-  
+  title: 'Forgot Password',
+}
+
 
 const Page = () => <ForgetPassword />
 

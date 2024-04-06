@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import GoogleButton from "../utilities/GoogleButton";
+import GoogleButton from "../../utilities/GoogleButton";
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -25,7 +25,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import axios from "axios";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   email: z.string()

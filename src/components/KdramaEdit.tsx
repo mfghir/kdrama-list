@@ -90,6 +90,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
           {/* <DialogDescription>
             What do you want to get done today?
           </DialogDescription> */}
+
         </DialogHeader>
         <form
           id="drama-form"
@@ -106,6 +107,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
+          
           <div className="grid grid-cols-4 items-center gap-4">
             <Select
               name="status"
