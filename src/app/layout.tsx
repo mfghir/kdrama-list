@@ -28,8 +28,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cookieStore = cookies();
   const currentTheme = cookieStore.get("currentTheme")?.value || "default";
 
-  const session = await getServerSession(authOptions);
   await connectDB()
+  const session = await getServerSession(authOptions);
 
   const user = await User.findOne({ email: session?.user?.email });
   // const userTest = await User.findOne({ id: session?.user?.id });

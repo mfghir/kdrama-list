@@ -19,7 +19,7 @@ export async function GET() {
     const user = await User.findOne({ email: session?.user?.email });
     // console.log("user ******", user._id);
 
-    const kdramaList = await KDramaModel.find({ userId: user._id })
+    const kdramaList = await KDramaModel.find({ userId: user?._id })
       .select("-userId")
       .sort({ createdAt: -1 });
     // console.log("kdramaList ******", kdramaList);

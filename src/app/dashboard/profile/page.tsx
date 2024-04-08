@@ -23,6 +23,7 @@ const Page = async () => {
   return (
     <>
       <BreadCrumb items={breadcrumbItems} />
+      {/* @ts-ignore */}
       <TabProfile userInfo={user} />
     </>
   )

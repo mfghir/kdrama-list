@@ -20,6 +20,7 @@ export const authOptions = {
         email: {},
         password: {},
       },
+      //  @ts-ignore 
       async authorize(credentials) {
         const { email, password } = credentials!;
 

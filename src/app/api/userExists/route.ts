@@ -22,16 +22,16 @@ export async function POST(req: any) {
     }
 
     // Check if the user is logged in based on their lastLoggedIn timestamp
-    const isLoggedIn = user.lastLoggedIn !== null;
-    console.log("isLoggedIn", isLoggedIn);
+    // const isLoggedIn = user?.lastLoggedIn !== null;
+    // console.log("isLoggedIn", isLoggedIn);
 
-    if (isLoggedIn) {
+    // if (isLoggedIn) {
       // User is already logged in
       return NextResponse.json(
         { message: "User is already logged in" },
         { status: 200 }
       );
-    }
+    // }
 
     // // Perform the necessary login operations here
     // // For example, you can update the user's lastLoggedIn field to the current timestamp
@@ -44,7 +44,7 @@ export async function POST(req: any) {
     //   { status: 200 }
     // );
 
-    return NextResponse.json({ user });
+    // return NextResponse.json({ user });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

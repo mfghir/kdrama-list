@@ -20,8 +20,10 @@ const Dashboard = async () => {
 
   return (
     <TabDashboard
-      role={user.role}
-      usersList={usersList} />
+    // @ts-ignore
+      role={user.role as string}
+      // @ts-ignore
+      usersList={usersList!} />
   )
 }
 
