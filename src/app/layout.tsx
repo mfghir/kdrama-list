@@ -50,11 +50,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
               {/* @ts-ignore */}
               <Navbar userInfo={user} />
-<SmoothScrolling>
 
-              {children}
-</SmoothScrolling>
-
+              <SmoothScrolling>{children}</SmoothScrolling>
 
             </Provider>
           </SessionProviderComp>

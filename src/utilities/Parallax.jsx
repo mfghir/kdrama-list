@@ -1,6 +1,6 @@
 "use client";
 import { gsap } from "gsap";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useWindowSize } from "@studio-freight/hamo";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -39,7 +39,7 @@ export function Parallax({ className, children, speed = 1, id = "parallax" }) {
 
   return (
     <div ref={trigger} className={className}>
-      <div ref={target}>{children}</div>
+      <React.Fragment ref={target}>{children}</React.Fragment>
     </div>
   );
 }

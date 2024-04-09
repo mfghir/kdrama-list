@@ -1,22 +1,25 @@
 "use client"
+
 import { Dribbble, Github, Instagram, Linkedin, Send } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+
+import { Button } from './ui/button';
+import { useLenis } from '@studio-freight/react-lenis';
 
 const Footer = () => {
 
-  const [cartCount, setCartCount] = useState(0);
+  const lenis = useLenis(({ scroll }) => {
+    // called every scroll
+    console.log(scroll);
+  });
 
-  const handleCartClick = () => {
-    setCartCount(cartCount + 1);
-  };
+
   return (
 
 
-    <footer className="w-full text-gray-200 bg-zinc-800 body-font rounded-xl mt-12">
+    <footer className="w-full text-gray-200 bg-zinc-900 body-font rounded-xl mt-12">
       <section className="container w-full flex justify-between flex-wrap md:flex-nowrap gap-y-12 p-6">
-
         <div className="w-full flex flex-col gap-y-6">
           <div className='w-full flex flex-col gap-y-1'>
             <Link href="/">
@@ -84,8 +87,6 @@ const Footer = () => {
           </ul>
         </div>
 
-
-
         <div className="w-full flex flex-col gap-y-2">
           <h2 className=" text-lg font-bold tracking-widest text-white uppercase title-font">Links</h2>
           <nav className="list-none flex flex-col gap-y-1">
@@ -100,11 +101,17 @@ const Footer = () => {
             </li>
           </nav>
         </div>
+
+        <Button
+          onClick={() => lenis?.scrollTo("#start-sec", { lerp: 0.02 })}
+          className='bg-zinc-800 text-white px-6'
+          variant="gooeyLeft"
+        >Go Up</Button>
       </section>
 
-      <div className="bg-zinc-950">
+      <div className="bg-zinc-800">
         <div className="container px-5 py-4 mx-auto">
-          <p className="text-sm text-gray-100 capitalize xl:text-center">© 2024 All rights reserved </p>
+          <p className="text-sm text-gray-100 capitalize xl:text-center">©2024 All rights reserved </p>
         </div>
       </div>
     </footer>

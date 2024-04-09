@@ -1,11 +1,12 @@
 import NextAuth from "next-auth/next";
+import { authOptions } from "@/auth-options";
+
 // import CredentialsProvider from "next-auth/providers/credentials";
 // import GoogleProvider from "next-auth/providers/google";
 
 // import User from "@/models/user";
 // import bcrypt from "bcryptjs";
 // import connectDB from "@/lib/connectDB";
-import { authOptions } from "@/auth-options";
 
 
 // // @ts-ignore
