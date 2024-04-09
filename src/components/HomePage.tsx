@@ -13,7 +13,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { twMerge } from 'tailwind-merge'
 
-// import {Parallax } from '@/utilities/Parallax'
+import {Parallax } from '@/utilities/Parallax'
 
 const HomePage = ({ usersList }: any) => {
   // console.log("test" , test);
@@ -47,16 +47,16 @@ const HomePage = ({ usersList }: any) => {
   //   tl.to(ref.current, { scale: 0, ease: "none" });
   // };
 
-  // gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-  // useEffect(() => {
-  //   ScrollTrigger.create({
-  //     start: 1,
-  //     end: "max",
-  //     onLeaveBack: self => self.scroll(ScrollTrigger.maxScroll(window) - 2),
-  //     onLeave: self => self.scroll(2)
-  //   }).scroll(2);
-  // }, []);
+  useEffect(() => {
+    ScrollTrigger.create({
+      start: 1,
+      end: "max",
+      onLeaveBack: self => self.scroll(ScrollTrigger.maxScroll(window) - 2),
+      onLeave: self => self.scroll(2)
+    }).scroll(2);
+  }, []);
 
   return (
     <>
@@ -76,7 +76,7 @@ const HomePage = ({ usersList }: any) => {
 
 
         <section className=''>
-        {/* <Parallax speed={1} className="self-start"> */}
+        <Parallax speed={1} className="self-start">
           <p className="text-4xl font-bold mb-4">Fans' list</p>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-11"
           // ref={ref}
@@ -107,7 +107,7 @@ const HomePage = ({ usersList }: any) => {
               </div>
             ))}
           </div>
-          {/* </Parallax> */}
+          </Parallax>
         </section>
 
         <Footer />

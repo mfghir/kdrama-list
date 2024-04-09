@@ -1,9 +1,12 @@
-import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { NextAuthOptions, RequestInternal } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+
 import connectDB from "./lib/connectDB";
 import User from "./models/user";
-import { NextAuthOptions } from "next-auth";
+
+type UserModel = any;
 
 export const authOptions = {
   session: { strategy: "jwt" },
@@ -20,8 +23,11 @@ export const authOptions = {
         email: {},
         password: {},
       },
-      //  @ts-ignore 
-      async authorize(credentials) {
+
+      async authorize(
+        credentials: Record<"email" | "password", string> | undefined,
+        req: Pick<RequestInternal, "headers" | "body" | "query" | "method">
+      ): Promise<UserModel | null> {
         const { email, password } = credentials!;
 
         try {
