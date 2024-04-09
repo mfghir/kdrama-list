@@ -37,7 +37,7 @@
     "src/components/dashboard/TabUsers.tsx",
     "src/app/api/userExists/route.ts",
     "src/app/api/auth/[...nextauth]/route.ts"
-, "src/utilities/SmoothScrolling.jsx"  ],
+, "src/utilities/SmoothScrolling.jsx", "src/lib/connectDB.t/js", "src/lib/connectDB.js"  ],
   "exclude": [
     "node_modules"
   ]

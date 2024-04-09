@@ -3,7 +3,7 @@ import { NextAuthOptions, RequestInternal } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 
-import connectDB from "./lib/connectDB";
+import connectDB from "./lib/connectDB.t/js";
 import User from "./models/user";
 
 type UserModel = any;
