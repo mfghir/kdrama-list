@@ -14,6 +14,7 @@ interface PageProps {
 
 export default async function Page({ params: { userDetailsId } }: PageProps) {
   await connectDB();
+  // @ts-ignore
   const user = await User.findOne({ _id: userDetailsId })
   // console.log("userDetailsId  user **********", user);
 

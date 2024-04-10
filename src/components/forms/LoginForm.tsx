@@ -109,16 +109,16 @@ export default function LoginForm() {
 
 
   return (
-    <section className="w-full grid md:grid-cols-2 md:gap-x-6 min-h-screen  p-6 mt-24 lg:px-20 lg:py-8">
+    <section className="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 min-h-screen h-fit p-6 mt-24 lg:mt-0 lg:px-20 lg:pt-28">
       <Image
-        className="hidden md:block w-full h-fit rounded-3xl"
-        width={480}
-        height={650}
-        src="https://i.postimg.cc/MKXcmyzx/login-pic.jpg"
+        className="hidden lg:block lg:w-[550px] m-auto rounded-3xl"
+        width={1080}
+        height={1080}
+        src="https://i.postimg.cc/v8kJq31c/login.jpg"
         alt="Login illustration" />
 
 
-      <div className="flex flex-col my-6">
+      <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col justify-center my-6">
         <h1 className="text-2xl font-bold inline-block w-fit border-b-2 my-4">Login</h1>
 
         <Form {...form}  >
@@ -151,11 +151,11 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Link className=" text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" href="/forget-password" >
+            <Link className=" text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" href="/reset-password" >
               forget password?
             </Link>
 
-            <Button type="submit" className="w-full font-semibold">Submit</Button>
+            <Button type="submit" className="w-full font-semibold text-base transition-colors duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-tb hover:from-cyan-500  hover:to-fuchsia-500 ">Submit</Button>
           </form>
         </Form>
 
