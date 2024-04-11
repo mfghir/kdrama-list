@@ -151,4 +151,8 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  .element-hover{
+    @apply hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all
+  }
 }

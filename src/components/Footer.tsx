@@ -18,7 +18,7 @@ const Footer = () => {
   return (
 
 
-    <footer className="w-full text-gray-200 bg-zinc-900 body-font rounded-xl mt-12">
+    <footer className="w-full dark:text-gray-200 text-zinc-800 bg-zinc-100 dark:bg-zinc-900 body-font rounded-xl mt-12">
       <section className="container w-full flex justify-between flex-wrap md:flex-nowrap gap-y-12 p-6">
         <div className="w-full flex flex-col gap-y-6">
           <div className='w-full flex flex-col gap-y-1'>
@@ -31,21 +31,22 @@ const Footer = () => {
                 alt="logo"
               />
             </Link>
-            <p className="text-base text-gray-50">Design, Code and Ship!</p>
+            <p className="text-base ">Kdrama World Project</p>
           </div>
 
-          <ul className="flex justify-start items-center gap-x-3 text-gray-50">
-            <li className="hover:text-blue-500 duration-300">
+          <ul className="flex justify-start items-center gap-x-3 ">
+            <li className="hover:text-indigo-600 transition-all">
               <a
                 href="https://t.me/fatemeweb"
                 target="_blank"
                 rel="noreferrer"
+              // className='element-hover'
               >
                 <Send />
               </a>
             </li>
 
-            <li className="text-2xl hover:text-blue-500 duration-300">
+            <li className="hover:text-indigo-600 transition-all">
               <a
                 href="https://www.instagram.com/fatemeweb/"
                 target="_blank"
@@ -55,7 +56,7 @@ const Footer = () => {
               </a>
             </li>
 
-            <li className="text-2xl hover:text-blue-500 duration-300">
+            <li className="hover:text-indigo-600 transition-all">
               <a
                 href="https://www.linkedin.com/in/fateme-ghafari"
                 target="_blank"
@@ -65,7 +66,7 @@ const Footer = () => {
               </a>
             </li>
 
-            <li className="text-2xl hover:text-blue-500 duration-300">
+            <li className="hover:text-indigo-600 transition-all">
               <a
                 href="https://github.com/mfghir"
                 target="_blank"
@@ -75,7 +76,7 @@ const Footer = () => {
               </a>
             </li>
 
-            <li className="text-2xl hover:text-blue-500 duration-300">
+            <li className="hover:text-indigo-600 transition-all">
               <a
                 href="https://dribbble.com/fatemeweb"
                 target="_blank"
@@ -88,16 +89,18 @@ const Footer = () => {
         </div>
 
         <div className="w-full flex flex-col gap-y-2">
-          <h2 className=" text-lg font-bold tracking-widest text-white uppercase title-font">Links</h2>
+          <h2 className=" text-lg font-bold tracking-widest  uppercase title-font">Links</h2>
           <nav className="list-none flex flex-col gap-y-1">
-            <li className="">
-              <a className="text-gray-50 cursor-pointer hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all">About me</a>
+            <li>
+              <a className=" cursor-pointer element-hover">About me</a>
             </li>
-            <li className="">
-              <a className="text-gray-50 cursor-pointer hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all">Git</a>
+            <li>
+              <a href='https://github.com/mfghir/kdrama-list'
+                className="cursor-pointer element-hover"
+              >Git</a>
             </li>
-            <li className="">
-              <a className="text-gray-50 cursor-pointer hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all">Terms & Privacy</a>
+            <li>
+              <a className=" cursor-pointer element-hover">Terms & Privacy</a>
             </li>
           </nav>
         </div>
@@ -109,9 +112,9 @@ const Footer = () => {
         >Go Up</Button>
       </section>
 
-      <div className="bg-zinc-800">
+      <div className="bg-zinc-200 dark:bg-zinc-800">
         <div className="container px-5 py-4 mx-auto">
-          <p className="text-sm text-gray-100 capitalize xl:text-center">©2024 All rights reserved </p>
+          <p className="text-sm capitalize xl:text-center">©2024 All rights reserved </p>
         </div>
       </div>
     </footer>

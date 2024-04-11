@@ -91,7 +91,7 @@ const HomePage = ({ usersList }: any) => {
                 bg-no-repeat bg-center bg-cover brightness-50"></div>
 
           <div className="absolute flex justify-center items-center flex-col gap-y-4">
-            <p className="text-5xl lg:text-7xl font-bold z-10 bg-gradient-to-r from-fuchsia-600 to-purple-600 bg-clip-text text-transparent">KDrama</p>
+            <p className="text-5xl lg:text-7xl font-bold z-10 bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">KDrama</p>
             <p className="text-lg lg:text-3xl text-center z-10">Welcome to the world of kdrama fans</p>
             <Button
               variant="expandIcon"
@@ -115,8 +115,14 @@ const HomePage = ({ usersList }: any) => {
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-11">
             {usersList.map((item: any) => (
               <div id="fans-sec" key={item.name} className="group relative ">
-                <div className="group before:hover:scale-95 min-w-80 w-full before:hover:w-80 before:hover:h-44 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl  from-fuchsia-500 to-cyan-500 before:absolute before:top-0  h-72 relative bg-zinc-800 flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden">
-                  <div className="w-28 h-28 bg-blue-700 mt-8 rounded-full border-4 border-slate-50 z-10 group-hover:scale-150 group-hover:-translate-x-24  group-hover:-translate-y-20 transition-all duration-500 overflow-hidden">
+                <div className="group before:hover:scale-95 min-w-80 w-full before:hover:w-80 before:hover:h-44 
+                    before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 
+                    before:rounded-t-2xl before:bg-gradient-to-bl  from-fuchsia-500 to-cyan-500 before:absolute before:top-0  
+                    h-72 relative bg-zinc-100 dark:bg-zinc-800 flex flex-col items-center justify-center gap-2 
+                    text-center rounded-2xl overflow-hidden">
+                  <div className="w-28 h-28 bg-blue-700 mt-8 rounded-full border-4 border-slate-50 z-10 
+                      group-hover:scale-150 group-hover:-translate-x-24  group-hover:-translate-y-20 
+                      transition-all duration-500 overflow-hidden">
                     <Image
                       src={item.imgUrl}
                       alt={item.name}
