@@ -4,6 +4,7 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { ScrollArea } from './ui/scroll-area'
 import Image from 'next/image'
+
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { ArrowRightIcon } from 'lucide-react'
@@ -14,9 +15,15 @@ import { ScrollTrigger } from "gsap/all";
 import { twMerge } from 'tailwind-merge'
 import { Parallax } from '@/utilities/Parallax'
 import { useLenis } from '@studio-freight/react-lenis'
+import FeaturesSec from '@/templates/FeaturesSec'
 
 const HomePage = ({ usersList }: any) => {
   // console.log("test" , test);
+
+  const lenis = useLenis(({ scroll }) => {
+    // called every scroll
+    console.log(scroll);
+  });
 
   const comp = useRef(null)
 
@@ -84,17 +91,22 @@ const HomePage = ({ usersList }: any) => {
                 bg-no-repeat bg-center bg-cover brightness-50"></div>
 
           <div className="absolute flex justify-center items-center flex-col gap-y-4">
-            <p className="text-7xl font-bold mx-auto z-10">KDrama</p>
-            <p className="text-lg lg:text-3xl mx-auto z-10">Welcome to the world of kdrama fans</p>
-            <Button variant="expandIcon" Icon={ArrowRightIcon} iconPlacement="right">Lets Go</Button>
+            <p className="text-5xl lg:text-7xl font-bold z-10 bg-gradient-to-r from-fuchsia-600 to-purple-600 bg-clip-text text-transparent">KDrama</p>
+            <p className="text-lg lg:text-3xl text-center z-10">Welcome to the world of kdrama fans</p>
+            <Button
+              variant="expandIcon"
+              Icon={ArrowRightIcon}
+              iconPlacement="right"
+              onClick={() => lenis?.scrollTo("#fans-title", { lerp: 0.02 })}
+            >
+              Lets Go
+            </Button>
           </div>
         </section>
         {/* </Parallax> */}
 
-        <section className='w-full grid grid-cols-3 gap-x-12 my-28'>
-          <div id='feat-sec1' className="bg-blue-400 w-full h-52"></div>
-          <div id='feat-sec2' className="bg-blue-500 w-full h-52"></div>
-          <div id='feat-sec3' className="bg-blue-600 w-full h-52"></div>
+        <section className='w-full grid grid-cols-1 gap-y-4 lg:grid-cols-3 gap-x-12 my-28'>
+          <FeaturesSec />
         </section>
 
         {/* <Parallax speed={2} className="self-end"> */}

@@ -91,13 +91,13 @@ const Footer = () => {
           <h2 className=" text-lg font-bold tracking-widest text-white uppercase title-font">Links</h2>
           <nav className="list-none flex flex-col gap-y-1">
             <li className="">
-              <a className="text-gray-50 cursor-pointer hover:text-blue-500 transition-all">About me</a>
+              <a className="text-gray-50 cursor-pointer hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all">About me</a>
             </li>
             <li className="">
-              <a className="text-gray-50 cursor-pointer hover:text-blue-500 transition-all">Git</a>
+              <a className="text-gray-50 cursor-pointer hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all">Git</a>
             </li>
             <li className="">
-              <a className="text-gray-50 cursor-pointer hover:text-blue-500 transition-all">Terms & Privacy</a>
+              <a className="text-gray-50 cursor-pointer hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all">Terms & Privacy</a>
             </li>
           </nav>
         </div>

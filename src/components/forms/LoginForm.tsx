@@ -155,7 +155,8 @@ export default function LoginForm() {
               forget password?
             </Link>
 
-            <Button type="submit" className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 ">
+            <Button type="submit"
+              className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 ">
               Submit</Button>
           </form>
         </Form>
