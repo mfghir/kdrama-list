@@ -1,24 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
-import React, { useEffect, useLayoutEffect, useRef } from 'react'
-import { ScrollArea } from './ui/scroll-area'
+import { useLayoutEffect, useRef } from 'react'
 import Image from 'next/image'
-
 import Link from 'next/link'
+
 import { Button } from './ui/button'
 import { ArrowRightIcon } from 'lucide-react'
 import Footer from './Footer'
 
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-import { twMerge } from 'tailwind-merge'
-import { Parallax } from '@/utilities/Parallax'
 import { useLenis } from '@studio-freight/react-lenis'
 import FeaturesSec from '@/templates/FeaturesSec'
 
+
+
 const HomePage = ({ usersList }: any) => {
-  // console.log("test" , test);
 
   const lenis = useLenis(({ scroll }) => {
     // called every scroll
@@ -61,15 +58,15 @@ const HomePage = ({ usersList }: any) => {
         })
         .to(["#fans-title"], {
           opacity: 1,
-          // x: "+=0",
           delay: 0.1,
           stagger: 0.5,
         })
 
         .from("#fans-sec", {
-          duration: 1,
+          duration: 2,
           scale: 0.7,
           opacity: 0,
+          scrub:true,
           // delay: 0.3,
           start: "top top",
           ease: "power4.inOut",
