@@ -92,16 +92,17 @@ const Footer = () => {
           <h2 className=" text-lg font-bold tracking-widest  uppercase title-font">Links</h2>
           <nav className="list-none flex flex-col gap-y-1">
             <li>
-              <a className=" cursor-pointer element-hover">About me</a>
+              <a href='https://fatemeweb.vercel.app'
+              className=" cursor-pointer element-hover">About me</a>
             </li>
             <li>
               <a href='https://github.com/mfghir/kdrama-list'
                 className="cursor-pointer element-hover"
               >Git</a>
             </li>
-            <li>
+            {/* <li>
               <a className=" cursor-pointer element-hover">Terms & Privacy</a>
-            </li>
+            </li> */}
           </nav>
         </div>
 

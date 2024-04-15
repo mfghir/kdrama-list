@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react";
 import { signIn } from "next-auth/react";
 import GoogleButton from "../../utilities/GoogleButton";
 
@@ -27,18 +26,20 @@ import Link from "next/link";
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
 
+
 const formSchema = z.object({
   email: z.string()
     .email("This is not a valid email.")
     .min(5, { message: "This field has to be filled." }),
-  password: z.string()
-    .min(8, { message: "pass must be at least 8 length." }),
+  password: z.string().min(8, { message: 'You must be at least 8 character' })
+    .refine((value) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/.test(value),
+      { message: 'Password must contain at least one letter, one number, and one special character' }
+    ),
 })
 
 
 
 export default function LoginForm() {
-  const [error, setError] = useState("");
   const router = useRouter();
   const { toast } = useToast();
 
@@ -56,7 +57,6 @@ export default function LoginForm() {
       const res = await signIn("credentials", {
         email: values.email,
         password: values.password,
-
         redirect: false,
       });
       console.log("res login", res);
@@ -66,12 +66,7 @@ export default function LoginForm() {
       // }
       // );
 
-
-      if (res?.error) {
-        // if (res?.data.error) {
-        setError("Invalid Credentials");
-        return;
-      }
+      if (res?.error) console.log("error/LoginForm --->", res.error)
 
       router.push("/dashboard");
     } catch (error) {
@@ -129,6 +124,7 @@ export default function LoginForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
+
                   <FormControl>
                     <Input placeholder="email" {...field} className="py-4" />
                   </FormControl>
@@ -144,9 +140,11 @@ export default function LoginForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
+
                   <FormControl>
                     <Input placeholder="password" {...field} className="py-4" />
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -156,7 +154,9 @@ export default function LoginForm() {
             </Link>
 
             <Button type="submit"
-              className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 ">
+              className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  
+              from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 "
+            >
               Submit</Button>
           </form>
         </Form>

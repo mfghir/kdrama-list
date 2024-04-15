@@ -26,13 +26,15 @@ import Image from "next/image";
 import GoogleButton from "../../utilities/GoogleButton";
 
 const formSchema = z.object({
-  name: z.string()
-    .min(4, { message: "This field has to be filled." }),
+  name: z.string().min(2, { message: "Username must be at least 2 characters.", }),
   email: z.string()
-    .min(5, { message: "This field has to be filled." })
-    .email("This is not a valid email."),
+    .email("This is not a valid email.")
+    .min(5, { message: "This field has to be filled." }),
   password: z.string()
-    .min(8, { message: "pass must be at least 8 length." }),
+    .min(8, { message: 'You must be at least 8 character' })
+    .refine((value) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/.test(value),
+      { message: 'Password must contain at least one letter, one number, and one special character' }
+    ),
 })
 
 
