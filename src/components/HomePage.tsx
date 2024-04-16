@@ -63,11 +63,13 @@ const HomePage = ({ usersList }: any) => {
         })
 
         .from("#fans-sec", {
-          duration: 2,
+          duration: 1,
           scale: 0.7,
           opacity: 0,
+          stagger: 0.2,
+
           scrub:true,
-          // delay: 0.3,
+          delay: 0.3,
           start: "top top",
           ease: "power4.inOut",
         }, "<")

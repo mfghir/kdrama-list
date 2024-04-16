@@ -149,7 +149,7 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Link className=" text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" href="/reset-password" >
+            <Link href="/reset-password"  className=" text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" >
               forget password?
             </Link>
 

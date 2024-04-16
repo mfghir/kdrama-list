@@ -1,16 +1,27 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { NextAuthOptions, RequestInternal } from "next-auth";
+import {
+  Account,
+  NextAuthOptions,
+  Profile,
+  RequestInternal,
+  Session,
+  User,
+} from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 
-
-import User from "./models/user";
+import { User as UserModelMongo } from "./models/user";
 import connectDB from "./lib/connectDB";
+import { JWT } from "next-auth/jwt";
 
 type UserModel = any;
 
 export const authOptions = {
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
 
   providers: [
     GoogleProvider({
@@ -47,7 +58,7 @@ export const authOptions = {
         // if (!passwordsMatch) return null;
 
         try {
-          const user = await User.findOne({ email });
+          const user = await UserModelMongo.findOne({ email });
           if (!user) return null;
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
@@ -69,8 +80,29 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session(params: { session: Session; token: JWT; user: User }) {
+      if (params.session.user) {
+        params.session.user.email = params.token.email;
+      }
 
-  secret: process.env.AUTH_SECRET,
+      return params.session;
+    },
+    async jwt(params: {
+      token: JWT;
+      user?: User | undefined;
+      account?: Account | null | undefined;
+      profile?: Profile | undefined;
+      isNewUser?: boolean | undefined;
+    }) {
+      if (params.user) {
+        params.token.email = params.user.email;
+      }
+
+      return params.token;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/dashboard",
   },
