@@ -12,7 +12,7 @@ import { getServerSession } from 'next-auth'
 
 // import { authOptions } from './api/auth/[...nextauth]/route'
 import connectDB from '@/lib/connectDB'
-import User from '@/models/user'
+import {User} from '@/models/user'
 import { authOptions } from '@/auth-options'
 import SmoothScrolling from '@/utilities/SmoothScrolling'
 

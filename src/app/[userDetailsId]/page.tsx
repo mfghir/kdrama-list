@@ -3,7 +3,7 @@ import BreadCrumb from "@/utilities/breadcrumb";
 import UserDetails from "@/components/UserDetails";
 
 import KDramaModel from "@/models/kdrama";
-import User from "@/models/user";
+import {User} from "@/models/user";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface PageProps {
@@ -14,7 +14,7 @@ interface PageProps {
 
 export default async function Page({ params: { userDetailsId } }: PageProps) {
   await connectDB();
-  // @ts-ignore
+  
   const user = await User.findOne({ _id: userDetailsId })
   // console.log("userDetailsId  user **********", user);
 
