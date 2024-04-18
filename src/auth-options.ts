@@ -80,28 +80,28 @@ export const authOptions = {
       },
     }),
   ],
-  callbacks: {
-    async session(params: { session: Session; token: JWT; user: User }) {
-      if (params.session.user) {
-        params.session.user.email = params.token.email;
-      }
+  // callbacks: {
+  //   async session(params: { session: Session; token: JWT; user: User }) {
+  //     if (params.session.user) {
+  //       params.session.user.email = params.token.email;
+  //     }
 
-      return params.session;
-    },
-    async jwt(params: {
-      token: JWT;
-      user?: User | undefined;
-      account?: Account | null | undefined;
-      profile?: Profile | undefined;
-      isNewUser?: boolean | undefined;
-    }) {
-      if (params.user) {
-        params.token.email = params.user.email;
-      }
+  //     return params.session;
+  //   },
+  //   async jwt(params: {
+  //     token: JWT;
+  //     user?: User | undefined;
+  //     account?: Account | null | undefined;
+  //     profile?: Profile | undefined;
+  //     isNewUser?: boolean | undefined;
+  //   }) {
+  //     if (params.user) {
+  //       params.token.email = params.user.email;
+  //     }
 
-      return params.token;
-    },
-  },
+  //     return params.token;
+  //   },
+  // },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/dashboard",

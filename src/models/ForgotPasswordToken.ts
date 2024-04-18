@@ -1,8 +1,8 @@
-import { Schema, model, models } from "mongoose"
+import mongoose from "mongoose"
 
-const TokenSchema = new Schema({
+const TokenSchema = new mongoose.Schema({
     userId: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
@@ -20,6 +20,6 @@ const TokenSchema = new Schema({
     }
 })
 
-const ForgotPasswordToken = models.ForgotPasswordToken || model("ForgotPasswordToken", TokenSchema)
+const ForgotPasswordToken = mongoose.models.ForgotPasswordToken || mongoose.model("ForgotPasswordToken", TokenSchema)
 
 export default ForgotPasswordToken

@@ -204,7 +204,9 @@ const ForgotPassword = () => {
 
             try {
                 setLoading(true)
-                const apiRes = await axios.post(FORGOT_PASSWORD_API_URL, { email })
+                // const apiRes = await axios.post(FORGOT_PASSWORD_API_URL, { email })
+                const apiRes = await axios.post("/api/forgot-password", { email })
+                console.log("apiRes",apiRes)
 
                 if (apiRes?.data?.success) {
                     setApiSuccessMsg(apiRes?.data.msg)

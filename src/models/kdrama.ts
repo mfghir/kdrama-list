@@ -1,4 +1,4 @@
-import  User  from './user';
+import  {User}  from './user';
 import mongoose, { Schema } from "mongoose";
 
 const KDramaSchema = new mongoose.Schema(

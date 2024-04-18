@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface EmailTemplateProps {
-    name: string;
+    name: string | undefined ;
     resetLink: string;
 }
 
@@ -17,7 +17,7 @@ const EmailTemplate = ({ name, resetLink }: EmailTemplateProps) => {
             </p>
 
             <p style={textStyles}>
-                You recently requested a password reset. To reset your password, please click the the button below:
+                You recently requested a password reset. To reset your password, please click the button below:
             </p>
 
             <a style={linkStyles} href={resetLink}>
