@@ -7,17 +7,34 @@ import { User } from "@/models/user";
 import connectDB from "@/lib/connectDB";
 
 import { Resend } from "resend";
+import { authOptions } from "@/auth-options";
+import { getServerSession } from "next-auth";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(req: Request) {
+export async function POST(req: any) {
   try {
     // connect to DB
-    connectDB().catch((err: any) => NextResponse.json(err));
+    connectDB()
+    // .catch((err: any) => NextResponse.json(err));
 
-    // find the user with email
-    const { email } = await req.json();
-    const user = await User.findOne({ email });
+    // console.log("req forgot*********",req.json())
+
+ 
+    // const body = await req.json();
+    // console.log("body ********",body)
+
+    // const session = await getServerSession(authOptions);
+    // console.log("session forgot********",session)
+    
+    // const user = await User.findOne({ email: session?.user?.email });
+    // console.log("user forgot********",user)
+    
+    const { email } = await req.json()
+    console.log("email forgot********",email)
+    const user = await User.findOne({ email })
+    console.log("user forgot********",user)
+
 
     if (!user)
       return NextResponse.json(
