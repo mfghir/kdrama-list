@@ -36,16 +36,18 @@ const UserSchema = new Schema(
       type: String,
       default: "https://i.postimg.cc/rpN1DtvM/uer-pic.jpg",
     },
-    passwordResetTokens: [
-      { type: Schema.Types.ObjectId, ref: "PasswordResetToken" },
-    ],
+    verifyToken: {
+      type: String,
+      required: false,
+    },
+    // passwordResetTokens: [
+    //   { type: Schema.Types.ObjectId, ref: "PasswordResetToken" },
+    // ],
   },
   { timestamps: true }
 );
 
-
 const User: Model<IUser> = models.User || model("User", UserSchema);
-
 
 export { User };
 // export default User;

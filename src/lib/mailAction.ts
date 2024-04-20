@@ -4,16 +4,16 @@ import { User } from "@/models/user";
 import connectDB from "./connectDB";
 import nodemailer from "nodemailer";
 
-export async function mailAction({ email }: { email: string }) {
+export async function mailAction({ email }: { email: any }) {
   await connectDB();
   const user = await User.findOne({ email });
   if (user) {
     // console.log("User Exist " ,user)
-    const resetToken = `${crypto.randomUUID()}${crypto.randomUUID()}`.replace(
+    const token = `${crypto.randomUUID()}${crypto.randomUUID()}`.replace(
       /-/g,
       ""
     );
-    // console.log("resetToken " ,resetToken)
+    // console.log("token " ,token)
 
     var transporter = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
@@ -24,7 +24,7 @@ export async function mailAction({ email }: { email: string }) {
       },
     });
 
-    const htmlBody = `Click here to <a  href="$http://localhost:3000/forget-password/${resetToken}">Resat password </a> `;
+    const htmlBody = `Click here to <a  href="http://localhost:3000/reset-password/${token}">Resat password </a> `;
     const info = await transporter.sendMail({
       from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
       to: "bar@example.com, baz@example.com", // list of receivers
@@ -33,9 +33,14 @@ export async function mailAction({ email }: { email: string }) {
       html: htmlBody, // html body
     });
     console.log("Message sent: %s", info.messageId);
+
+    // save in db
+    await User.findOneAndUpdate({email:email },{ verifyToken:token})
   }
 
   if (!user) {
     throw new Error("User not found");
   }
+
+
 }

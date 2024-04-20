@@ -4,11 +4,9 @@ import ResetPassword from '@/components/forms/ResetPassword'
 import { ResetPasswordProps } from '@/lib/types'
 import React from 'react'
 
-const page = ({ params }: ResetPasswordProps) => {
+const page = () => {
     return (
-        <ResetPassword
-            params={params}
-        />
+        <ResetPassword  />
     )
 }
 

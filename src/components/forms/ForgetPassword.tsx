@@ -89,7 +89,7 @@ const ForgetPassword = () => {
       // }
 
       // await axios.post(FORGOT_PASSWORD_API_URL, values)
-      mailAction(values)
+      await mailAction(values)
       // Show success message and possibly redirect
       router.push("/login")
       toast({
