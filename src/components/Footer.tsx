@@ -22,7 +22,7 @@ const Footer = () => {
       <section className="container w-full flex justify-between flex-wrap md:flex-nowrap gap-y-12 p-6">
         <div className="w-full flex flex-col gap-y-6">
           <div className='w-full flex flex-col gap-y-1'>
-            <Link href="/">
+            <Link href="/" className='w-fit bg-zinc-200 pic-anim'>
               <Image
                 className="w-16 h-16 rounded-full object-cover origin-center"
                 width={70}
@@ -93,7 +93,7 @@ const Footer = () => {
           <nav className="list-none flex flex-col gap-y-1">
             <li>
               <a href='https://fatemeweb.vercel.app'
-              className=" cursor-pointer element-hover">About me</a>
+                className=" cursor-pointer element-hover">About me</a>
             </li>
             <li>
               <a href='https://github.com/mfghir/kdrama-list'

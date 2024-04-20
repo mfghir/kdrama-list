@@ -12,10 +12,10 @@ import { getServerSession } from 'next-auth'
 
 // import { authOptions } from './api/auth/[...nextauth]/route'
 import connectDB from '@/lib/connectDB'
-import {User} from '@/models/user'
+import { User } from '@/models/user'
 import { authOptions } from '@/auth-options'
 import SmoothScrolling from '@/utilities/SmoothScrolling'
-
+import { Toaster } from '@/components/ui/toaster'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -46,14 +46,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           disableTransitionOnChange
         >
           <SessionProviderComp>
-            <Provider>
+              <Provider>
 
-              {/* @ts-ignore */}
-              <Navbar userInfo={user} />
+                {/* @ts-ignore */}
+                <Navbar userInfo={user} />
 
-              <SmoothScrolling>{children}</SmoothScrolling>
-
-            </Provider>
+                <SmoothScrolling>
+         
+                  {children}
+          
+                  </SmoothScrolling>
+                  <Toaster />
+              </Provider>
           </SessionProviderComp>
         </ThemeProvider>
       </body>
