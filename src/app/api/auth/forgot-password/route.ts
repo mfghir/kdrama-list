@@ -15,7 +15,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: any) {
   try {
     // connect to DB
-    connectDB()
+    await connectDB()
     // .catch((err: any) => NextResponse.json(err));
 
     // console.log("req forgot*********",req.json())

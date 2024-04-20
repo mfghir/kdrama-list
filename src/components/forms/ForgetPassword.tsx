@@ -27,6 +27,7 @@ import axios from "axios";
 import { useToast } from "../ui/use-toast";
 import { FORGOT_PASSWORD_API_URL } from '@/lib'
 import { Toast } from '../ui/toast'
+import { mailAction } from '@/lib/mailAction'
 
 
 
@@ -73,21 +74,22 @@ const ForgetPassword = () => {
 
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // const onSubmit = async (data: ForgotPasswordInputs) => {
     // console.log("form", form.control)
     console.log("values", values)
 
     try {
-      const response = await fetch(FORGOT_PASSWORD_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      });
+      // const response = await fetch(FORGOT_PASSWORD_API_URL, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(values),
+      // });
 
-      if (!response.ok) {
-        throw new Error('There was an error sending the reset password email.');
-      }
+      // if (!response.ok) {
+      //   throw new Error('There was an error sending the reset password email.');
+      // }
 
+      // await axios.post(FORGOT_PASSWORD_API_URL, values)
+      mailAction(values)
       // Show success message and possibly redirect
       router.push("/login")
       toast({
