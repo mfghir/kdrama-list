@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 
 
@@ -24,6 +24,9 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Image from "next/image";
 import GoogleButton from "../../utilities/GoogleButton";
+import SubmitButton from "@/templates/SubmitButton";
+import axios from "axios";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Username must be at least 2 characters.", }),
@@ -40,7 +43,10 @@ const formSchema = z.object({
 
 
 export default function RegisterForm() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
+
   const { status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -60,45 +66,25 @@ export default function RegisterForm() {
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Could not register user.")
-        return res.json()
-      })
-      .then((data) => {
-        console.log(data);
-        router.push("/login");
-      }).catch((err) => console.log(err));
+    setLoading(true);
+
+    try {
+      await axios.post("/api/register", values);
+      router.push("/login");
+
+    } catch (error: any) {
+      console.log("error - RegisterForm ---->", error)
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error,
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
 
-  // async function onSubmit(values: z.infer<typeof formSchema>) {
-
-  //   try {
-  //     const res = await signIn("credentials", {
-  //       name: values.name,
-  //       email: values.email,
-  //       password: values.password,
-
-  //       // redirect: false,
-  //     });
-  //     console.log('res', res);
-
-  //     if (res?.error) {
-  //       setError("Invalid Credentials");
-  //       // if (res?.url) router.replace("/dashboard");
-  //       return;
-  //     }
-
-  //     router.replace("dashboard");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   // async function onSubmit( e:any ,values: z.infer<typeof formSchema>) {
 
@@ -313,12 +299,7 @@ export default function RegisterForm() {
                 )}
               />
 
-              <Button type="submit"
-                className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  
-              from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 "
-              >
-                Submit
-              </Button>
+              <SubmitButton loading={loading} />
             </form>
           </Form>
 

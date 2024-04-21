@@ -27,6 +27,7 @@ import axios from "axios";
 import { useToast } from "../ui/use-toast";
 import { mailAction } from '@/lib/mailAction'
 import { MoveLeft } from 'lucide-react'
+import SubmitButton from '@/templates/SubmitButton'
 
 
 
@@ -40,6 +41,7 @@ const formSchema = z.object({
 const ForgetPassword = () => {
   const router = useRouter();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,12 +118,8 @@ const ForgetPassword = () => {
             />
 
 
-            <Button type="submit"
-              className="w-full font-semibold text-base text-white transition-all 
-                duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl 
-              hover:from-cyan-500  hover:to-fuchsia-500 ">
-              Submit
-            </Button>
+            <SubmitButton loading={loading} />
+
           </form>
         </Form>
       </div>

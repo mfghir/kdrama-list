@@ -22,7 +22,8 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
     <div className="fixed inset-0 top-0 left-0 z-20 h-fit">
       <div className=" px-6 py-3 lg:px-20 flex justify-between items-center supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur">
         <section className="wf flex justify-start items-center gap-y-2 gap-x-4 ">
-          <Link href="/" className='bg-blue-700 pic-anim'>
+          <Link href="/"
+            className='pic-anim bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500 hover:to-fuchsia-500'>
             <Image
               className="w-16 h-16 rounded-full object-fill "
               width={70}

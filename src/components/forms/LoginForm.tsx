@@ -25,6 +25,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useState } from "react";
+import SubmitButton from "@/templates/SubmitButton";
 
 
 const formSchema = z.object({
@@ -165,16 +166,7 @@ export default function LoginForm() {
               forget password?
             </Link>
 
-            <Button type="submit" disabled={loading}
-              className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  
-              from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 "
-            >
-              {loading ?
-                <>
-                  <svg className="animate-spin h-5 w-5 mr-3 " viewBox="0 0 24 24"></svg>
-                  Loading ...
-                </> : 'Submit'}
-            </Button>
+            <SubmitButton loading={loading} />
           </form>
         </Form>
 

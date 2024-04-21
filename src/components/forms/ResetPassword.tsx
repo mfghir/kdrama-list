@@ -160,6 +160,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
 import { updatePassword } from '@/lib/updatePassword'
+import SubmitButton from '@/templates/SubmitButton'
 
 
 
@@ -182,6 +183,8 @@ const formSchema = z.object({
 const ResetPassword = ({ params }: { params: any }) => {
   const router = useRouter();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+
   // const { token } = useParams()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -286,12 +289,8 @@ const ResetPassword = ({ params }: { params: any }) => {
               )}
             />
 
-            <Button type="submit"
-              className="w-full font-semibold text-base text-white transition-all 
-                duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl 
-              hover:from-cyan-500  hover:to-fuchsia-500 ">
-              Submit
-            </Button>
+            <SubmitButton loading={loading} />
+
           </form>
         </Form>
       </div>
