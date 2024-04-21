@@ -159,18 +159,18 @@ import Link from "next/link";
 
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
-import { FORGOT_PASSWORD_API_URL } from '@/lib'
-import { Toast } from '../ui/toast'
-import { mailAction } from '@/lib/mailAction'
 import { updatePassword } from '@/lib/updatePassword'
 
 
 
 const formSchema = z.object({
   newPassword: z.string()
-    .min(6, { message: 'Password must be at least 6 characters' }),
+    .min(8, { message: 'You must be at least 8 character' })
+    .refine((value) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/.test(value),
+      { message: 'Password must contain at least one letter, one number, and one special character' }
+    ),
   confirmPassword: z.string()
-    .min(6, { message: 'Password must be at least 6 characters' })
+    .min(8, { message: 'Password must be at least 6 characters' })
 })
   .refine((data) => data.newPassword === data.confirmPassword, {
     path: ['confirmPassword'],
@@ -179,10 +179,10 @@ const formSchema = z.object({
 
 
 
-const ResetPassword = () => {
+const ResetPassword = ({ params }: { params: any }) => {
   const router = useRouter();
   const { toast } = useToast();
-  const { token } = useParams()
+  // const { token } = useParams()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -207,31 +207,21 @@ const ResetPassword = () => {
   //     console.log("forget password", err)
   //   }
   // }
-  console.log("token ", token)
+  // console.log("token ", token)
+  console.log("params ", params)
 
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // console.log("form", form.control)
-    // console.log("values", values)
+    console.log("values", values.newPassword)
 
 
     try {
-      // const response = await fetch(FORGOT_PASSWORD_API_URL, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(values),
-      // });
 
-      // if (!response.ok) {
-      //   throw new Error('There was an error sending the reset password email.');
-      // }
-
-      // await axios.post(FORGOT_PASSWORD_API_URL, values)
-      await updatePassword({ values, token })
-
-
-      // Show success message and possibly redirect
+      await updatePassword({ newPassword: values.newPassword, token: params.token })
       router.push("/login")
+
+
       toast({
         variant: "success",
         title: "success",
@@ -254,7 +244,7 @@ const ResetPassword = () => {
         className="hidden lg:block lg:w-[550px] m-auto rounded-3xl"
         width={1080}
         height={1080}
-        src="https://i.postimg.cc/7YPZySS3/forget-pass.jpg"
+        src="https://i.postimg.cc/YSwB8kDG/reset-pass.jpg"
         alt="reset password illustration" />
 
       <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col justify-center my-6">

@@ -5,8 +5,10 @@ import connectDB from "./connectDB";
 import nodemailer from "nodemailer";
 
 export async function mailAction({ email }: { email: any }) {
+
   await connectDB();
   const user = await User.findOne({ email });
+
   if (user) {
     // console.log("User Exist " ,user)
     const token = `${crypto.randomUUID()}${crypto.randomUUID()}`.replace(
@@ -24,7 +26,7 @@ export async function mailAction({ email }: { email: any }) {
       },
     });
 
-    const htmlBody = `Click here to <a  href="http://localhost:3000/reset-password/${token}">Resat password </a> `;
+    const htmlBody = `Click here to <a  href="http://localhost:3000/reset-password/${token}">Resat password</a> `;
     const info = await transporter.sendMail({
       from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
       to: "bar@example.com, baz@example.com", // list of receivers

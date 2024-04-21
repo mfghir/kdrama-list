@@ -10,17 +10,13 @@ import { redirect } from "next/navigation";
 //   confirmPassword: string;
 // }
 
-export async function updatePassword({
-  values,
-  token,
-}: {
-  values: any;
-  token: any;
-}) {
-  console.log("values", values);
+export async function updatePassword({ newPassword,token} : { newPassword: any, token: any}) {
+  console.log("newPassword", newPassword);
   await connectDB();
+
   const salt = await bcrypt.genSalt(20);
-  const hashedPassword = await bcrypt.hash(values.newPassword, salt);
+  const hashedPassword = await bcrypt.hash(newPassword, salt);
+
   await User.findOneAndUpdate(
     { verifyToken: token },
     { password: hashedPassword }

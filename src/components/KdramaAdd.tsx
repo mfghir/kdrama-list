@@ -36,7 +36,6 @@ type SelectOptions = {
 
 
 const KdramaAdd = () => {
-
   const { mutate } = useAddDrama()
   const { toast } = useToast()
   const [value, setValue] = useState<SelectOptions>({
@@ -52,32 +51,11 @@ const KdramaAdd = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
-    console.log("data drama form", data);
-    // mutate(data);
-
-    // const res = await fetch("/api/kdrama", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: { "Content-Type": "application/json" },
-    // })
-    // const dataDrama = await res.json()
-
-    // if (dataDrama.error) {
-    //   console.log("error", dataDrama);
-    //   toast({
-    //     title: dataDrama.error,
-    //     variant: "destructive"
-    //   })
-
-    // } else {
-    //   console.log("success", dataDrama);
-    //   toast({ title: dataDrama.message })
-    // }
+    console.log("data - KdramaAdd ---->", data);
 
     try {
-      // Send the post request directly with the data object
-      await axios.post(`/api/kdrama`, data);
-      // mutate(data);
+      // await axios.post(`/api/kdrama`, data);
+      mutate(data);
 
       toast({ title: "Successfully Added ✔" });
 

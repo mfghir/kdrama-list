@@ -25,23 +25,16 @@ import Link from "next/link";
 
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
-import { FORGOT_PASSWORD_API_URL } from '@/lib'
-import { Toast } from '../ui/toast'
 import { mailAction } from '@/lib/mailAction'
+import { MoveLeft } from 'lucide-react'
 
 
 
 const formSchema = z.object({
   email: z.string()
     .email("This is not a valid email.")
-    .min(5, { message: "This field has to be filled." }),
-  // password: z.string()
-  //   .min(8, { message: "pass must be at least 8 length." }),
+    .min(5, { message: "This field has to be filled." })
 })
-
-type ForgotPasswordInputs = {
-  email: string;
-}
 
 
 const ForgetPassword = () => {
@@ -51,47 +44,21 @@ const ForgetPassword = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      // password: "",
+      email: ""
     },
   })
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<ForgotPasswordInputs>()
 
-  // const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
-  //   try {
-  //     await axios.post("/api/auth/forget-password", values)
-  //     toast({ title: "success", description: "Check your inbox!" });
-  //     router.push("/login")
-  //   } catch (err) {
-  //     console.log("forget password", err)
-  //   }
-  // }
+
 
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log("form", form.control)
-    console.log("values", values)
+    // console.log("values", values)
 
     try {
-      // const response = await fetch(FORGOT_PASSWORD_API_URL, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(values),
-      // });
-
-      // if (!response.ok) {
-      //   throw new Error('There was an error sending the reset password email.');
-      // }
-
-      // await axios.post(FORGOT_PASSWORD_API_URL, values)
       await mailAction(values)
-      // Show success message and possibly redirect
       router.push("/login")
+
       toast({
         variant: "success",
         title: "success",
@@ -118,6 +85,13 @@ const ForgetPassword = () => {
         alt="forget password illustration" />
 
       <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col justify-center my-6">
+        <Link href="/login"
+          className="flex justify-start items-center gap-x-2 text-gray-500 text-xs mb-6 hover:text-blue-500 duration-300"
+        >
+          <MoveLeft size={16} />
+          Back to Login
+        </Link>
+
         <h1 className="text-2xl font-bold inline-block w-fit border-b-2 ">Forget Password</h1>
         <p className='text-sm text-gray-400 mt-2 mb-8'>
           Don't worry if you've forgotten your password.
@@ -140,6 +114,7 @@ const ForgetPassword = () => {
                 </FormItem>
               )}
             />
+
 
             <Button type="submit"
               className="w-full font-semibold text-base text-white transition-all 

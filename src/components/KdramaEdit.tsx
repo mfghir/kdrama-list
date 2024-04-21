@@ -28,7 +28,6 @@ import { labels, genres, statuses } from "@/lib/data";
 import { useEditDrama } from "@/lib/mutations";
 import { useState } from "react";
 
-// import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 
@@ -40,17 +39,11 @@ type SelectOptions = {
 
 
 export default function KdramaEdit({ row }: { row: any }): JSX.Element {
-  // const { data: session } = useSession();
-  const pathname = usePathname()
-
-
   const { mutate } = useEditDrama()
   const { toast } = useToast()
+  const pathname = usePathname()
 
   const [value, setValue] = useState<SelectOptions>({
-    // statuses: "",
-    // labels: "",
-    // genres: ""
     statuses: row.original.status,
     labels: row.original.label,
     genres: row.original.genre,
@@ -107,7 +100,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
-          
+
           <div className="grid grid-cols-4 items-center gap-4">
             <Select
               name="status"

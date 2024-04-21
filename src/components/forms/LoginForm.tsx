@@ -1,10 +1,5 @@
 "use client"
 
-import { signIn } from "next-auth/react";
-import GoogleButton from "../../utilities/GoogleButton";
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
@@ -13,18 +8,23 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 
+import { Button } from "@/components/ui/button"
+import { useToast } from "../ui/use-toast";
+import GoogleButton from "../../utilities/GoogleButton";
 
+import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import * as z from "zod"
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+import { signIn } from "next-auth/react";
 import axios from "axios";
-import { useToast } from "../ui/use-toast";
+import { useState } from "react";
 
 
 const formSchema = z.object({
@@ -42,6 +42,7 @@ const formSchema = z.object({
 export default function LoginForm() {
   const router = useRouter();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,33 +52,44 @@ export default function LoginForm() {
     },
   })
 
-  // async function onSubmit(values: z.infer<typeof formSchema>) {
+
   const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
+    setLoading(true);
     try {
       const res = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
-      console.log("res login", res);
+      // console.log("res login", res);
+
       // const res = await axios.post("/api/userExists", {
       //   email: values.email,
       //   password: values.password,
       // }
       // );
 
-      if (res?.error) console.log("error/LoginForm --->", res.error)
+      if (res?.error) {
+        console.log("error/LoginForm --->", res.error)
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: res.error,
+        });
+      }
 
       router.push("/dashboard");
-    } catch (error) {
+
+    } catch (error: any) {
       console.log("error===>", error);
 
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        description: error,
       });
     }
+    setLoading(false);
   }
 
 
@@ -149,15 +161,20 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Link href="/forget-password"  className=" text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" >
+            <Link href="/forget-password" className="text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" >
               forget password?
             </Link>
 
-            <Button type="submit"
+            <Button type="submit" disabled={loading}
               className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  
               from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 "
             >
-              Submit</Button>
+              {loading ?
+                <>
+                  <svg className="animate-spin h-5 w-5 mr-3 " viewBox="0 0 24 24"></svg>
+                  Loading ...
+                </> : 'Submit'}
+            </Button>
           </form>
         </Form>
 

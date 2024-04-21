@@ -1,13 +1,15 @@
-// import ResetPassword from '@/app/components/Auth/ResetPassword'
-// import { ResetPasswordProps } from '@/app/types'
 import ResetPassword from '@/components/forms/ResetPassword'
-import { ResetPasswordProps } from '@/lib/types'
-import React from 'react'
+import { Metadata } from 'next'
 
-const page = () => {
-    return (
-        <ResetPassword  />
-    )
+export const metadata: Metadata = {
+  title: 'Reset Password',
+}
+
+
+const page = ({ params }: { params: string }) => {
+  return (
+    <ResetPassword params={params} />
+  )
 }
 
 export default page

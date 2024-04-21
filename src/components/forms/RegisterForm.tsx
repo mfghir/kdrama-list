@@ -313,12 +313,16 @@ export default function RegisterForm() {
                 )}
               />
 
-              <Button type="submit" className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 ">
-                Submit</Button>
+              <Button type="submit"
+                className="w-full font-semibold text-base text-white transition-all duration-700 bg-gradient-to-r  
+              from-fuchsia-500 to-cyan-500 hover:bg-gradient-to-rl hover:from-cyan-500  hover:to-fuchsia-500 "
+              >
+                Submit
+              </Button>
             </form>
           </Form>
 
-          <div className="flex justify-between items-center gap-x-2 my-6 w-full  text-zinc-600">
+          <div className="flex justify-between items-center gap-x-2 my-6 w-full text-zinc-600">
             <span className="w-full h-[1px] bg-zinc-600"></span>
             <span>or</span>
             <span className="w-full h-[1px] bg-zinc-600"></span>
