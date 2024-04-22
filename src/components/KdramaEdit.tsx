@@ -64,7 +64,7 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
     };
 
     mutate({ id: row.original.id, ...updatedData });
-    toast({ title: "Successfully edited ! ✔" })
+    toast({ variant: "success", title: "Successfully edited ! ✔" })
   }
 
 
@@ -72,7 +72,8 @@ export default function KdramaEdit({ row }: { row: any }): JSX.Element {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {pathname === "/dashboard/kdrama-list" &&
+        {
+          pathname === "/dashboard/kdrama-list" &&
           <Button variant="default" size="sm">Edit</Button>
         }
       </DialogTrigger>

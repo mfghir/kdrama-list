@@ -77,6 +77,7 @@ export default function RegisterForm() {
         title: "Success",
         description: "Successfully Registered!"
       });
+      
     } catch (error: any) {
       console.log("error catch - RegisterForm ---->", error)
 

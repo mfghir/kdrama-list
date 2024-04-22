@@ -5,14 +5,14 @@ import {
   Profile,
   RequestInternal,
   Session,
-  User,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 
-import { User as UserModelMongo } from "./models/user";
+// import { User as UserModelMongo } from "./models/user";
 import connectDB from "./lib/connectDB";
 import { JWT } from "next-auth/jwt";
+import User from "./models/user";
 
 type UserModel = any;
 
@@ -58,7 +58,7 @@ export const authOptions = {
         // if (!passwordsMatch) return null;
 
         try {
-          const user = await UserModelMongo.findOne({ email });
+          const user = await User.findOne({ email });
           if (!user) return null;
 
           const passwordsMatch = await bcrypt.compare(password, user.password);

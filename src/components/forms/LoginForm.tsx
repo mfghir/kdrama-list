@@ -24,6 +24,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import SubmitButton from "@/templates/SubmitButton";
+import axios from "axios";
 
 
 const formSchema = z.object({
@@ -56,34 +57,34 @@ export default function LoginForm() {
   const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
     setLoading(true);
     try {
-      const res = await signIn("credentials", {
+      // const res = 
+      await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
       // console.log("res login", res);
 
-      // const res = await axios.post("/api/userExists", {
-      //   email: values.email,
-      //   password: values.password,
-      // }
-      // );
+      console.log("values", values)
+
+      // await axios.post("/api/login", { email: values.email });
+      router.push("/dashboard");
+
       toast({
         variant: "success",
         title: "Success",
         description: "Welcome back"
       });
 
-      if (res?.error) {
-        console.log("error - LoginForm ---->", res.error)
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: res.error,
-        });
-      }
+      // if (res?.error) {
+      //   console.log("error - LoginForm ---->", res.error)
+      //   toast({
+      //     variant: "destructive",
+      //     title: "Uh oh! Something went wrong.",
+      //     description: res.error,
+      //   });
+      // }
 
-      router.push("/dashboard");
 
     } catch (error: any) {
       console.log("error catch- LoginForm ---->", error)

@@ -5,10 +5,14 @@ import { NextResponse } from "next/server";
 export async function POST(req: any) {
   try {
     await connectDB();
-    console.log("req api", req);
+    console.log("req api POST - login ******", req);
 
-    const { email } = await req.json();
-    const user = await User.findOne({ email });
+    const userData = await req.json();
+    console.log("userData - login ******", userData);
+
+
+    // const { email } = await req.json();
+    const user = await User.findOne({ email :userData.email });
 
     // const userr = await User.findOne({ email }).select("_id");
     // console.log("userr exist ****", userr);

@@ -57,7 +57,7 @@ const KdramaAdd = () => {
       // await axios.post(`/api/kdrama`, data);
       mutate(data);
 
-      toast({ title: "Successfully Added ✔" });
+      toast({ variant: "success", title: "Successfully Added ✔" });
 
     } catch (error) {
       console.error("Error adding data:", error);

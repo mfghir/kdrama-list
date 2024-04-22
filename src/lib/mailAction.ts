@@ -16,7 +16,7 @@ export async function mailAction({ email }: { email: any }) {
     );
     // console.log("token " ,token)
 
-    var transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
