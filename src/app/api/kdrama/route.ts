@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth-options";
 
-import {User} from "@/models/user";
+import User from "@/models/user";
 import KDramaModel from "@/models/kdrama";
 import connectDB from "@/lib/connectDB";
 

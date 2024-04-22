@@ -1,11 +1,10 @@
 "use server";
 
-import { User } from "@/models/user";
+import User from "@/models/user";
 import connectDB from "./connectDB";
 import nodemailer from "nodemailer";
 
 export async function mailAction({ email }: { email: any }) {
-
   await connectDB();
   const user = await User.findOne({ email });
 
@@ -37,12 +36,10 @@ export async function mailAction({ email }: { email: any }) {
     console.log("Message sent: %s", info.messageId);
 
     // save in db
-    await User.findOneAndUpdate({email:email },{ verifyToken:token})
+    await User.findOneAndUpdate({ email: email }, { verifyToken: token });
   }
 
   if (!user) {
     throw new Error("User not found");
   }
-
-
 }

@@ -72,8 +72,14 @@ export default function RegisterForm() {
       await axios.post("/api/register", values);
       router.push("/login");
 
+      toast({
+        variant: "success",
+        title: "Success",
+        description: "Successfully Registered!"
+      });
     } catch (error: any) {
-      console.log("error - RegisterForm ---->", error)
+      console.log("error catch - RegisterForm ---->", error)
+
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",

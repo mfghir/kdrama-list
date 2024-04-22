@@ -216,29 +216,31 @@ const ResetPassword = ({ params }: { params: any }) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // console.log("form", form.control)
-    console.log("values", values.newPassword)
+    // console.log("values", values.newPassword)
 
+    setLoading(true);
 
     try {
-
       await updatePassword({ newPassword: values.newPassword, token: params.token })
       router.push("/login")
 
-
       toast({
         variant: "success",
-        title: "success",
-        description: "Check your inbox!"
+        title: "Success",
+        description: "Your password successfully changed!"
       });
 
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.log("forget password ---->", error)
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to send reset password email"
+        // description: "Failed to send reset password email"
+        description: error
       });
     }
+
+    setLoading(false);
   }
 
   return (

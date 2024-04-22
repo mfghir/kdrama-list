@@ -54,8 +54,9 @@ const ForgetPassword = () => {
 
 
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
     // console.log("values", values)
+    setLoading(true);
 
     try {
       await mailAction(values)
@@ -63,18 +64,20 @@ const ForgetPassword = () => {
 
       toast({
         variant: "success",
-        title: "success",
+        title: "Success",
         description: "Check your inbox!"
       });
 
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.log("forget password ---->", error)
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to send reset password email"
+        description: error
       });
     }
+    setLoading(false);
+
   }
 
   return (

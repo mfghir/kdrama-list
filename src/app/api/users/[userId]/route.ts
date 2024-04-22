@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/connectDB";
-import {User} from "@/models/user";
+import User from "@/models/user";
 
-import  bcrypt  from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 // export async function GET(request: any, { params: { id } }: any) {
 //   try {
@@ -42,8 +42,8 @@ export async function PATCH(request: any, context: any) {
   try {
     const userData = await request?.json();
     const hashedPassword = await bcrypt.hash(userData.password, 10);
- 
-    userData.password = hashedPassword
+
+    userData.password = hashedPassword;
     await connectDB();
     await User.findByIdAndUpdate(context.params.userId, userData);
 

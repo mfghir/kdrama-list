@@ -1,13 +1,13 @@
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/auth-options';
 import connectDB from '@/lib/connectDB';
 import User from '@/models/user';
 
-import TabProfile from '@/components/dashboard/TabProfile'
-import BreadCrumb from '@/utilities/breadcrumb';
-import { redirect } from 'next/navigation';
-
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/auth-options';
+import { redirect } from 'next/navigation';
+import TabProfile from '@/components/dashboard/TabProfile'
+
+import BreadCrumb from '@/utilities/breadcrumb';
+
 
 const Page = async () => {
   const session = await getServerSession(authOptions);

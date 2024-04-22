@@ -1,16 +1,23 @@
 "use server";
-import bcrypt from "bcryptjs";
 
-import { User } from "@/models/user";
+import User from "@/models/user";
 import connectDB from "./connectDB";
 import { redirect } from "next/navigation";
+
+import bcrypt from "bcryptjs";
 
 // interface passTypes {
 //   newPassword: string;
 //   confirmPassword: string;
 // }
 
-export async function updatePassword({ newPassword,token} : { newPassword: any, token: any}) {
+export async function updatePassword({
+  newPassword,
+  token,
+}: {
+  newPassword: any;
+  token: any;
+}) {
   console.log("newPassword", newPassword);
   await connectDB();
 

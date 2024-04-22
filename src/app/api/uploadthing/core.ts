@@ -3,19 +3,16 @@ import { UploadThingError } from "uploadthing/server";
 
 const f = createUploadthing();
 
-
 const auth = (req: Request) => ({ id: "user1" }); // Fake auth function
 // (req: any) => new Promise<string>((res, rej)=>{
 //     if (req.headers?.authorization === 'Bearer secret') res('admin');
 //     else rej(new Error("Invalid token"));
 // });
 
-
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "4MB"} })
-
+  imageUploader: f({ image: { maxFileSize: "4MB" } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
@@ -28,16 +25,14 @@ export const ourFileRouter = {
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-          // This code RUNS ON YOUR SERVER after upload
-          console.log("Upload complete for userId:", metadata.userId);
- 
-          console.log("file url", file.url);
-     
-          // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-          return { uploadedBy: metadata.userId };
+      // This code RUNS ON YOUR SERVER after upload
+      console.log("Upload complete for userId:", metadata.userId);
+
+      console.log("file url", file.url);
+
+      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+      return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
-
-

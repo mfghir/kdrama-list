@@ -1,4 +1,4 @@
-import {User} from "@/models/user";
+import User from "@/models/user";
 import HomePage from "@/components/HomePage";
 
 
@@ -8,5 +8,5 @@ export default async function Home() {
   const usersList = users.map(user => user.toObject());
 
 
-  return <HomePage usersList={usersList}   />
+  return <HomePage usersList={usersList} />
 }

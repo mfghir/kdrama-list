@@ -8,9 +8,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 
-import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useToast } from "../ui/use-toast";
 import GoogleButton from "../../utilities/GoogleButton";
 
@@ -23,7 +22,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { signIn } from "next-auth/react";
-import axios from "axios";
 import { useState } from "react";
 import SubmitButton from "@/templates/SubmitButton";
 
@@ -32,7 +30,8 @@ const formSchema = z.object({
   email: z.string()
     .email("This is not a valid email.")
     .min(5, { message: "This field has to be filled." }),
-  password: z.string().min(8, { message: 'You must be at least 8 character' })
+  password: z.string()
+    .min(8, { message: 'You must be at least 8 character' })
     .refine((value) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/.test(value),
       { message: 'Password must contain at least one letter, one number, and one special character' }
     ),
@@ -69,9 +68,14 @@ export default function LoginForm() {
       //   password: values.password,
       // }
       // );
+      toast({
+        variant: "success",
+        title: "Success",
+        description: "Welcome back"
+      });
 
       if (res?.error) {
-        console.log("error/LoginForm --->", res.error)
+        console.log("error - LoginForm ---->", res.error)
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
@@ -82,7 +86,7 @@ export default function LoginForm() {
       router.push("/dashboard");
 
     } catch (error: any) {
-      console.log("error===>", error);
+      console.log("error catch- LoginForm ---->", error)
 
       toast({
         variant: "destructive",
@@ -162,7 +166,7 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Link href="/forget-password" className="text-gray-500 text-xs mt-1 hover:text-blue-500 duration-300" >
+            <Link href="/forget-password" className="text-gray-500 text-xs mt-3 hover:text-blue-500 duration-300" >
               forget password?
             </Link>
 

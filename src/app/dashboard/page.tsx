@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import connectDB from "@/lib/connectDB";
 
 import { authOptions } from "@/auth-options";
-import {User} from "@/models/user";
+import User from "@/models/user";
 import TabDashboard from "@/components/dashboard/TabDashboard";
 
 
@@ -20,7 +20,7 @@ const Dashboard = async () => {
 
   return (
     <TabDashboard
-    // @ts-ignore
+      // @ts-ignore
       role={user.role as string}
       // @ts-ignore
       usersList={usersList!} />
