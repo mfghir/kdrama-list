@@ -19,7 +19,7 @@ import { onDeleteFile } from "@/lib/uploadthing";
 interface ImageUploadProps {
   onChange?: any;
   //  @ts-ignore 
-  onRemove: (value: UploadFileResponse[]) => void;  
+  onRemove: (value: UploadFileResponse[]) => void;
   //  @ts-ignore 
   value: UploadFileResponse[];
 }
@@ -85,10 +85,10 @@ export default function FileUpload({
 
   return (
     <>
-      <div>
-        <div className="mb-4 flex items-center gap-4">
+      <div className="w-[90%] md:w-full md:h-full">
+        <div className="mb-4 flex items-center gap-4 ">
           {imgUrl ?
-            <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden">
+            <div className="relative  rounded-md overflow-hidden">
               <div className="z-10 absolute top-2 right-2">
                 <Button
                   type="button"
@@ -113,10 +113,10 @@ export default function FileUpload({
           }
         </div>
 
-        <div>
-         {/* @ts-ignore  */}
+        <>
+          {/* @ts-ignore  */}
           <UploadDropzone<OurFileRouter>
-            className="dark:bg-zinc-800 py-2 ut-label:text-sm ut-allowed-content:ut-uploading:text-red-300"
+            className=" dark:bg-zinc-800 py-2 ut-label:text-sm ut-allowed-content:ut-uploading:text-red-300"
             endpoint="imageUploader"
             config={{ mode: "auto" }}
             content={{
@@ -136,15 +136,15 @@ export default function FileUpload({
             }}
             onUploadError={(error: Error) => {
               console.log("error upload ===>", error.message);
-              // toast({
-              //   title: "Error",
-              //   variant: "destructive",
-              //   description: error.message,
-              // });
+              toast({
+                variant: "destructive",
+                title: "Error",
+                description: error.message,
+              });
             }}
             onUploadBegin={() => { }}
           />
-        </div>
+        </>
       </div>
     </>
   );

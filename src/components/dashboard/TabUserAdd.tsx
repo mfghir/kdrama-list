@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
 
-import { Heading } from '@/utilities/heading'
+import { Heading } from '@/templates/heading'
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
 

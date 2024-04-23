@@ -6,6 +6,13 @@ import KDramaModel from "@/models/kdrama";
 import User from "@/models/user";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'Details Page',
+}
+
 interface PageProps {
   params: {
     userDetailsId: string;

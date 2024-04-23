@@ -2,7 +2,6 @@
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Column, Row, Table } from "@tanstack/react-table"
-import { movieSchema } from "@/lib/schema"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -23,9 +22,24 @@ import { useToast } from "@/components/ui/use-toast"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { useState } from "react"
 
-// import { useMutation, useQueryClient } from "@tanstack/react-query"
-// import axios from "axios"
 import KdramaEdit from "@/components/KdramaEdit"
+import { z } from "zod"
+
+
+
+
+
+
+
+ const movieSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  status: z.string(),
+  label: z.string(),
+  genre: z.string(),
+})
+
+
 
 interface DataTableRowActionsProps<TData> {
   table: Table<TData>
@@ -52,21 +66,6 @@ export function DataTableRowActions<TData>({
   }
 
 
-  // const queryClient = useQueryClient()
-
-  // //deleting the user
-  // const { mutate: deleteUser } = useMutation((id: any) => {
-  //   return axios.delete(`${process.env.NEXT_PUBLIC_API_KEY}/kdramalist/${id}`)
-  // }, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['list']),
-  //     toast({
-  //       title: "Successfully Deleted! ✔",
-  //       // description: `Drama Name: ${text}`,
-  //     })
-  //   }
-  // })
-
 
   return (
     <>
@@ -87,8 +86,6 @@ export function DataTableRowActions<TData>({
             <DialogTrigger asChild>
               <DropdownMenuItem
                 onSelect={(e) => e.preventDefault()}
-              // onClick={() => table.options?.meta.handleOpenDetailsPanel(drama.id)} 
-              onClick={() => console.log("---",drama.id)} 
               >
                 Edit
                 {/* @ts-ignore  */}
@@ -119,7 +116,7 @@ export function DataTableRowActions<TData>({
 
         <DropdownMenuSeparator /> */}
 
-          <DropdownMenuItem 
+          <DropdownMenuItem
           // onClick={() => deleteUser(drama.id)}
           >
             Delete

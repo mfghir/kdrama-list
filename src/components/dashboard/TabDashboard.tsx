@@ -11,7 +11,6 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Button } from "../ui/button";
 import { UserInfo, userNotifs } from "@/lib/data";
 import { User } from "@/utilities/users-table/columns";
-import { ReactElement, JSXElementConstructor, ReactNode, PromiseLikeOfReactNode, Key, ReactPortal } from "react";
 
 
 
@@ -45,29 +44,6 @@ const TabDashboard = ({ role, usersList }: {
         <SecTwo serverData={serverData} />
 
         <SecThree usersList={usersList} />
-
-        {/* <section className="flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
-            {image ? <Image src={image} alt="user" width={60} height={60} /> : ""}
-
-            <div>
-              Role: <span className="font-bold">{role}</span>
-            </div>
-            <div>
-              Name: <span className="font-bold">{name}</span>
-            </div>
-            <div>
-              Email: <span className="font-bold">{email}</span>
-            </div>
-
-            <Button asChild >
-              <Link href="/" >
-                <LogOutIcon className="mr-2 h-4 w-4" />
-                Go to Dashboard
-              </Link>
-            </Button>
-          </section> */}
-        {/* </ScrollArea> */}
-        {/* </div> */}
       </>
     );
   }
@@ -193,7 +169,7 @@ const SecTwo = ({ serverData }: any) => {
 const SecThree = ({ usersList }: {
   usersList: any
 }): JSX.Element => {
-  const filteredUsers = usersList?.filter((user:UserInfo) => user.role === "user");
+  const filteredUsers = usersList?.filter((user: UserInfo) => user.role === "user");
 
   return (
     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7 min-h-[430px]">
@@ -218,7 +194,7 @@ const SecThree = ({ usersList }: {
         </CardHeader>
 
         <CardContent>
-          {filteredUsers?.map((user: UserInfo ) => (
+          {filteredUsers?.map((user: UserInfo) => (
             <div key={user.email} className="w-full flex  items-center  gap-x-3 mb-8">
               <Avatar className="h-9 w-9">
                 <AvatarImage src={user?.imgUrl} alt="Avatar" />

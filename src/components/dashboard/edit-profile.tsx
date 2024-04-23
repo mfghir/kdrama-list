@@ -1,7 +1,4 @@
 "use client"
-import { X } from 'lucide-react'
-
-
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -24,36 +21,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
 
-import { Heading } from '@/utilities/heading'
+import { Heading } from '@/templates/heading'
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
+
 import { UserInfo } from '@/lib/data';
 
 
 const formSchema = z.object({
-  name: z.string().min(3, { message: "Product Name must be at least 3 characters" }),
-  imgUrl: z.string().refine((files) => { return files?.[0] }),
+  name: z.string()
+    .min(3, { message: "Product Name must be at least 3 characters" }),
+  imgUrl: z.string()
+    .refine((files) => { return files?.[0] }),
   email: z.string()
     .min(5, { message: "This field has to be filled." })
     .email("This is not a valid email."),
-  password: z.string()
-    .min(8, { message: "pass must be at least 8 length." })
-    .optional(),
   role: z.string().default("user")
 });
-
-
-// const EditProfile = ({ setEditOpen }: { setEditOpen: boolean }) => {
-// 	return (
-// 		<>
-// 			{/* <X onClick={() => setEditOpen(true)} /> */}
-
-
-// 		</>
-// 	)
-// }
-
-// export default EditProfile
 
 
 
@@ -68,10 +52,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
     defaultValues: {
       name: "" || userInfo?.name,
       email: "" || userInfo?.email,
-      imgUrl: "" || userInfo?.imgUrl,
-      // password: ""
-      // password: ""|| userInfo?.password
-      // role: "",
+      imgUrl: "" || userInfo?.imgUrl
     }
   });
 
@@ -81,25 +62,14 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
 
     try {
       setLoading(true);
-
       // Create a new object to hold the data to be sent to the server
       const newData: any = {
         name: data.name,
         email: data.email,
-        imgUrl: data.imgUrl,
-        password: data?.password,
-
+        imgUrl: data.imgUrl
       };
 
-      // Only include the password field if a new password is provided
-      if (data.password) {
-        newData.password = data.password;
-      } else {
-        // If no new password is provided, include the existing hashed password
-        newData.password = userInfo.password;
-      }
-
-      console.log("newData===>", newData);
+      // console.log("newData===>", newData);
       await axios.patch(`/api/users/${userInfo._id}`, newData);
       localStorage.removeItem('imgUrl');
 
@@ -108,8 +78,9 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       router.refresh();
 
       toast({
+        variant: "success",
         title: "Success!",
-        description: "User has been edited.",
+        description: "Your Profile successfully edited!",
       });
 
     } catch (error: any) {
@@ -134,27 +105,33 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">
-          <FormField
-            control={form.control}
-            name="imgUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Images</FormLabel>
-                <FormControl>
-                  {/* @ts-ignore */}
-                  <FileUpload onChange={field.onChange} value={field.value} onRemove={field.onChange} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          {/* @ts-ignore */}
-          <Image src={userInfo?.imgUrl}
-            alt="Sample image"
-            width={200}
-            height={200}
-          />
+          <div className="w-full flex gap-x-12 gap-y-4 flex-wrap items-center">
+            {/* @ts-ignore */}
+            <Image src={userInfo?.imgUrl}
+              alt="Sample image"
+              width={200}
+              height={200}
+              className="rounded-2xl"
+            />
+ 
+            <FormField
+              control={form.control}
+              name="imgUrl"
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>Images</FormLabel> */}
+                  <FormControl>
+                    {/* @ts-ignore */}
+                    <FileUpload onChange={field.onChange} value={field.value} onRemove={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+
+          </div>
 
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
@@ -186,7 +163,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
               )}
             />
 
-            <FormField
+            {/* <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
@@ -198,7 +175,7 @@ const EditProfile = ({ userInfo }: { userInfo: UserInfo }) => {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
             {/* <FormField
 							control={form.control}

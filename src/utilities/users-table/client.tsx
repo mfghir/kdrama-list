@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { DataTable } from "./data-table";
 import { User, columns } from "./columns";
 
-import { Heading } from "../heading";
+import { Heading } from "../../templates/heading";
 
 interface ProductsClientProps {
   data: User[];

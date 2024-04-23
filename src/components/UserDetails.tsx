@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { DataTable } from "@/utilities/table/data-table"
+import { DataTable } from "@/utilities/kdrama-table/data-table"
 
 const UserDetails = ({ userDetails, kdramaList }: any) => {
 

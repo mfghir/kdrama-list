@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 export function setCookie(
   key: string,
   value: string,
-  options?: Cookies.CookieAttributes,
+  options?: Cookies.CookieAttributes
 ) {
   Cookies.set(key, value, options);
 }

@@ -3,6 +3,14 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/auth-options";
 
 import RegisterForm from "@/components/forms/RegisterForm";
+import { Metadata } from "next";
+
+
+
+export const metadata: Metadata = {
+  title: 'Register',
+}
+
 
 const Register = async () => {
   const session = await getServerSession(authOptions);

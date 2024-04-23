@@ -12,6 +12,7 @@ import {
   SquareUserRound ,
   UsersRound,
   MessageSquare,
+  KeyRound,
 } from "lucide-react";
 
 
@@ -64,6 +65,13 @@ export const navItems: NavItem[] = [
     href: "/dashboard/kdrama-list",
     icon: ListFilter,
     label: "KDrama List",
+    role: ["user", "admin"],
+  },
+  {
+    title: "Change Password",
+    href: "/dashboard/change-password",
+    icon: KeyRound,
+    label: "Change Password",
     role: ["user", "admin"],
   },
 ];

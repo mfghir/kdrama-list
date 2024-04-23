@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
 
-import { Heading } from '@/utilities/heading'
+import { Heading } from '@/templates/heading'
 import FileUpload from "@/utilities/file-upload";
 import axios from "axios";
 
@@ -40,7 +40,7 @@ const formSchema = z.object({
 
 
 
-const TabUserEdit = ({ userId }: any ) => {
+const TabUserEdit = ({ userId }: any) => {
   // console.log(userId);
   // console.log("-====userId=>>>>>>>", typeof userId);
 
@@ -54,7 +54,7 @@ const TabUserEdit = ({ userId }: any ) => {
   const defaultValues = initialData ? initialData : {
     name: "",
     email: "",
-    imgUrl: "" || userId?.imgUrl ,
+    imgUrl: "" || userId?.imgUrl,
     // password: "",
     role: "",
   };
@@ -80,7 +80,7 @@ const TabUserEdit = ({ userId }: any ) => {
         const res = await axios.post(`/api/users`, data);
         console.log("product", res);
       }
-      
+
       router.refresh();
       router.push(`/dashboard/users`);
       router.refresh();
@@ -146,7 +146,7 @@ const TabUserEdit = ({ userId }: any ) => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">
-        <FormField
+          <FormField
             control={form.control}
             name="imgUrl"
             render={({ field }) => (
@@ -165,7 +165,7 @@ const TabUserEdit = ({ userId }: any ) => {
             src={userId?.imgUrl}
             alt="Sample image"
             width={200}
-            height={200} 
+            height={200}
           />
 
 

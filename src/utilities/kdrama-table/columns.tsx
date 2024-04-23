@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { labels, genres, statuses } from "@/lib/data"
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
-import { MovieList } from "@/lib/schema"
+import { MovieList } from "@/lib/movieSchema"
 import KdramaEdit from "@/components/KdramaEdit"
 
 import KdramaDelete from "@/components/KdramaDelete"
@@ -127,7 +127,7 @@ export const columns: ColumnDef<MovieList>[] = [
   //     return <DataTableRowActions row={row} column={column} table={table} getValue={getValue} />
   //   }
   // },
-  
+
   {
     id: "edit",
     cell: ({ row }) => {

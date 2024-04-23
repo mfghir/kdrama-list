@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
-// import DashboardNav from "./DashboardNav";
-
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+
 import { ModeToggle } from "@/utilities/ModeToggle";
 import ThemeSelector from "../theme/ThemeSelector";
-
-// import Sidebar from "./Sidebar";
 import DashboardNav from "./DashboardNav";
+
 import { UserInfo } from "@/lib/data";
 
 

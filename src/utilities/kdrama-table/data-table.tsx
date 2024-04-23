@@ -27,38 +27,27 @@ import {
 
 import { useMemo } from 'react'
 import { useKdramasData } from "@/lib/queries"
-import { columns } from '@/utilities/table/columns'
+import { columns } from '@/utilities/kdrama-table/columns'
 
 import { useToast } from "@/components/ui/use-toast"
-import { Heading } from "../heading"
+import { Heading } from "../../templates/heading"
 
-// interface DataTableProps<TValue> {
-//   columns: ColumnDef<TValue>[]
-//   // dataT: TData[]
-// }
+
 
 export function DataTable<TValue>({ kdramaList }: any) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const { toast } = useToast()
 
-  const copyHandler = (text: string) => {
-    navigator.clipboard.writeText(text)
-    toast({
-      title: "Copy to clipboard! ✔",
-      description: `Drama Name: ${text}`,
-    })
-  }
-  console.log("kdramaList", kdramaList);
-  // const { data: serverData } = useQuery({
-  //   queryKey: ["kdrama"],
-  //   queryFn: async () => {
-  //     const result = await axios.get(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama`);
-  //     return result.data;
-  //   },
-  // });
+  // const copyHandler = (text: string) => {
+  //   navigator.clipboard.writeText(text)
+  //   toast({
+  //     title: "Copy to clipboard! ✔",
+  //     description: `Drama Name: ${text}`,
+  //   })
+  // }
 
-  // const data = useMemo(() => serverData ?? [], [serverData]);
+
 
   const { data: serverData } = useKdramasData()
   // const data = useMemo(() => serverData ?? [], [serverData]);
@@ -123,7 +112,7 @@ export function DataTable<TValue>({ kdramaList }: any) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => copyHandler(row.original.title)}
+                // onClick={() => copyHandler(row.original.title)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

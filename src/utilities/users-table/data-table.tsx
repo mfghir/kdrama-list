@@ -21,7 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { DataTablePagination } from "../table/data-table-pagination";
+import { DataTablePagination } from "../kdrama-table/data-table-pagination";
 import { AlertModal } from "../alert-modal";
 import { Input } from "@/components/ui/input";
 

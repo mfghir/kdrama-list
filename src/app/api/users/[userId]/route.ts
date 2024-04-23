@@ -41,9 +41,9 @@ export async function POST(request: any) {
 export async function PATCH(request: any, context: any) {
   try {
     const userData = await request?.json();
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    // const hashedPassword = await bcrypt.hash(userData.password, 10);
 
-    userData.password = hashedPassword;
+    // userData.password = hashedPassword;
     await connectDB();
     await User.findByIdAndUpdate(context.params.userId, userData);
 
