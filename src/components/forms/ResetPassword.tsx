@@ -195,29 +195,12 @@ const ResetPassword = ({ params }: { params: any }) => {
     },
   })
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors, isSubmitting },
-  // } = useForm<ForgotPasswordInputs>()
 
-  // const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
-  //   try {
-  //     await axios.post("/api/auth/forget-password", values)
-  //     toast({ title: "success", description: "Check your inbox!" });
-  //     router.push("/login")
-  //   } catch (err) {
-  //     console.log("forget password", err)
-  //   }
-  // }
   // console.log("token ", token)
   console.log("params ", params)
 
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log("form", form.control)
-    // console.log("values", values.newPassword)
-
     setLoading(true);
 
     try {

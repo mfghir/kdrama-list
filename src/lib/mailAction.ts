@@ -9,7 +9,6 @@ export async function mailAction({ email }: { email: any }) {
   const user = await User.findOne({ email });
 
   if (user) {
-    // console.log("User Exist " ,user)
     const token = `${crypto.randomUUID()}${crypto.randomUUID()}`.replace(
       /-/g,
       ""

@@ -29,6 +29,8 @@ export async function updatePassword({
     { password: hashedPassword }
   );
 
+  
+
   redirect("/login");
 
   //   if (!user) {

@@ -1,11 +1,12 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 
 import { Heading } from '@/templates/heading'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
 import { mailAction } from '@/lib/mailAction'
@@ -25,81 +26,84 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { updatePassword } from '@/lib/updatePassword';
+import { useSession } from 'next-auth/react';
 
 const formSchema = z.object({
-  email: z.string()
-    .email("This is not a valid email.")
-    .min(5, { message: "This field has to be filled." })
+  newPassword: z.string()
+    .min(8, { message: 'You must be at least 8 character' })
+    .refine((value) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/.test(value),
+      { message: 'Password must contain at least one letter, one number, and one special character' }
+    ),
+  confirmPassword: z.string()
+    .min(8, { message: 'Password must be at least 6 characters' })
 })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Passwords does not match'
+  })
+
 
 const TabChangePassword = () => {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      newPassword: "",
+      confirmPassword: ""
+    },
+  })
 
 
-    const router = useRouter();
-    const { toast } = useToast();
-    const [loading, setLoading] = useState(false);
-  
-    const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        email: ""
-      },
-    })
-  
-  
-  
-  
-  
-    const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
-      // console.log("values", values)
-      setLoading(true);
-  
-      try {
-        await mailAction(values)
-        router.push("/login")
-  
-        toast({
-          variant: "success",
-          title: "Success",
-          description: "Check your inbox!"
-        });
-  
-      } catch (error: any) {
-        console.log("forget password ---->", error)
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: error
-        });
-      }
-      setLoading(false);
-  
+  const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
+    setLoading(true);
+
+    try {
+      await updatePassword({ newPassword: values.newPassword, token: "token" })
+      // router.push("/login")
+
+      toast({
+        variant: "success",
+        title: "Success",
+        description: "Your password successfully changed!"
+      });
+
+    } catch (error: any) {
+      console.log("forget password ---->", error)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        // description: "Failed to send reset password email"
+        description: error
+      });
     }
 
-
-
-
+    setLoading(false);
+  }
 
 
 
   return (
-    <div>
-   <div className="flex items-center justify-between ">
+    <>
+      <div className="flex items-start justify-start ">
         <Heading title="Change Password" description="change your password" />
       </div>
 
 
-
-      <Form {...form}  >
+      <div className="w-full md:w-2/5 flex flex-col justify-start my-6">
+        <Form {...form}  >
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
             <FormField
               control={form.control}
-              name="email"
+              name="newPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>New Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="email" {...field} className="py-4" />
+                    <Input placeholder="new password" {...field} className="py-4" />
                   </FormControl>
 
                   <FormMessage />
@@ -107,15 +111,29 @@ const TabChangePassword = () => {
               )}
             />
 
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Confirm Password" {...field} className="py-4" />
+                  </FormControl>
 
-<Button disabled={loading} className="ml-auto" type="submit" >
-            {loading ? "Saving changes..." : "Save changes"}
-          </Button>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button disabled={loading} className="ml-auto" type="submit" >
+              {loading ? "Saving changes..." : "Save changes"}
+            </Button>
 
           </form>
         </Form>
-
-    </div>
+      </div>
+    </>
   )
 }
 

@@ -7,11 +7,11 @@ import {
   Session,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcryptjs";
 
-// import { User as UserModelMongo } from "./models/user";
+import bcrypt from "bcryptjs";
 import connectDB from "./lib/connectDB";
 import { JWT } from "next-auth/jwt";
+
 import User from "./models/user";
 
 type UserModel = any;
@@ -80,6 +80,22 @@ export const authOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async jwt({ token, user }: { token: JWT; user: UserModel | null }) {
+      if (user) {
+        token.id = user._id;
+      }
+      return token;
+    },
+    async session({ session, token }: { session: Session; token: JWT }) {
+      if (token) {
+        // @ts-ignore
+        session.user.id = token.id;
+      }
+      return session;
+    },
+  },
   // callbacks: {
   //   async session(params: { session: Session; token: JWT; user: User }) {
   //     if (params.session.user) {
@@ -102,6 +118,7 @@ export const authOptions = {
   //     return params.token;
   //   },
   // },
+
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/dashboard",
