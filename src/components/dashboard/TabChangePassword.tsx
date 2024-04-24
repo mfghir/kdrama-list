@@ -1,18 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
+import { useState } from 'react'
+import axios from "axios";
+import { useForm } from "react-hook-form"
+
 import { Heading } from '@/templates/heading'
-import React, { useEffect, useState } from 'react'
+import { useToast } from "../ui/use-toast";
 import { Button } from '../ui/button'
 
-
-import { useParams, useRouter } from "next/navigation";
-import axios from "axios";
-import { useToast } from "../ui/use-toast";
-import { mailAction } from '@/lib/mailAction'
-
-
-import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
@@ -23,11 +19,11 @@ import {
 } from "@/components/ui/form"
 
 
+import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { updatePassword } from '@/lib/updatePassword';
-import { useSession } from 'next-auth/react';
+
+
 
 const formSchema = z.object({
   newPassword: z.string()
@@ -45,7 +41,6 @@ const formSchema = z.object({
 
 
 const TabChangePassword = () => {
-  const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -58,12 +53,12 @@ const TabChangePassword = () => {
   })
 
 
+
   const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
     setLoading(true);
 
     try {
-      await updatePassword({ newPassword: values.newPassword, token: "token" })
-      // router.push("/login")
+      await axios.patch("/api/update-password", values);
 
       toast({
         variant: "success",

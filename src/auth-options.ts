@@ -1,17 +1,9 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import {
-  Account,
-  NextAuthOptions,
-  Profile,
-  RequestInternal,
-  Session,
-} from "next-auth";
+import { NextAuthOptions, RequestInternal } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 import bcrypt from "bcryptjs";
 import connectDB from "./lib/connectDB";
-import { JWT } from "next-auth/jwt";
-
 import User from "./models/user";
 
 type UserModel = any;
@@ -81,51 +73,8 @@ export const authOptions = {
     }),
   ],
 
-  callbacks: {
-    async jwt({ token, user }: { token: JWT; user: UserModel | null }) {
-      if (user) {
-        token.id = user._id;
-      }
-      return token;
-    },
-    async session({ session, token }: { session: Session; token: JWT }) {
-      if (token) {
-        // @ts-ignore
-        session.user.id = token.id;
-      }
-      return session;
-    },
-  },
-  // callbacks: {
-  //   async session(params: { session: Session; token: JWT; user: User }) {
-  //     if (params.session.user) {
-  //       params.session.user.email = params.token.email;
-  //     }
-
-  //     return params.session;
-  //   },
-  //   async jwt(params: {
-  //     token: JWT;
-  //     user?: User | undefined;
-  //     account?: Account | null | undefined;
-  //     profile?: Profile | undefined;
-  //     isNewUser?: boolean | undefined;
-  //   }) {
-  //     if (params.user) {
-  //       params.token.email = params.user.email;
-  //     }
-
-  //     return params.token;
-  //   },
-  // },
-
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/dashboard",
   },
 } satisfies NextAuthOptions;
-
-// @ts-ignore
-// const handler = NextAuth(authOptions)
-
-// export { handler as GET, handler as POST };

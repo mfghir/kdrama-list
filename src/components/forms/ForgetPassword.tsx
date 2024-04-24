@@ -2,10 +2,9 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useState } from 'react'
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
@@ -15,19 +14,18 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
+import { useToast } from "../ui/use-toast";
+import { Input } from "@/components/ui/input"
+import SubmitButton from '@/templates/SubmitButton'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
-import axios from "axios";
-import { useToast } from "../ui/use-toast";
+import { useState } from 'react'
 import { mailAction } from '@/lib/mailAction'
 import { MoveLeft } from 'lucide-react'
-import SubmitButton from '@/templates/SubmitButton'
 
 
 
@@ -49,10 +47,6 @@ const ForgetPassword = () => {
       email: ""
     },
   })
-
-
-
-
 
   const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
     // console.log("values", values)

@@ -2,7 +2,7 @@
 
 import User from "@/models/user";
 import connectDB from "./connectDB";
-import nodemailer from "nodemailer";
+import nodemailer from "nodemailer"; 
 
 export async function mailAction({ email }: { email: any }) {
   await connectDB();

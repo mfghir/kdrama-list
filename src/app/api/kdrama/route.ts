@@ -13,24 +13,23 @@ export async function GET() {
     await connectDB();
 
     const session = await getServerSession(authOptions);
-    // console.log("GET session******", session);
-    // console.log("GET context******", context);
+    // console.log("GET session - kdrama******", session);
 
     const user = await User.findOne({ email: session?.user?.email });
-    // console.log("user ******", user._id);
+    // console.log("user - kdrama ******", user._id);
 
     const kdramaList = await KDramaModel.find({ userId: user?._id })
       .select("-userId")
       .sort({ createdAt: -1 });
-    // console.log("kdramaList ******", kdramaList);
+    // console.log("kdramaList - kdrama ******", kdramaList);
 
     return NextResponse.json(
-      { message: "Ok", data: kdramaList },
+      { message: "Successfully get the data", data: kdramaList },
       { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed to fetch Courses", error },
+      { message: "Failed to fetch kdramas", error },
       { status: 500 }
     );
   }

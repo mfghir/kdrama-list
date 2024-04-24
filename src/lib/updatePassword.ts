@@ -6,11 +6,6 @@ import { redirect } from "next/navigation";
 
 import bcrypt from "bcryptjs";
 
-// interface passTypes {
-//   newPassword: string;
-//   confirmPassword: string;
-// }
-
 export async function updatePassword({
   newPassword,
   token,
@@ -28,8 +23,6 @@ export async function updatePassword({
     { verifyToken: token },
     { password: hashedPassword }
   );
-
-  
 
   redirect("/login");
 

@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
-
-
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useForm } from "react-hook-form"
+
+import axios from "axios";
 import {
   Form,
   FormControl,
@@ -18,15 +18,14 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
-
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import Image from "next/image";
-import GoogleButton from "../../utilities/GoogleButton";
-import SubmitButton from "@/templates/SubmitButton";
-import axios from "axios";
 import { useToast } from "../ui/use-toast";
+import { Input } from "@/components/ui/input"
+import SubmitButton from "@/templates/SubmitButton";
+
+import GoogleButton from "../../utilities/GoogleButton";
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Username must be at least 2 characters.", }),
@@ -65,7 +64,7 @@ export default function RegisterForm() {
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
     setLoading(true);
 
     try {
@@ -77,7 +76,7 @@ export default function RegisterForm() {
         title: "Success",
         description: "Successfully Registered!"
       });
-      
+
     } catch (error: any) {
       console.log("error catch - RegisterForm ---->", error)
 
