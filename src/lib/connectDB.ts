@@ -9,7 +9,7 @@ async function connectDB() {
     console.log("connect to DB");
   } catch (error) {
     console.log("error mongo--->", error);
-    throw new Error("Connection failed!");
+    // throw new Error("Connection failed!");
   }
 }
 

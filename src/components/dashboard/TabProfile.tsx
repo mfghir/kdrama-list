@@ -2,30 +2,25 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 import axios from 'axios'
-import { Button } from '../ui/button'
-import { Pencil, Trash, X } from 'lucide-react'
-
-import { UserInfo } from '@/lib/data'
-import { AlertModal } from '@/utilities/alert-modal'
 import { signOut } from 'next-auth/react'
+import { UserInfo } from '@/lib/data'
 
+import { AlertModal } from '@/utilities/alert-modal'
+import { Button } from '../ui/button'
 import { toast } from '../ui/use-toast'
+
 import EditProfile from './edit-profile'
-import Link from 'next/link'
+import { Pencil, Trash } from 'lucide-react'
 
 
 const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-
   const [editOpen, setEditOpen] = useState(false);
-  const [userInfoData, setUserInfoData] = useState(userInfo);
-  const router = useRouter();
 
- 
 
   const onConfirm = async () => {
     try {
@@ -42,7 +37,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       });
 
     } catch (error) {
-      console.error("delete error==>", error);
+      console.error("delete error - TabProfile ---->", error);
     } finally {
       setLoading(false);
     }
@@ -61,7 +56,7 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
       <section className="h-full flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
         {editOpen ?
           <>
-            <EditProfile userInfo={userInfo}  />
+            <EditProfile userInfo={userInfo} />
           </>
           :
           <>

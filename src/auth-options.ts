@@ -73,6 +73,54 @@ export const authOptions = {
     }),
   ],
 
+  callbacks: {
+    async jwt({ token, account }: { token: any; account: any }) {
+      // Persist the OAuth access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      // console.log("in jwt",token)
+      return token;
+    },
+
+    async session({
+      session,
+      token,
+      user,
+    }: {
+      session: any;
+      token: any;
+      user: any;
+    }) {
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken;
+      return session;
+    },
+    async signIn({ user }: { user: any }) {
+      console.log("inside callback");
+
+      await connectDB();
+      console.log("connected", user);
+
+      const u = await User.findOne({ email: user.email });
+      console.log("found", u);
+
+      const email = user.email;
+      const name = user.name;
+
+      if (!u) {
+        const newUser = new User({
+          email,
+          profile: {
+            firstName: name,
+          },
+        });
+        await newUser.save();
+      }
+      return true;
+    }, 
+  },
+
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/dashboard",

@@ -11,6 +11,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Button } from "../ui/button";
 import { UserInfo, userNotifs } from "@/lib/data";
 import { User } from "@/utilities/users-table/columns";
+import { useSession } from "next-auth/react";
 
 
 
@@ -19,9 +20,10 @@ const TabDashboard = ({ role, usersList }: {
   usersList?: User[];
 }) => {
   const { data: serverData } = useKdramasData()
+  const {status} = useSession();
+  
 
-
-  if (role === "admin") {
+  if (role === "admin" || status === "authenticated") {
     return (
       <>
         <section className="w-full flex items-center justify-between space-y-2">

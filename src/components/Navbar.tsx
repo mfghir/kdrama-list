@@ -15,8 +15,11 @@ import { usePathname } from 'next/navigation';
 import { UserInfo } from '@/lib/data';
 
 const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
-  const { data: session } = useSession();
+  const { data: session ,status  } = useSession();
   const path = usePathname();
+
+  console.log("status ---->",status)
+
 
   return (
     <div className="fixed inset-0 top-0 left-0 z-20 h-fit">

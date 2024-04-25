@@ -21,20 +21,22 @@ import { Gauge, LogOutIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { UserInfo } from "@/lib/data";
 
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from "next/link";
 
 
 const UserNav = ({userInfo}: { userInfo: UserInfo }) => {
-  // const { data: session } = useSession();
-  // console.log("session===>>>" , session);
+  const { data: session } = useSession();
+  console.log("session - userNav===>>>" , session );
+  // status === "authenticated"
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
-            <AvatarImage src={userInfo?.imgUrl} alt="user pic" />
+            {/*  @ts-ignore  */}
+            <AvatarImage src={userInfo?.imgUrl || session.user.image } alt="user pic" />
             <AvatarFallback>{userInfo?.name ? userInfo.name.slice(0, 2) : "user pic"}</AvatarFallback>
           </Avatar>
         </Button>
