@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 }
 
 
-const page = ({ params }: { params: string }) => {
+const page = ({ params }: { params: any }) => {
   return (
     <ResetPassword params={params} />
   )
