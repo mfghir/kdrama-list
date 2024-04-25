@@ -1,6 +1,6 @@
 // import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 // import axios from "axios";
-import { MovieList } from "./movieSchema";
+
 
 // const useAddDrama = () => {
 //   const queryClient = useQueryClient();
@@ -56,6 +56,7 @@ import { MovieList } from "./movieSchema";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { MovieList } from "./data";
 
 const useAddDrama = () => {
   const queryClient = useQueryClient();

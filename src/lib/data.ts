@@ -9,17 +9,11 @@ import {
   ArrowUp,
   Gauge,
   ListFilter,
-  SquareUserRound ,
+  SquareUserRound,
   UsersRound,
   MessageSquare,
   KeyRound,
 } from "lucide-react";
-
-
-
-
-
-
 
 export interface NavItem {
   title: string;
@@ -194,6 +188,14 @@ export type Notification = {
   title: string;
   desc: string;
   createdAt: string;
+};
+
+export type MovieList = {
+  id: object;
+  title: string;
+  status: string;
+  label: string;
+  genre: string;
 };
 
 export const userNotifs: Notification[] = [

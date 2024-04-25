@@ -2,10 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "@/components/ui/badge"
-import { labels, genres, statuses } from "@/lib/data"
+import { labels, genres, statuses, MovieList } from "@/lib/data"
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
-import { MovieList } from "@/lib/movieSchema"
 import KdramaEdit from "@/components/KdramaEdit"
 
 import KdramaDelete from "@/components/KdramaDelete"
