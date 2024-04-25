@@ -35,8 +35,7 @@ const UserNav = ({userInfo}: { userInfo: UserInfo }) => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
-            {/*  @ts-ignore  */}
-            <AvatarImage src={userInfo?.imgUrl || session.user.image } alt="user pic" />
+            <AvatarImage src={session?.user?.image ? session.user.image : userInfo?.imgUrl } alt="user pic" />
             <AvatarFallback>{userInfo?.name ? userInfo.name.slice(0, 2) : "user pic"}</AvatarFallback>
           </Avatar>
         </Button>

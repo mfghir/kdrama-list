@@ -6,9 +6,8 @@ import Overview from "./Overview";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { ScrollArea } from "../ui/scroll-area";
-
 import { Button } from "../ui/button";
+
 import { UserInfo, userNotifs } from "@/lib/data";
 import { User } from "@/utilities/users-table/columns";
 import { useSession } from "next-auth/react";
@@ -20,8 +19,8 @@ const TabDashboard = ({ role, usersList }: {
   usersList?: User[];
 }) => {
   const { data: serverData } = useKdramasData()
-  const {status} = useSession();
-  
+  const { status } = useSession();
+
 
   if (role === "admin" || status === "authenticated") {
     return (
@@ -45,40 +44,11 @@ const TabDashboard = ({ role, usersList }: {
 
         <SecTwo serverData={serverData} />
 
-        <SecThree usersList={usersList} />
+        {role === "user" ? <SecUserNotifs /> : <SecThree usersList={usersList} />}
       </>
     );
   }
 
-  if (role === "user") {
-    return (
-      <>
-        <ScrollArea className="h-full ">
-          <section className="w-full flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Hi, Welcome back 👋
-            </h2>
-
-            <div className="hidden md:flex items-center gap-x-4">
-              <Button className="flex justify-between items-center gap-x-2" variant="secondary">
-                <Calendar size={18} />
-                {new Date().toLocaleString("en-US", { year: "numeric", month: "long", day: '2-digit' })}
-              </Button>
-
-              <Button className="flex justify-between items-center gap-x-2" variant="ghost">
-                <Clock size={18} />
-                {new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" })}
-              </Button>
-            </div>
-          </section>
-
-          <SecTwo serverData={serverData} />
-
-          <SecUserNotifs />
-        </ScrollArea>
-      </>
-    )
-  }
 
   return null
 }
