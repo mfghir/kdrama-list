@@ -240,3 +240,14 @@ export interface UserInfo {
   imgUrl?: string;
   __v?: number;
 }
+
+export const factCategories: string[] = [
+  "beauty",
+  "communication",
+  "education",
+  "family",
+  "life",
+  "love",
+  "movies",
+  "success",
+];

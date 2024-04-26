@@ -5,15 +5,15 @@ import BreadCrumb from "@/utilities/breadcrumb";
 
 const Page = () => {
   const breadcrumbItems = [
-    { title: "Users", link: "/dashboard/messages" },
+    { title: "Messages", link: "/dashboard/messages" },
   ];
 
   return (
     // <ScrollArea className="h-full">
-      <div className="flex-1 space-y-4">
-        <BreadCrumb items={breadcrumbItems} />
-        <TabMessages />
-      </div>
+    <div className="flex-1 space-y-4">
+      <BreadCrumb items={breadcrumbItems} />
+      <TabMessages />
+    </div>
     // </ScrollArea>
   )
 }

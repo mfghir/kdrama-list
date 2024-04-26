@@ -27,8 +27,8 @@ import Link from "next/link";
 
 const UserNav = ({userInfo}: { userInfo: UserInfo }) => {
   const { data: session } = useSession();
-  console.log("session - userNav===>>>" , session );
-  console.log("image - userNav===>>>" , session?.user?.image );
+  // console.log("session - userNav===>>>" , session );
+  // console.log("image - userNav===>>>" , session?.user?.image );
   // status === "authenticated"
 
   return (
