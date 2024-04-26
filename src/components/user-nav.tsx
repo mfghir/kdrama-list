@@ -28,6 +28,7 @@ import Link from "next/link";
 const UserNav = ({userInfo}: { userInfo: UserInfo }) => {
   const { data: session } = useSession();
   console.log("session - userNav===>>>" , session );
+  console.log("image - userNav===>>>" , session?.user?.image );
   // status === "authenticated"
 
   return (
@@ -35,7 +36,7 @@ const UserNav = ({userInfo}: { userInfo: UserInfo }) => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
-            <AvatarImage src={session?.user?.image ? session.user.image : userInfo?.imgUrl } alt="user pic" />
+            <AvatarImage src={ userInfo?.imgUrl } alt="user pic" />
             <AvatarFallback>{userInfo?.name ? userInfo.name.slice(0, 2) : "user pic"}</AvatarFallback>
           </Avatar>
         </Button>
