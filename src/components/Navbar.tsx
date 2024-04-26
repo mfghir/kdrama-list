@@ -18,6 +18,7 @@ const Navbar = ({ userInfo }: { userInfo: UserInfo }) => {
   const { data: session ,status  } = useSession();
   const path = usePathname();
 
+  console.log("session ---->",session)
   console.log("status ---->",status)
 
 

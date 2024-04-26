@@ -97,7 +97,7 @@ export const authOptions = {
       return session;
     },
     async signIn({ user }: { user: any }) {
-      console.log("inside callback");
+      console.log("inside callback - authOptions / user " ,user);
 
       await connectDB();
       console.log("connected", user);
@@ -107,18 +107,18 @@ export const authOptions = {
 
       const email = user.email;
       const name = user.name;
+      const image = user.image;
 
       if (!u) {
         const newUser = new User({
           email,
-          profile: {
-            firstName: name,
-          },
+          name,
+          image,
         });
         await newUser.save();
       }
       return true;
-    }, 
+    },
   },
 
   secret: process.env.NEXTAUTH_SECRET,
