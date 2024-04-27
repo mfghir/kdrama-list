@@ -27,6 +27,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useQuery } from "@tanstack/react-query";
 import { generatePassword } from "@/utilities/ninjas-api";
+import { Button } from "../ui/button";
+import { Copy, Dices, KeyRound } from "lucide-react";
 
 
 const formSchema = z.object({
@@ -193,13 +195,23 @@ export default function RegisterForm() {
   // };
 
 
-  const { data: passwordGeneFunc, isLoading, error, refetch } = useQuery(['password'], () => generatePassword());
+  const { data: passwordGeneFunc, isLoading, error, refetch } =
+    useQuery(['password'], () => generatePassword(), {
+      enabled: false
+    });
 
-  const handleGeneratePassword = () => {
+  const handleGeneratePassword = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
     refetch();
   };
 
-
+  const copyHandler = (text: string) => {
+    navigator.clipboard.writeText(text)
+    toast({
+      variant: "success",
+      title: "Copy to clipboard! ✔",
+    })
+  }
 
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
@@ -316,11 +328,20 @@ export default function RegisterForm() {
               />
 
 
-<div>
-        <span>Generated password: </span>
-        <span>{passwordGeneFunc}</span>
-      </div>
-<button onClick={()=>handleGeneratePassword()}>Generate New Password</button>
+              <div className="flex flex-row justify-between items-center" >
+                <span className="flex justify-start items-start gap-x-2 text-zinc-500">
+                  <KeyRound /> { passwordGeneFunc ? passwordGeneFunc : "Password Generator"}
+                </span>
+
+                <span className="flex justify-start items-start gap-x-2" >
+                  <Copy
+                    className="text-zinc-500 hover:text-blue-500 cursor-pointer transition-all"
+                    onClick={() => copyHandler(passwordGeneFunc)} />
+                  <Dices
+                    className="text-zinc-500 hover:text-blue-500 cursor-pointer transition-all"
+                    onClick={() => refetch()} />
+                </span>
+              </div>
 
               <SubmitButton loading={loading} />
             </form>

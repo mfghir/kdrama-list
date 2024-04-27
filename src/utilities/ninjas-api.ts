@@ -28,5 +28,7 @@ export const generatePassword  = async () => {
       "X-Api-Key": process.env.NINJA_API_KEY,
     },
   });
-  return response.data.map((password: { random_password: any; }) => password.random_password);
+  console.log(response.data);
+  // return response.data.map((password: { random_password: any; }) => password.random_password);
+  return response.data.random_password
 };
