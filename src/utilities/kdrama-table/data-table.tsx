@@ -6,8 +6,8 @@ import { DataTablePagination } from "./data-table-pagination"
 
 import {
   ColumnDef,
-  ColumnFiltersState,
-  SortingState,
+  type ColumnFiltersState,
+  type SortingState,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
@@ -34,6 +34,7 @@ import { Heading } from "../../templates/heading"
 
 
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function DataTable<TValue>({ kdramaList }: any) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])

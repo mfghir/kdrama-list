@@ -25,6 +25,8 @@ import SubmitButton from "@/templates/SubmitButton";
 import GoogleButton from "../../utilities/GoogleButton";
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { useQuery } from "@tanstack/react-query";
+import { generatePassword } from "@/utilities/ninjas-api";
 
 
 const formSchema = z.object({
@@ -191,6 +193,14 @@ export default function RegisterForm() {
   // };
 
 
+  const { data: passwordGeneFunc, isLoading, error, refetch } = useQuery(['password'], () => generatePassword());
+
+  const handleGeneratePassword = () => {
+    refetch();
+  };
+
+
+
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
   }
@@ -304,6 +314,13 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
+
+
+<div>
+        <span>Generated password: </span>
+        <span>{passwordGeneFunc}</span>
+      </div>
+<button onClick={()=>handleGeneratePassword()}>Generate New Password</button>
 
               <SubmitButton loading={loading} />
             </form>

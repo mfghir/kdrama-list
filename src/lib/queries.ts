@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { MovieList } from "./data";
+import type { MovieList } from "./data";
 
 
 const useKdramasData = () => {
@@ -10,7 +10,7 @@ const useKdramasData = () => {
     // const data = await res.json();
     // console.log(data);
 
-    const res = await axios.get(`/api/kdrama`);
+    const res = await axios.get("/api/kdrama");
     // console.log(res);
     return res.data.data;
   }

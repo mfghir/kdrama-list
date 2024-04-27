@@ -1,7 +1,6 @@
 // import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 // import axios from "axios";
 
-
 // const useAddDrama = () => {
 //   const queryClient = useQueryClient();
 
@@ -56,14 +55,14 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { MovieList } from "./data";
+import type { MovieList } from "./data";
 
 const useAddDrama = () => {
   const queryClient = useQueryClient();
 
   const addDrama = async (data: unknown) => {
     // await axios.post(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama`, data);
-    await axios.post(`/api/kdrama`, data);
+    await axios.post("/api/kdrama", data);
 
     console.log("data - useAddDrama ---->", data);
   };
@@ -81,6 +80,7 @@ const useAddDrama = () => {
 
 const useEditDrama = () => {
   const queryClient = useQueryClient();
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const editDrama = async (item: any) => {
     await axios.put(
       // `${process.env.NEXT_PUBLIC_API_KEY}/kdrama/`,
@@ -98,6 +98,7 @@ const useEditDrama = () => {
 
 const useDeleteDrama = () => {
   const queryClient = useQueryClient();
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const deleteDrama = async (item: any) => {
     // await axios.delete(`${process.env.NEXT_PUBLIC_API_KEY}/kdrama/${item.id}`);
     await axios.delete(`/api/kdrama/${item.id}`);

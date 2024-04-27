@@ -39,6 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={currentTheme}>
       <body className={`${montserrat.className} `}>
+        <Provider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -46,7 +47,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           disableTransitionOnChange
         >
           <SessionProviderComp>
-            <Provider>
 
               {/* @ts-ignore */}
               <Navbar userInfo={user} />
@@ -57,9 +57,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
               </SmoothScrolling>
               <Toaster />
-            </Provider>
           </SessionProviderComp>
         </ThemeProvider>
+            </Provider>
       </body>
     </html>
   )
