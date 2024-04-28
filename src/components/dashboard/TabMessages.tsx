@@ -1,13 +1,18 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { factCategories } from '@/lib/data'
+
 import axios from 'axios'
-import { fetchFacts, fetchQuotes } from '@/utilities/ninjas-api'
-import { Dice5, Hash, Quote, User } from 'lucide-react'
+
+import { fetchFacts, fetchQuotes, fetchSuggestion } from '@/utilities/ninjas-api'
+import { Dice5, Flower2, Hash, Quote, User } from 'lucide-react'
 import { Skeleton } from '../ui/skeleton'
+
 import { useQuery } from '@tanstack/react-query'
+import { Heading } from '@/templates/heading'
 
 
 
@@ -23,46 +28,92 @@ interface Quote {
 
 const TabMessages = (): JSX.Element => {
 
+  // console.log("env", process.env.NEXT_PUBLIC_NINJA_API_KEY)
 
-  // const { data: quotes, isLoading: quotesLoading } = useQuery(['quotes'], fetchQuotes)
-  // const { data: facts, isLoading: factsLoading } = useQuery(['facts'], fetchFacts)
+  // const fetchFacts = async () => {
+  //   const response = await axios.get('https://api.api-ninjas.com/v1/facts', {
+  //     headers: {
+  //       "X-Api-Key": `7dK5WLtwDyExnmGrGyrIyg==CxiwhXya1srNi0AF`,
+  //     },
+  //   });
+  //   console.log("fetchFacts", response)
 
-  const fetchFacts = async () => {
-    const response = await axios.get('https://api.api-ninjas.com/v1/facts', {
-      headers: {
-        'X-Api-Key': "7dK5WLtwDyExnmGrGyrIyg==CxiwhXya1srNi0AF",
-      },
+  //   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  //   return response.data.map((fact: { fact: any; }) => fact.fact);
+  // };
+
+
+  // const fetchSuggestion = async () => {
+  //   const response = await axios.get('https://api.api-ninjas.com/v1/bucketlist', {
+  //     headers: {
+  //       "X-Api-Key": `${process.env.NEXT_PUBLIC_NINJA_API_KEY}`,
+  //     },
+  //   });
+  //   console.log("fetchSuggestion", response)
+  //   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  //   return response.data.map((item: { item: any; }) => item);
+  // };
+
+  // const fetchQuotes = async () => {
+  //   const response = await axios.get('https://api.api-ninjas.com/v1/quotes', {
+  //     headers: {
+  //       "X-Api-Key": `${process.env.NEXT_PUBLIC_NINJA_API_KEY}`
+  //     },
+  //   });
+  //   console.log("fetchQuotes", response)
+
+  //   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  //   return response.data.map((quote: { quote: any; }) => quote);
+  // };
+
+
+
+
+
+  const {
+    data: quotes,
+    isLoading: isQuotesLoading,
+    error: quotesError,
+    refetch: refetchQuotes } =
+    useQuery(['quotes'], fetchQuotes, {
+      // enabled: false,
+      staleTime: Infinity
     });
-    return response.data.map((fact: { fact: any; }) => fact.fact);
-  };
+  console.log("quotesError", quotesError)
 
-
-
-  const fetchQuotes = async () => {
-    const response = await axios.get('https://api.api-ninjas.com/v1/quotes', {
-      headers: {
-        'X-Api-Key': "7dK5WLtwDyExnmGrGyrIyg==CxiwhXya1srNi0AF",
-      },
+  const {
+    data: facts,
+    isLoading: isFactsLoading,
+    error: factsError,
+    refetch: refetchFacts } =
+    useQuery(['facts'], fetchFacts, {
+      // enabled: false,
+      staleTime: Infinity
     });
-    return response.data.map((quote: { quote: any; }) => quote);
-  };
+  // console.log("facts", facts)
 
 
-
-  const { data: quotes, isLoading: isQuotesLoading, error: quotesError, refetch: refetchQuotes } = useQuery(['quotes'], fetchQuotes);
-  console.log("quotes", quotes)
-  const { data: facts, isLoading: isFactsLoading, error: factsError, refetch: refetchFacts } = useQuery(['facts'], fetchFacts);
-  console.log("facts", facts)
-
-
-
+  const {
+    data: bucketList,
+    isLoading: isBucketListLoading,
+    error: bucketListError,
+    refetch: refetchBucketList } =
+    useQuery(['bucketList'], fetchSuggestion, {
+      // enabled: false,
+      staleTime: Infinity
+    });
+  // console.log("facts", facts)
 
 
   const handleDiceClick = async (type: string) => {
     if (type === 'quotes') {
       refetchQuotes();
-    } else if (type === 'facts') {
+    }
+    else if (type === 'facts') {
       refetchFacts();
+    }
+    else if (type === 'bucketList') {
+      refetchBucketList();
     }
   };
 
@@ -72,65 +123,93 @@ const TabMessages = (): JSX.Element => {
 
 
   return (
+    <>
+      <div className="flex items-start justify-start ">
+        <Heading title="Messages" description="here are your messages" />
+      </div>
 
-    <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-8">
+      <section className="w-full grid grid-cols-1  row-auto md:grid-cols-2 gap-8 items-start">
 
-      {/* Quotes */}
-      <div className='min-h-[180px] h-fit p-3 rounded-2xl border bg-background/95 backdrop-blur'>
-        <div className="flex flex-row justify-between items-center">
-          <h1 className="text-2xl text-white font-bold">Quotes</h1>
-          <Dice5
-            onClick={() => handleDiceClick('quotes')}
-            className='transform transition-all duration-500 cursor-pointer hover:text-blue-600 hover:rotate-90 '
-          />
+        {/* bucketList */}
+        <div className='h-auto col-span-1 p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+          <div className="flex flex-row justify-between items-center">
+            <h1 className="text-2xl text-white font-bold">Today's Recommend</h1>
+            <Dice5
+              onClick={() => handleDiceClick('bucketList')}
+              className='transform transition-all duration-500 cursor-pointer hover:text-blue-600 hover:rotate-90 '
+            />
+          </div>
+
+          {isBucketListLoading
+            ?
+            <Skeleton className="h-[80px] w-full mt-4" />
+            :
+            <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
+              <Flower2 />
+              {bucketList}
+            </p>
+          }
         </div>
 
+        {/* Facts */}
+        <div className='h-auto col-span-3 p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+          <div className="flex flex-row justify-between items-center">
+            <h1 className="text-2xl text-white font-bold">Facts</h1>
+            <Dice5
+              onClick={() => handleDiceClick('facts')}
+              className='transform transition-all duration-500 cursor-pointer hover:text-blue-600 hover:rotate-90 '
+            />
+          </div>
 
-        {isQuotesLoading ?
-          <>
+          {isFactsLoading
+            ?
             <Skeleton className="h-[80px] w-full mt-4" />
-            <Skeleton className="h-[20px] w-full my-2" />
-            <Skeleton className="h-[20px] w-full" />
-          </>
-          :
-          <>
+            :
             <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
               <Quote />
-              {quotes[0]?.quote}
+              {facts}
             </p>
-            <p className="text-sm flex flex-row gap-x-1 items-center text-zinc-500 w-full my-2">
-              <User size={16} />
-              {quotes[0]?.author}
-            </p>
-            <p className="text-xs flex flex-row gap-x-1 items-center text-zinc-500 w-full">
-              <Hash size={16} />
-              {quotes[0]?.category}
-            </p>
-          </>
-        }
-      </div>
-
-      {/* Facts */}
-      <div className='min-h-[180px] h-fit p-3 rounded-2xl border bg-background/95 backdrop-blur'>
-        <div className="flex flex-row justify-between items-center">
-          <h1 className="text-2xl text-white font-bold">Facts</h1>
-          <Dice5
-            onClick={() => handleDiceClick('facts')}
-            className='transform transition-all duration-500 cursor-pointer hover:text-blue-600 hover:rotate-90 '
-          />
+          }
         </div>
 
-        {isFactsLoading
-          ?
-          <Skeleton className="h-[80px] w-full mt-4" />
-          :
-          <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
-            <Quote />
-            {facts}
-          </p>
-        }
-      </div>
-    </section>
+        {/* Quotes */}
+        <div className='h-auto p-3 col-span-4 rounded-2xl border bg-background/95 backdrop-blur'>
+          <div className="flex flex-row justify-between items-center">
+            <h1 className="text-2xl text-white font-bold">Quotes</h1>
+            <Dice5
+              onClick={() => handleDiceClick('quotes')}
+              className='transform transition-all duration-500 cursor-pointer hover:text-blue-600 hover:rotate-90 '
+            />
+          </div>
+
+
+          {isQuotesLoading ?
+            <>
+              <Skeleton className="h-[80px] w-full mt-4" />
+              <Skeleton className="h-[20px] w-full my-2" />
+              <Skeleton className="h-[20px] w-full" />
+            </>
+            :
+            <>
+              <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
+                <Quote />
+                {quotes?.quote}
+              </p>
+              <p className="text-sm flex flex-row gap-x-1 items-center text-zinc-500 w-full my-2">
+                <User size={16} />
+                {quotes?.author}
+              </p>
+              <p className="text-xs flex flex-row gap-x-1 items-center text-zinc-500 w-full">
+                <Hash size={16} />
+                {quotes?.category}
+              </p>
+            </>
+          }
+        </div>
+
+      </section>
+    </>
+
   )
 }
 

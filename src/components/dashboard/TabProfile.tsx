@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import axios from 'axios'
 import { signOut } from 'next-auth/react'
-import { UserInfo } from '@/lib/data'
+import type { UserInfo } from '@/lib/data'
 
 import { AlertModal } from '@/utilities/alert-modal'
 import { Button } from '../ui/button'
@@ -14,6 +14,7 @@ import { toast } from '../ui/use-toast'
 
 import EditProfile from './edit-profile'
 import { Pencil, Trash } from 'lucide-react'
+import { Heading } from '@/templates/heading'
 
 
 const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
@@ -52,6 +53,11 @@ const TabProfile = ({ userInfo }: { userInfo: UserInfo }) => {
         onConfirm={onConfirm}
         loading={loading}
       />
+
+      <div className="flex items-start justify-start ">
+        <Heading title="Profile" description="here are your Profile" />
+      </div>
+
 
       <section className="h-full flex flex-col gap-2 my-6 w-full md:w-2/4 p-3 rounded-2xl border bg-background/95 backdrop-blur ">
         {editOpen ?

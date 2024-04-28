@@ -62,6 +62,7 @@ const ForgetPassword = () => {
         description: "Check your inbox!"
       });
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
       console.log("forget password ---->", error)
       toast({

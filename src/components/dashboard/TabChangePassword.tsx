@@ -66,6 +66,7 @@ const TabChangePassword = () => {
         description: "Your password successfully changed!"
       });
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
       console.log("forget password ---->", error)
       toast({
