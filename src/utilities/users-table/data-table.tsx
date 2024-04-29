@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/table"
 
 import { DataTablePagination } from "../kdrama-table/data-table-pagination";
-import { AlertModal } from "../alert-modal";
+import { AlertModal } from "../../templates/alert-modal";
 import { Input } from "@/components/ui/input";
 
 import { useRouter } from "next/navigation";

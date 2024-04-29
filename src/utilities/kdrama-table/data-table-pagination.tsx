@@ -17,7 +17,7 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons"
-import { AlertModal } from "../alert-modal"
+import { AlertModal } from "../../templates/alert-modal"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"

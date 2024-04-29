@@ -8,7 +8,7 @@ import axios from 'axios'
 import { signOut } from 'next-auth/react'
 import type { UserInfo } from '@/lib/data'
 
-import { AlertModal } from '@/utilities/alert-modal'
+import { AlertModal } from '@/templates/alert-modal'
 import { Button } from '../ui/button'
 import { toast } from '../ui/use-toast'
 

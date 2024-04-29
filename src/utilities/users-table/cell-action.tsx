@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { User } from "./columns";
-import { AlertModal } from "../alert-modal";
+import { AlertModal } from "../../templates/alert-modal";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 import axios from "axios";

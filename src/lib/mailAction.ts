@@ -4,13 +4,13 @@ import User from "@/models/user";
 import connectDB from "./connectDB";
 import nodemailer from "nodemailer";
 
-import { MailtrapClient } from "mailtrap";
+// import { MailtrapClient } from "mailtrap";
 
 
 const TOKEN = "5d31785dea64bd3fe1d817c7757477c6";
 const ENDPOINT = "https://send.api.mailtrap.io/";
 
-const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
+// const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
 
 
@@ -79,15 +79,15 @@ export async function mailAction({ email }: { email: any }) {
 
 
     try {
-      const result = await client.send({
-        from: sender,
-        to: recipients,
-        subject: "You are awesome!",
-        text: "Congrats for sending test email with Mailtrap!",
-        category: "Integration Test",
-      });
+      // const result = await client.send({
+      //   from: sender,
+      //   to: recipients,
+      //   subject: "You are awesome!",
+      //   text: "Congrats for sending test email with Mailtrap!",
+      //   category: "Integration Test",
+      // });
   
-      console.log(result);
+      // console.log(result);
     await User.findOneAndUpdate({ email: email }, { verifyToken: token });
 
       // res.status(200).json({ message: "Email sent successfully" });

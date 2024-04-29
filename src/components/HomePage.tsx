@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -12,6 +12,8 @@ import Footer from './Footer'
 import gsap from "gsap";
 import { useLenis } from '@studio-freight/react-lenis'
 import FeaturesSec from '@/templates/FeaturesSec'
+import { Skeleton } from './ui/skeleton'
+import GoTopBtn from '@/utilities/go-top-btn'
 
 
 
@@ -68,7 +70,7 @@ const HomePage = ({ usersList }: any) => {
           opacity: 0,
           stagger: 0.2,
 
-          scrub:true,
+          scrub: true,
           delay: 0.3,
           start: "top top",
           ease: "power4.inOut",
@@ -78,6 +80,34 @@ const HomePage = ({ usersList }: any) => {
 
     return () => ctx.revert()
   }, [])
+
+
+
+  const [showButton, setShowButton] = useState(false);
+
+  const scrollFunction = () => {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
+
+  const backToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollFunction);
+    return () => window.removeEventListener("scroll", scrollFunction);
+  }, []);
+
+
+
+
 
 
   return (
@@ -98,7 +128,7 @@ const HomePage = ({ usersList }: any) => {
               iconPlacement="right"
               onClick={() => lenis?.scrollTo("#fans-title", { lerp: 0.02 })}
             >
-              Lets Go
+              Let's Go
             </Button>
           </div>
         </section>
@@ -112,42 +142,66 @@ const HomePage = ({ usersList }: any) => {
         <section>
           <p id='fans-title' className="text-4xl font-bold mb-4">Fans' list</p>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-11">
-            {usersList.map((item: any) => (
-              <div id="fans-sec" key={item.name} className="group relative ">
-                <div className="group before:hover:scale-95 min-w-80 w-full before:hover:w-80 before:hover:h-44 
+            {/* {usersList.length ?
+              <Skeleton className="h-[80px] w-full mt-4" />
+
+              : */}
+            <>
+              {usersList.map((item: any) => (
+                <div id="fans-sec" key={item.name} className="group relative ">
+                  <div className="group before:hover:scale-95 min-w-80 w-full before:hover:w-80 before:hover:h-44 
                     before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 
                     before:rounded-t-2xl before:bg-gradient-to-bl  from-fuchsia-500 to-cyan-500 before:absolute before:top-0  
                     h-72 relative bg-zinc-100 dark:bg-zinc-800 flex flex-col items-center justify-center gap-2 
                     text-center rounded-2xl overflow-hidden">
-                  <div className="w-28 h-28 bg-blue-700 mt-8 rounded-full border-4 border-slate-50 z-10 
+                    <div className="w-28 h-28 bg-blue-700 mt-8 rounded-full border-4 border-slate-50 z-10 
                       group-hover:scale-150 group-hover:-translate-x-24  group-hover:-translate-y-20 
                       transition-all duration-500 overflow-hidden">
-                    <Image
-                      src={item.imgUrl}
-                      alt={item.name}
-                      width={200}
-                      height={200}
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
+                      {!item.imgUrl ?
+                        <Skeleton className="h-full w-full" />
+                        :
+                        <Image
+                          src={item.imgUrl}
+                          alt={item.name}
+                          width={200}
+                          height={200}
+                          className="h-full w-full object-cover object-center"
+                        />}
+                    </div>
 
-                  <div className="z-10  group-hover:-translate-y-10 transition-all duration-500">
-                    <span className="text-2xl font-semibold">{item.name}</span>
-                    <p>{item.email}</p>
-                  </div>
+                    <div className="z-10  group-hover:-translate-y-10 transition-all duration-500">
+                      <span className="text-2xl font-semibold">
+                        {!item.name ?
+                          <Skeleton className="h-full w-full" />
+                          :
+                          <>{item.name}</>
+                        }
+                      </span>
 
-                  <Link href={`/${item._id}`} className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500">
-                    See More
-                  </Link>
+                      <p className='text-sm text-zinc-500'>
+                        {!item.email ?
+                          <Skeleton className="h-full w-full" />
+                          :
+                          <>{item.email}</>
+                        }
+                      </p>
+                    </div>
+
+                    <Link href={`/${item._id}`} className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500">
+                      See More
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+              }
+            </>
+            {/* } */}
           </div>
         </section>
         {/* </Parallax> */}
 
 
-
+        <GoTopBtn backToTop={backToTop} showButton={showButton} />
         <Footer />
       </section>
     </>
