@@ -2,7 +2,7 @@
 
 import User from "@/models/user";
 import connectDB from "./connectDB";
-import nodemailer from "nodemailer"; 
+import nodemailer from "nodemailer";
 
 export async function mailAction({ email }: { email: any }) {
   await connectDB();
@@ -15,12 +15,23 @@ export async function mailAction({ email }: { email: any }) {
     );
     // console.log("token " ,token)
 
+    // const transporter = nodemailer.createTransport({
+    //   host: "sandbox.smtp.mailtrap.io",
+    //   port: 2525,
+    //   auth: {
+    //     user: process.env.MAIL_USER,
+    //     pass: process.env.MAIL_PASS,
+    //   },
+    // });
+
     const transporter = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: "live.smtp.mailtrap.io",
+      port: 587,
       auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
+        user: "api",
+        pass: "5d31785dea64bd3fe1d817c7757477c6",
+        // user: process.env.MAIL_USER,
+        // pass: process.env.MAIL_PASS,
       },
     });
 
