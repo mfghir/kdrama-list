@@ -9,12 +9,10 @@ const Page = () => {
   ];
 
   return (
-    // <ScrollArea className="h-full">
     <div className="flex-1 space-y-4">
       <BreadCrumb items={breadcrumbItems} />
       <TabMessages />
     </div>
-    // </ScrollArea>
   )
 }
 

@@ -2,7 +2,6 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import type { MovieList } from "./data";
 
-
 const useKdramasData = () => {
   // async function getKdramaList(): Promise<MovieList[]> {
   async function getKdramaList(): Promise<MovieList[]> {

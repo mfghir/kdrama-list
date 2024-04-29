@@ -330,7 +330,8 @@ export default function RegisterForm() {
 
               <div className="flex flex-row justify-between items-center" >
                 <span className="flex justify-start items-start gap-x-2 text-zinc-500">
-                  <KeyRound /> { passwordGeneFunc ? passwordGeneFunc : "Password Generator"}
+                  <KeyRound />
+                  {passwordGeneFunc ? passwordGeneFunc : "Password Generator"}
                 </span>
 
                 <span className="flex justify-start items-start gap-x-2" >

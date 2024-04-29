@@ -241,13 +241,13 @@ export interface UserInfo {
   __v?: number;
 }
 
-export const factCategories: string[] = [
-  "beauty",
-  "communication",
-  "education",
-  "family",
-  "life",
-  "love",
-  "movies",
-  "success",
-];
+// export const factCategories: string[] = [
+//   "beauty",
+//   "communication",
+//   "education",
+//   "family",
+//   "life",
+//   "love",
+//   "movies",
+//   "success",
+// ];

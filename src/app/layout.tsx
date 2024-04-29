@@ -17,6 +17,8 @@ import { authOptions } from '@/auth-options'
 import SmoothScrolling from '@/utilities/SmoothScrolling'
 import { Toaster } from '@/components/ui/toaster'
 
+
+
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -30,23 +32,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   await connectDB()
   const session = await getServerSession(authOptions);
-
   const user = await User.findOne({ email: session?.user?.email });
-  // const userTest = await User.findOne({ id: session?.user?.id });
-  // console.log("layout user====", user);
-  // console.log("layout userTest====", userTest);
 
   return (
     <html lang="en" className={currentTheme}>
       <body className={`${montserrat.className} `}>
         <Provider>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SessionProviderComp>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SessionProviderComp>
 
               {/* @ts-ignore */}
               <Navbar userInfo={user} />
@@ -57,9 +55,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
               </SmoothScrolling>
               <Toaster />
-          </SessionProviderComp>
-        </ThemeProvider>
-            </Provider>
+            </SessionProviderComp>
+          </ThemeProvider>
+        </Provider>
       </body>
     </html>
   )

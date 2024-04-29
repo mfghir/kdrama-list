@@ -1,14 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
-import { useEffect, useState } from 'react'
-import { Button } from '../ui/button'
-import { factCategories } from '@/lib/data'
-
-import axios from 'axios'
-
-import { fetchFacts, fetchQuotes, fetchSuggestion } from '@/utilities/ninjas-api'
-import { Dice5, Flower2, Hash, Quote, User } from 'lucide-react'
+import { fetchFacts, fetchJokes, fetchQuotes, fetchSuggestion } from '@/utilities/ninjas-api'
+import { Dice5, Flower2, Hash, Quote, Smile, User } from 'lucide-react'
 import { Skeleton } from '../ui/skeleton'
 
 import { useQuery } from '@tanstack/react-query'
@@ -16,59 +10,8 @@ import { Heading } from '@/templates/heading'
 
 
 
-// biome-ignore lint/suspicious/noRedeclare: <explanation>
-interface Quote {
-  quote: string;
-  author: string;
-  category: string;
-}
-
-
-
-
 const TabMessages = (): JSX.Element => {
-
   // console.log("env", process.env.NEXT_PUBLIC_NINJA_API_KEY)
-
-  // const fetchFacts = async () => {
-  //   const response = await axios.get('https://api.api-ninjas.com/v1/facts', {
-  //     headers: {
-  //       "X-Api-Key": `7dK5WLtwDyExnmGrGyrIyg==CxiwhXya1srNi0AF`,
-  //     },
-  //   });
-  //   console.log("fetchFacts", response)
-
-  //   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  //   return response.data.map((fact: { fact: any; }) => fact.fact);
-  // };
-
-
-  // const fetchSuggestion = async () => {
-  //   const response = await axios.get('https://api.api-ninjas.com/v1/bucketlist', {
-  //     headers: {
-  //       "X-Api-Key": `${process.env.NEXT_PUBLIC_NINJA_API_KEY}`,
-  //     },
-  //   });
-  //   console.log("fetchSuggestion", response)
-  //   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  //   return response.data.map((item: { item: any; }) => item);
-  // };
-
-  // const fetchQuotes = async () => {
-  //   const response = await axios.get('https://api.api-ninjas.com/v1/quotes', {
-  //     headers: {
-  //       "X-Api-Key": `${process.env.NEXT_PUBLIC_NINJA_API_KEY}`
-  //     },
-  //   });
-  //   console.log("fetchQuotes", response)
-
-  //   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  //   return response.data.map((quote: { quote: any; }) => quote);
-  // };
-
-
-
-
 
   const {
     data: quotes,
@@ -104,6 +47,17 @@ const TabMessages = (): JSX.Element => {
     });
   // console.log("facts", facts)
 
+  const {
+    data: jokes,
+    isLoading: isJokesLoading,
+    error: jokesError,
+    refetch: refetchJokes } =
+    useQuery(['jokes'], fetchJokes, {
+      // enabled: false,
+      staleTime: Infinity
+    });
+  // console.log("jokes", jokes)
+
 
   const handleDiceClick = async (type: string) => {
     if (type === 'quotes') {
@@ -115,9 +69,10 @@ const TabMessages = (): JSX.Element => {
     else if (type === 'bucketList') {
       refetchBucketList();
     }
+    else if (type === 'jokes') {
+      refetchBucketList();
+    }
   };
-
-
 
 
 
@@ -128,10 +83,10 @@ const TabMessages = (): JSX.Element => {
         <Heading title="Messages" description="here are your messages" />
       </div>
 
-      <section className="w-full grid grid-cols-1  row-auto md:grid-cols-2 gap-8 items-start">
+      <section className="w-full flex justify-between flex-wrap gap-8 items-start ">
 
         {/* bucketList */}
-        <div className='h-auto col-span-1 p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className='w-full lg:w-2/5 h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Today's Recommend</h1>
             <Dice5
@@ -140,8 +95,7 @@ const TabMessages = (): JSX.Element => {
             />
           </div>
 
-          {isBucketListLoading
-            ?
+          {isBucketListLoading ?
             <Skeleton className="h-[80px] w-full mt-4" />
             :
             <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
@@ -152,7 +106,7 @@ const TabMessages = (): JSX.Element => {
         </div>
 
         {/* Facts */}
-        <div className='h-auto col-span-3 p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className='w-full lg:w-[57%] h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Facts</h1>
             <Dice5
@@ -161,8 +115,7 @@ const TabMessages = (): JSX.Element => {
             />
           </div>
 
-          {isFactsLoading
-            ?
+          {isFactsLoading ?
             <Skeleton className="h-[80px] w-full mt-4" />
             :
             <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
@@ -173,7 +126,7 @@ const TabMessages = (): JSX.Element => {
         </div>
 
         {/* Quotes */}
-        <div className='h-auto p-3 col-span-4 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className=' w-full lg:w-[57%] h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Quotes</h1>
             <Dice5
@@ -204,6 +157,26 @@ const TabMessages = (): JSX.Element => {
                 {quotes?.category}
               </p>
             </>
+          }
+        </div>
+
+        {/* jokes */}
+        <div className=' w-full lg:w-2/5 h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+          <div className="flex flex-row justify-between items-center">
+            <h1 className="text-2xl text-white font-bold">Joke</h1>
+            <Dice5
+              onClick={() => handleDiceClick('bucketList')}
+              className='transform transition-all duration-500 cursor-pointer hover:text-blue-600 hover:rotate-90 '
+            />
+          </div>
+
+          {isJokesLoading ?
+            <Skeleton className="h-[80px] w-full mt-4" />
+            :
+            <p className="text-lg flex flex-row gap-x-1 items-start text-white w-full mt-4">
+              <Smile />
+              {jokes.joke}
+            </p>
           }
         </div>
 
