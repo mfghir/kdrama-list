@@ -8,5 +8,9 @@ export default async function Home() {
   const usersList = users.map(user => user.toObject());
 
 
-  return <HomePage usersList={usersList} />
+  return <HomePage
+    // usersList={usersList} 
+    usersList={JSON.parse(JSON.stringify(usersList))}
+
+  />
 }

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/auth-options";
 
 import LoginForm from "@/components/forms/LoginForm";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 
 

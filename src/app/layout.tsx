@@ -47,7 +47,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <SessionProviderComp>
 
               {/* @ts-ignore */}
-              <Navbar userInfo={user} />
+              <Navbar 
+              // userInfo={user}
+              userInfo={JSON.parse(JSON.stringify(user))}
+              />
 
               <SmoothScrolling>
 

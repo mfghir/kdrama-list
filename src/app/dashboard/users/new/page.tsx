@@ -2,7 +2,6 @@ import TabUserAdd from '@/components/dashboard/TabUserAdd'
 import BreadCrumb from "@/utilities/breadcrumb";
 
 const page = () => {
-
   const breadcrumbItems = [
     { title: "Users", link: "/dashboard/users" },
     { title: "Create", link: "/dashboard/users/create" },

@@ -20,6 +20,7 @@ const TabMessages = (): JSX.Element => {
     refetch: refetchQuotes } =
     useQuery(['quotes'], fetchQuotes, {
       // enabled: false,
+      // biome-ignore lint/style/useNumberNamespace: <explanation>
       staleTime: Infinity
     });
   console.log("quotesError", quotesError)
@@ -31,6 +32,7 @@ const TabMessages = (): JSX.Element => {
     refetch: refetchFacts } =
     useQuery(['facts'], fetchFacts, {
       // enabled: false,
+      // biome-ignore lint/style/useNumberNamespace: <explanation>
       staleTime: Infinity
     });
   // console.log("facts", facts)
@@ -43,6 +45,7 @@ const TabMessages = (): JSX.Element => {
     refetch: refetchBucketList } =
     useQuery(['bucketList'], fetchSuggestion, {
       // enabled: false,
+      // biome-ignore lint/style/useNumberNamespace: <explanation>
       staleTime: Infinity
     });
   // console.log("facts", facts)
@@ -54,6 +57,7 @@ const TabMessages = (): JSX.Element => {
     refetch: refetchJokes } =
     useQuery(['jokes'], fetchJokes, {
       // enabled: false,
+      // biome-ignore lint/style/useNumberNamespace: <explanation>
       staleTime: Infinity
     });
   // console.log("jokes", jokes)
@@ -83,10 +87,10 @@ const TabMessages = (): JSX.Element => {
         <Heading title="Messages" description="here are your messages" />
       </div>
 
-      <section className="w-full flex justify-between flex-wrap gap-8 items-start ">
+      <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-start ">
 
         {/* bucketList */}
-        <div className='w-full lg:w-2/5 h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className='w-full h-full p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Today's Recommend</h1>
             <Dice5
@@ -106,7 +110,7 @@ const TabMessages = (): JSX.Element => {
         </div>
 
         {/* Facts */}
-        <div className='w-full lg:w-[57%] h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className='w-full h-full p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Facts</h1>
             <Dice5
@@ -126,7 +130,7 @@ const TabMessages = (): JSX.Element => {
         </div>
 
         {/* Quotes */}
-        <div className=' w-full lg:w-[57%] h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className=' w-full h-full p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Quotes</h1>
             <Dice5
@@ -161,7 +165,7 @@ const TabMessages = (): JSX.Element => {
         </div>
 
         {/* jokes */}
-        <div className=' w-full lg:w-2/5 h-auto p-3 rounded-2xl border bg-background/95 backdrop-blur'>
+        <div className=' w-full h-full p-3 rounded-2xl border bg-background/95 backdrop-blur'>
           <div className="flex flex-row justify-between items-center">
             <h1 className="text-2xl text-white font-bold">Joke</h1>
             <Dice5

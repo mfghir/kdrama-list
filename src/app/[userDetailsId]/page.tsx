@@ -6,7 +6,7 @@ import KDramaModel from "@/models/kdrama";
 import User from "@/models/user";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
@@ -22,7 +22,8 @@ interface PageProps {
 export default async function Page({ params: { userDetailsId } }: PageProps) {
   await connectDB();
 
-  const user = await User.findOne({ _id: userDetailsId })
+  const user = await User.findById(userDetailsId)
+  // const user = await User.findOne({ _id: userDetailsId })
   // console.log("userDetailsId  user **********", user);
 
   const kdramaList = await KDramaModel.find({ userId: userDetailsId })

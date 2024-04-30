@@ -19,10 +19,11 @@ const Dashboard = async () => {
 
   return (
     <TabDashboard
-      // @ts-ignore
+      
       role={user.role as string}
-      // @ts-ignore
-      usersList={usersList!} />
+      usersList={JSON.parse(JSON.stringify(usersList))}
+      // usersList={usersList!} 
+      />
   )
 }
 

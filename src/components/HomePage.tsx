@@ -6,17 +6,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from './ui/button'
+import { Skeleton } from './ui/skeleton'
 import { ArrowRightIcon } from 'lucide-react'
+
 import Footer from './Footer'
+import FeaturesSec from '@/templates/FeaturesSec'
+import GoTopBtn from '@/utilities/go-top-btn'
 
 import gsap from "gsap";
 import { useLenis } from '@studio-freight/react-lenis'
-import FeaturesSec from '@/templates/FeaturesSec'
-import { Skeleton } from './ui/skeleton'
-import GoTopBtn from '@/utilities/go-top-btn'
 
 
 
+
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const HomePage = ({ usersList }: any) => {
 
   const lenis = useLenis(({ scroll }) => {
@@ -27,7 +30,7 @@ const HomePage = ({ usersList }: any) => {
   const comp = useRef(null)
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const t1 = gsap.timeline()
 
       t1.from("#feat-sec1", {
@@ -36,6 +39,7 @@ const HomePage = ({ usersList }: any) => {
         opacity: 0,
         ease: "power4.inOut",
       }, "<")
+
         .from("#feat-sec2", {
           duration: 2,
           scale: 0.8,
@@ -43,6 +47,7 @@ const HomePage = ({ usersList }: any) => {
           delay: 0.2,
           ease: "power4.inOut",
         }, "<")
+
         .from("#feat-sec3", {
           duration: 2,
           scale: 0.8,
@@ -87,8 +92,8 @@ const HomePage = ({ usersList }: any) => {
 
   const scrollFunction = () => {
     if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
+      document.body.scrollTop > 600 ||
+      document.documentElement.scrollTop > 600
     ) {
       setShowButton(true);
     } else {
@@ -100,12 +105,11 @@ const HomePage = ({ usersList }: any) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     window.addEventListener("scroll", scrollFunction);
     return () => window.removeEventListener("scroll", scrollFunction);
   }, []);
-
-
 
 
 
@@ -117,7 +121,7 @@ const HomePage = ({ usersList }: any) => {
         <section className='flex justify-center items-center flex-col relative' id='start-sec'>
           <div className="w-full rounded-3xl min-h-[calc(100vh-120px)]
                 bg-[url('https://i.postimg.cc/NjwS7txJ/Design.gif')] 
-                bg-no-repeat bg-center bg-cover brightness-50"></div>
+                bg-no-repeat bg-center bg-cover brightness-50" />
 
           <div className="absolute flex justify-center items-center flex-col gap-y-4">
             <p className="text-5xl lg:text-7xl font-bold z-10 bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">KDrama</p>
@@ -142,11 +146,8 @@ const HomePage = ({ usersList }: any) => {
         <section>
           <p id='fans-title' className="text-4xl font-bold mb-4">Fans' list</p>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-11">
-            {/* {usersList.length ?
-              <Skeleton className="h-[80px] w-full mt-4" />
-
-              : */}
             <>
+              {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
               {usersList.map((item: any) => (
                 <div id="fans-sec" key={item.name} className="group relative ">
                   <div className="group before:hover:scale-95 min-w-80 w-full before:hover:w-80 before:hover:h-44 
@@ -187,7 +188,10 @@ const HomePage = ({ usersList }: any) => {
                       </p>
                     </div>
 
-                    <Link href={`/${item._id}`} className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500">
+                    <Link
+                      href={`/${item._id}`}
+                      className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500"
+                    >
                       See More
                     </Link>
                   </div>
@@ -195,7 +199,6 @@ const HomePage = ({ usersList }: any) => {
               ))
               }
             </>
-            {/* } */}
           </div>
         </section>
         {/* </Parallax> */}
