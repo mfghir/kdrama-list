@@ -84,7 +84,7 @@ const ForgetPassword = () => {
         src="https://i.postimg.cc/7YPZySS3/forget-pass.jpg"
         alt="forget password illustration" />
 
-      <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col justify-center my-6">
+      <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col items-start justify-start my-6 ">
         <Link href="/login"
           className="flex justify-start items-center gap-x-2 text-gray-500 text-xs mb-6 hover:text-blue-500 duration-300"
         >

@@ -2,10 +2,7 @@
 
 import axios from "axios";
 
-
-
-const API_KEY  = process.env.NEXT_PUBLIC_NINJA_API_KEY
-
+const API_KEY = process.env.NEXT_PUBLIC_NINJA_API_KEY;
 
 export const fetchQuotes = async () => {
   const response = await axios.get("https://api.api-ninjas.com/v1/quotes", {
@@ -14,7 +11,7 @@ export const fetchQuotes = async () => {
     },
   });
   // console.log("fetchQuotes -----",response.data[0])
-  return response.data[0]
+  return response.data[0];
 };
 
 export const fetchFacts = async () => {
@@ -38,10 +35,9 @@ export const fetchSuggestion = async () => {
     },
   });
   // console.log("fetchSuggestion -----",response.data[0])
-  
+
   return response.data.item;
 };
-
 
 export const fetchJokes = async () => {
   const response = await axios.get("https://api.api-ninjas.com/v1/jokes", {
@@ -50,27 +46,10 @@ export const fetchJokes = async () => {
       "X-Api-Key": "7dK5WLtwDyExnmGrGyrIyg==CxiwhXya1srNi0AF",
     },
   });
-  console.log("fetchJokes -----",response.data[0])
-  
+  console.log("fetchJokes -----", response.data[0]);
+
   return response.data[0];
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export const generatePassword = async () => {
@@ -78,7 +57,8 @@ export const generatePassword = async () => {
     "https://api.api-ninjas.com/v1/passwordgenerator?length=8",
     {
       headers: {
-        "X-Api-Key": process.env.NEXT_PUBLIC_NINJA_API_KEY,
+        // "X-Api-Key": process.env.NEXT_PUBLIC_NINJA_API_KEY,
+        "X-Api-Key": "7dK5WLtwDyExnmGrGyrIyg==CxiwhXya1srNi0AF",
       },
     }
   );

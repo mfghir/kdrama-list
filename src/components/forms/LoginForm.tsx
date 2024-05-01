@@ -86,6 +86,7 @@ export default function LoginForm() {
       // }
 
 
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
       console.log("error catch- LoginForm ---->", error)
 
@@ -131,7 +132,7 @@ export default function LoginForm() {
         alt="Login illustration" />
 
 
-      <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col justify-center my-6">
+      <div className="w-full md:w-[350px] mx-auto lg:w-[450px] flex flex-col items-start justify-start my-6">
         <h1 className="text-2xl font-bold inline-block w-fit border-b-2 my-4">Login</h1>
 
         <Form {...form}  >
@@ -176,9 +177,9 @@ export default function LoginForm() {
         </Form>
 
         <div className="flex justify-between items-center gap-x-2 my-6 w-full  text-zinc-600">
-          <span className="w-full h-[1px] bg-zinc-600"></span>
+          <span className="w-full h-[1px] bg-zinc-600" />
           <span>or</span>
-          <span className="w-full h-[1px] bg-zinc-600"></span>
+          <span className="w-full h-[1px] bg-zinc-600" />
         </div>
 
         <GoogleButton text="Login" />
