@@ -28,6 +28,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -104,7 +105,7 @@ export function DataTable<TData, TValue>({
           className="w-full md:max-w-sm my-3"
         />
 
-        {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)]">
+        {/* <ScrollArea className="rounded-md border h-[calc(80vh-220px)] ">
           <Table className="relative">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -154,8 +155,8 @@ export function DataTable<TData, TValue>({
               )}
             </TableBody>
           </Table>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea> */}
+          {/* <ScrollBar orientation="horizontal" /> */}
+        {/* </ScrollArea>   */}
 
         <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-x-hidden">
           <Table className="relative" >

@@ -78,7 +78,7 @@ export function DataTable<TValue>({ kdramaList }: any) {
       <div className="my-3">
         <Heading
           title={`Kdramas (${data.length})`}
-          description="list of kdarams in database"
+          description="list of kdramas in database"
         />
       </div>
 
@@ -86,8 +86,8 @@ export function DataTable<TValue>({ kdramaList }: any) {
         <DataTableToolbar table={table} />
       </div>
 
-      <div className="rounded-md border h-fit overflow-scroll md:overflow-x-hidden">
-        <Table >
+      <div className="rounded-md border h-[calc(82vh-220px)] overflow-scroll md:overflow-x-hidden">
+        <Table className="relative ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

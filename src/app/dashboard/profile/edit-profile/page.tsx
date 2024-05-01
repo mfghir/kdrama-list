@@ -21,8 +21,7 @@ const Page = async () => {
   return (
     <>
       <BreadCrumb items={breadcrumbItems} />
-      {/* @ts-ignore */}
-      <EditProfile userInfo={user} />
+      <EditProfile userInfo={JSON.parse(JSON.stringify(user))} />
     </>
   )
 }

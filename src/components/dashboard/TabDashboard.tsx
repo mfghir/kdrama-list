@@ -2,7 +2,7 @@
 
 import { Calendar, Clock, Popcorn, Slice, Smile, Sparkles } from "lucide-react"
 import { useKdramasData } from "@/lib/queries";
-import Overview from "./Overview";
+import DashboardChart from "@/templates/dashboard-chart";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { UserInfo, userNotifs } from "@/lib/data";
 import { User } from "@/utilities/users-table/columns";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 
 
@@ -42,6 +43,7 @@ const TabDashboard = ({ role, usersList }: {
           </div>
         </section>
 
+        {/* @ts-ignore */}
         <SecTwo serverData={serverData} />
 
         {role === "user" ? <SecUserNotifs /> : <SecThree usersList={usersList} />}
@@ -62,10 +64,35 @@ export default TabDashboard
 
 
 
-const SecTwo = ({ serverData }: any) => {
-  const fantasy = serverData?.filter((item: { genre: string; }) => item.genre === "fantasy")
-  const comedy = serverData?.filter((item: { genre: string; }) => item.genre === "comedy")
-  const criminal = serverData?.filter((item: { genre: string; }) => item.genre === "criminal")
+interface ServerDataItem {
+  genre: string;
+  // Add other properties as needed
+}
+
+
+const SecTwo = ({ serverData }: { serverData: ServerDataItem[] }) => {
+
+  // const fantasy = serverData?.filter((item: { genre: string; }) => item.genre === "fantasy")
+  // const comedy = serverData?.filter((item: { genre: string; }) => item.genre === "comedy")
+  // const criminal = serverData?.filter((item: { genre: string; }) => item.genre === "criminal")
+
+  const [groupedData, setGroupedData] = useState<Record<string, ServerDataItem[]>>({});
+
+  useEffect(() => {
+    if (serverData) {
+      const grouped: Record<string, ServerDataItem[]> = {};
+      serverData.forEach((item) => {
+        if (!grouped[item.genre]) {
+          grouped[item.genre] = [];
+        }
+        grouped[item.genre].push(item);
+      });
+      setGroupedData(grouped);
+    }
+  }, [serverData]);
+
+  const { fantasy = [], comedy = [], criminal = [] } = groupedData;
+
 
   return (
     <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 my-6">
@@ -152,16 +179,16 @@ const SecThree = ({ usersList }: {
           <CardTitle>Overview</CardTitle>
         </CardHeader>
         <CardContent className="pl-2">
-          <Overview />
+          <DashboardChart />
         </CardContent>
       </Card>
 
 
       <Card className="col-span-4 md:col-span-3 h-[430px] overflow-y-scroll">
         <CardHeader>
-          <CardTitle>users list</CardTitle>
+          <CardTitle>Users list</CardTitle>
           <CardDescription>
-            Total Users {filteredUsers?.length}
+            Total Users ({filteredUsers?.length})
           </CardDescription>
         </CardHeader>
 
@@ -178,7 +205,10 @@ const SecThree = ({ usersList }: {
                 <div className="w-full flex justify-between items-center">
                   <p className="text-sm font-medium leading-none">{user.name}</p>
                   <p className="text-xs text-muted-foreground break-all">
-                    {user.createdAt.toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })}
+                    {
+                      new Date(user.createdAt)
+                        .toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })
+                    }
                   </p>
                 </div>
 
@@ -201,7 +231,7 @@ const SecUserNotifs = (): JSX.Element => {
           <CardTitle>Overview</CardTitle>
         </CardHeader>
         <CardContent className="pl-2">
-          <Overview />
+          <DashboardChart />
         </CardContent>
       </Card>
 

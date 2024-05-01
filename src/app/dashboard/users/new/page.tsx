@@ -1,4 +1,4 @@
-import TabUserAdd from '@/components/dashboard/TabUserAdd'
+import TabUserAdd from '@/components/dashboard/user-add'
 import BreadCrumb from "@/utilities/breadcrumb";
 
 const page = () => {

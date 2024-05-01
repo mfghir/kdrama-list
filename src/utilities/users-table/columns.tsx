@@ -72,11 +72,6 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
 
       return row.original.createdAt ?
-      // new Intl.DateTimeFormat('en-US', {
-      //   year: 'numeric',
-      //   month: '2-digit',
-      //   day: '2-digit',
-      // }).format(row.original.createdAt)
         new Date(row.original.createdAt)
           .toLocaleDateString("en-US", { year: "numeric", month: "numeric", day: '2-digit' })
         :

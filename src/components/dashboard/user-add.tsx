@@ -74,11 +74,11 @@ const TabUserAdd = () => {
       router.push(`/dashboard/users`);
       router.refresh();
 
-      // toast({
-      //   variant: "default",
-      //   title: "Success!",
-      //   description: "User was successfully added.",
-      // });
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "User was successfully added.",
+      });
     } catch (error: any) {
       console.log("error-->", error);
     } finally {

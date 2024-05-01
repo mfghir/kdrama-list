@@ -1,6 +1,6 @@
 import User from "@/models/user";
 import connectDB from "@/lib/connectDB";
-import TabUserEdit from "@/components/dashboard/TabUserEdit";
+import TabUserEdit from "@/components/dashboard/user-edit";
 
 import BreadCrumb from "@/utilities/breadcrumb";
 
@@ -24,7 +24,7 @@ export default async function Page({ params: { userId } }: PageProps) {
   return (
     <div className="flex-1 space-y-4">
       <BreadCrumb items={breadcrumbItems} />
-      <TabUserEdit userId={user} />
+      <TabUserEdit userId={JSON.parse(JSON.stringify(user))} />
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import { chartData } from "@/lib/data"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
-const Overview = () => {
+const DashboardChart = () => {
   return (
     <ResponsiveContainer width="100%" height={350}>
     <BarChart data={chartData}>
@@ -32,4 +32,4 @@ const Overview = () => {
   )
 }
 
-export default Overview
+export default DashboardChart

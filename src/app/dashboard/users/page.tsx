@@ -28,11 +28,7 @@ const DashboardUsers = async () => {
   return (
     <>
       <BreadCrumb items={breadcrumbItems} />
-      <TabUsers
-        // data={usersList}
-        data={JSON.parse(JSON.stringify(usersList))}
-
-      />
+      <TabUsers data={JSON.parse(JSON.stringify(usersList))} />
     </>
   )
 }

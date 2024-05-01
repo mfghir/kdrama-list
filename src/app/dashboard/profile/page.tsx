@@ -12,6 +12,7 @@ import BreadCrumb from '@/utilities/breadcrumb';
 const Page = async () => {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/register");
+
   await connectDB()
   const user = await User.findOne({ email: session?.user?.email });
 
@@ -23,8 +24,7 @@ const Page = async () => {
   return (
     <>
       <BreadCrumb items={breadcrumbItems} />
-      {/* @ts-ignore */}
-      <TabProfile userInfo={user} />
+      <TabProfile userInfo={JSON.parse(JSON.stringify(user))} />
     </>
   )
 }
