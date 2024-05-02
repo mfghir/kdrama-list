@@ -13,20 +13,22 @@ export const metadata: Metadata = {
   title: 'Details Page',
 }
 
-interface PageProps {
-  params: {
-    userDetailsId: string;
-  };
-}
+// interface PageProps {
+//   params: {
+//     userDetailsId: string;
+//   };
+// }
 
-export default async function Page({ params: { userDetailsId } }: PageProps) {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export default async function Page({ params: { userDetailsId } }: any) {
   await connectDB();
 
-  const user = await User.findById(userDetailsId)
-  // const user = await User.findOne({ _id: userDetailsId })
+  // const user = await User.findById(userDetailsId)
+  const user = await User.findOne({ _id: userDetailsId })
   // console.log("userDetailsId  user **********", user);
 
   const kdramaList = await KDramaModel.find({ userId: userDetailsId })
+  // const kdramaList = await KDramaModel.findById({ userId: userDetailsId })
     .select("-userId")
     .sort({ createdAt: -1 });
   // console.log("userDetailsId kdramaList **********", kdramaList);
@@ -41,7 +43,10 @@ export default async function Page({ params: { userDetailsId } }: PageProps) {
         <BreadCrumb items={breadcrumbItems} />
 
         <div className="w-[calc(100vw-48px)] md:w-full">
-          <UserDetails userDetails={user} kdramaList={kdramaList} />
+          <UserDetails
+            // userDetails={user}
+            userDetails={JSON.parse(JSON.stringify(user))}
+            kdramaList={kdramaList} />
         </div>
       </section>
     </ScrollArea>

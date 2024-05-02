@@ -19,7 +19,7 @@ import {
 
 import { Gauge, LogOutIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { UserInfo } from "@/lib/data";
+import type { UserInfo } from "@/lib/data";
 
 import { signOut, useSession } from 'next-auth/react';
 import Link from "next/link";

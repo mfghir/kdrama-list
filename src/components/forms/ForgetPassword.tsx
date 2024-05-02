@@ -22,10 +22,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-
 import { useState } from 'react'
 import { mailAction } from '@/lib/mailAction'
 import { MoveLeft } from 'lucide-react'
+import axios from 'axios';
 
 
 
@@ -49,11 +49,12 @@ const ForgetPassword = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
-    // console.log("values", values)
+    console.log("values", values)
     setLoading(true);
 
     try {
-      await mailAction(values)
+      // await mailAction(values)
+      await axios.post('/api/mailtrap', values.email);
       router.push("/login")
 
       toast({
@@ -64,7 +65,7 @@ const ForgetPassword = () => {
 
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
-      console.log("forget password ---->", error)
+      console.log("forget password - error ---->", error)
       toast({
         variant: "destructive",
         title: "Error",
