@@ -38,32 +38,17 @@ export async function mailAction({ email }: { email: string }) {
   
 
 
-
-
     const transporter = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: "live.smtp.mailtrap.io",
+      port: 587,
       auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
+        user: "bcbb4c7b70b9f4",
+        // pass: "5d31785dea64bd3fe1d817c7757477c6",
+        pass: "eec40dcac32688",
+        // user: process.env.MAIL_USER,
+        // pass: process.env.MAIL_PASS,
       },
     });
-
-  
-  
-
-    
-
-    // const transporter = nodemailer.createTransport({
-    //   host: "live.smtp.mailtrap.io",
-    //   port: 587,
-    //   auth: {
-    //     user: "api",
-    //     pass: "5d31785dea64bd3fe1d817c7757477c6",
-    //     // user: process.env.MAIL_USER,
-    //     // pass: process.env.MAIL_PASS,
-    //   },
-    // });
 
     const htmlBody = `Click here to <a  href="http://localhost:3000/reset-password/${token}">Resat password</a> `;
     const info = await transporter.sendMail({
