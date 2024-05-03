@@ -17,7 +17,7 @@ import { MailtrapClient } from "mailtrap";
 export async function mailAction({ email }: { email: string }) {
   await connectDB();
   const user = await User.findOne({ email });
-  // console.log("user - mailAction ---->", user.email);
+  console.log("user - mailAction ---->", user.email);
 
   if (user) {
     const token = `${crypto.randomUUID()}${crypto.randomUUID()}`.replace(
@@ -37,10 +37,10 @@ export async function mailAction({ email }: { email: string }) {
     // ];
 
     const transporter = nodemailer.createTransport({
-      host: "live.smtp.mailtrap.io",
+      // host: "live.smtp.mailtrap.io",
       // host: "sandbox.smtp.mailtrap.io",
-      // host:"send.api.mailtrap.io",
-      port: 587,
+      host:"send.api.mailtrap.io",
+      // port: 587,
       auth: {
         user: "bcbb4c7b70b9f4",
         // pass: "5d31785dea64bd3fe1d817c7757477c6",

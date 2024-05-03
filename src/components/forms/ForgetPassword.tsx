@@ -53,8 +53,8 @@ const ForgetPassword = () => {
     setLoading(true);
 
     try {
-      // await mailAction(values)
-      await axios.post('/api/mailtrap', values.email);
+      await mailAction(values)
+      // await axios.post('/api/mailtrap', values.email);
       router.push("/login")
 
       toast({

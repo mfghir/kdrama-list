@@ -1,13 +1,9 @@
 // import { MailtrapClient } from "mailtrap";
 
-
-
 // const TOKEN = "5d31785dea64bd3fe1d817c7757477c6";
 // const ENDPOINT = "https://send.api.mailtrap.io/";
 
 // const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
-
-
 
 // // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 // export default async function POST(req:any, res:any) {
@@ -38,39 +34,33 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export async function POST(req:any, res:any) {
-  const body = req.body;
-  console.log("mailtrap post **********",body)
+export  function POST(req: Request, res: any) {
+  const userData = req.body;
+  console.log("mailtrap req **********", userData);
+
+  // const body = req.body;
+  // console.log("mailtrap post **********", body);
 
   const mailData = {
-    from: 'test@example.com',
-    to: 'test@example.com',
-    subject: `New feedback from ${body.name}`,
-    text: `${body.feedback}`,
-    html: `<p>${body.feedback}</p>`,
+    from: "test@example.com",
+    to: "test@example.com",
+    subject: `New feedback from test`,
+    // subject: `New feedback from ${body}`,
+    text: `test test`,
+    // text: `${body}`,
+    html: `<p>text text</p>`,
+    // html: `<p>${body}</p>`,
   };
 
   const transport = nodemailer.createTransport({
-    host: 'sandbox.smtp.mailtrap.io',
+    host: "send.api.mailtrap.io",
     port: 2525,
     auth: {
-      user: process.env.MAILTRAP_USER,
-      pass: process.env.MAILTRAP_PASS,
+      user: "bcbb4c7b70b9f4",
+      pass: "5d31785dea64bd3fe1d817c7757477c6",
     },
   });
 
@@ -79,5 +69,6 @@ export async function POST(req:any, res:any) {
     console.log(`Message sent: ${info}`);
   });
 
-  return res.status(200).json({ body });
+  // return res.status(200).json({ body });
+  return res.status(200).json({ userData });
 }
